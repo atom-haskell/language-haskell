@@ -1,0 +1,90 @@
+'.source.haskell':
+  'Definition':
+    'prefix': '='
+    'body': '${1:name} ${2:pattern}${2/.+/ /}= ${0:definition}'
+  'Function':
+    'prefix': 'fun'
+    'body': '${1:name} :: ${2:Type}\n${1} ${3:pattern}${3/.+/ /}${4/.+/= /}${4:definition}'
+  '#!/usr/bin/env…':
+    'prefix': '#!'
+    'body': '#!/usr/bin/env ${1:runhaskell}\n'
+  'Lambda Expression':
+    'prefix': '\\'
+    'body': '\\\\${1:pattern} -> ${0:expression}'
+  'Left Arrow':
+    'prefix': '<'
+    'body': '${1:name} <- ${0:expression}'
+  'Main':
+    'prefix': 'main'
+    'body': 'module Main where\n\nmain :: IO ()\nmain = ${0:putStrLn "Hello World"}\n'
+  'Right Arrow':
+    'prefix': '>'
+    'body': '${1:expression} -> ${0:expression}'
+  'Type Signature':
+    'prefix': '::'
+    'body': '${1:name} :: ${0:Type}'
+  'case … of …':
+    'prefix': 'case'
+    'body': 'case ${1:expression} of\n\t${2:pattern} -> ${3:expression}\n\t${4:otherwise} -> ${5:expression}'
+  'class …':
+    'prefix': 'cla'
+    'body': 'class ${1:Class} where\n\t${0:definition}'
+  'data …':
+    'prefix': 'dat'
+    'body': 'data ${1:Type} = ${0:Other}'
+  'do …':
+    'prefix': 'do'
+    'body': 'do\n\t${1:return ${0:expression}}'
+  'if … then … else …':
+    'prefix': 'if'
+    'body': 'if ${1:condition}\n\tthen ${2:expression}\n\telse ${3:expression}'
+  'import … hiding …':
+    'prefix': 'imph'
+    'body': 'import ${1:Module}${2/.+/ hiding (/}${2:function}${2/.+/)/}$0'
+  'import …':
+    'prefix': 'imp'
+    'body': 'import ${1:Module}${2/.+/ (/}${2:function}${2/.+/)/}$0'
+  'import qualified …':
+    'prefix': 'impq'
+    'body': 'import qualified ${1:Module}${2/.+/ as /}${2:Mod}${3/.+/ (/}${3:function}${3/.+/)/}$0'
+  'instance …':
+    'prefix': 'ins'
+    'body': 'instance ${1:Class} ${2:Type} where\n\t${0:definition}'
+  'let …':
+    'prefix': 'let'
+    'body': 'let\n\t${1:name} = ${2:expression}\n\tin ${0:expression}'
+  'newtype …':
+    'prefix': 'new'
+    'body': 'newtype ${1:Type} = ${0:Other}'
+  'type …':
+    'prefix': 'typ'
+    'body': 'type ${1:Type} = ${0:Other}'
+  'where …':
+    'prefix': 'where'
+    'body': 'where\n\t${0:definitions}'
+'.source.haskell:not(.comment)':
+  'Guard':
+    'prefix': '|'
+    'body': '| ${1:predicate} = ${0:definition}'
+'.source.haskell .comment.block':
+  'Haddock Postfix':
+    'prefix': '|'
+    'body': '| ${0:documentation}'
+  'Haddock Prefix':
+    'prefix': '^'
+    'body': '^ ${0:documentation}'
+'.source.haskell .constant.language.nil':
+  'List Comprehension':
+    'prefix': '['
+    'body': '[ ${1:expression} | ${2:name} <- ${3:expression}${4/.+/, /}${4:condition} '
+'.source.haskell .meta.function.type':
+  'Type Constraint':
+    'prefix': '='
+    'body': '(${1:Class}) => $0'
+  'Type Sequence':
+    'prefix': '-'
+    'body': '${1:Type} -> ${0:Type}'
+'.source.haskell .meta.type':
+  'deriving …':
+    'prefix': 'der'
+    'body': 'deriving (${0:Class})'

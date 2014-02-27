@@ -1,0 +1,12 @@
+{
+  "name": "language-haskell",
+  "version": "0.0.1",
+  "description": "Haskell language support in Atom",
+  "repository": "https://github.com/jroesch/language-haskell",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+  }
+}
