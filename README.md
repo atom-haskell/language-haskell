@@ -1,3 +1,5 @@
-# language-haskell package
+# Haskell support in Atom
 
-A short description of your package.
+Adds syntax highlighting and snippets to the Ruby files in Atom.
+
+Converted from the [Haskell TextMate bundle](https://github.com/textmate/haskell.tmbundle).
