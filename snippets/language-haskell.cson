@@ -81,9 +81,6 @@
   'Type Constraint':
     'prefix': '='
     'body': '(${1:Class}) => $0'
-  'Type Sequence':
-    'prefix': '-'
-    'body': '${1:Type} -> ${0:Type}'
 '.source.haskell .meta.type':
   'deriving …':
     'prefix': 'der'
