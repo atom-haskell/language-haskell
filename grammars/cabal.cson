@@ -42,7 +42,7 @@
           'match':'(executable)\\s+(\\S+)'
           'captures':
             '1':
-                'name':'entity.name.function.haskell'
+                'name':'entity.name.function'
             '2':
                 'name':'support.other'
           'name':'module-type'
