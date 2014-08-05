@@ -49,7 +49,7 @@
     'beginCaptures':
       '1':
         'name': 'keyword.other.haskell'
-    'end': '\\b(where)\\b'
+    'end': '\\b(where)\\b|$'
     'endCaptures':
       '1':
         'name': 'keyword.other.haskell'
@@ -194,7 +194,7 @@
     'name': 'string.quoted.single.haskell'
   }
   {
-    'begin': '^\\s*(?<fn>(?:[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+\\))(?:\\s*,\\s*\\g<fn>)?)\\s*(::)'
+    'begin': '^\\s*(?<fn>(?:[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+\\))(?:\\s*,\\s*\\g<fn>)?)\\s*(::|∷)'
     'beginCaptures':
       '1':
         'patterns': [
@@ -346,7 +346,15 @@
         'name': 'keyword.other.arrow.haskell'
       }
       {
+        'match': '→'
+        'name': 'keyword.other.arrow.haskell'
+      }
+      {
         'match': '=>'
+        'name': 'keyword.other.big-arrow.haskell'
+      }
+      {
+        'match': '⇒'
         'name': 'keyword.other.big-arrow.haskell'
       }
       {
