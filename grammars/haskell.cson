@@ -22,7 +22,7 @@
     'name': 'constant.language.empty-list.haskell'
   }
   {
-    'begin': '(module)'
+    'begin': '\\b(module)\\b'
     'beginCaptures':
       '1':
         'name': 'keyword.other.haskell'
