@@ -4,14 +4,14 @@
 'name': 'Haskell'
 'patterns': [
   {
+    'name': 'keyword.operator.function.infix.haskell'
+    'match': '(`)[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(`)'
     'captures':
       '1':
         'name': 'punctuation.definition.entity.haskell'
       '2':
         'name': 'punctuation.definition.entity.haskell'
     'comment': 'In case this regex seems unusual for an infix operator, note that Haskell allows any ordinary function application (elem 4 [1..10]) to be rewritten as an infix expression (4 `elem` [1..10]).'
-    'match': '(`)[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(`)'
-    'name': 'keyword.operator.function.infix.haskell'
   }
   {
     'match': '\\(\\)'
@@ -22,6 +22,7 @@
     'name': 'constant.language.empty-list.haskell'
   }
   {
+    'name': 'meta.declaration.module.haskell'
     'begin': '\\b(module)\\b'
     'beginCaptures':
       '1':
@@ -30,7 +31,6 @@
     'endCaptures':
       '1':
         'name': 'keyword.other.haskell'
-    'name': 'meta.declaration.module.haskell'
     'patterns': [
       {
         'include': '#module_name'
@@ -45,6 +45,7 @@
     ]
   }
   {
+    'name': 'meta.declaration.class.haskell'
     'begin': '\\b(class)\\b'
     'beginCaptures':
       '1':
@@ -53,7 +54,6 @@
     'endCaptures':
       '1':
         'name': 'keyword.other.haskell'
-    'name': 'meta.declaration.class.haskell'
     'patterns': [
       {
         'match': '\\b(Monad|Functor|Eq|Ord|Read|Show|Num|(Frac|Ra)tional|Enum|Bounded|Real(Frac|Float)?|Integral|Floating)\\b'
@@ -82,6 +82,44 @@
     'patterns': [
       {
         'include': '#type_signature'
+      }
+    ]
+  }
+  {
+    'name': 'meta.record-decl.haskell'
+    'begin': '(data|newtype)\\s+(.*)\\s+(=)\\s+(.*)\\s+(\\{)'
+    'beginCaptures':
+      '1':
+        'name': 'keyword.other.haskell'
+      '2':
+        'name': 'constant.other.haskell' #fixme
+      '3':
+        'name': 'keyword.operator.haskell'
+      '4':
+        'name': 'constant.other.haskell' #fixme
+      '5':
+        'name': 'keyword.operator.haskell'
+    'end': '\\s*(\\})'
+    'endCaptures':
+      '1':
+        'name': 'keyword.operator.haskell'
+    'patterns': [
+      {
+        'include': '#comments'
+      }
+      {
+        'match': '(?<rec>[^\\(\\)\\[\\]]*(:?\\(\\g<rec>\\)|\\[\\g<rec>\\]|\\(\\))?)[^\\(\\)\\[\\]]*(,)\\s*'
+        'name': 'meta.record-field.haskell'
+        'captures':
+          '1':
+            'patterns': [{'include': '#decl'}]
+          '3':
+            'name': 'punctuation.separator.comma.haskell'
+        'comment': 'the regex here matches any balanced bracket expression followed by a comma'
+      }
+      {
+        'include': '#decl'
+        'comment': 'final field without the trailing comma'
       }
     ]
   }
@@ -194,27 +232,7 @@
     'name': 'string.quoted.single.haskell'
   }
   {
-    'begin': '^\\s*(?<fn>(?:[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+\\))(?:\\s*,\\s*\\g<fn>)?)\\s*(::|∷)'
-    'beginCaptures':
-      '1':
-        'patterns': [
-          {
-            'match': '[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*'
-            'name': 'entity.name.function.haskell'
-          }
-          {
-            'include': '#infix_op'
-          }
-        ]
-      '2':
-        'name': 'keyword.other.double-colon.haskell'
-    'end': '$\\n?'
-    'name': 'meta.function.type-declaration.haskell'
-    'patterns': [
-      {
-        'include': '#type_signature'
-      }
-    ]
+    'include': '#decl'
   }
   {
     'match': '\\b(Just|Nothing|Left|Right|True|False|LT|EQ|GT|\\(\\)|\\[\\])\\b'
@@ -375,6 +393,28 @@
       }
       {
         'include': '#comments'
+      }
+    ]
+  'decl':
+    'name': 'meta.function.type-declaration.haskell'
+    'begin': '\\s*(?<fn>(?:[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+\\))(?:\\s*,\\s*\\g<fn>)?)\\s*(::|∷)'
+    'beginCaptures':
+      '1':
+        'patterns': [
+          {
+            'match': '[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*'
+            'name': 'entity.name.function.haskell'
+          }
+          {
+            'include': '#infix_op'
+          }
+        ]
+      '2':
+        'name': 'keyword.other.double-colon.haskell'
+    'end': '(?=\\})|$\\n?'
+    'patterns': [
+      {
+        'include': '#type_signature'
       }
     ]
 'scopeName': 'source.haskell'
