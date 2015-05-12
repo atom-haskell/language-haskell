@@ -86,6 +86,44 @@
     ]
   }
   {
+    'name': 'meta.record-decl.haskell'
+    'begin': '(data|newtype)\\s+(.*)\\s+(=)\\s+(.*)\\s+(\\{)'
+    'beginCaptures':
+      '1':
+        'name': 'keyword.other.haskell'
+      '2':
+        'name': 'constant.other.haskell' #fixme
+      '3':
+        'name': 'keyword.operator.haskell'
+      '4':
+        'name': 'constant.other.haskell' #fixme
+      '5':
+        'name': 'keyword.operator.haskell'
+    'end': '\\s*(\\})'
+    'endCaptures':
+      '1':
+        'name': 'keyword.operator.haskell'
+    'patterns': [
+      {
+        'include': '#comments'
+      }
+      {
+        'match': '(?<rec>[^\\(\\)\\[\\]]*(:?\\(\\g<rec>\\)|\\[\\g<rec>\\]|\\(\\))?)[^\\(\\)\\[\\]]*(,)\\s*'
+        'name': 'meta.record-field.haskell'
+        'captures':
+          '1':
+            'patterns': [{'include': '#decl'}]
+          '3':
+            'name': 'punctuation.separator.comma.haskell'
+        'comment': 'the regex here matches any balanced bracket expression followed by a comma'
+      }
+      {
+        'include': '#decl'
+        'comment': 'final field without the trailing comma'
+      }
+    ]
+  }
+  {
     'begin': '\\b(import)\\b'
     'beginCaptures':
       '1':
@@ -373,7 +411,7 @@
         ]
       '2':
         'name': 'keyword.other.double-colon.haskell'
-    'end': '$\\n?'
+    'end': '(?=\\})|$\\n?'
     'patterns': [
       {
         'include': '#type_signature'
