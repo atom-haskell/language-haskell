@@ -52,6 +52,9 @@ makeGrammar_ "grammars/haskell.cson",
       ///
     classConstraint: concat /({className})\s+/,
       list('classConstraint',/{className}|{functionName}/,/\s+/)
+    functionTypeDeclaration:
+      concat list('functionTypeDeclaration',/{functionName}|{operatorFun}/,/,/),
+        /\s*(::|∷)/
 
   patterns: [
       name: 'keyword.operator.function.infix.haskell'
@@ -161,6 +164,32 @@ makeGrammar_ "grammars/haskell.cson",
           include: '#inherited_class'
           ]
     ,
+      name: 'meta.record-declaration.haskell'
+      begin: /^\s*(data|newtype)\s+({className})\s*(=)\s*({className})\s+(\{)/
+      end: /(\})/
+      beginCaptures:
+        1:
+          name: 'storage.type.data.haskell'
+        2:
+          name: 'entity.name.type.haskell'
+        3:
+          name: 'keyword.operator.assignment.haskell'
+        4:
+          name: 'entity.name.tag.haskell'
+        5:
+          name: 'keyword.operator.record.begin.haskell'
+      endCaptures:
+        1:
+          name: 'keyword.operator.record.end.haskell'
+      patterns: [
+          include: '#comments'
+        ,
+          name: 'punctuation.separator.comma.haskell'
+          match: /,/
+        ,
+          include: '#record_field_declaration'
+      ]
+    ,
       name: 'keyword.other.haskell'
       match: /\b(deriving|where|data|type|case|of|let|in|newtype|default)\b/
     ,
@@ -224,23 +253,7 @@ makeGrammar_ "grammars/haskell.cson",
         # {character} macro has 4 capture groups, here 3-6
         7: name: 'punctuation.definition.string.end.haskell'
     ,
-      name: 'meta.function.type-declaration.haskell'
-      begin: concat /^\s*/,
-        list('functionTypeDeclaration',/{functionName}|{operatorFun}/,/,/),
-        /\s*(::|∷)/
-      end: /$\n?/
-      beginCaptures:
-        1:
-          patterns: [
-              match: /{functionName}/
-              name: 'entity.name.function.haskell'
-            ,
-              include: '#infix_op'
-          ]
-        2: name: 'keyword.other.double-colon.haskell'
-      patterns: [
-          include: '#type_signature'
-      ]
+      include: '#function_type_declaration'
     ,
       match: /\b(Just|Nothing|Left|Right|True|False|LT|EQ|GT|\(\)|\[\])\b/
       name: 'support.constant.haskell'
@@ -305,11 +318,11 @@ makeGrammar_ "grammars/haskell.cson",
           beginCaptures:
             1: name: 'punctuation.whitespace.comment.leading.haskell'
           patterns: [
+              name: 'comment.line.double-dash.haskell'
               begin: /--/
               end: /\n/
               beginCaptures:
                 0: name: 'punctuation.definition.comment.haskell'
-              name: 'comment.line.double-dash.haskell'
           ]
         ,
           include: '#block_comment'
@@ -353,6 +366,38 @@ makeGrammar_ "grammars/haskell.cson",
       patterns: [
           match: /\b(LANGUAGE|UNPACK|INLINE)\b/
           name: 'keyword.other.preprocessor.haskell'
+      ]
+    function_type_declaration:
+      name: 'meta.function.type-declaration.haskell'
+      begin: concat /^\s*/,/{functionTypeDeclaration}/
+      end: /$\n?/
+      beginCaptures:
+        1:
+          patterns: [
+              name: 'entity.name.function.haskell'
+              match: /{functionName}/
+            ,
+              include: '#infix_op'
+          ]
+        2: name: 'keyword.other.double-colon.haskell'
+      patterns: [
+          include: '#type_signature'
+      ]
+    record_field_declaration:
+      name: 'meta.record-field.type-declaration.haskell'
+      begin: /{functionTypeDeclaration}/
+      end: /,|$\n?/
+      beginCaptures:
+        1:
+          patterns: [
+              name: 'entity.other.attribute-name.haskell'
+              match: /{functionName}/
+            ,
+              include: '#infix_op'
+          ]
+        2: name: 'keyword.other.double-colon.haskell'
+      patterns: [
+          include: '#type_signature'
       ]
     type_signature:
       patterns: [
