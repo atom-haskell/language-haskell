@@ -28,9 +28,6 @@
   'Right Arrow':
     'prefix': '>'
     'body': '${1:expression} -> ${0:expression}'
-  'Type Signature':
-    'prefix': '::'
-    'body': '${1:name} :: ${0:Type}'
   'case … of …':
     'prefix': 'case'
     'body': '''
@@ -93,6 +90,38 @@
       where
       \t${0:definitions}
       '''
+  ###### UNICODE ######
+  '.source.haskell':
+    'Proportion':
+      'prefix': '::'
+      'body': '∷' #0x2237
+    'Rightwards double arrow':
+      'prefix': '=>'
+      'body': '⇒'
+    'For all':
+      'prefix': 'forall'
+      'body': '∀' #0x2200
+    'Rightwards arrow':
+      'prefix': '->'
+      'body': '→' #  0x2192
+    'Leftwards arrow':
+      'prefix': '<-'
+      'body': '←' #0x2190
+    'Leftwards arrow-tail':
+      'prefix': '-<'
+      'body': '↢' #0x2919
+    'Rightwards arrow-tail':
+      'prefix': '>-'
+      'body': '↣' #0x291A
+    'Leftwards double arrow-tail':
+      'prefix': '-<<'
+      'body': '⤛' # 0x291B
+    'Rightwards double arrow-tail':
+      'prefix': '>>-'
+      'body': '⤜' # 0x291C
+    'Black star':
+      'prefix': '*'
+      'body': '★' #0x2605
 '.source.haskell:not(.comment)':
   'Guard':
     'prefix': '|'
