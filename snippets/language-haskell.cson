@@ -1,4 +1,15 @@
 '.source.haskell':
+  'Pragma':
+    'prefix': '{-#'
+    'body': '{-# $1 #-'
+  'Module':
+    'prefix': 'module'
+    'body':
+      """
+      module ${1:Name}
+          (
+          ) where
+      """
   'Definition':
     'prefix': '='
     'body': '${1:name} ${2:pattern} = ${0:definition}'
