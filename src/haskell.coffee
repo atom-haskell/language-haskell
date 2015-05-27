@@ -94,7 +94,7 @@ makeGrammar_ "grammars/haskell.cson",
       begin: /\b(class)\b/
       end: /\b(where)\b|$/
       beginCaptures:
-        1: name: 'keyword.other.haskell'
+        1: name: 'storage.type.class.haskell'
       endCaptures:
         1: name: 'keyword.other.haskell'
       patterns: [
@@ -117,7 +117,7 @@ makeGrammar_ "grammars/haskell.cson",
             )\b
             ///
         ,
-          include: '#inherited_class'
+          include: '#type_name'
         ,
           include: '#generic_type'
       ]
@@ -153,7 +153,8 @@ makeGrammar_ "grammars/haskell.cson",
       beginCaptures:
         1: name: 'keyword.other.haskell'
       patterns: [
-        include: '#inherited_class'
+        name: 'entity.other.inherited-class.haskell'
+        match: /\b{className}\b/
       ]
     ,
       name: 'meta.deriving.haskell'
@@ -161,26 +162,21 @@ makeGrammar_ "grammars/haskell.cson",
       captures:
         1: name: 'keyword.other.haskell'
         2: patterns:[
-          include: '#inherited_class'
-          ]
+          name: 'entity.other.inherited-class.haskell'
+          match: /\b{className}\b/
+        ]
     ,
-      name: 'meta.record-declaration.haskell'
+      name: 'meta.declaration.record.haskell'
       begin: /^\s*(data|newtype)\s+({className})\s*(=)\s*({className})\s+(\{)/
       end: /(\})/
       beginCaptures:
-        1:
-          name: 'storage.type.data.haskell'
-        2:
-          name: 'entity.name.type.haskell'
-        3:
-          name: 'keyword.operator.assignment.haskell'
-        4:
-          name: 'entity.name.tag.haskell'
-        5:
-          name: 'keyword.operator.record.begin.haskell'
+        1: name: 'storage.type.data.haskell'
+        2: patterns: [include: '#type_name']
+        3: name: 'keyword.operator.assignment.haskell'
+        4: patterns: [include: '#type_ctor']
+        5: name: 'keyword.operator.record.begin.haskell'
       endCaptures:
-        1:
-          name: 'keyword.operator.record.end.haskell'
+        1: name: 'keyword.operator.record.end.haskell'
       patterns: [
           include: '#comments'
         ,
@@ -191,13 +187,16 @@ makeGrammar_ "grammars/haskell.cson",
       ]
     ,
       name: 'keyword.other.haskell'
-      match: /\b(deriving|where|data|type|case|of|let|in|newtype|default)\b/
+      match: /\b(deriving|where|data|type|newtype)\b/
+    ,
+      name: 'storage.type.haskell'
+      match: /\b(data|type|newtype)\b/
     ,
       name: 'keyword.operator.haskell'
       match: /\binfix[lr]?\b/
     ,
       name: 'keyword.control.haskell'
-      match: /\b(do|if|then|else)\b/
+      match: /\b(do|if|then|else|case|of|let|in|default)\b/
     ,
       name: 'constant.numeric.float.haskell'
       match: /\b([0-9]+\.[0-9]+([eE][+-]?[0-9]+)?|[0-9]+[eE][+-]?[0-9]+)\b/
@@ -230,16 +229,16 @@ makeGrammar_ "grammars/haskell.cson",
           begin: /\\\s/
           end: /\\/
           beginCaptures:
-            0: name: 'constant.character.escape.begin.haskell'
+            0: name: 'markup.other.escape.newline.begin.haskell'
           endCaptures:
-            0: name: 'constant.character.escape.end.haskell'
+            0: name: 'markup.other.escape.newline.end.haskell'
           patterns: [
               match: /\S+/
               name: 'invalid.illegal.character-not-allowed-here.haskell'
           ]
       ]
     ,
-      name: 'constant.escape.newline.haskell'
+      name: 'markup.other.escape.newline.haskell'
       match: /\\$/
     ,
       name: 'string.quoted.single.haskell'
@@ -255,11 +254,10 @@ makeGrammar_ "grammars/haskell.cson",
     ,
       include: '#function_type_declaration'
     ,
-      match: /\b(Just|Nothing|Left|Right|True|False|LT|EQ|GT|\(\)|\[\])\b/
-      name: 'support.constant.haskell'
+      match: /\b(Just|Left|Right|Nothing|True|False|LT|EQ|GT)\b/
+      name: 'support.tag.haskell'
     ,
-      match: /\b{className}/
-      name: 'constant.other.haskell'
+      include: '#type_ctor'
     ,
       include: '#comments'
     ,
@@ -345,8 +343,7 @@ makeGrammar_ "grammars/haskell.cson",
           name: 'entity.name.function.haskell'
           match: /\b{functionName}/
         ,
-          name: 'storage.type.haskell'
-          match: /\b{className}/
+          include: '#type_name'
         ,
           name: 'punctuation.separator.comma.haskell'
           match: /,/
@@ -369,17 +366,17 @@ makeGrammar_ "grammars/haskell.cson",
       ]
     function_type_declaration:
       name: 'meta.function.type-declaration.haskell'
-      begin: concat /^\s*/,/{functionTypeDeclaration}/
-      end: /$\n?/
+      begin: concat /^(\s*)/,/{functionTypeDeclaration}/
+      end: /^\1(?!\s)/
       beginCaptures:
-        1:
+        2:
           patterns: [
               name: 'entity.name.function.haskell'
               match: /{functionName}/
             ,
               include: '#infix_op'
           ]
-        2: name: 'keyword.other.double-colon.haskell'
+        3: name: 'keyword.other.double-colon.haskell'
       patterns: [
           include: '#type_signature'
       ]
@@ -425,7 +422,7 @@ makeGrammar_ "grammars/haskell.cson",
           name: 'keyword.other.big-arrow.haskell'
           match: /=>|⇒/
         ,
-          name: 'support.type.prelude.haskell'
+          name: 'support.class.prelude.haskell'
           match: ///\b
             (Int(eger)?
             |Maybe
@@ -443,20 +440,23 @@ makeGrammar_ "grammars/haskell.cson",
             )\b
             ///
         ,
-          name: 'variable.other.generic-type.haskell'
-          match: /\b{functionName}/
+          include: '#generic_type'
         ,
-          name: 'storage.type.haskell'
-          match: /\b{className}/
+          include: '#type_name'
         ,
-          name: 'support.constant.unit.haskell'
-          match: /\(\)/
+          include: '#unit'
         ,
           include: '#comments'
       ]
-    inherited_class:
-      name: 'entity.other.inherited-class.haskell'
+    type_name:
+      name: 'entity.name.type.haskell'
       match: /\b{className}\b/
+    type_ctor:
+      name: 'entity.name.tag.haskell'
+      match: /\b{className}\b/
+    unit:
+      name: 'constant.language.unit.haskell'
+      match: /\(\)/
     generic_type:
       name: 'variable.other.generic-type.haskell'
       match: /\b{functionName}\b/
@@ -464,10 +464,12 @@ makeGrammar_ "grammars/haskell.cson",
       name: 'meta.class-constraint.haskell'
       match: /{classConstraint}/
       captures:
-        1: patterns: [{include: '#inherited_class'}]
+        1: patterns: [
+          name: 'entity.other.inherited-class.haskell'
+          match: /\b{className}\b/
+        ]
         2: patterns: [
-            name: 'storage.type.haskell'
-            match: /\b{className}\b/
+            include: '#type_name'
           ,
             include: '#generic_type'
         ]

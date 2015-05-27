@@ -59,7 +59,7 @@
     'end': '\\b(where)\\b|$'
     'beginCaptures':
       '1':
-        'name': 'keyword.other.haskell'
+        'name': 'storage.type.class.haskell'
     'endCaptures':
       '1':
         'name': 'keyword.other.haskell'
@@ -69,7 +69,7 @@
         'match': '\\b(Monad|Functor|Eq|Ord|Read|Show|Num|(Frac|Ra)tional|Enum|Bounded|Real(Frac|Float)?|Integral|Floating)\\b'
       }
       {
-        'include': '#inherited_class'
+        'include': '#type_name'
       }
       {
         'include': '#generic_type'
@@ -121,7 +121,8 @@
         'name': 'keyword.other.haskell'
     'patterns': [
       {
-        'include': '#inherited_class'
+        'name': 'entity.other.inherited-class.haskell'
+        'match': '\\b[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*\\b'
       }
     ]
   }
@@ -134,23 +135,32 @@
       '2':
         'patterns': [
           {
-            'include': '#inherited_class'
+            'name': 'entity.other.inherited-class.haskell'
+            'match': '\\b[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*\\b'
           }
         ]
   }
   {
-    'name': 'meta.record-declaration.haskell'
+    'name': 'meta.declaration.record.haskell'
     'begin': '^\\s*(data|newtype)\\s+([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)\\s*(=)\\s*([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)\\s+(\\{)'
     'end': '(\\})'
     'beginCaptures':
       '1':
         'name': 'storage.type.data.haskell'
       '2':
-        'name': 'entity.name.type.haskell'
+        'patterns': [
+          {
+            'include': '#type_name'
+          }
+        ]
       '3':
         'name': 'keyword.operator.assignment.haskell'
       '4':
-        'name': 'entity.name.tag.haskell'
+        'patterns': [
+          {
+            'include': '#type_ctor'
+          }
+        ]
       '5':
         'name': 'keyword.operator.record.begin.haskell'
     'endCaptures':
@@ -171,7 +181,11 @@
   }
   {
     'name': 'keyword.other.haskell'
-    'match': '\\b(deriving|where|data|type|case|of|let|in|newtype|default)\\b'
+    'match': '\\b(deriving|where|data|type|newtype)\\b'
+  }
+  {
+    'name': 'storage.type.haskell'
+    'match': '\\b(data|type|newtype)\\b'
   }
   {
     'name': 'keyword.operator.haskell'
@@ -179,7 +193,7 @@
   }
   {
     'name': 'keyword.control.haskell'
-    'match': '\\b(do|if|then|else)\\b'
+    'match': '\\b(do|if|then|else|case|of|let|in|default)\\b'
   }
   {
     'name': 'constant.numeric.float.haskell'
@@ -218,10 +232,10 @@
         'end': '\\\\'
         'beginCaptures':
           '0':
-            'name': 'constant.character.escape.begin.haskell'
+            'name': 'markup.other.escape.newline.begin.haskell'
         'endCaptures':
           '0':
-            'name': 'constant.character.escape.end.haskell'
+            'name': 'markup.other.escape.newline.end.haskell'
         'patterns': [
           {
             'match': '\\S+'
@@ -232,7 +246,7 @@
     ]
   }
   {
-    'name': 'constant.escape.newline.haskell'
+    'name': 'markup.other.escape.newline.haskell'
     'match': '\\\\$'
   }
   {
@@ -254,12 +268,11 @@
     'include': '#function_type_declaration'
   }
   {
-    'match': '\\b(Just|Nothing|Left|Right|True|False|LT|EQ|GT|\\(\\)|\\[\\])\\b'
-    'name': 'support.constant.haskell'
+    'match': '\\b(Just|Left|Right|Nothing|True|False|LT|EQ|GT)\\b'
+    'name': 'support.tag.haskell'
   }
   {
-    'match': '\\b[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*'
-    'name': 'constant.other.haskell'
+    'include': '#type_ctor'
   }
   {
     'include': '#comments'
@@ -355,8 +368,7 @@
             'match': '\\b[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*'
           }
           {
-            'name': 'storage.type.haskell'
-            'match': '\\b[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*'
+            'include': '#type_name'
           }
           {
             'name': 'punctuation.separator.comma.haskell'
@@ -397,10 +409,10 @@
     'patterns': [
       {
         'name': 'meta.function.type-declaration.haskell'
-        'begin': '(?:(?:^\\s*)(?:(?:(?:(?<functionTypeDeclaration>(?:[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+\\)))(?:\\s*(?:,)\\s*\\g<functionTypeDeclaration>)?))(?:\\s*(::|∷)))))'
-        'end': '$\\n?'
+        'begin': '(?:(?:^(\\s*))(?:(?:(?:(?<functionTypeDeclaration>(?:[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+\\)))(?:\\s*(?:,)\\s*\\g<functionTypeDeclaration>)?))(?:\\s*(::|∷)))))'
+        'end': '^\\1(?!\\s)'
         'beginCaptures':
-          '1':
+          '2':
             'patterns': [
               {
                 'name': 'entity.name.function.haskell'
@@ -410,7 +422,7 @@
                 'include': '#infix_op'
               }
             ]
-          '2':
+          '3':
             'name': 'keyword.other.double-colon.haskell'
         'patterns': [
           {
@@ -485,30 +497,41 @@
         'match': '=>|⇒'
       }
       {
-        'name': 'support.type.prelude.haskell'
+        'name': 'support.class.prelude.haskell'
         'match': '\\b(Int(eger)?|Maybe|Either|Bool|Float|Double|Char|String|Ordering|ShowS|ReadS|FilePath|IO(Error)?)\\b'
       }
       {
-        'name': 'variable.other.generic-type.haskell'
-        'match': '\\b[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*'
+        'include': '#generic_type'
       }
       {
-        'name': 'storage.type.haskell'
-        'match': '\\b[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*'
+        'include': '#type_name'
       }
       {
-        'name': 'support.constant.unit.haskell'
-        'match': '\\(\\)'
+        'include': '#unit'
       }
       {
         'include': '#comments'
       }
     ]
-  'inherited_class':
+  'type_name':
     'patterns': [
       {
-        'name': 'entity.other.inherited-class.haskell'
+        'name': 'entity.name.type.haskell'
         'match': '\\b[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*\\b'
+      }
+    ]
+  'type_ctor':
+    'patterns': [
+      {
+        'name': 'entity.name.tag.haskell'
+        'match': '\\b[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*\\b'
+      }
+    ]
+  'unit':
+    'patterns': [
+      {
+        'name': 'constant.language.unit.haskell'
+        'match': '\\(\\)'
       }
     ]
   'generic_type':
@@ -527,14 +550,14 @@
           '1':
             'patterns': [
               {
-                'include': '#inherited_class'
+                'name': 'entity.other.inherited-class.haskell'
+                'match': '\\b[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*\\b'
               }
             ]
           '2':
             'patterns': [
               {
-                'name': 'storage.type.haskell'
-                'match': '\\b[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*\\b'
+                'include': '#type_name'
               }
               {
                 'include': '#generic_type'
