@@ -117,26 +117,26 @@
   }
   {
     'name': 'meta.declaration.type.data.record.haskell'
-    'begin': '^\\s*(data|newtype)\\s+([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)\\s*(=)\\s*([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)\\s+(\\{)'
+    'begin': '^(\\s)*(data|newtype)\\s+([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)\\s*(=)\\s*([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)\\s+(\\{)'
     'end': '^\\1(?!\\s)'
     'beginCaptures':
-      '1':
-        'name': 'storage.type.data.haskell'
       '2':
+        'name': 'storage.type.data.haskell'
+      '3':
         'patterns': [
           {
             'include': '#type_name'
           }
         ]
-      '3':
-        'name': 'keyword.operator.assignment.haskell'
       '4':
+        'name': 'keyword.operator.assignment.haskell'
+      '5':
         'patterns': [
           {
             'include': '#type_ctor'
           }
         ]
-      '5':
+      '6':
         'name': 'keyword.operator.record.begin.haskell'
     'patterns': [
       {

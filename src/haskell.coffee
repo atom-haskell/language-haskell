@@ -163,14 +163,14 @@ makeGrammar_ "grammars/haskell.cson",
       ]
     ,
       name: 'meta.declaration.type.data.record.haskell'
-      begin: /^\s*(data|newtype)\s+({className})\s*(=)\s*({className})\s+(\{)/
+      begin: /^(\s)*(data|newtype)\s+({className})\s*(=)\s*({className})\s+(\{)/
       end: /^\1(?!\s)/
       beginCaptures:
-        1: name: 'storage.type.data.haskell'
-        2: patterns: [include: '#type_name']
-        3: name: 'keyword.operator.assignment.haskell'
-        4: patterns: [include: '#type_ctor']
-        5: name: 'keyword.operator.record.begin.haskell'
+        2: name: 'storage.type.data.haskell'
+        3: patterns: [include: '#type_name']
+        4: name: 'keyword.operator.assignment.haskell'
+        5: patterns: [include: '#type_ctor']
+        6: name: 'keyword.operator.record.begin.haskell'
       patterns: [
           include: '#comments'
         ,
