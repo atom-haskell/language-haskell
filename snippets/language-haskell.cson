@@ -102,37 +102,36 @@
       \t${0:definitions}
       '''
   ###### UNICODE ######
-  '.source.haskell':
-    'Proportion':
-      'prefix': '::'
-      'body': '∷' #0x2237
-    'Rightwards double arrow':
-      'prefix': '=>'
-      'body': '⇒'
-    'For all':
-      'prefix': 'forall'
-      'body': '∀' #0x2200
-    'Rightwards arrow':
-      'prefix': '->'
-      'body': '→' #  0x2192
-    'Leftwards arrow':
-      'prefix': '<-'
-      'body': '←' #0x2190
-    'Leftwards arrow-tail':
-      'prefix': '-<'
-      'body': '↢' #0x2919
-    'Rightwards arrow-tail':
-      'prefix': '>-'
-      'body': '↣' #0x291A
-    'Leftwards double arrow-tail':
-      'prefix': '-<<'
-      'body': '⤛' # 0x291B
-    'Rightwards double arrow-tail':
-      'prefix': '>>-'
-      'body': '⤜' # 0x291C
-    'Black star':
-      'prefix': '*'
-      'body': '★' #0x2605
+  'Proportion':
+    'prefix': '::'
+    'body': '∷' #0x2237
+  'Rightwards double arrow':
+    'prefix': '=>'
+    'body': '⇒'
+  'For all':
+    'prefix': 'forall'
+    'body': '∀' #0x2200
+  'Rightwards arrow':
+    'prefix': '->'
+    'body': '→' #  0x2192
+  'Leftwards arrow':
+    'prefix': '<-'
+    'body': '←' #0x2190
+  'Leftwards arrow-tail':
+    'prefix': '-<'
+    'body': '↢' #0x2919
+  'Rightwards arrow-tail':
+    'prefix': '>-'
+    'body': '↣' #0x291A
+  'Leftwards double arrow-tail':
+    'prefix': '-<<'
+    'body': '⤛' # 0x291B
+  'Rightwards double arrow-tail':
+    'prefix': '>>-'
+    'body': '⤜' # 0x291C
+  'Black star':
+    'prefix': '*'
+    'body': '★' #0x2605
 '.source.haskell:not(.comment)':
   'Guard':
     'prefix': '|'
@@ -144,11 +143,11 @@
   'Haddock Prefix':
     'prefix': '^'
     'body': '^ ${0:documentation}'
-'.source.haskell .constant.language.nil':
+'.source.haskell .constant.language.empty-list':
   'List Comprehension':
     'prefix': '['
-    'body': '[ ${1:expression} | ${2:${3:name} <- ${4:expression}}$0]'
-'.source.haskell .meta.function.type':
+    'body': '[ ${1:expression} | ${2:${3:name} <- ${4:expression}}$0'
+'.source.haskell .meta.type-signature':
   'Type Constraint':
     'prefix': '='
     'body': '(${1:Class}) => $0'
