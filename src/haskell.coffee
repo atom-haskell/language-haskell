@@ -60,9 +60,12 @@ makeGrammar_ "grammars/haskell.cson",
       concat list('functionTypeDeclaration',/{functionName}|{operatorFun}/,/,/),
         /\s*(::|∷)/
     ctorArgs: ///
+      (?!deriving)
+      (?:
       {className}     #proper type
       |{functionName} #type variable
-      |[\w\(\)\s'->→=⇒]+ #anything goes!
+      |(?:[\w\(\)\s'->→=⇒](?!deriving))+ #anything goes!
+      )
       ///
     ctor: concat /({className})\s+/,
       listMaybe('ctorArgs',/{ctorArgs}/,/\s+/)
@@ -159,46 +162,30 @@ makeGrammar_ "grammars/haskell.cson",
           include: '#module_exports'
       ]
     ,
-      name: 'meta.deriving.haskell'
-      begin: /(deriving)\s*\(/
-      end: /\)/
-      beginCaptures:
-        1: name: 'keyword.other.haskell'
-      patterns: [
-        name: 'entity.other.inherited-class.haskell'
-        match: /\b{className}\b/
-      ]
-    ,
-      name: 'meta.deriving.haskell'
-      match: /(deriving)\s*({className})/
-      captures:
-        1: name: 'keyword.other.haskell'
-        2: patterns:[
-          name: 'entity.other.inherited-class.haskell'
-          match: /\b{className}\b/
-        ]
-    ,
-      name: 'meta.declaration.data.record.haskell'
+      name: 'meta.declaration.type.data.record.haskell'
       begin: /^\s*(data|newtype)\s+({className})\s*(=)\s*({className})\s+(\{)/
-      end: /(\})/
+      end: /^\1(?!\s)/
       beginCaptures:
         1: name: 'storage.type.data.haskell'
         2: patterns: [include: '#type_name']
         3: name: 'keyword.operator.assignment.haskell'
         4: patterns: [include: '#type_ctor']
         5: name: 'keyword.operator.record.begin.haskell'
-      endCaptures:
-        1: name: 'keyword.operator.record.end.haskell'
       patterns: [
           include: '#comments'
+        ,
+          include: '#deriving'
         ,
           name: 'punctuation.separator.comma.haskell'
           match: /,/
         ,
           include: '#record_field_declaration'
+        ,
+          name: 'keyword.operator.record.end.haskell'
+          match: '\}'
       ]
     ,
-      name: 'meta.declaration.data.haskell'
+      name: 'meta.declaration.type.data.haskell'
       begin: /^(\s)*(data)\s+({typeDecl})\s*(=)\s*/
       end: /^\1(?!\s)/
       beginCaptures:
@@ -206,6 +193,10 @@ makeGrammar_ "grammars/haskell.cson",
         3: patterns: [include: '#type_signature']
         4: name: 'keyword.operator.assignment.haskell'
       patterns: [
+          include: '#comments'
+        ,
+          include: '#deriving'
+        ,
           match: list 'ctorVariants',/{ctor}/,/\|/
           captures:
             1: patterns: [
@@ -216,7 +207,7 @@ makeGrammar_ "grammars/haskell.cson",
             ]
       ]
     ,
-      name: 'meta.declaration.newtype.haskell'
+      name: 'meta.declaration.type.newtype.haskell'
       begin: /^(\s)*(newtype)\s+({typeDecl})\s*(=)\s*/
       end: /^\1(?!\s)/
       beginCaptures:
@@ -224,20 +215,30 @@ makeGrammar_ "grammars/haskell.cson",
         3: patterns: [include: '#type_signature']
         4: name: 'keyword.operator.assignment.haskell'
       patterns: [
+          include: '#comments'
+        ,
+          include: '#deriving'
+        ,
           match: /({className})\s+({ctorArgs})/,
           captures:
             1: patterns: [include: '#type_ctor']
             2: patterns: [include: '#type_signature']
       ]
     ,
-      name: 'meta.declaration.type.haskell'
+      name: 'meta.declaration.type.type.haskell'
       begin: /^(\s)*(type)\s+({typeDecl})\s*(=)\s*/
       end: /^\1(?!\s)/
       beginCaptures:
         2: name: 'storage.type.data.haskell'
         3: patterns: [include: '#type_signature']
         4: name: 'keyword.operator.assignment.haskell'
-      patterns: [include: '#type_signature']
+      patterns: [
+          include: '#comments'
+        ,
+          include: '#deriving'
+        ,
+          include: '#type_signature'
+      ]
     ,
       name: 'keyword.other.haskell'
       match: /\b(deriving|where|data|type|newtype)\b/
@@ -450,57 +451,60 @@ makeGrammar_ "grammars/haskell.cson",
           include: '#type_signature'
       ]
     type_signature:
-      patterns: [
-          name: 'meta.class-constraints.haskell'
-          match: concat /\(/,
-            list('classConstraints',/{classConstraint}/,/,/),
-            /\)/, /\s*(=>|⇒)/
-          captures:
-            1: patterns: [{include: '#class_constraint'}]
-            #2,3 are from classConstraint
-            4: name: 'keyword.other.big-arrow.haskell'
-        ,
-          name: 'meta.class-constraints.haskell'
-          match: /({classConstraint})\s*(=>|⇒)/
-          captures:
-            1: patterns: [{include: '#class_constraint'}]
-            #2,3 are from classConstraint
-            4: name: 'keyword.other.big-arrow.haskell'
-        ,
-          include: '#pragma'
-        ,
-          name: 'keyword.other.arrow.haskell'
-          match: /->|→/
-        ,
-          name: 'keyword.other.big-arrow.haskell'
-          match: /=>|⇒/
-        ,
-          name: 'support.class.prelude.haskell'
-          match: ///\b
-            (Int(eger)?
-            |Maybe
-            |Either
-            |Bool
-            |Float
-            |Double
-            |Char
-            |String
-            |Ordering
-            |ShowS
-            |ReadS
-            |FilePath
-            |IO(Error)?
-            )\b
-            ///
-        ,
-          include: '#generic_type'
-        ,
-          include: '#type_name'
-        ,
-          include: '#unit'
-        ,
-          include: '#comments'
-      ]
+      name: 'meta.type-signature.haskell'
+      match: '(.*)'
+      captures:
+        1: patterns: [
+              name: 'meta.class-constraints.haskell'
+              match: concat /\(/,
+                list('classConstraints',/{classConstraint}/,/,/),
+                /\)/, /\s*(=>|⇒)/
+              captures:
+                1: patterns: [{include: '#class_constraint'}]
+                #2,3 are from classConstraint
+                4: name: 'keyword.other.big-arrow.haskell'
+            ,
+              name: 'meta.class-constraints.haskell'
+              match: /({classConstraint})\s*(=>|⇒)/
+              captures:
+                1: patterns: [{include: '#class_constraint'}]
+                #2,3 are from classConstraint
+                4: name: 'keyword.other.big-arrow.haskell'
+            ,
+              include: '#pragma'
+            ,
+              name: 'keyword.other.arrow.haskell'
+              match: /->|→/
+            ,
+              name: 'keyword.other.big-arrow.haskell'
+              match: /=>|⇒/
+            ,
+              name: 'support.class.prelude.haskell'
+              match: ///\b
+                (Int(eger)?
+                |Maybe
+                |Either
+                |Bool
+                |Float
+                |Double
+                |Char
+                |String
+                |Ordering
+                |ShowS
+                |ReadS
+                |FilePath
+                |IO(Error)?
+                )\b
+                ///
+            ,
+              include: '#generic_type'
+            ,
+              include: '#type_name'
+            ,
+              include: '#unit'
+            ,
+              include: '#comments'
+          ]
     type_name:
       name: 'entity.name.type.haskell'
       match: /\b{className}\b/
@@ -526,3 +530,33 @@ makeGrammar_ "grammars/haskell.cson",
           ,
             include: '#generic_type'
         ]
+    deriving:
+      patterns: [
+          include: '#deriving_list'
+        ,
+          include: '#deriving_simple'
+        ,
+          include: '#deriving_keyword'
+      ]
+    deriving_keyword:
+      name: 'meta.deriving.haskell'
+      match: /(deriving)/
+      captures:
+        1: name: 'keyword.other.haskell'
+    deriving_list:
+      name: 'meta.deriving.haskell'
+      begin: /(deriving)\s*\(/
+      end: /\)/
+      beginCaptures:
+        1: name: 'keyword.other.haskell'
+      patterns: [
+          match: /\b({className})\b/
+          captures:
+            1: name: 'entity.other.inherited-class.haskell'
+      ]
+    deriving_simple:
+      name: 'meta.deriving.haskell'
+      match: /(deriving)\s*({className})/
+      captures:
+        1: name: 'keyword.other.haskell'
+        2: name: 'entity.other.inherited-class.haskell'
