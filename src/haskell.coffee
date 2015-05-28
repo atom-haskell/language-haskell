@@ -12,6 +12,10 @@ list = (item,s,sep) ->
   #recursive regexp, caution advised
   "(?<#{item}>(?:#{toString s})(?:\\s*(?:#{toString sep})\\s*\\g<#{item}>)?)"
 
+listMaybe = (item,s,sep) ->
+  #recursive regexp, caution advised
+  "(?<#{item}>(?:#{toString s})(?:\\s*(?:#{toString sep})\\s*\\g<#{item}>)?)?"
+
 concat = (list...) ->
   r=''.concat (list.map (i) -> "(?:#{toString i})")...
   "(?:#{r})"
@@ -55,6 +59,14 @@ makeGrammar_ "grammars/haskell.cson",
     functionTypeDeclaration:
       concat list('functionTypeDeclaration',/{functionName}|{operatorFun}/,/,/),
         /\s*(::|∷)/
+    ctorArgs: ///
+      {className}     #proper type
+      |{functionName} #type variable
+      |[\w\(\)\s'->→=⇒]+ #anything goes!
+      ///
+    ctor: concat /({className})\s+/,
+      listMaybe('ctorArgs',/{ctorArgs}/,/\s+/)
+    typeDecl: /.+?/
 
   patterns: [
       name: 'keyword.operator.function.infix.haskell'
@@ -166,7 +178,7 @@ makeGrammar_ "grammars/haskell.cson",
           match: /\b{className}\b/
         ]
     ,
-      name: 'meta.declaration.record.haskell'
+      name: 'meta.declaration.data.record.haskell'
       begin: /^\s*(data|newtype)\s+({className})\s*(=)\s*({className})\s+(\{)/
       end: /(\})/
       beginCaptures:
@@ -185,6 +197,47 @@ makeGrammar_ "grammars/haskell.cson",
         ,
           include: '#record_field_declaration'
       ]
+    ,
+      name: 'meta.declaration.data.haskell'
+      begin: /^(\s)*(data)\s+({typeDecl})\s*(=)\s*/
+      end: /^\1(?!\s)/
+      beginCaptures:
+        2: name: 'storage.type.data.haskell'
+        3: patterns: [include: '#type_signature']
+        4: name: 'keyword.operator.assignment.haskell'
+      patterns: [
+          match: list 'ctorVariants',/{ctor}/,/\|/
+          captures:
+            1: patterns: [
+              match: /{ctor}/
+              captures:
+                1: patterns: [include: '#type_ctor']
+                2: patterns: [include: '#type_signature']
+            ]
+      ]
+    ,
+      name: 'meta.declaration.newtype.haskell'
+      begin: /^(\s)*(newtype)\s+({typeDecl})\s*(=)\s*/
+      end: /^\1(?!\s)/
+      beginCaptures:
+        2: name: 'storage.type.data.haskell'
+        3: patterns: [include: '#type_signature']
+        4: name: 'keyword.operator.assignment.haskell'
+      patterns: [
+          match: /({className})\s+({ctorArgs})/,
+          captures:
+            1: patterns: [include: '#type_ctor']
+            2: patterns: [include: '#type_signature']
+      ]
+    ,
+      name: 'meta.declaration.type.haskell'
+      begin: /^(\s)*(type)\s+({typeDecl})\s*(=)\s*/
+      end: /^\1(?!\s)/
+      beginCaptures:
+        2: name: 'storage.type.data.haskell'
+        3: patterns: [include: '#type_signature']
+        4: name: 'keyword.operator.assignment.haskell'
+      patterns: [include: '#type_signature']
     ,
       name: 'keyword.other.haskell'
       match: /\b(deriving|where|data|type|newtype)\b/
