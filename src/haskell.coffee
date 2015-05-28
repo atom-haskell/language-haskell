@@ -140,6 +140,7 @@ makeGrammar_ "grammars/haskell.cson",
       name: 'meta.declaration.instance.haskell'
       begin: /\b(instance)\b/
       end: /\b(where)\b|$/
+      contentName: 'meta.type-signature.haskell'
       beginCaptures:
         1: name: 'keyword.other.haskell'
       endCaptures:
@@ -164,7 +165,7 @@ makeGrammar_ "grammars/haskell.cson",
     ,
       name: 'meta.declaration.type.data.record.haskell'
       begin: /^(\s)*(data|newtype)\s+({className})\s*(=)\s*({className})\s+(\{)/
-      end: /^\1(?!\s)/
+      end: /^\1(?![ \t])/
       beginCaptures:
         2: name: 'storage.type.data.haskell'
         3: patterns: [include: '#type_name']
@@ -187,10 +188,12 @@ makeGrammar_ "grammars/haskell.cson",
     ,
       name: 'meta.declaration.type.data.haskell'
       begin: /^(\s)*(data)\s+({typeDecl})\s*(=)\s*/
-      end: /^\1(?!\s)/
+      end: /^\1(?![ \t])/
       beginCaptures:
         2: name: 'storage.type.data.haskell'
-        3: patterns: [include: '#type_signature']
+        3:
+          name: 'meta.type-signature.haskell'
+          patterns: [include: '#type_signature']
         4: name: 'keyword.operator.assignment.haskell'
       patterns: [
           include: '#comments'
@@ -203,16 +206,20 @@ makeGrammar_ "grammars/haskell.cson",
               match: /{ctor}/
               captures:
                 1: patterns: [include: '#type_ctor']
-                2: patterns: [include: '#type_signature']
+                2:
+                  name: 'meta.type-signature.haskell'
+                  patterns: [include: '#type_signature']
             ]
       ]
     ,
       name: 'meta.declaration.type.newtype.haskell'
       begin: /^(\s)*(newtype)\s+({typeDecl})\s*(=)\s*/
-      end: /^\1(?!\s)/
+      end: /^\1(?![ \t])/
       beginCaptures:
         2: name: 'storage.type.data.haskell'
-        3: patterns: [include: '#type_signature']
+        3:
+          name: 'meta.type-signature.haskell'
+          patterns: [include: '#type_signature']
         4: name: 'keyword.operator.assignment.haskell'
       patterns: [
           include: '#comments'
@@ -222,15 +229,20 @@ makeGrammar_ "grammars/haskell.cson",
           match: /({className})\s+({ctorArgs})/,
           captures:
             1: patterns: [include: '#type_ctor']
-            2: patterns: [include: '#type_signature']
+            2:
+              name: 'meta.type-signature.haskell'
+              patterns: [include: '#type_signature']
       ]
     ,
       name: 'meta.declaration.type.type.haskell'
       begin: /^(\s)*(type)\s+({typeDecl})\s*(=)\s*/
-      end: /^\1(?!\s)/
+      end: /^\1(?![ \t])/
+      contentName: 'meta.type-signature.haskell'
       beginCaptures:
         2: name: 'storage.type.data.haskell'
-        3: patterns: [include: '#type_signature']
+        3:
+          name: 'meta.type-signature.haskell'
+          patterns: [include: '#type_signature']
         4: name: 'keyword.operator.assignment.haskell'
       patterns: [
           include: '#comments'
@@ -421,7 +433,8 @@ makeGrammar_ "grammars/haskell.cson",
     function_type_declaration:
       name: 'meta.function.type-declaration.haskell'
       begin: concat /^(\s*)/,/{functionTypeDeclaration}/
-      end: /^\1(?!\s)/
+      end: /^\1(?![ \t])/
+      contentName: 'meta.type-signature.haskell'
       beginCaptures:
         2:
           patterns: [
@@ -438,6 +451,7 @@ makeGrammar_ "grammars/haskell.cson",
       name: 'meta.record-field.type-declaration.haskell'
       begin: /{functionTypeDeclaration}/
       end: /,|$\n?/
+      contentName: 'meta.type-signature.haskell'
       beginCaptures:
         1:
           patterns: [
@@ -451,60 +465,57 @@ makeGrammar_ "grammars/haskell.cson",
           include: '#type_signature'
       ]
     type_signature:
-      name: 'meta.type-signature.haskell'
-      match: '(.*)'
-      captures:
-        1: patterns: [
-              name: 'meta.class-constraints.haskell'
-              match: concat /\(/,
-                list('classConstraints',/{classConstraint}/,/,/),
-                /\)/, /\s*(=>|⇒)/
-              captures:
-                1: patterns: [{include: '#class_constraint'}]
-                #2,3 are from classConstraint
-                4: name: 'keyword.other.big-arrow.haskell'
-            ,
-              name: 'meta.class-constraints.haskell'
-              match: /({classConstraint})\s*(=>|⇒)/
-              captures:
-                1: patterns: [{include: '#class_constraint'}]
-                #2,3 are from classConstraint
-                4: name: 'keyword.other.big-arrow.haskell'
-            ,
-              include: '#pragma'
-            ,
-              name: 'keyword.other.arrow.haskell'
-              match: /->|→/
-            ,
-              name: 'keyword.other.big-arrow.haskell'
-              match: /=>|⇒/
-            ,
-              name: 'support.class.prelude.haskell'
-              match: ///\b
-                (Int(eger)?
-                |Maybe
-                |Either
-                |Bool
-                |Float
-                |Double
-                |Char
-                |String
-                |Ordering
-                |ShowS
-                |ReadS
-                |FilePath
-                |IO(Error)?
-                )\b
-                ///
-            ,
-              include: '#generic_type'
-            ,
-              include: '#type_name'
-            ,
-              include: '#unit'
-            ,
-              include: '#comments'
-          ]
+      patterns: [
+          name: 'meta.class-constraints.haskell'
+          match: concat /\(/,
+            list('classConstraints',/{classConstraint}/,/,/),
+            /\)/, /\s*(=>|⇒)/
+          captures:
+            1: patterns: [{include: '#class_constraint'}]
+            #2,3 are from classConstraint
+            4: name: 'keyword.other.big-arrow.haskell'
+        ,
+          name: 'meta.class-constraints.haskell'
+          match: /({classConstraint})\s*(=>|⇒)/
+          captures:
+            1: patterns: [{include: '#class_constraint'}]
+            #2,3 are from classConstraint
+            4: name: 'keyword.other.big-arrow.haskell'
+        ,
+          include: '#pragma'
+        ,
+          name: 'keyword.other.arrow.haskell'
+          match: /->|→/
+        ,
+          name: 'keyword.other.big-arrow.haskell'
+          match: /=>|⇒/
+        ,
+          name: 'support.class.prelude.haskell'
+          match: ///\b
+            (Int(eger)?
+            |Maybe
+            |Either
+            |Bool
+            |Float
+            |Double
+            |Char
+            |String
+            |Ordering
+            |ShowS
+            |ReadS
+            |FilePath
+            |IO(Error)?
+            )\b
+            ///
+        ,
+          include: '#generic_type'
+        ,
+          include: '#type_name'
+        ,
+          include: '#unit'
+        ,
+          include: '#comments'
+      ]
     type_name:
       name: 'entity.name.type.haskell'
       match: /\b{className}\b/

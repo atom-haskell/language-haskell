@@ -83,6 +83,7 @@
     'name': 'meta.declaration.instance.haskell'
     'begin': '\\b(instance)\\b'
     'end': '\\b(where)\\b|$'
+    'contentName': 'meta.type-signature.haskell'
     'beginCaptures':
       '1':
         'name': 'keyword.other.haskell'
@@ -118,7 +119,7 @@
   {
     'name': 'meta.declaration.type.data.record.haskell'
     'begin': '^(\\s)*(data|newtype)\\s+([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)\\s*(=)\\s*([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)\\s+(\\{)'
-    'end': '^\\1(?!\\s)'
+    'end': '^\\1(?![ \\t])'
     'beginCaptures':
       '2':
         'name': 'storage.type.data.haskell'
@@ -161,11 +162,12 @@
   {
     'name': 'meta.declaration.type.data.haskell'
     'begin': '^(\\s)*(data)\\s+(.+?)\\s*(=)\\s*'
-    'end': '^\\1(?!\\s)'
+    'end': '^\\1(?![ \\t])'
     'beginCaptures':
       '2':
         'name': 'storage.type.data.haskell'
       '3':
+        'name': 'meta.type-signature.haskell'
         'patterns': [
           {
             'include': '#type_signature'
@@ -195,6 +197,7 @@
                       }
                     ]
                   '2':
+                    'name': 'meta.type-signature.haskell'
                     'patterns': [
                       {
                         'include': '#type_signature'
@@ -208,11 +211,12 @@
   {
     'name': 'meta.declaration.type.newtype.haskell'
     'begin': '^(\\s)*(newtype)\\s+(.+?)\\s*(=)\\s*'
-    'end': '^\\1(?!\\s)'
+    'end': '^\\1(?![ \\t])'
     'beginCaptures':
       '2':
         'name': 'storage.type.data.haskell'
       '3':
+        'name': 'meta.type-signature.haskell'
         'patterns': [
           {
             'include': '#type_signature'
@@ -237,6 +241,7 @@
               }
             ]
           '2':
+            'name': 'meta.type-signature.haskell'
             'patterns': [
               {
                 'include': '#type_signature'
@@ -248,11 +253,13 @@
   {
     'name': 'meta.declaration.type.type.haskell'
     'begin': '^(\\s)*(type)\\s+(.+?)\\s*(=)\\s*'
-    'end': '^\\1(?!\\s)'
+    'end': '^\\1(?![ \\t])'
+    'contentName': 'meta.type-signature.haskell'
     'beginCaptures':
       '2':
         'name': 'storage.type.data.haskell'
       '3':
+        'name': 'meta.type-signature.haskell'
         'patterns': [
           {
             'include': '#type_signature'
@@ -503,7 +510,8 @@
       {
         'name': 'meta.function.type-declaration.haskell'
         'begin': '(?:(?:^(\\s*))(?:(?:(?:(?<functionTypeDeclaration>(?:[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+\\)))(?:\\s*(?:,)\\s*\\g<functionTypeDeclaration>)?))(?:\\s*(::|∷)))))'
-        'end': '^\\1(?!\\s)'
+        'end': '^\\1(?![ \\t])'
+        'contentName': 'meta.type-signature.haskell'
         'beginCaptures':
           '2':
             'patterns': [
@@ -530,6 +538,7 @@
         'name': 'meta.record-field.type-declaration.haskell'
         'begin': '(?:(?:(?<functionTypeDeclaration>(?:[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+\\)))(?:\\s*(?:,)\\s*\\g<functionTypeDeclaration>)?))(?:\\s*(::|∷)))'
         'end': ',|$\\n?'
+        'contentName': 'meta.type-signature.haskell'
         'beginCaptures':
           '1':
             'patterns': [
@@ -553,65 +562,57 @@
   'type_signature':
     'patterns': [
       {
-        'name': 'meta.type-signature.haskell'
-        'match': '(.*)'
+        'name': 'meta.class-constraints.haskell'
+        'match': '(?:(?:\\()(?:(?<classConstraints>(?:(?:(?:([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)\\s+)(?:(?<classConstraint>(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)(?:\\s*(?:\\s+)\\s*\\g<classConstraint>)?))))(?:\\s*(?:,)\\s*\\g<classConstraints>)?))(?:\\))(?:\\s*(=>|⇒)))'
         'captures':
           '1':
             'patterns': [
               {
-                'name': 'meta.class-constraints.haskell'
-                'match': '(?:(?:\\()(?:(?<classConstraints>(?:(?:(?:([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)\\s+)(?:(?<classConstraint>(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)(?:\\s*(?:\\s+)\\s*\\g<classConstraint>)?))))(?:\\s*(?:,)\\s*\\g<classConstraints>)?))(?:\\))(?:\\s*(=>|⇒)))'
-                'captures':
-                  '1':
-                    'patterns': [
-                      {
-                        'include': '#class_constraint'
-                      }
-                    ]
-                  '4':
-                    'name': 'keyword.other.big-arrow.haskell'
-              }
-              {
-                'name': 'meta.class-constraints.haskell'
-                'match': '((?:(?:([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)\\s+)(?:(?<classConstraint>(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)(?:\\s*(?:\\s+)\\s*\\g<classConstraint>)?))))\\s*(=>|⇒)'
-                'captures':
-                  '1':
-                    'patterns': [
-                      {
-                        'include': '#class_constraint'
-                      }
-                    ]
-                  '4':
-                    'name': 'keyword.other.big-arrow.haskell'
-              }
-              {
-                'include': '#pragma'
-              }
-              {
-                'name': 'keyword.other.arrow.haskell'
-                'match': '->|→'
-              }
-              {
-                'name': 'keyword.other.big-arrow.haskell'
-                'match': '=>|⇒'
-              }
-              {
-                'name': 'support.class.prelude.haskell'
-                'match': '\\b(Int(eger)?|Maybe|Either|Bool|Float|Double|Char|String|Ordering|ShowS|ReadS|FilePath|IO(Error)?)\\b'
-              }
-              {
-                'include': '#generic_type'
-              }
-              {
-                'include': '#type_name'
-              }
-              {
-                'include': '#unit'
-              }
-              {
-                'include': '#comments'
+                'include': '#class_constraint'
               }
             ]
+          '4':
+            'name': 'keyword.other.big-arrow.haskell'
+      }
+      {
+        'name': 'meta.class-constraints.haskell'
+        'match': '((?:(?:([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)\\s+)(?:(?<classConstraint>(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)(?:\\s*(?:\\s+)\\s*\\g<classConstraint>)?))))\\s*(=>|⇒)'
+        'captures':
+          '1':
+            'patterns': [
+              {
+                'include': '#class_constraint'
+              }
+            ]
+          '4':
+            'name': 'keyword.other.big-arrow.haskell'
+      }
+      {
+        'include': '#pragma'
+      }
+      {
+        'name': 'keyword.other.arrow.haskell'
+        'match': '->|→'
+      }
+      {
+        'name': 'keyword.other.big-arrow.haskell'
+        'match': '=>|⇒'
+      }
+      {
+        'name': 'support.class.prelude.haskell'
+        'match': '\\b(Int(eger)?|Maybe|Either|Bool|Float|Double|Char|String|Ordering|ShowS|ReadS|FilePath|IO(Error)?)\\b'
+      }
+      {
+        'include': '#generic_type'
+      }
+      {
+        'include': '#type_name'
+      }
+      {
+        'include': '#unit'
+      }
+      {
+        'include': '#comments'
       }
     ]
   'type_name':
