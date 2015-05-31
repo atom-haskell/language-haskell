@@ -26,8 +26,10 @@ makeGrammar_ "grammars/haskell.cson",
   scopeName: 'source.haskell'
 
   macros:
-    functionName: /[\p{Ll}_][\p{Ll}_\p{Lu}\p{Lt}\p{Nd}']*/
-    className: /[\p{Lu}\p{Lt}][\p{Ll}_\p{Lu}\p{Lt}\p{Nd}']*/
+    functionNameOne: /[\p{Ll}_][\p{Ll}_\p{Lu}\p{Lt}\p{Nd}']*/
+    classNameOne: /[\p{Lu}\p{Lt}][\p{Ll}_\p{Lu}\p{Lt}\p{Nd}']*/
+    functionName: /(?:{className}\.)?{functionNameOne}/
+    className: /{classNameOne}(?:\.{classNameOne})*/
     operatorChar: /[\p{S}\p{P}&&[^(),;\[\]`{}_"']]/
     ###
     In case this regex seems overly general, note that Haskell
