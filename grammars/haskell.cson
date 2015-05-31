@@ -540,11 +540,11 @@
     'patterns': [
       {
         'name': 'meta.record-field.type-declaration.haskell'
-        'begin': '((?:(?:(?<functionTypeDeclaration>(?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+\\)))(?:\\s*(?:,)\\s*\\g<functionTypeDeclaration>)?))(?:\\s*(::|∷))))'
+        'begin': '(?:(?:(?<functionTypeDeclaration>(?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+\\)))(?:\\s*(?:,)\\s*\\g<functionTypeDeclaration>)?))(?:\\s*(::|∷)))'
         'end': '(?=(?:(?:(?<functionTypeDeclaration>(?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+\\)))(?:\\s*(?:,)\\s*\\g<functionTypeDeclaration>)?))(?:\\s*(::|∷)))|})'
         'contentName': 'meta.type-signature.haskell'
         'beginCaptures':
-          '2':
+          '1':
             'patterns': [
               {
                 'name': 'entity.other.attribute-name.haskell'
@@ -554,7 +554,7 @@
                 'include': '#infix_op'
               }
             ]
-          '3':
+          '2':
             'name': 'keyword.other.double-colon.haskell'
         'patterns': [
           {
