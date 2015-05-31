@@ -15,6 +15,8 @@
   'ctorArgs': '(?!deriving)(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:[\\w\\(\\)\\s\'->→=⇒](?!deriving))+)'
   'ctor': '(?:(?:([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)\\s+)(?:(?<ctorArgs>(?:(?!deriving)(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:[\\w\\(\\)\\s\'->→=⇒](?!deriving))+))(?:\\s*(?:\\s+)\\s*\\g<ctorArgs>)?)?))'
   'typeDecl': '.+?'
+  'indentChar': '[ \\t]'
+  'indentBlockEnd': '^(?!\\1[ \\t])'
 'patterns': [
   {
     'name': 'keyword.operator.function.infix.haskell'
@@ -119,7 +121,7 @@
   {
     'name': 'meta.declaration.type.data.record.haskell'
     'begin': '^(\\s)*(data|newtype)\\s+([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)\\s*(=)\\s*([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)\\s+(\\{)'
-    'end': '^\\1(?![ \\t])'
+    'end': '^(?!\\1[ \\t])'
     'beginCaptures':
       '2':
         'name': 'storage.type.data.haskell'
@@ -162,7 +164,7 @@
   {
     'name': 'meta.declaration.type.data.haskell'
     'begin': '^(\\s)*(data)\\s+(.+?)\\s*(=)\\s*'
-    'end': '^\\1(?![ \\t])'
+    'end': '^(?!\\1[ \\t])'
     'beginCaptures':
       '2':
         'name': 'storage.type.data.haskell'
@@ -211,7 +213,7 @@
   {
     'name': 'meta.declaration.type.newtype.haskell'
     'begin': '^(\\s)*(newtype)\\s+(.+?)\\s*(=)\\s*'
-    'end': '^\\1(?![ \\t])'
+    'end': '^(?!\\1[ \\t])'
     'beginCaptures':
       '2':
         'name': 'storage.type.data.haskell'
@@ -253,7 +255,7 @@
   {
     'name': 'meta.declaration.type.type.haskell'
     'begin': '^(\\s)*(type)\\s+(.+?)\\s*(=)\\s*'
-    'end': '^\\1(?![ \\t])'
+    'end': '^(?!\\1[ \\t])'
     'contentName': 'meta.type-signature.haskell'
     'beginCaptures':
       '2':
@@ -510,7 +512,7 @@
       {
         'name': 'meta.function.type-declaration.haskell'
         'begin': '(?:(?:^(\\s*))(?:(?:(?:(?<functionTypeDeclaration>(?:[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+\\)))(?:\\s*(?:,)\\s*\\g<functionTypeDeclaration>)?))(?:\\s*(::|∷)))))'
-        'end': '^\\1(?![ \\t])'
+        'end': '^(?!\\1[ \\t])'
         'contentName': 'meta.type-signature.haskell'
         'beginCaptures':
           '2':

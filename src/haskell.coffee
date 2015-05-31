@@ -70,6 +70,8 @@ makeGrammar_ "grammars/haskell.cson",
     ctor: concat /({className})\s+/,
       listMaybe('ctorArgs',/{ctorArgs}/,/\s+/)
     typeDecl: /.+?/
+    indentChar: /[ \t]/
+    indentBlockEnd: /^(?!\1{indentChar})/
 
   patterns: [
       name: 'keyword.operator.function.infix.haskell'
@@ -165,7 +167,7 @@ makeGrammar_ "grammars/haskell.cson",
     ,
       name: 'meta.declaration.type.data.record.haskell'
       begin: /^(\s)*(data|newtype)\s+({className})\s*(=)\s*({className})\s+(\{)/
-      end: /^\1(?![ \t])/
+      end: /{indentBlockEnd}/
       beginCaptures:
         2: name: 'storage.type.data.haskell'
         3: patterns: [include: '#type_name']
@@ -188,7 +190,7 @@ makeGrammar_ "grammars/haskell.cson",
     ,
       name: 'meta.declaration.type.data.haskell'
       begin: /^(\s)*(data)\s+({typeDecl})\s*(=)\s*/
-      end: /^\1(?![ \t])/
+      end: /{indentBlockEnd}/
       beginCaptures:
         2: name: 'storage.type.data.haskell'
         3:
@@ -214,7 +216,7 @@ makeGrammar_ "grammars/haskell.cson",
     ,
       name: 'meta.declaration.type.newtype.haskell'
       begin: /^(\s)*(newtype)\s+({typeDecl})\s*(=)\s*/
-      end: /^\1(?![ \t])/
+      end: /{indentBlockEnd}/
       beginCaptures:
         2: name: 'storage.type.data.haskell'
         3:
@@ -236,7 +238,7 @@ makeGrammar_ "grammars/haskell.cson",
     ,
       name: 'meta.declaration.type.type.haskell'
       begin: /^(\s)*(type)\s+({typeDecl})\s*(=)\s*/
-      end: /^\1(?![ \t])/
+      end: /{indentBlockEnd}/
       contentName: 'meta.type-signature.haskell'
       beginCaptures:
         2: name: 'storage.type.data.haskell'
@@ -433,7 +435,7 @@ makeGrammar_ "grammars/haskell.cson",
     function_type_declaration:
       name: 'meta.function.type-declaration.haskell'
       begin: concat /^(\s*)/,/{functionTypeDeclaration}/
-      end: /^\1(?![ \t])/
+      end: /{indentBlockEnd}/
       contentName: 'meta.type-signature.haskell'
       beginCaptures:
         2:
