@@ -66,7 +66,7 @@ makeGrammar_ "grammars/haskell.cson",
       (?:
       {className}     #proper type
       |{functionName} #type variable
-      |(?:[\w\(\)\s'->→=⇒](?!deriving))+ #anything goes!
+      |(?:(?!deriving)(?:[\w()'→⇒]|->|=>)+\s*)+ #anything goes!
       )
       ///
     ctor: concat /({className})\s+/,
@@ -230,7 +230,7 @@ makeGrammar_ "grammars/haskell.cson",
         ,
           include: '#deriving'
         ,
-          match: /({className})\s+({ctorArgs})/,
+          match: /({className})\s+({ctorArgs})?/,
           captures:
             1: patterns: [include: '#type_ctor']
             2:
@@ -454,7 +454,7 @@ makeGrammar_ "grammars/haskell.cson",
     record_field_declaration:
       name: 'meta.record-field.type-declaration.haskell'
       begin: /{functionTypeDeclaration}/
-      end: /,|$\n?/
+      end: /(?={functionTypeDeclaration}|})/
       contentName: 'meta.type-signature.haskell'
       beginCaptures:
         1:
