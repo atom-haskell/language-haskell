@@ -215,9 +215,6 @@
         'include': '#comments'
       }
       {
-        'include': '#deriving'
-      }
-      {
         'match': '='
         'captures':
           '0':

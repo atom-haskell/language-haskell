@@ -224,8 +224,6 @@ makeGrammar_ "grammars/haskell.cson",
       patterns: [
           include: '#comments'
         ,
-          include: '#deriving'
-        ,
           match: /=/
           captures:
             0: name: 'keyword.operator.assignment.haskell'
