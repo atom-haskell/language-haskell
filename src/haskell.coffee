@@ -169,42 +169,22 @@ makeGrammar_ "grammars/haskell.cson",
           include: '#module_exports'
       ]
     ,
-      name: 'meta.declaration.type.data.record.haskell'
-      begin: /^(\s)*(data|newtype)\s+({className})\s*(=)\s*({className})\s+(\{)/
-      end: /{indentBlockEnd}/
-      beginCaptures:
-        2: name: 'storage.type.data.haskell'
-        3: patterns: [include: '#type_name']
-        4: name: 'keyword.operator.assignment.haskell'
-        5: patterns: [include: '#type_ctor']
-        6: name: 'keyword.operator.record.begin.haskell'
-      patterns: [
-          include: '#comments'
-        ,
-          include: '#deriving'
-        ,
-          name: 'punctuation.separator.comma.haskell'
-          match: /,/
-        ,
-          include: '#record_field_declaration'
-        ,
-          name: 'keyword.operator.record.end.haskell'
-          match: '\}'
-      ]
-    ,
       name: 'meta.declaration.type.data.haskell'
-      begin: /^(\s)*(data)\s+({typeDecl})\s*(=)\s*/
+      begin: /^(\s)*(data|newtype)\s+({typeDecl})\s*(?=\=|$)/
       end: /{indentBlockEnd}/
       beginCaptures:
         2: name: 'storage.type.data.haskell'
         3:
           name: 'meta.type-signature.haskell'
           patterns: [include: '#type_signature']
-        4: name: 'keyword.operator.assignment.haskell'
       patterns: [
           include: '#comments'
         ,
           include: '#deriving'
+        ,
+          match: /=/
+          captures:
+            0: name: 'keyword.operator.assignment.haskell'
         ,
           match: /{ctor}/
           captures:
@@ -216,32 +196,24 @@ makeGrammar_ "grammars/haskell.cson",
           match: /\|/
           captures:
             0: name: 'punctuation.separator.pipe.haskell'
-      ]
-    ,
-      name: 'meta.declaration.type.newtype.haskell'
-      begin: /^(\s)*(newtype)\s+({typeDecl})\s*(=)\s*/
-      end: /{indentBlockEnd}/
-      beginCaptures:
-        2: name: 'storage.type.data.haskell'
-        3:
-          name: 'meta.type-signature.haskell'
-          patterns: [include: '#type_signature']
-        4: name: 'keyword.operator.assignment.haskell'
-      patterns: [
-          include: '#comments'
         ,
-          include: '#deriving'
-        ,
-          match: /({className})\s+({ctorArgs})?/,
-          captures:
-            1: patterns: [include: '#type_ctor']
-            2:
-              name: 'meta.type-signature.haskell'
-              patterns: [include: '#type_signature']
+          name: 'meta.declaratyion.type.data.record.block.haskell'
+          begin: /\{/
+          beginCaptures:
+            0: name: 'keyword.operator.record.begin.haskell'
+          end: /\}/
+          endCaptures:
+            0: name: 'keyword.operator.record.end.haskell'
+          patterns: [
+              name: 'punctuation.separator.comma.haskell'
+              match: /,/
+            ,
+              include: '#record_field_declaration'
+          ]
       ]
     ,
       name: 'meta.declaration.type.type.haskell'
-      begin: /^(\s)*(type)\s+({typeDecl})\s*(=)\s*/
+      begin: /^(\s)*(type)\s+({typeDecl})\s*(?=\=|$)/
       end: /{indentBlockEnd}/
       contentName: 'meta.type-signature.haskell'
       beginCaptures:
@@ -249,11 +221,14 @@ makeGrammar_ "grammars/haskell.cson",
         3:
           name: 'meta.type-signature.haskell'
           patterns: [include: '#type_signature']
-        4: name: 'keyword.operator.assignment.haskell'
       patterns: [
           include: '#comments'
         ,
           include: '#deriving'
+        ,
+          match: /=/
+          captures:
+            0: name: 'keyword.operator.assignment.haskell'
         ,
           include: '#type_signature'
       ]

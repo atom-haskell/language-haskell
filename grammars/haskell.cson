@@ -124,51 +124,8 @@
     ]
   }
   {
-    'name': 'meta.declaration.type.data.record.haskell'
-    'begin': '^(\\s)*(data|newtype)\\s+([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)\\s*(=)\\s*([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)\\s+(\\{)'
-    'end': '^(?!\\1[ \\t].*[^ \\t]|^$)'
-    'beginCaptures':
-      '2':
-        'name': 'storage.type.data.haskell'
-      '3':
-        'patterns': [
-          {
-            'include': '#type_name'
-          }
-        ]
-      '4':
-        'name': 'keyword.operator.assignment.haskell'
-      '5':
-        'patterns': [
-          {
-            'include': '#type_ctor'
-          }
-        ]
-      '6':
-        'name': 'keyword.operator.record.begin.haskell'
-    'patterns': [
-      {
-        'include': '#comments'
-      }
-      {
-        'include': '#deriving'
-      }
-      {
-        'name': 'punctuation.separator.comma.haskell'
-        'match': ','
-      }
-      {
-        'include': '#record_field_declaration'
-      }
-      {
-        'name': 'keyword.operator.record.end.haskell'
-        'match': '}'
-      }
-    ]
-  }
-  {
     'name': 'meta.declaration.type.data.haskell'
-    'begin': '^(\\s)*(data)\\s+(.+?)\\s*(=)\\s*'
+    'begin': '^(\\s)*(data|newtype)\\s+(.+?)\\s*(?=\\=|$)'
     'end': '^(?!\\1[ \\t].*[^ \\t]|^$)'
     'beginCaptures':
       '2':
@@ -180,14 +137,18 @@
             'include': '#type_signature'
           }
         ]
-      '4':
-        'name': 'keyword.operator.assignment.haskell'
     'patterns': [
       {
         'include': '#comments'
       }
       {
         'include': '#deriving'
+      }
+      {
+        'match': '='
+        'captures':
+          '0':
+            'name': 'keyword.operator.assignment.haskell'
       }
       {
         'match': '(?:(?:([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)\\s+)(?:(?<ctorArgs>(?:(?!deriving)(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:(?!deriving)(?:[\\w()\'→⇒\\[\\],]|->|=>)+\\s*)+))(?:\\s*(?:\\s+)\\s*\\g<ctorArgs>)?)?))'
@@ -212,53 +173,31 @@
           '0':
             'name': 'punctuation.separator.pipe.haskell'
       }
-    ]
-  }
-  {
-    'name': 'meta.declaration.type.newtype.haskell'
-    'begin': '^(\\s)*(newtype)\\s+(.+?)\\s*(=)\\s*'
-    'end': '^(?!\\1[ \\t].*[^ \\t]|^$)'
-    'beginCaptures':
-      '2':
-        'name': 'storage.type.data.haskell'
-      '3':
-        'name': 'meta.type-signature.haskell'
+      {
+        'name': 'meta.declaratyion.type.data.record.block.haskell'
+        'begin': '\\{'
+        'beginCaptures':
+          '0':
+            'name': 'keyword.operator.record.begin.haskell'
+        'end': '\\}'
+        'endCaptures':
+          '0':
+            'name': 'keyword.operator.record.end.haskell'
         'patterns': [
           {
-            'include': '#type_signature'
+            'name': 'punctuation.separator.comma.haskell'
+            'match': ','
+          }
+          {
+            'include': '#record_field_declaration'
           }
         ]
-      '4':
-        'name': 'keyword.operator.assignment.haskell'
-    'patterns': [
-      {
-        'include': '#comments'
-      }
-      {
-        'include': '#deriving'
-      }
-      {
-        'match': '([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)\\s+((?!deriving)(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:(?!deriving)(?:[\\w()\'→⇒\\[\\],]|->|=>)+\\s*)+))?'
-        'captures':
-          '1':
-            'patterns': [
-              {
-                'include': '#type_ctor'
-              }
-            ]
-          '2':
-            'name': 'meta.type-signature.haskell'
-            'patterns': [
-              {
-                'include': '#type_signature'
-              }
-            ]
       }
     ]
   }
   {
     'name': 'meta.declaration.type.type.haskell'
-    'begin': '^(\\s)*(type)\\s+(.+?)\\s*(=)\\s*'
+    'begin': '^(\\s)*(type)\\s+(.+?)\\s*(?=\\=|$)'
     'end': '^(?!\\1[ \\t].*[^ \\t]|^$)'
     'contentName': 'meta.type-signature.haskell'
     'beginCaptures':
@@ -271,14 +210,18 @@
             'include': '#type_signature'
           }
         ]
-      '4':
-        'name': 'keyword.operator.assignment.haskell'
     'patterns': [
       {
         'include': '#comments'
       }
       {
         'include': '#deriving'
+      }
+      {
+        'match': '='
+        'captures':
+          '0':
+            'name': 'keyword.operator.assignment.haskell'
       }
       {
         'include': '#type_signature'
