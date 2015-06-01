@@ -66,14 +66,14 @@ makeGrammar_ "grammars/haskell.cson",
       (?:
       {className}     #proper type
       |{functionName} #type variable
-      |(?:(?!deriving)(?:[\w()'→⇒]|->|=>)+\s*)+ #anything goes!
+      |(?:(?!deriving)(?:[\w()'→⇒\[\],]|->|=>)+\s*)+ #anything goes!
       )
       ///
     ctor: concat /({className})\s+/,
       listMaybe('ctorArgs',/{ctorArgs}/,/\s+/)
     typeDecl: /.+?/
     indentChar: /[ \t]/
-    indentBlockEnd: /^(?!\1{indentChar})/
+    indentBlockEnd: /^(?!\1{indentChar}.*[^ \t]|^$)/
 
   patterns: [
       name: 'keyword.operator.function.infix.haskell'
