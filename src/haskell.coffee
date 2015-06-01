@@ -101,6 +101,8 @@ makeGrammar_ "grammars/haskell.cson",
       endCaptures:
         1: name: 'keyword.other.haskell'
       patterns: [
+          include: '#comments'
+        ,
           include: '#module_name'
         ,
           include: '#module_exports'
@@ -204,16 +206,16 @@ makeGrammar_ "grammars/haskell.cson",
         ,
           include: '#deriving'
         ,
-          match: list 'ctorVariants',/{ctor}/,/\|/
+          match: /{ctor}/
           captures:
-            1: patterns: [
-              match: /{ctor}/
-              captures:
-                1: patterns: [include: '#type_ctor']
-                2:
-                  name: 'meta.type-signature.haskell'
-                  patterns: [include: '#type_signature']
-            ]
+            1: patterns: [include: '#type_ctor']
+            2:
+              name: 'meta.type-signature.haskell'
+              patterns: [include: '#type_signature']
+        ,
+          match: /\|/
+          captures:
+            0: name: 'punctuation.separator.pipe.haskell'
       ]
     ,
       name: 'meta.declaration.type.newtype.haskell'
@@ -410,6 +412,8 @@ makeGrammar_ "grammars/haskell.cson",
       begin: /\(/
       end: /\)/
       patterns: [
+          include: '#comments'
+        ,
           name: 'entity.name.function.haskell'
           match: /\b{functionName}/
         ,

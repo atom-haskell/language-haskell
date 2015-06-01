@@ -49,6 +49,9 @@
         'name': 'keyword.other.haskell'
     'patterns': [
       {
+        'include': '#comments'
+      }
+      {
         'include': '#module_name'
       }
       {
@@ -187,28 +190,27 @@
         'include': '#deriving'
       }
       {
-        'match': '(?<ctorVariants>(?:(?:(?:([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)\\s+)(?:(?<ctorArgs>(?:(?!deriving)(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:(?!deriving)(?:[\\w()\'→⇒]|->|=>)+\\s*)+))(?:\\s*(?:\\s+)\\s*\\g<ctorArgs>)?)?)))(?:\\s*(?:\\|)\\s*\\g<ctorVariants>)?)'
+        'match': '(?:(?:([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)\\s+)(?:(?<ctorArgs>(?:(?!deriving)(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:(?!deriving)(?:[\\w()\'→⇒]|->|=>)+\\s*)+))(?:\\s*(?:\\s+)\\s*\\g<ctorArgs>)?)?))'
         'captures':
           '1':
             'patterns': [
               {
-                'match': '(?:(?:([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)\\s+)(?:(?<ctorArgs>(?:(?!deriving)(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:(?!deriving)(?:[\\w()\'→⇒]|->|=>)+\\s*)+))(?:\\s*(?:\\s+)\\s*\\g<ctorArgs>)?)?))'
-                'captures':
-                  '1':
-                    'patterns': [
-                      {
-                        'include': '#type_ctor'
-                      }
-                    ]
-                  '2':
-                    'name': 'meta.type-signature.haskell'
-                    'patterns': [
-                      {
-                        'include': '#type_signature'
-                      }
-                    ]
+                'include': '#type_ctor'
               }
             ]
+          '2':
+            'name': 'meta.type-signature.haskell'
+            'patterns': [
+              {
+                'include': '#type_signature'
+              }
+            ]
+      }
+      {
+        'match': '\\|'
+        'captures':
+          '0':
+            'name': 'punctuation.separator.pipe.haskell'
       }
     ]
   }
@@ -467,6 +469,9 @@
         'begin': '\\('
         'end': '\\)'
         'patterns': [
+          {
+            'include': '#comments'
+          }
           {
             'name': 'entity.name.function.haskell'
             'match': '\\b(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*'
