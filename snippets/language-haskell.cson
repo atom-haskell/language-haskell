@@ -1,10 +1,24 @@
 '.source.haskell':
+  'Pragma':
+    'prefix': '{-#'
+    'body': '{-# $1 #-'
+  'Module':
+    'prefix': 'module'
+    'body':
+      """
+      module ${1:Name}
+          (
+          ) where
+      """
   'Definition':
     'prefix': '='
-    'body': '${1:name} ${2:pattern}${2/.+/ /}= ${0:definition}'
+    'body': '${1:name} ${2:pattern} = ${0:definition}'
   'Function':
     'prefix': 'fun'
-    'body': '${1:name} :: ${2:Type}\n${1} ${3:pattern}${3/.+/ /}${4/.+/= /}${4:definition}'
+    'body': '''
+      ${1:name} :: ${2:Type}
+      ${1} ${3:pattern} = ${4:definition}
+      '''
   '#!/usr/bin/env…':
     'prefix': '#!'
     'body': '#!/usr/bin/env ${1:runhaskell}\n'
@@ -16,43 +30,65 @@
     'body': '${1:name} <- ${0:expression}'
   'Main':
     'prefix': 'main'
-    'body': 'module Main where\n\nmain :: IO ()\nmain = ${0:putStrLn "Hello World"}\n'
+    'body': '''
+      module Main where
+
+      main :: IO ()
+      main = ${0:putStrLn "Hello World"}\n
+      '''
   'Right Arrow':
     'prefix': '>'
     'body': '${1:expression} -> ${0:expression}'
-  'Type Signature':
-    'prefix': '::'
-    'body': '${1:name} :: ${0:Type}'
   'case … of …':
     'prefix': 'case'
-    'body': 'case ${1:expression} of\n\t${2:pattern} -> ${3:expression}\n\t${4:otherwise} -> ${5:expression}'
+    'body': '''
+      case ${1:expression} of
+      \t${2:pattern} -> ${3:expression}
+      \t${4:otherwise} -> ${5:expression}
+      '''
   'class …':
     'prefix': 'cla'
-    'body': 'class ${1:Class} where\n\t${0:definition}'
+    'body': '''
+      class ${1:Class} where
+      \t${0:definition}
+      '''
   'data …':
     'prefix': 'dat'
     'body': 'data ${1:Type} = ${0:Other}'
   'do …':
     'prefix': 'do'
-    'body': 'do\n\t${1:return ${0:expression}}'
+    'body': '''
+      do
+      \t${1:return ${0:expression}}
+      '''
   'if … then … else …':
     'prefix': 'if'
-    'body': 'if ${1:condition}\n\tthen ${2:expression}\n\telse ${3:expression}'
+    'body': '''
+      if ${1:condition}
+      \tthen ${2:expression}
+      \telse ${3:expression}
+      '''
   'import … hiding …':
     'prefix': 'imph'
-    'body': 'import ${1:Module}${2/.+/ hiding (/}${2:function}${2/.+/)/}$0'
+    'body': 'import ${1:Module} hiding (${2:function})'
   'import …':
     'prefix': 'imp'
-    'body': 'import ${1:Module}${2/.+/ (/}${2:function}${2/.+/)/}$0'
+    'body': 'import ${1:Module}'
   'import qualified …':
     'prefix': 'impq'
-    'body': 'import qualified ${1:Module}${2/.+/ as /}${2:Mod}${3/.+/ (/}${3:function}${3/.+/)/}$0'
+    'body': 'import qualified ${1:Module}${2: as ${3:Mod}}'
   'instance …':
     'prefix': 'ins'
-    'body': 'instance ${1:Class} ${2:Type} where\n\t${0:definition}'
+    'body': '''
+      instance ${1:Class} ${2:Type} where
+      \t${0:definition}
+      '''
   'let …':
     'prefix': 'let'
-    'body': 'let\n\t${1:name} = ${2:expression}\n\tin ${0:expression}'
+    'body': '''
+      let
+      \t${1:name} = ${2:expression}\n\tin ${0:expression}
+      '''
   'newtype …':
     'prefix': 'new'
     'body': 'newtype ${1:Type} = ${0:Other}'
@@ -61,7 +97,41 @@
     'body': 'type ${1:Type} = ${0:Other}'
   'where …':
     'prefix': 'where'
-    'body': 'where\n\t${0:definitions}'
+    'body': '''
+      where
+      \t${0:definitions}
+      '''
+  ###### UNICODE ######
+  'Proportion':
+    'prefix': '::'
+    'body': '∷' #0x2237
+  'Rightwards double arrow':
+    'prefix': '=>'
+    'body': '⇒'
+  'For all':
+    'prefix': 'forall'
+    'body': '∀' #0x2200
+  'Rightwards arrow':
+    'prefix': '->'
+    'body': '→' #  0x2192
+  'Leftwards arrow':
+    'prefix': '<-'
+    'body': '←' #0x2190
+  'Leftwards arrow-tail':
+    'prefix': '-<'
+    'body': '↢' #0x2919
+  'Rightwards arrow-tail':
+    'prefix': '>-'
+    'body': '↣' #0x291A
+  'Leftwards double arrow-tail':
+    'prefix': '-<<'
+    'body': '⤛' # 0x291B
+  'Rightwards double arrow-tail':
+    'prefix': '>>-'
+    'body': '⤜' # 0x291C
+  'Black star':
+    'prefix': '*'
+    'body': '★' #0x2605
 '.source.haskell:not(.comment)':
   'Guard':
     'prefix': '|'
@@ -73,11 +143,11 @@
   'Haddock Prefix':
     'prefix': '^'
     'body': '^ ${0:documentation}'
-'.source.haskell .constant.language.nil':
+'.source.haskell .constant.language.empty-list':
   'List Comprehension':
     'prefix': '['
-    'body': '[ ${1:expression} | ${2:name} <- ${3:expression}${4/.+/, /}${4:condition} '
-'.source.haskell .meta.function.type':
+    'body': '[ ${1:expression} | ${2:${3:name} <- ${4:expression}}$0'
+'.source.haskell .meta.type-signature':
   'Type Constraint':
     'prefix': '='
     'body': '(${1:Class}) => $0'
