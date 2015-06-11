@@ -136,7 +136,7 @@
   'Guard':
     'prefix': '|'
     'body': '| ${1:predicate} = ${0:definition}'
-'.source.haskell .comment.block':
+'.source.haskell .comment':
   'Haddock Postfix':
     'prefix': '|'
     'body': '| ${0:documentation}'
