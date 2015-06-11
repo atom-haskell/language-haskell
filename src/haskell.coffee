@@ -155,6 +155,20 @@ makeGrammar_ "grammars/haskell.cson",
           include: '#type_signature'
       ]
     ,
+      name: 'meta.foreign.haskell'
+      begin: /(^\s*)(foreign)\s+(import|export)/
+      end: /{indentBlockEnd}/
+      beginCaptures:
+        2: name: 'keyword.other.haskell'
+        3: name: 'keyword.other.haskell'
+      patterns:[
+          match: /(?:un)?safe/
+          captures:
+            0: name: 'keyword.other.haskell'
+        ,
+          include: '$self'
+      ]
+    ,
       name: 'meta.import.haskell'
       begin: /\b(import)\b/
       end: /($|;|(?=--))/
