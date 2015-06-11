@@ -340,17 +340,44 @@ makeGrammar_ "grammars/haskell.cson",
   ]
   repository:
     block_comment:
-      name: 'comment.block.haskell'
-      begin: /\{-(?!#)/
-      end: /-\}/
-      applyEndPatternLast: 1
-      captures:
-        0: name: 'punctuation.definition.comment.haskell'
       patterns: [
-          include: '#block_comment'
+          name: 'comment.block.haddock.haskell'
+          begin: /\{-\s*[|^]/
+          end: /-\}/
+          applyEndPatternLast: 1
+          beginCaptures:
+            0: name: 'punctuation.definition.comment.haddock.haskell'
+          endCaptures:
+            0: name: 'punctuation.definition.comment.haddock.haskell'
+          patterns: [
+              include: '#block_comment'
+          ]
+        ,
+          name: 'comment.block.haskell'
+          begin: /\{-(?!#)/
+          end: /-\}/
+          applyEndPatternLast: 1
+          beginCaptures:
+            0: name: 'punctuation.definition.comment.haskell'
+          patterns: [
+              include: '#block_comment'
+          ]
       ]
     comments:
       patterns: [
+          begin: /(^[ \t]+)?(?=--+\s+[|^])/
+          end: /(?!\G)/
+          beginCaptures:
+            1: name: 'punctuation.whitespace.comment.leading.haskell'
+          patterns: [
+              name: 'comment.line.double-dash.haddock.haskell'
+              begin: /(--+)\s+([|^])/
+              end: /\n/
+              beginCaptures:
+                1: name: 'punctuation.definition.comment.haskell'
+                2: name: 'punctuation.definition.comment.haddock.haskell'
+          ]
+        ,
           ###
           Operators may begin with -- as long as they are not
           entirely composed of - characters. This means comments can't be

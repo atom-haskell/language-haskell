@@ -343,6 +343,23 @@
   'block_comment':
     'patterns': [
       {
+        'name': 'comment.block.haddock.haskell'
+        'begin': '\\{-\\s*[|^]'
+        'end': '-\\}'
+        'applyEndPatternLast': 1
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.definition.comment.haddock.haskell'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.comment.haddock.haskell'
+        'patterns': [
+          {
+            'include': '#block_comment'
+          }
+        ]
+      }
+      {
         'name': 'comment.block.haskell'
         'begin': '\\{-(?!#)'
         'end': '-\\}'
@@ -359,6 +376,25 @@
     ]
   'comments':
     'patterns': [
+      {
+        'begin': '(^[ \\t]+)?(?=--+\\s+[|^])'
+        'end': '(?!\\G)'
+        'beginCaptures':
+          '1':
+            'name': 'punctuation.whitespace.comment.leading.haskell'
+        'patterns': [
+          {
+            'name': 'comment.line.double-dash.haddock.haskell'
+            'begin': '(--+)\\s+([|^])'
+            'end': '\\n'
+            'beginCaptures':
+              '1':
+                'name': 'punctuation.definition.comment.haskell'
+              '2':
+                'name': 'punctuation.definition.comment.haddock.haskell'
+          }
+        ]
+      }
       {
         'begin': '(^[ \\t]+)?(?=--+(?![\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]))'
         'end': '(?!\\G)'
