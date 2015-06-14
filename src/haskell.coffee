@@ -156,7 +156,7 @@ makeGrammar_ "grammars/haskell.cson",
       ]
     ,
       name: 'meta.foreign.haskell'
-      begin: /(^\s*)(foreign)\s+(import|export)/
+      begin: /(^\s*)(foreign)\s+(import|export)\b/
       end: /{indentBlockEnd}/
       beginCaptures:
         2: name: 'keyword.other.haskell'
@@ -175,12 +175,13 @@ makeGrammar_ "grammars/haskell.cson",
       beginCaptures:
         1: name: 'keyword.other.haskell'
       patterns: [
-          match: /(qualified|as|hiding)/
-          name: 'keyword.other.haskell'
-        ,
           include: '#module_name'
         ,
           include: '#module_exports'
+        ,
+          match: /\b(qualified|as|hiding)\b/
+          captures:
+            1: name: 'keyword.other.haskell'
       ]
     ,
       name: 'meta.declaration.type.data.haskell'
@@ -443,7 +444,7 @@ makeGrammar_ "grammars/haskell.cson",
       ]
     module_name:
       name: 'support.other.module.haskell'
-      match: /(?:{className}\.)+/
+      match: /(?:{className}\.)+{className}?/
     pragma:
       name: 'meta.preprocessor.haskell'
       begin: /\{-#/
