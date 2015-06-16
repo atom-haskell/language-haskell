@@ -69,7 +69,7 @@ makeGrammar_ "grammars/haskell.cson",
       |(?:(?!deriving)(?:[\w()'→⇒\[\],]|->|=>)+\s*)+ #anything goes!
       )
       ///
-    ctor: concat /({className})\s+/,
+    ctor: concat /\b({className})\s+/,
       listMaybe('ctorArgs',/{ctorArgs}/,/\s+/)
     typeDecl: /.+?/
     indentChar: /[ \t]/
