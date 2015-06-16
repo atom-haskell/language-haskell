@@ -444,7 +444,7 @@ makeGrammar_ "grammars/haskell.cson",
       ]
     module_name:
       name: 'support.other.module.haskell'
-      match: /(?:{className}\.)+{className}?/
+      match: /(?:{className}\.)*{className}\.?/
     pragma:
       name: 'meta.preprocessor.haskell'
       begin: /\{-#/
