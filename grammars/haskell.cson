@@ -19,6 +19,7 @@
   'typeDecl': '.+?'
   'indentChar': '[ \\t]'
   'indentBlockEnd': '^(?!\\1[ \\t].*[^ \\t]|^$)'
+  'maybeBirdTrack': '^'
 'patterns': [
   {
     'name': 'keyword.operator.function.infix.haskell'
@@ -105,7 +106,7 @@
   }
   {
     'name': 'meta.foreign.haskell'
-    'begin': '(^\\s*)(foreign)\\s+(import|export)\\b'
+    'begin': '^(\\s*)(foreign)\\s+(import|export)\\b'
     'end': '^(?!\\1[ \\t].*[^ \\t]|^$)'
     'beginCaptures':
       '2':
@@ -400,7 +401,7 @@
   'comments':
     'patterns': [
       {
-        'begin': '(^[ \\t]+)?(?=--+\\s+[|^])'
+        'begin': '^([ \\t]+)?(?=--+\\s+[|^])'
         'end': '(?!\\G)'
         'beginCaptures':
           '1':
@@ -419,7 +420,7 @@
         ]
       }
       {
-        'begin': '(^[ \\t]+)?(?=--+(?![\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]))'
+        'begin': '^([ \\t]+)?(?=--+(?![\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]))'
         'end': '(?!\\G)'
         'beginCaptures':
           '1':
