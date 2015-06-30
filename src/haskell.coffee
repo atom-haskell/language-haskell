@@ -92,6 +92,17 @@ haskellGrammar =
       name: 'constant.language.empty-list.haskell'
       match: /\[\]/
     ,
+      begin: /(\[)({functionNameOne})(\|)/
+      end: /(\|)(\])/
+      beginCaptures:
+        1: name: 'punctuation.definition.quasiquotes.begin.haskell'
+        2: name: 'entity.name.tag.haskell'
+        3: name: 'string.quoted.quasiquotes.haskell'
+      endCaptures:
+        1: name: 'string.quoted.quasiquotes.haskell'
+        2: name: 'punctuation.definition.quasiquotes.end.haskell'
+      contentName: 'string.quoted.quasiquotes.haskell'
+    ,
       name: 'meta.declaration.module.haskell'
       begin: /\b(module)\b/
       end: /(where)/
