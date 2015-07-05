@@ -390,7 +390,7 @@ haskellGrammar =
       ]
     comments:
       patterns: [
-          begin: /{maybeBirdTrack}([ \t]+)?(?=--+\s+[|^])/
+          begin: /({maybeBirdTrack}[ \t]+)?(?=--+\s+[|^])/
           end: /(?!\G)/
           beginCaptures:
             1: name: 'punctuation.whitespace.comment.leading.haskell'
@@ -408,7 +408,7 @@ haskellGrammar =
           entirely composed of - characters. This means comments can't be
           immediately followed by an allowable operator character.
           ###
-          begin: /{maybeBirdTrack}([ \t]+)?(?=--+(?!{operatorChar}))/
+          begin: /({maybeBirdTrack}[ \t]+)?(?=--+(?!{operatorChar}))/
           end: /(?!\G)/
           beginCaptures:
             1: name: 'punctuation.whitespace.comment.leading.haskell'
