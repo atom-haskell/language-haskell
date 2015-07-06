@@ -51,6 +51,35 @@
     ]
   }
   {
+    'begin': '^((\\\\)begin)({)spec(})(\\s*\\n)?'
+    'beginCaptures':
+      '1':
+        'name': 'support.function.be.latex.haskell'
+      '2':
+        'name': 'punctuation.definition.function.latex.haskell'
+      '3':
+        'name': 'punctuation.definition.arguments.begin.latex.haskell'
+      '4':
+        'name': 'punctuation.definition.arguments.end.latex.haskell'
+    'end': '^((\\\\)end)({)spec(})'
+    'endCaptures':
+      '1':
+        'name': 'support.function.be.latex.haskell'
+      '2':
+        'name': 'punctuation.definition.function.latex.haskell'
+      '3':
+        'name': 'punctuation.definition.arguments.begin.latex.haskell'
+      '4':
+        'name': 'punctuation.definition.arguments.end.latex.haskell'
+    'contentName': 'source.haskell.embedded.latex.haskell'
+    'name': 'meta.embedded.block.haskell.latex.haskell'
+    'patterns': [
+      {
+        'include': 'source.haskell'
+      }
+    ]
+  }
+  {
     'begin': '^(?=> )'
     'end': '^(?!> )'
     'name': 'meta.embedded.haskell'
