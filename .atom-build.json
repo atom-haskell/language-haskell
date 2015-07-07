@@ -1,5 +1,0 @@
-{
-  "cmd": "coffee",
-  "args": [ "src/haskell.coffee" ],
-  "sh": false
-}

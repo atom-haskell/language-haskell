@@ -1,4 +1,4 @@
-makeGrammar = require 'atom-syntax-tools'
+makeGrammar = require './syntax-tools'
 
 toString = (rx) ->
   if rx instanceof RegExp
@@ -71,7 +71,7 @@ haskellGrammar =
       listMaybe('ctorArgs',/{ctorArgs}/,/\s+/)
     typeDecl: /.+?/
     indentChar: /[ \t]/
-    indentBlockEnd: /^(?!\1{indentChar}.*[^ \t]|^$)/
+    indentBlockEnd: /^(?!\1{indentChar}|{indentChar}*$)/
     maybeBirdTrack: /^/
 
   patterns: [
@@ -653,6 +653,6 @@ literateHaskellGrammar =
 
 literateHaskellGrammar.macros.maybeBirdTrack = /^> /
 literateHaskellGrammar.macros.indentBlockEnd =
-  /^(?!> \1{indentChar}.*[^ \t]|> $)|^(?!> )/
+  /^(?!> \1{indentChar}|> {indentChar}*$)|^(?!> )/
 
 makeGrammar literateHaskellGrammar, "grammars/literate haskell.cson"
