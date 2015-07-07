@@ -614,7 +614,7 @@ literateHaskellGrammar =
 
   macros: haskellGrammar.macros
   patterns: [
-      begin: /^((\\)begin)({)code(})(\s*\n)?/
+      begin: /^((\\)begin)({)(code|spec)(})(\s*\n)?/
       beginCaptures:
         1:
           name: 'support.function.be.latex'
@@ -622,9 +622,9 @@ literateHaskellGrammar =
           name: 'punctuation.definition.function.latex'
         3:
           name: 'punctuation.definition.arguments.begin.latex'
-        4:
+        5:
           name: 'punctuation.definition.arguments.end.latex'
-      end: /^((\\)end)({)code(})/
+      end: /^((\\)end)({)\4(})/
       endCaptures:
         1:
           name: 'support.function.be.latex'
