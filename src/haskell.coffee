@@ -640,8 +640,8 @@ literateHaskellGrammar =
           include: 'source.haskell'
       ]
     ,
-      begin: /^(?=> )/
-      end: /^(?!> )/
+      begin: /^(?=[><] )/
+      end: /^(?![><] )/
       name: 'meta.embedded.haskell'
       patterns: haskellGrammar.patterns.concat
         match: /^> /
@@ -651,8 +651,8 @@ literateHaskellGrammar =
   ]
   repository: haskellGrammar.repository
 
-literateHaskellGrammar.macros.maybeBirdTrack = /^> /
+literateHaskellGrammar.macros.maybeBirdTrack = /^(?:>|<) /
 literateHaskellGrammar.macros.indentBlockEnd =
-  /^(?!> \1{indentChar}|> {indentChar}*$)|^(?!> )/
+  /^(?!(?:>|<) \1{indentChar}|(?:>|<) {indentChar}*$)|^(?!(?:>|<) )/
 
 makeGrammar literateHaskellGrammar, "grammars/literate haskell.cson"
