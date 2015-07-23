@@ -276,9 +276,11 @@ haskellGrammar =
       match: /\b([0-9]+|0([xX][0-9a-fA-F]+|[oO][0-7]+))\b/
     ,
       name: 'meta.preprocessor.c'
-      match: /{maybeBirdTrack}\s*(#)\s*\w+/
-      captures:
-        1: name: 'punctuation.definition.preprocessor.c'
+      begin: /{maybeBirdTrack}\s*(?=#)/
+      end: '(?<!\\\\)(?=\\n)'
+      patterns: [
+        include: 'source.c'
+      ]
       ###
       In addition to Haskell's "native" syntax, GHC permits the C
       preprocessor to be run on a source file.
