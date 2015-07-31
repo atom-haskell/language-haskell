@@ -195,7 +195,7 @@ haskellGrammar =
       ]
     ,
       name: 'meta.declaration.type.data.haskell'
-      begin: /{maybeBirdTrack}(\s)*(data|newtype)\s+({typeDecl})\s*(?=\=|$)/
+      begin: /{maybeBirdTrack}(\s*)(data|newtype)\s+({typeDecl})\s*(?=\=|$)/
       end: /{indentBlockEnd}/
       beginCaptures:
         2: name: 'storage.type.data.haskell'
@@ -238,7 +238,7 @@ haskellGrammar =
       ]
     ,
       name: 'meta.declaration.type.type.haskell'
-      begin: /{maybeBirdTrack}(\s)*(type)\s+({typeDecl})\s*(?=\=|$)/
+      begin: /{maybeBirdTrack}(\s*)(type)\s+({typeDecl})\s*(?=\=|$)/
       end: /{indentBlockEnd}/
       contentName: 'meta.type-signature.haskell'
       beginCaptures:
