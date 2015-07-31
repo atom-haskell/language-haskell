@@ -1,3 +1,8 @@
+# 1.2.1
+
+* Add CHANGELOG
+* Fix indent block problems with data, newtype and type (#42)
+
 # 1.2.0
 
 * Initial support for c2hs and hsc2hs
