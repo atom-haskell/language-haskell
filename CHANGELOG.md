@@ -1,3 +1,7 @@
+# 1.3.0
+
+* GADTs where-syntax support (#43)
+
 # 1.2.1
 
 * Add CHANGELOG
