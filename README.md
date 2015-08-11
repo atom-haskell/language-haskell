@@ -33,3 +33,21 @@ By default, `increaseIndentPattern` has the following value:
   editor:
     increaseIndentPattern: '(((=|\\bdo|\\bwhere|\\bthen|\\belse|\\bof)\\s*)|(\\bif(?!.*\\bthen\\b.*\\belse\\b.*).*))$'
 ```
+# License
+
+Copyright © 2015 Atom-Haskell
+
+Contributors:
+* Ian D. Bollinger
+* Jared Roesch
+* Jesse Cooke
+* Matthew Griffith
+* mdgriffith
+* Michael Rawson
+* Nikolay Yakimov
+* Ross Ogilvie
+* samuela
+
+See the [LICENSE.md][LICENSE] for details.
+
+[LICENSE]: https://github.com/atom-haskell/language-haskell/blob/master/LICENSE.md
