@@ -1,3 +1,7 @@
+# 1.3.1
+
+* Add `benchmark, flag, source-repository, test-suite` sections highlighting for .cabal files (by @ianbollinger)
+
 # 1.3.0
 
 * GADTs where-syntax support (#43)
