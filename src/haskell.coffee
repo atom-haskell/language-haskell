@@ -701,6 +701,13 @@ literateHaskellGrammar =
         match: /^> /
         name: 'punctuation.definition.bird-track.haskell'
     ,
+      begin: '(?<!\\\\verb)\\|'
+      end: /\|/
+      name: 'meta.embedded.text.haskell.latex'
+      patterns: [
+          include: 'source.haskell'
+      ]
+    ,
       include: 'text.tex.latex'
   ]
   repository: haskellGrammar.repository
