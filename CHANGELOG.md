@@ -1,3 +1,6 @@
+## 1.4.1
+* Pipe escapes for LHS (#45)
+
 ## 1.4.0
 * Match scripts with `runhaskell` shebang as Haskell files
 * Add highlighting rule for shebang
