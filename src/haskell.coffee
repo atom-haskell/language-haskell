@@ -326,6 +326,9 @@ haskellGrammar =
       name: 'string.quoted.double.haskell'
       match: /(")[^"]*(")/
       captures:
+        0: patterns: [
+            include: '#characters'
+        ]
         1: name: 'punctuation.definition.string.begin.haskell'
         2: name: 'punctuation.definition.string.end.haskell'
     ,
