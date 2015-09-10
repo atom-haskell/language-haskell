@@ -1,3 +1,6 @@
+## 1.4.2
+* Quasi-fix for #47
+
 ## 1.4.1
 * Pipe escapes for LHS (#45)
 
