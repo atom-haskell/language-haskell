@@ -1,3 +1,7 @@
+## 1.4.3
+* Add character patterns to in-line quoted string (#47)
+
+
 ## 1.4.2
 * Quasi-fix for #47
 
