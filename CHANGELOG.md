@@ -1,3 +1,6 @@
+## 1.4.5
+* Fix double quote escape in strings (#51)
+
 ## 1.4.4
 * Fix gadt and record syntax conflict (#50)
 
