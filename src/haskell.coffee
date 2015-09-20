@@ -111,8 +111,8 @@ haskellGrammar =
       contentName: 'string.quoted.quasiquotes.haskell'
     ,
       name: 'meta.declaration.module.haskell'
-      begin: /\b(module)\b/
-      end: /(where)/
+      begin: /\b(module)(?!')\b/
+      end: /\b(where)(?!')\b/
       beginCaptures:
         1: name: 'keyword.other.haskell'
       endCaptures:
@@ -129,8 +129,8 @@ haskellGrammar =
       ]
     ,
       name: 'meta.declaration.class.haskell'
-      begin: /\b(class)\b/
-      end: /\b(where)\b|$/
+      begin: /\b(class)(?!')\b/
+      end: /\b(where)(?!')\b|$/
       beginCaptures:
         1: name: 'storage.type.class.haskell'
       endCaptures:
@@ -161,8 +161,8 @@ haskellGrammar =
       ]
     ,
       name: 'meta.declaration.instance.haskell'
-      begin: /\b(instance)\b/
-      end: /\b(where)\b|$/
+      begin: /\b(instance)(?!')\b/
+      end: /\b(where)(?!')\b|$/
       contentName: 'meta.type-signature.haskell'
       beginCaptures:
         1: name: 'keyword.other.haskell'
@@ -173,7 +173,7 @@ haskellGrammar =
       ]
     ,
       name: 'meta.foreign.haskell'
-      begin: /{maybeBirdTrack}(\s*)(foreign)\s+(import|export)\b/
+      begin: /{maybeBirdTrack}(\s*)(foreign)\s+(import|export)(?!')\b/
       end: /{indentBlockEnd}/
       beginCaptures:
         2: name: 'keyword.other.haskell'
@@ -187,7 +187,7 @@ haskellGrammar =
       ]
     ,
       name: 'meta.import.haskell'
-      begin: /\b(import)\b/
+      begin: /\b(import)(?!')\b/
       end: /($|;|(?=--))/
       beginCaptures:
         1: name: 'keyword.other.haskell'
@@ -222,7 +222,7 @@ haskellGrammar =
               patterns: [include: '#type_signature']
         ,
           name: 'keyword.other.haskell'
-          match: /\bwhere\b/
+          match: /\bwhere(?!')\b/
         ,
           include: '#type_name'
         ,
@@ -292,16 +292,16 @@ haskellGrammar =
       ]
     ,
       name: 'keyword.other.haskell'
-      match: /\b(deriving|where|data|type|newtype)\b/
+      match: /\b(deriving|where|data|type|newtype)(?!')\b/
     ,
       name: 'storage.type.haskell'
-      match: /\b(data|type|newtype)\b/
+      match: /\b(data|type|newtype)(?!')\b/
     ,
       name: 'keyword.operator.haskell'
-      match: /\binfix[lr]?\b/
+      match: /\binfix[lr]?(?!')\b/
     ,
       name: 'keyword.control.haskell'
-      match: /\b(do|if|then|else|case|of|let|in|default)\b/
+      match: /\b(do|if|then|else|case|of|let|in|default)(?!')\b/
     ,
       name: 'constant.numeric.float.haskell'
       match: /\b([0-9]+\.[0-9]+([eE][+-]?[0-9]+)?|[0-9]+[eE][+-]?[0-9]+)\b/
@@ -370,7 +370,7 @@ haskellGrammar =
     ,
       include: '#function_type_declaration'
     ,
-      match: /\b(Just|Left|Right|Nothing|True|False|LT|EQ|GT)\b/
+      match: /\b(Just|Left|Right|Nothing|True|False|LT|EQ|GT)(?!')\b/
       name: 'support.tag.haskell'
     ,
       include: '#type_ctor'
@@ -398,7 +398,7 @@ haskellGrammar =
         |splitAt|sqrt|subtract|succ|sum|tail|take|takeWhile|tan|tanh|toEnum
         |toInteger|toRational|truncate|uncurry|undefined|unlines|until
         |unwords|unzip|unzip3|userError|words|writeFile|zip|zip3
-        |zipWith|zipWith3)\b
+        |zipWith|zipWith3)(?!')\b
         ///
     ,
       include: '#infix_op'
@@ -506,7 +506,7 @@ haskellGrammar =
       begin: /\{-#/
       end: /#-\}/
       patterns: [
-          match: /\b(LANGUAGE|UNPACK|INLINE)\b/
+          match: /\b(LANGUAGE|UNPACK|INLINE)(?!')\b/
           name: 'keyword.other.preprocessor.haskell'
       ]
     function_type_declaration:
@@ -601,7 +601,7 @@ haskellGrammar =
             |ReadS
             |FilePath
             |IO(Error)?
-            )\b
+            )(?!')\b
             ///
         ,
           include: '#generic_type'
@@ -647,12 +647,12 @@ haskellGrammar =
       ]
     deriving_keyword:
       name: 'meta.deriving.haskell'
-      match: /(deriving)/
+      match: /\b(deriving)(?!')\b/
       captures:
         1: name: 'keyword.other.haskell'
     deriving_list:
       name: 'meta.deriving.haskell'
-      begin: /(deriving)\s*\(/
+      begin: /\b(deriving)\s*\(/
       end: /\)/
       beginCaptures:
         1: name: 'keyword.other.haskell'
@@ -663,7 +663,7 @@ haskellGrammar =
       ]
     deriving_simple:
       name: 'meta.deriving.haskell'
-      match: /(deriving)\s*({className})/
+      match: /\b(deriving)\s*({className})\b/
       captures:
         1: name: 'keyword.other.haskell'
         2: name: 'entity.other.inherited-class.haskell'
