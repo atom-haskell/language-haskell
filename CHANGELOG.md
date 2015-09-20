@@ -1,3 +1,6 @@
+## 1.4.6
+* Word anchoring and tick (') handling (#52)
+
 ## 1.4.5
 * Fix double quote escape in strings (#51)
 
