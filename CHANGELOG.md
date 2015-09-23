@@ -1,3 +1,6 @@
+## 1.4.8
+* Amend quote escapes fix
+
 ## 1.4.7
 * Quote escapes fix (#53)
 
