@@ -73,7 +73,7 @@ haskellGrammar =
       ///
     ctor: concat /\b({className})\s+/,
       listMaybe('ctorArgs',/{ctorArgs}/,/\s+/)
-    typeDecl: /(?:(?:{className}|{functionName})\s*)*?(?:(?!=where)(?:{className}|{functionName}))/
+    typeDecl: /(?:{className}|{functionName})(?:\s(?:{className}|{functionName}))*/
     indentChar: /[ \t]/
     indentBlockEnd: /^(?!\1{indentChar}|{indentChar}*$)/
     maybeBirdTrack: /^/
