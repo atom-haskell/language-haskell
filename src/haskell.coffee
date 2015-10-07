@@ -73,7 +73,8 @@ haskellGrammar =
       ///
     ctor: concat /\b({className})\s+/,
       listMaybe('ctorArgs',/{ctorArgs}/,/\s+/)
-    typeDecl: /(?:(?:{className}|{functionName})\s*)*?(?:(?!=where)(?:{className}|{functionName}))/
+    typeDeclOne: /(?:(?!where)(?:{className}|{functionName}))/
+    typeDecl: /(?:{typeDeclOne})(?:\s*{typeDeclOne})*/
     indentChar: /[ \t]/
     indentBlockEnd: /^(?!\1{indentChar}|{indentChar}*$)/
     maybeBirdTrack: /^/
@@ -202,7 +203,7 @@ haskellGrammar =
       ]
     ,
       name: 'meta.declaration.type.GADT.haskell'
-      begin: /{maybeBirdTrack}(\s*)(data|newtype)\s+({typeDecl})\s*(?=where|$)/
+      begin: /{maybeBirdTrack}(\s*)(data|newtype)\s+({typeDecl})(?=\s+where)/
       end: /{indentBlockEnd}/
       beginCaptures:
         2: name: 'storage.type.data.haskell'
@@ -230,7 +231,7 @@ haskellGrammar =
       ]
     ,
       name: 'meta.declaration.type.data.haskell'
-      begin: /{maybeBirdTrack}(\s*)(data|newtype)\s+({typeDecl})\s*(?=\=|$)/
+      begin: /{maybeBirdTrack}(\s*)(data|newtype)\s+({typeDecl})/
       end: /{indentBlockEnd}/
       beginCaptures:
         2: name: 'storage.type.data.haskell'
@@ -257,7 +258,7 @@ haskellGrammar =
           captures:
             0: name: 'punctuation.separator.pipe.haskell'
         ,
-          name: 'meta.declaratyion.type.data.record.block.haskell'
+          name: 'meta.declaration.type.data.record.block.haskell'
           begin: /\{/
           beginCaptures:
             0: name: 'keyword.operator.record.begin.haskell'
@@ -273,7 +274,7 @@ haskellGrammar =
       ]
     ,
       name: 'meta.declaration.type.type.haskell'
-      begin: /{maybeBirdTrack}(\s*)(type)\s+({typeDecl})\s*(?=\=|$)/
+      begin: /{maybeBirdTrack}(\s*)(type)\s+({typeDecl})/
       end: /{indentBlockEnd}/
       contentName: 'meta.type-signature.haskell'
       beginCaptures:
@@ -545,14 +546,14 @@ haskellGrammar =
       ]
     record_field_declaration:
       name: 'meta.record-field.type-declaration.haskell'
-      begin: /{functionTypeDeclaration}/
+      begin: /\b{functionTypeDeclaration}/
       end: /(?={functionTypeDeclaration}|})/
       contentName: 'meta.type-signature.haskell'
       beginCaptures:
         1:
           patterns: [
               name: 'entity.other.attribute-name.haskell'
-              match: /{functionName}/
+              match: /\b{functionName}\b/
             ,
               include: '#infix_op'
           ]
