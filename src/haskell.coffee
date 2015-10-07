@@ -73,8 +73,8 @@ haskellGrammar =
       ///
     ctor: concat /\b({className})\s+/,
       listMaybe('ctorArgs',/{ctorArgs}/,/\s+/)
-    typeDeclOne: /(?:(?!where)(?:{className}|{functionName}))/
-    typeDecl: '(?>(?:{typeDeclOne})(?:\\s*{typeDeclOne})*)'
+    typeDeclOne: /(?:(?!\bwhere(?!')\b)(?:{className}|{functionName}))/
+    typeDecl: '(?>(?:{typeDeclOne})(?:\\s+{typeDeclOne})*)'
     indentChar: /[ \t]/
     indentBlockEnd: /^(?!\1{indentChar}|{indentChar}*$)/
     maybeBirdTrack: /^/
@@ -203,7 +203,7 @@ haskellGrammar =
       ]
     ,
       name: 'meta.declaration.type.GADT.haskell'
-      begin: /{maybeBirdTrack}(\s*)(data|newtype)\s+({typeDecl})(?=\s+where)/
+      begin: /{maybeBirdTrack}(\s*)(data|newtype)\s+({typeDecl})(?=\s+where(?!')\b)/
       end: /{indentBlockEnd}/
       beginCaptures:
         2: name: 'storage.type.data.haskell'
