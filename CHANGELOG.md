@@ -1,3 +1,6 @@
+## 1.4.11
+* Fix where anchoring in typeDecl and GADT
+
 ## 1.4.10
 * Fix catastrophic backtracking in GADTs (#55)
 
