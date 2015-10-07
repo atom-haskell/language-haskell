@@ -1,3 +1,6 @@
+## 1.4.10
+* Fix catastrophic backtracking in GADTs (#55)
+
 ## 1.4.9
 * Hack to trigger activation hook after all packages loaded
 
