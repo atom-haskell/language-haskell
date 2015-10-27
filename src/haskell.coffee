@@ -325,7 +325,7 @@ haskellGrammar =
       include: '#pragma'
     ,
       name: 'string.quoted.double.haskell'
-      match: '(")(?:(?<!\\\\)\\\\(?:\\\\{2})*"|[^"])*(")'
+      match: '(")(?>(?:[^"\\\\]+|\\\\.)*)(")'
       captures:
         0: patterns: [
             include: '#characters'
