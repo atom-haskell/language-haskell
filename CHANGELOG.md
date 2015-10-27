@@ -1,3 +1,6 @@
+## 1.4.12
+* Fix #58 (escaped quotes in multiline strings)
+
 ## 1.4.11
 * Fix where anchoring in typeDecl and GADT
 
