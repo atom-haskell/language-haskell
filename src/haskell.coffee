@@ -671,6 +671,21 @@ haskellGrammar =
 
 makeGrammar haskellGrammar, "grammars/haskell.cson"
 
+completionHintGrammar =
+  name: 'Haskell Autocompletion Hint'
+  fileTypes: []
+  scopeName: 'hint.haskell'
+
+  macros: haskellGrammar.macros
+  patterns: [
+      include: '#function_type_declaration'
+    ,
+      include: '#ctor_type_declaration'
+  ]
+  repository: haskellGrammar.repository
+
+makeGrammar completionHintGrammar, "grammars/haskell autocompletion hint.cson"
+
 literateHaskellGrammar =
   name: 'Literate Haskell'
   fileTypes: [ 'lhs' ]
