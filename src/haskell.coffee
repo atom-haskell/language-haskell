@@ -61,7 +61,7 @@ haskellGrammar =
       concat list('functionTypeDeclaration',/{functionName}|{operatorFun}/,/,/),
         /\s*(::|∷)/
     ctorTypeDeclaration:
-      concat list('functionTypeDeclaration',/{className}|{operatorFun}/,/,/),
+      concat list('ctorTypeDeclaration',/{className}|{operatorFun}/,/,/),
         /\s*(::|∷)/
     ctorArgs: ///
       (?!deriving)
