@@ -1,3 +1,6 @@
+## 1.5.0
+* Haskell Autocompletion Hint grammar
+
 ## 1.4.12
 * Fix #58 (escaped quotes in multiline strings)
 
