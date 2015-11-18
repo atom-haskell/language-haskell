@@ -497,7 +497,11 @@ haskellGrammar =
           include: '#infix_op'
         ,
           name: 'meta.other.constructor-list.haskell'
-          match: /\(.*?\)/
+          begin: /\(/
+          end: /\)/
+          patterns: [
+            include: '#type_ctor'
+          ]
       ]
     module_name:
       name: 'support.other.module.haskell'
