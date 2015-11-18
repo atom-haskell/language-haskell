@@ -1,3 +1,6 @@
+## 1.5.1
+* Support multiline module export ctors (#60)
+
 ## 1.5.0
 * Haskell Autocompletion Hint grammar
 
