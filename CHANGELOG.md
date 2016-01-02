@@ -1,3 +1,6 @@
+## 1.5.2
+* Don't confuse timecop
+
 ## 1.5.1
 * Support multiline module export ctors (#60)
 
