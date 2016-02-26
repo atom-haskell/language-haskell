@@ -703,6 +703,36 @@ typeHintGrammar =
 
 makeGrammar typeHintGrammar, "grammars/haskell type hint.cson"
 
+messageHintGrammar =
+  name: 'Haskell Message Hint'
+  fileTypes: []
+  scopeName: 'hint.message.haskell'
+
+  macros: haskellGrammar.macros
+  patterns: [
+      match: /^[^:]*:(.+)$/
+      captures:
+        1:
+          patterns: [
+            include: 'source.haskell'
+          ]
+    ,
+      begin: /^[^:]*:$/
+      end: /^\S/
+      patterns: [
+        include: 'source.haskell'
+      ]
+    ,
+      begin: /‘/
+      end: /’/
+      patterns: [
+        include: 'source.haskell'
+      ]
+  ]
+  repository: haskellGrammar.repository
+
+makeGrammar messageHintGrammar, "grammars/haskell message hint.cson"
+
 literateHaskellGrammar =
   name: 'Literate Haskell'
   fileTypes: [ 'lhs' ]
