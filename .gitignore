@@ -1,4 +1,5 @@
 grammars/haskell.cson
 grammars/literate haskell.cson
 grammars/haskell autocompletion hint.cson
+grammars/haskell type hint.cson
 node_modules
