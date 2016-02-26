@@ -1,3 +1,6 @@
+## 1.7.0
+* Haskell message hint grammar
+
 ## 1.6.0
 * Haskell Type Hint grammar
 
