@@ -1,3 +1,6 @@
+## 1.6.0
+* Haskell Type Hint grammar
+
 ## 1.5.2
 * Don't confuse timecop
 
