@@ -1,3 +1,7 @@
+## 1.7.1
+* Fix string tokenization (+tests)
+* In-line type signatures
+
 ## 1.7.0
 * Haskell message hint grammar
 
