@@ -36,17 +36,16 @@ describe "Language-Haskell", ->
 
   describe "strings", ->
     it "tokenizes single-line strings", ->
-      delimsByScope =
-        "string.quoted.double.haskell": '"'
+      {tokens} = grammar.tokenizeLine '"abcde\\n\\EOT\\EOL"'
+      expect(tokens).toEqual  [
+        { value : '"', scopes : [ 'source.haskell', 'string.quoted.double.haskell', 'punctuation.definition.string.begin.haskell' ] }
+        { value : 'abcde', scopes : [ 'source.haskell', 'string.quoted.double.haskell' ] }
+        { value : '\\n', scopes : [ 'source.haskell', 'string.quoted.double.haskell', 'constant.character.escape.haskell' ] }
+        { value : '\\EOT', scopes : [ 'source.haskell', 'string.quoted.double.haskell', 'constant.character.escape.haskell' ] }
+        { value : '\\EOL', scopes : [ 'source.haskell', 'string.quoted.double.haskell' ] }
+        { value : '"', scopes : [ 'source.haskell', 'string.quoted.double.haskell', 'punctuation.definition.string.end.haskell' ] }
+      ]
 
-      for scope, delim of delimsByScope
-        {tokens} = grammar.tokenizeLine(delim + "x" + delim)
-        expect(tokens[0].value).toEqual delim
-        expect(tokens[0].scopes).toEqual ["source.haskell", scope]
-        expect(tokens[1].value).toEqual "x"
-        expect(tokens[1].scopes).toEqual ["source.haskell", scope]
-        expect(tokens[2].value).toEqual delim
-        expect(tokens[2].scopes).toEqual ["source.haskell", scope]
 
   describe "backtick function call", ->
     it "finds backtick function names", ->
@@ -74,8 +73,8 @@ describe "Language-Haskell", ->
             { value : '1', scopes : [ 'source.haskell', 'constant.numeric.haskell' ] }
           ],
           [
-            { value : '/', scopes : [ 'source.haskell', 'keyword.operator.haskell' ] },
-            { value : ' ', scopes : [ 'source.haskell' ] },
+            { value : '/', scopes : [ 'source.haskell', 'keyword.operator.haskell' ] }
+            { value : ' ', scopes : [ 'source.haskell' ] }
             { value : '2', scopes : [ 'source.haskell', 'constant.numeric.haskell' ] }
           ]
         ]
@@ -84,14 +83,14 @@ describe "Language-Haskell", ->
     {tokens} = grammar.tokenizeLine('{--}')
 
     expect(tokens).toEqual [
-        { value : '{-', scopes : [ 'source.haskell', 'comment.block.haskell', 'punctuation.definition.comment.haskell' ] },
+        { value : '{-', scopes : [ 'source.haskell', 'comment.block.haskell', 'punctuation.definition.comment.haskell' ] }
         { value : '-}', scopes : [ 'source.haskell', 'comment.block.haskell' ] }
       ]
 
     {tokens} = grammar.tokenizeLine('{- foo -}')
     expect(tokens).toEqual  [
-        { value : '{-', scopes : [ 'source.haskell', 'comment.block.haskell', 'punctuation.definition.comment.haskell' ] },
-        { value : ' foo ', scopes : [ 'source.haskell', 'comment.block.haskell' ] },
+        { value : '{-', scopes : [ 'source.haskell', 'comment.block.haskell', 'punctuation.definition.comment.haskell' ] }
+        { value : ' foo ', scopes : [ 'source.haskell', 'comment.block.haskell' ] }
         { value : '-}', scopes : [ 'source.haskell', 'comment.block.haskell' ] }
       ]
 
@@ -102,3 +101,71 @@ describe "Language-Haskell", ->
       for scope, id of typeIds
         {tokens} = grammar.tokenizeLine(id)
         expect(tokens[0]).toEqual value: id, scopes: ['source.haskell', 'entity.name.tag.haskell']
+
+  describe ':: declarations', ->
+    it 'parses newline declarations', ->
+      data = 'function :: Type -> OtherType'
+      {tokens} = grammar.tokenizeLine(data)
+      expect(tokens).toEqual [
+          { value : 'function', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell', 'entity.name.function.haskell' ] }
+          { value : ' ', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell' ] }
+          { value : '::', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell', 'keyword.other.double-colon.haskell' ] }
+          { value : ' ', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell', 'meta.type-signature.haskell' ] }
+          { value : 'Type', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell' ] }
+          { value : ' ', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell', 'meta.type-signature.haskell' ] }
+          { value : '->', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell', 'meta.type-signature.haskell', 'keyword.other.arrow.haskell' ] }
+          { value : ' ', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell', 'meta.type-signature.haskell' ] }
+          { value : 'OtherType', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell' ] }
+        ]
+
+    it 'parses in-line parenthesised declarations', ->
+      data = 'main = (putStrLn :: String -> IO ()) ("Hello World" :: String)'
+      {tokens} = grammar.tokenizeLine(data)
+      expect(tokens).toEqual [
+        { value : 'main ', scopes : [ 'source.haskell' ] }
+        { value : '=', scopes : [ 'source.haskell', 'keyword.operator.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
+        { value : '(', scopes : [ 'source.haskell' ] }
+        { value : 'putStrLn', scopes : [ 'source.haskell', 'support.function.prelude.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
+        { value : '::', scopes : [ 'source.haskell', 'keyword.other.double-colon.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
+        { value : 'String', scopes : [ 'source.haskell', 'support.class.prelude.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
+        { value : '->', scopes : [ 'source.haskell', 'keyword.other.arrow.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
+        { value : 'IO', scopes : [ 'source.haskell', 'support.class.prelude.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
+        { value : '()', scopes : [ 'source.haskell', 'constant.language.unit.haskell' ] }
+        { value : ')', scopes : [ 'source.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
+        { value : '(', scopes : [ 'source.haskell' ] }
+        { value : '"', scopes : [ 'source.haskell', 'string.quoted.double.haskell', 'punctuation.definition.string.begin.haskell' ] }
+        { value : 'Hello World', scopes : [ 'source.haskell', 'string.quoted.double.haskell' ] }
+        { value : '"', scopes : [ 'source.haskell', 'string.quoted.double.haskell', 'punctuation.definition.string.end.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
+        { value : '::', scopes : [ 'source.haskell', 'keyword.other.double-colon.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
+        { value : 'String', scopes : [ 'source.haskell', 'support.class.prelude.haskell' ] }
+        { value : ')', scopes : [ 'source.haskell' ] }
+      ]
+
+    it 'parses in-line non-parenthesised declarations', ->
+      data = 'main = putStrLn "Hello World" :: IO ()'
+      {tokens} = grammar.tokenizeLine(data)
+      expect(tokens).toEqual [
+        { value : 'main ', scopes : [ 'source.haskell' ] }
+        { value : '=', scopes : [ 'source.haskell', 'keyword.operator.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
+        { value : 'putStrLn', scopes : [ 'source.haskell', 'support.function.prelude.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
+        { value : '"', scopes : [ 'source.haskell', 'string.quoted.double.haskell', 'punctuation.definition.string.begin.haskell' ] }
+        { value : 'Hello World', scopes : [ 'source.haskell', 'string.quoted.double.haskell' ] }
+        { value : '"', scopes : [ 'source.haskell', 'string.quoted.double.haskell', 'punctuation.definition.string.end.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
+        { value : '::', scopes : [ 'source.haskell', 'keyword.other.double-colon.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
+        { value : 'IO', scopes : [ 'source.haskell', 'support.class.prelude.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
+        { value : '()', scopes : [ 'source.haskell', 'constant.language.unit.haskell' ] }
+      ]

@@ -44,17 +44,16 @@ haskellGrammar =
         \)
       )
       ///
-    character: ///
-      (?:
-        [\ -\[\]-~]                # Basic Char
-        | (\\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE
-          |DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS
-          |US|SP|DEL|[abfnrtv\\\"'\&]))    # Escapes
-        | (\\o[0-7]+)                # Octal Escapes
-        | (\\x[0-9A-Fa-f]+)            # Hexadecimal Escapes
-        | (\^[A-Z@\[\]\\\^_])            # Control Chars
-      )
+    basicChar: /[\ -\[\]-~]/
+    escapeChar: ///
+      \\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE
+        |DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS
+        |US|SP|DEL|[abfnrtv\\\"'\&])    # Escapes
       ///
+    octalChar: /(?:\\o[0-7]+)/
+    hexChar: /(?:\\x[0-9A-Fa-f]+)/
+    controlChar: /(?:\^[A-Z@\[\]\\\^_])/
+    character: '(?:{basicChar}|{escapeChar}|{octalChar}|{hexChar}|{controlChar})'
     classConstraint: concat /({className})\s+/,
       list('classConstraint',/{className}|{functionName}/,/\s+/)
     functionTypeDeclaration:
@@ -325,15 +324,6 @@ haskellGrammar =
       include: '#pragma'
     ,
       name: 'string.quoted.double.haskell'
-      match: '(")(?>(?:[^"\\\\]+|\\\\.)*)(")'
-      captures:
-        0: patterns: [
-            include: '#characters'
-        ]
-        1: name: 'punctuation.definition.string.begin.haskell'
-        2: name: 'punctuation.definition.string.end.haskell'
-    ,
-      name: 'string.quoted.double.haskell'
       begin: /"/
       end: /"/
       beginCaptures:
@@ -366,8 +356,7 @@ haskellGrammar =
           patterns:[
             include: '#characters'
           ]
-        # {character} macro has 4 capture groups, here 3-6
-        7: name: 'punctuation.definition.string.end.haskell'
+        3: name: 'punctuation.definition.string.end.haskell'
     ,
       include: '#function_type_declaration'
     ,
@@ -481,12 +470,12 @@ haskellGrammar =
           include: '#block_comment'
       ]
     characters:
-      match: /{character}/
-      captures:
-        1: name: 'constant.character.escape.haskell'
-        2: name: 'constant.character.escape.octal.haskell'
-        3: name: 'constant.character.escape.hexadecimal.haskell'
-        4: name: 'constant.character.escape.control.haskell'
+      patterns: [
+          {match: '{escapeChar}', name: 'constant.character.escape.haskell'}
+          {match: '{octalChar}', name: 'constant.character.escape.octal.haskell'}
+          {match: '{hexChar}', name: 'constant.character.escape.hexadecimal.haskell'}
+          {match: 'controlChar', name: 'constant.character.escape.control.haskell'}
+        ]
     infix_op:
       name: 'entity.name.function.infix.haskell'
       match: /{operatorFun}/
