@@ -511,7 +511,7 @@ haskellGrammar =
       begin: /\{-#/
       end: /#-\}/
       patterns: [
-          match: /\b(LANGUAGE|UNPACK|INLINE)(?!')\b/
+          match: /\b(LANGUAGE|UNPACK|INLINE|OPTIONS_GHC)(?!')\b/
           name: 'keyword.other.preprocessor.haskell'
       ]
     function_type_declaration:
