@@ -1,3 +1,7 @@
+## 1.7.3
+* Fix message highlighting
+* Add coffeelint
+
 ## 1.7.2
 * Merge pull request #63 from robrix/options-ghc-pragma
 * Add OPTIONS_GHC to the recognized pragmas.
