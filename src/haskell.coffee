@@ -718,7 +718,7 @@ messageHintGrammar =
           ]
     ,
       begin: /^[^:]*:$/
-      end: /^\S/
+      end: /^(?=\S)/
       patterns: [
         include: 'source.haskell'
       ]
