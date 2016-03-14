@@ -6,16 +6,16 @@ toString = (rx) ->
   else
     rx
 
-list = (item,s,sep) ->
+list = (item, s, sep) ->
   #recursive regexp, caution advised
   "(?<#{item}>(?:#{toString s})(?:\\s*(?:#{toString sep})\\s*\\g<#{item}>)?)"
 
-listMaybe = (item,s,sep) ->
+listMaybe = (item, s, sep) ->
   #recursive regexp, caution advised
   "(?<#{item}>(?:#{toString s})(?:\\s*(?:#{toString sep})\\s*\\g<#{item}>)?)?"
 
 concat = (list...) ->
-  r=''.concat (list.map (i) -> "(?:#{toString i})")...
+  r = ''.concat (list.map (i) -> "(?:#{toString i})")...
   "(?:#{r})"
 
 haskellGrammar =
@@ -55,12 +55,12 @@ haskellGrammar =
     controlChar: /(?:\^[A-Z@\[\]\\\^_])/
     character: '(?:{basicChar}|{escapeChar}|{octalChar}|{hexChar}|{controlChar})'
     classConstraint: concat /({className})\s+/,
-      list('classConstraint',/{className}|{functionName}/,/\s+/)
+      list('classConstraint', /{className}|{functionName}/, /\s+/)
     functionTypeDeclaration:
-      concat list('functionTypeDeclaration',/{functionName}|{operatorFun}/,/,/),
+      concat list('functionTypeDeclaration', /{functionName}|{operatorFun}/, /,/),
         /\s*(::|∷)/
     ctorTypeDeclaration:
-      concat list('ctorTypeDeclaration',/{className}|{operatorFun}/,/,/),
+      concat list('ctorTypeDeclaration', /{className}|{operatorFun}/, /,/),
         /\s*(::|∷)/
     ctorArgs: ///
       (?!deriving)
@@ -71,7 +71,7 @@ haskellGrammar =
       )
       ///
     ctor: concat /\b({className})\s+/,
-      listMaybe('ctorArgs',/{ctorArgs}/,/\s+/)
+      listMaybe('ctorArgs', /{ctorArgs}/, /\s+/)
     typeDeclOne: /(?:(?!\bwhere(?!')\b)(?:{className}|{functionName}))/
     typeDecl: '(?>(?:{typeDeclOne})(?:\\s+{typeDeclOne})*)'
     indentChar: /[ \t]/
@@ -516,7 +516,7 @@ haskellGrammar =
       ]
     function_type_declaration:
       name: 'meta.function.type-declaration.haskell'
-      begin: concat /{maybeBirdTrack}(\s*)/,/{functionTypeDeclaration}/
+      begin: concat /{maybeBirdTrack}(\s*)/, /{functionTypeDeclaration}/
       end: /{indentBlockEnd}/
       contentName: 'meta.type-signature.haskell'
       beginCaptures:
@@ -533,7 +533,7 @@ haskellGrammar =
       ]
     ctor_type_declaration:
       name: 'meta.ctor.type-declaration.haskell'
-      begin: concat /{maybeBirdTrack}(\s*)/,/{ctorTypeDeclaration}/
+      begin: concat /{maybeBirdTrack}(\s*)/, /{ctorTypeDeclaration}/
       end: /{indentBlockEnd}/
       contentName: 'meta.type-signature.haskell'
       beginCaptures:
@@ -569,7 +569,7 @@ haskellGrammar =
       patterns: [
           name: 'meta.class-constraints.haskell'
           match: concat /\(/,
-            list('classConstraints',/{classConstraint}/,/,/),
+            list('classConstraints', /{classConstraint}/, /,/),
             /\)/, /\s*(=>|⇒)/
           captures:
             1: patterns: [{include: '#class_constraint'}]
