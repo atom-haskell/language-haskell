@@ -364,12 +364,12 @@ haskellGrammar =
       captures:
         1: patterns: [include: 'source.haskell']
         2: name: 'keyword.other.double-colon.haskell'
-        3: patterns: [include: '#type_signature']
+        3: {name: 'meta.type-signature.haskell', patterns: [include: '#type_signature']}
     ,
       match: '(::|∷)(.*)'
       captures:
         1: name: 'keyword.other.double-colon.haskell'
-        2: patterns: [include: '#type_signature']
+        2: {name: 'meta.type-signature.haskell', patterns: [include: '#type_signature']}
     ,
       match: /\b(Just|Left|Right|Nothing|True|False|LT|EQ|GT)(?!')\b/
       name: 'support.tag.haskell'
