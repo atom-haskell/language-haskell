@@ -1,3 +1,7 @@
+## 1.7.4
+* More accurate inline type signature match
+* Add meta.type-signature.haskell to in-line sigs
+
 ## 1.7.3
 * Fix message highlighting
 * Add coffeelint
