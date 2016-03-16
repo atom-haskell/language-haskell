@@ -366,7 +366,7 @@ haskellGrammar =
         2: name: 'keyword.other.double-colon.haskell'
         3: {name: 'meta.type-signature.haskell', patterns: [include: '#type_signature']}
     ,
-      match: '(::|∷)((?:{className}|{functionName}|\\->|=>|→|⇒|\\s)*)'
+      match: '(::|∷)((?:{className}|{functionName}|\\->|=>|[→⇒()\\[\\]]|\\s)*)'
       captures:
         1: name: 'keyword.other.double-colon.haskell'
         2: {name: 'meta.type-signature.haskell', patterns: [include: '#type_signature']}
