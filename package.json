@@ -1,6 +1,6 @@
 {
   "name": "language-haskell",
-  "version": "1.7.4",
+  "version": "1.7.5",
   "description": "Haskell language support in Atom",
   "repository": "https://github.com/atom-haskell/language-haskell",
   "license": "MIT",
