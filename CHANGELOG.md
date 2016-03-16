@@ -1,3 +1,6 @@
+## 1.7.5
+* Add [] () to inline type signature characters
+
 ## 1.7.4
 * More accurate inline type signature match
 * Add meta.type-signature.haskell to in-line sigs
