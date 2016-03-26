@@ -1,3 +1,6 @@
+## 1.7.6
+* More preprocessor pragmas
+
 ## 1.7.5
 * Add [] () to inline type signature characters
 
