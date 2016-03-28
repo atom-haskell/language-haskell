@@ -1,3 +1,8 @@
+## 1.7.7
+* Regression tests for #65
+* Tweak ctor regex
+* Spec update
+
 ## 1.7.6
 * More preprocessor pragmas
 
