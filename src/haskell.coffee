@@ -70,8 +70,8 @@ haskellGrammar =
       |(?:(?!deriving)(?:[\w()'→⇒\[\],]|->|=>)+\s*)+ #anything goes!
       )
       ///
-    ctor: concat /\b({className})\s+/,
-      listMaybe('ctorArgs', /{ctorArgs}/, /\s+/)
+    ctor: concat /\b({className})\b/,
+      listMaybe('ctorArgs', /\s+{ctorArgs}/, '')
     typeDeclOne: /(?:(?!\bwhere(?!')\b)(?:{className}|{functionName}))/
     typeDecl: '(?>(?:{typeDeclOne})(?:\\s+{typeDeclOne})*)'
     indentChar: /[ \t]/
