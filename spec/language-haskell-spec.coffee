@@ -129,14 +129,14 @@ describe "Language-Haskell", ->
         { value : 'putStrLn', scopes : [ 'source.haskell', 'support.function.prelude.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '::', scopes : [ 'source.haskell', 'keyword.other.double-colon.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell' ] }
-        { value : 'String', scopes : [ 'source.haskell', 'support.class.prelude.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell' ] }
-        { value : '->', scopes : [ 'source.haskell', 'keyword.other.arrow.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell' ] }
-        { value : 'IO', scopes : [ 'source.haskell', 'support.class.prelude.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell' ] }
-        { value : '()', scopes : [ 'source.haskell', 'constant.language.unit.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
+        { value : 'String', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'support.class.prelude.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
+        { value : '->', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'keyword.other.arrow.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
+        { value : 'IO', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'support.class.prelude.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
+        { value : '()', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'constant.language.unit.haskell' ] }
         { value : ')', scopes : [ 'source.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '(', scopes : [ 'source.haskell' ] }
@@ -145,10 +145,11 @@ describe "Language-Haskell", ->
         { value : '"', scopes : [ 'source.haskell', 'string.quoted.double.haskell', 'punctuation.definition.string.end.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '::', scopes : [ 'source.haskell', 'keyword.other.double-colon.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell' ] }
-        { value : 'String', scopes : [ 'source.haskell', 'support.class.prelude.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
+        { value : 'String', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'support.class.prelude.haskell' ] }
         { value : ')', scopes : [ 'source.haskell' ] }
       ]
+
 
     it 'parses in-line non-parenthesised declarations', ->
       data = 'main = putStrLn "Hello World" :: IO ()'
@@ -164,8 +165,8 @@ describe "Language-Haskell", ->
         { value : '"', scopes : [ 'source.haskell', 'string.quoted.double.haskell', 'punctuation.definition.string.end.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '::', scopes : [ 'source.haskell', 'keyword.other.double-colon.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell' ] }
-        { value : 'IO', scopes : [ 'source.haskell', 'support.class.prelude.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell' ] }
-        { value : '()', scopes : [ 'source.haskell', 'constant.language.unit.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
+        { value : 'IO', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'support.class.prelude.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
+        { value : '()', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'constant.language.unit.haskell' ] }
       ]
