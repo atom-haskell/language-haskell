@@ -273,8 +273,8 @@ haskellGrammar =
       ]
     ,
       name: 'meta.declaration.type.type.haskell'
-      begin: /{maybeBirdTrack}(\s*)(type)\s+({typeDecl})/
-      end: /{indentBlockEnd}/
+      begin: /{maybeBirdTrack}(\s*)(type(?:\s+family)?)\s+({typeDecl})/
+      end: /{indentBlockEnd}|(?=\bwhere\b)/
       contentName: 'meta.type-signature.haskell'
       beginCaptures:
         2: name: 'storage.type.data.haskell'
