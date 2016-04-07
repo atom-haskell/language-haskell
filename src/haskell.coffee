@@ -79,6 +79,14 @@ haskellGrammar =
     maybeBirdTrack: /^/
 
   patterns: [
+      name: 'block.liquidhaskell'
+      contentName: 'block.liquidhaskell.annotation'
+      begin: '\\{-@(?!#)'
+      end: '@-\\}'
+      patterns: [
+          include: '$self'
+      ]
+    ,
       name: 'comment.line.shebang.haskell'
       match: '^\\#\\!.*\\brunhaskell\\b.*$'
     ,
@@ -413,6 +421,7 @@ haskellGrammar =
   repository:
     block_comment:
       patterns: [
+
           name: 'comment.block.haddock.haskell'
           begin: /\{-\s*[|^]/
           end: /-\}/
