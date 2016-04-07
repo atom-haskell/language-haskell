@@ -421,7 +421,6 @@ haskellGrammar =
   repository:
     block_comment:
       patterns: [
-
           name: 'comment.block.haddock.haskell'
           begin: /\{-\s*[|^]/
           end: /-\}/
