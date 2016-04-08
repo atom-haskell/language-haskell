@@ -1,3 +1,6 @@
+## 1.7.10
+* added liquidhaskell comment block (PR #69 by @ranjitjhala)
+
 ## 1.7.9
 * Add 'type instance' keyword
 
