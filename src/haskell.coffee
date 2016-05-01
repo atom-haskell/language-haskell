@@ -383,8 +383,6 @@ haskellGrammar =
       match: /\b(Just|Left|Right|Nothing|True|False|LT|EQ|GT)(?!')\b/
       name: 'support.tag.haskell'
     ,
-      include: '#type_ctor'
-    ,
       include: '#comments'
     ,
       name: 'support.function.prelude.haskell'
@@ -418,6 +416,15 @@ haskellGrammar =
     ,
       name: 'punctuation.separator.comma.haskell'
       match: /,/
+    ,
+      match: '\\b{functionName}\\b'
+      captures:
+        0:
+          patterns: [
+            include: '#module_name'
+          ]
+    ,
+      include: '#type_ctor'
   ]
   repository:
     block_comment:
