@@ -1,3 +1,7 @@
+## 1.7.12
+* Spec update
+* Capture identifiers before type ctors
+
 ## 1.7.11
 * Fix CPP # confusion
 * Updated contributors
