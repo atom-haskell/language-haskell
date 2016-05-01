@@ -122,7 +122,8 @@ describe "Language-Haskell", ->
       data = 'main = (putStrLn :: String -> IO ()) ("Hello World" :: String)'
       {tokens} = grammar.tokenizeLine(data)
       expect(tokens).toEqual [
-        { value : 'main ', scopes : [ 'source.haskell' ] }
+        { value : 'main', scopes : [ 'source.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '=', scopes : [ 'source.haskell', 'keyword.operator.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '(', scopes : [ 'source.haskell' ] }
@@ -155,7 +156,8 @@ describe "Language-Haskell", ->
       data = 'main = putStrLn "Hello World" :: IO ()'
       {tokens} = grammar.tokenizeLine(data)
       expect(tokens).toEqual [
-        { value : 'main ', scopes : [ 'source.haskell' ] }
+        { value : 'main', scopes : [ 'source.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '=', scopes : [ 'source.haskell', 'keyword.operator.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
         { value : 'putStrLn', scopes : [ 'source.haskell', 'support.function.prelude.haskell' ] }
