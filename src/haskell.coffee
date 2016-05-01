@@ -421,7 +421,8 @@ haskellGrammar =
       captures:
         0:
           patterns: [
-            include: '#module_name'
+            name: 'support.other.module.haskell'
+            match: /^(?:{className}\.)*{className}\.?/
           ]
     ,
       include: '#type_ctor'
