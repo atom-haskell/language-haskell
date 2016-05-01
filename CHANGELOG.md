@@ -1,3 +1,7 @@
+## 1.7.11
+* Fix CPP # confusion
+* Updated contributors
+
 ## 1.7.10
 * added liquidhaskell comment block (PR #69 by @ranjitjhala)
 
