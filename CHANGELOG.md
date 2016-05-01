@@ -1,3 +1,6 @@
+## 1.7.13
+* Fix runaway module name
+
 ## 1.7.12
 * Spec update
 * Capture identifiers before type ctors
