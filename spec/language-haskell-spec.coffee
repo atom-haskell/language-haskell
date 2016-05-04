@@ -70,12 +70,12 @@ describe "Language-Haskell", ->
       """
       expect(lines).toEqual  [
           [
-            { value : '1', scopes : [ 'source.haskell', 'constant.numeric.haskell' ] }
+            { value : '1', scopes : [ 'source.haskell', 'constant.numeric.decimal.haskell' ] }
           ],
           [
             { value : '/', scopes : [ 'source.haskell', 'keyword.operator.haskell' ] }
             { value : ' ', scopes : [ 'source.haskell' ] }
-            { value : '2', scopes : [ 'source.haskell', 'constant.numeric.haskell' ] }
+            { value : '2', scopes : [ 'source.haskell', 'constant.numeric.decimal.haskell' ] }
           ]
         ]
 
@@ -122,7 +122,7 @@ describe "Language-Haskell", ->
       data = 'main = (putStrLn :: String -> IO ()) ("Hello World" :: String)'
       {tokens} = grammar.tokenizeLine(data)
       expect(tokens).toEqual [
-        { value : 'main', scopes : [ 'source.haskell' ] }
+        { value : 'main', scopes : [ 'source.haskell', 'identifier.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '=', scopes : [ 'source.haskell', 'keyword.operator.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
@@ -156,7 +156,7 @@ describe "Language-Haskell", ->
       data = 'main = putStrLn "Hello World" :: IO ()'
       {tokens} = grammar.tokenizeLine(data)
       expect(tokens).toEqual [
-        { value : 'main', scopes : [ 'source.haskell' ] }
+        { value : 'main', scopes : [ 'source.haskell', 'identifier.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '=', scopes : [ 'source.haskell', 'keyword.operator.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
