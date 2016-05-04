@@ -25,8 +25,10 @@ haskellGrammar =
   scopeName: 'source.haskell'
 
   macros:
-    functionNameOne: /[\p{Ll}_][\p{Ll}_\p{Lu}\p{Lt}\p{Nd}']*/
-    classNameOne: /[\p{Lu}\p{Lt}][\p{Ll}_\p{Lu}\p{Lt}\p{Nd}']*/
+    identStartCharClass: /[\p{Ll}_\p{Lu}\p{Lt}]/
+    identCharClass: /[\p{Ll}_\p{Lu}\p{Lt}\p{Nd}']/
+    functionNameOne: /[\p{Ll}_]{identCharClass}*/
+    classNameOne: /[\p{Lu}\p{Lt}]{identCharClass}*/
     functionName: /(?:{className}\.)?{functionNameOne}/
     className: /{classNameOne}(?:\.{classNameOne})*/
     operatorChar: /[\p{S}\p{P}&&[^(),;\[\]`{}_"']]/
@@ -70,13 +72,16 @@ haskellGrammar =
       |(?:(?!deriving)(?:[\w()'→⇒\[\],]|->|=>)+\s*)+ #anything goes!
       )
       ///
-    ctor: concat /\b({className})\b/,
+    ctor: concat /{lb}({className}){rb}/,
       listMaybe('ctorArgs', /\s+{ctorArgs}/, '')
-    typeDeclOne: /(?:(?!\bwhere(?!')\b)(?:{className}|{functionName}))/
+    typeDeclOne: /(?:(?!{lb}where{rb})(?:{className}|{functionName}))/
     typeDecl: '(?>(?:{typeDeclOne})(?:\\s+{typeDeclOne})*)'
     indentChar: /[ \t]/
     indentBlockEnd: /^(?!\1{indentChar}|{indentChar}*$)/
     maybeBirdTrack: /^/
+    lb: '(?:(?={identStartCharClass})(?<!{identStartCharClass}))'
+    rb: '(?:(?<={identCharClass})(?!{identCharClass}))'
+    b: '(?:{lb}|{rb})'
 
   patterns: [
       name: 'block.liquidhaskell'
@@ -119,8 +124,8 @@ haskellGrammar =
       contentName: 'string.quoted.quasiquotes.haskell'
     ,
       name: 'meta.declaration.module.haskell'
-      begin: /\b(module)(?!')\b/
-      end: /\b(where)(?!')\b/
+      begin: /{lb}(module){rb}/
+      end: /{lb}(where){rb}/
       beginCaptures:
         1: name: 'keyword.other.haskell'
       endCaptures:
@@ -137,8 +142,8 @@ haskellGrammar =
       ]
     ,
       name: 'meta.declaration.class.haskell'
-      begin: /\b(class)(?!')\b/
-      end: /\b(where)(?!')\b|$/
+      begin: /{lb}(class){rb}/
+      end: /{lb}(where){rb}|$/
       beginCaptures:
         1: name: 'storage.type.class.haskell'
       endCaptures:
@@ -146,7 +151,7 @@ haskellGrammar =
       patterns: [
           name: 'support.class.prelude.haskell'
           match: ///
-            \b
+            {lb}
             (Monad
             |Functor
             |Eq
@@ -160,7 +165,7 @@ haskellGrammar =
             |Real(Frac|Float)?
             |Integral
             |Floating
-            )\b
+            ){rb}
             ///
         ,
           include: '#type_name'
@@ -169,8 +174,8 @@ haskellGrammar =
       ]
     ,
       name: 'meta.declaration.instance.haskell'
-      begin: /\b(instance)(?!')\b/
-      end: /\b(where)(?!')\b|$/
+      begin: /{lb}(instance){rb}/
+      end: /{lb}(where){rb}|$/
       contentName: 'meta.type-signature.haskell'
       beginCaptures:
         1: name: 'keyword.other.haskell'
@@ -181,7 +186,7 @@ haskellGrammar =
       ]
     ,
       name: 'meta.foreign.haskell'
-      begin: /{maybeBirdTrack}(\s*)(foreign)\s+(import|export)(?!')\b/
+      begin: /{maybeBirdTrack}(\s*)(foreign)\s+(import|export){rb}/
       end: /{indentBlockEnd}/
       beginCaptures:
         2: name: 'keyword.other.haskell'
@@ -195,7 +200,7 @@ haskellGrammar =
       ]
     ,
       name: 'meta.import.haskell'
-      begin: /\b(import)(?!')\b/
+      begin: /{lb}(import){rb}/
       end: /($|;|(?=--))/
       beginCaptures:
         1: name: 'keyword.other.haskell'
@@ -204,13 +209,13 @@ haskellGrammar =
         ,
           include: '#module_exports'
         ,
-          match: /\b(qualified|as|hiding)\b/
+          match: /{lb}(qualified|as|hiding){rb}/
           captures:
             1: name: 'keyword.other.haskell'
       ]
     ,
       name: 'meta.declaration.type.GADT.haskell'
-      begin: /{maybeBirdTrack}(\s*)(data|newtype)\s+({typeDecl})(?=\s+where(?!')\b)/
+      begin: /{maybeBirdTrack}(\s*)(data|newtype)\s+({typeDecl})(?=\s+where{rb})/
       end: /{indentBlockEnd}/
       beginCaptures:
         2: name: 'storage.type.data.haskell'
@@ -230,7 +235,7 @@ haskellGrammar =
               patterns: [include: '#type_signature']
         ,
           name: 'keyword.other.haskell'
-          match: /\bwhere(?!')\b/
+          match: /{lb}where{rb}/
         ,
           include: '#type_name'
         ,
@@ -282,7 +287,7 @@ haskellGrammar =
     ,
       name: 'meta.declaration.type.type.haskell'
       begin: /{maybeBirdTrack}(\s*)(type(?:\s+(?:family|instance))?)\s+({typeDecl})/
-      end: /{indentBlockEnd}|(?=\bwhere\b)/
+      end: /{indentBlockEnd}|(?={lb}where{rb})/
       contentName: 'meta.type-signature.haskell'
       beginCaptures:
         2: name: 'storage.type.data.haskell'
@@ -300,23 +305,16 @@ haskellGrammar =
       ]
     ,
       name: 'keyword.other.haskell'
-      match: /\b(deriving|where|data|type|newtype)(?!')\b/
+      match: /{lb}(deriving|where|data|type|newtype){rb}/
     ,
       name: 'storage.type.haskell'
-      match: /\b(data|type|newtype)(?!')\b/
+      match: /{lb}(data|type|newtype){rb}/
     ,
       name: 'keyword.operator.haskell'
-      match: /\binfix[lr]?(?!')\b/
+      match: /{lb}infix[lr]?{rb}/
     ,
       name: 'keyword.control.haskell'
-      match: /\b(do|if|then|else|case|of|let|in|default)(?!')\b/
-    ,
-      name: 'constant.numeric.float.haskell'
-      match: /\b([0-9]+\.[0-9]+([eE][+-]?[0-9]+)?|[0-9]+[eE][+-]?[0-9]+)\b/
-      # Floats are always decimal
-    ,
-      name: 'constant.numeric.haskell'
-      match: /\b([0-9]+|0([xX][0-9a-fA-F]+|[oO][0-7]+))\b/
+      match: /{lb}(do|if|then|else|case|of|let|in|default){rb}/
     ,
       name: 'meta.preprocessor.c'
       begin: /{maybeBirdTrack}(?=#)/
@@ -380,14 +378,14 @@ haskellGrammar =
         1: name: 'keyword.other.double-colon.haskell'
         2: {name: 'meta.type-signature.haskell', patterns: [include: '#type_signature']}
     ,
-      match: /\b(Just|Left|Right|Nothing|True|False|LT|EQ|GT)(?!')\b/
+      match: /{lb}(Just|Left|Right|Nothing|True|False|LT|EQ|GT){rb}/
       name: 'support.tag.haskell'
     ,
       include: '#comments'
     ,
       name: 'support.function.prelude.haskell'
       match: ///
-        \b(abs|acos|acosh|all|and|any|appendFile|applyM|asTypeOf|asin|asinh
+        {lb}(abs|acos|acosh|all|and|any|appendFile|applyM|asTypeOf|asin|asinh
         |atan|atan2|atanh|break|catch|ceiling|compare|concat|concatMap|const
         |cos|cosh|curry|cycle|decodeFloat|div|divMod|drop|dropWhile|elem
         |encodeFloat|enumFrom|enumFromThen|enumFromThenTo|enumFromTo
@@ -406,26 +404,43 @@ haskellGrammar =
         |splitAt|sqrt|subtract|succ|sum|tail|take|takeWhile|tan|tanh|toEnum
         |toInteger|toRational|truncate|uncurry|undefined|unlines|until
         |unwords|unzip|unzip3|userError|words|writeFile|zip|zip3
-        |zipWith|zipWith3)(?!')\b
+        |zipWith|zipWith3){rb}
         ///
     ,
       include: '#infix_op'
     ,
-      name: 'keyword.operator.haskell'
-      match: /{operator}/
-    ,
       name: 'punctuation.separator.comma.haskell'
       match: /,/
     ,
-      match: '\\b{functionName}\\b'
+      name: 'constant.numeric.hexadecimal.haskell'
+      match: '(?<!{identCharClass})0[xX][0-9a-fA-F]+'
+    ,
+      name: 'constant.numeric.octal.haskell'
+      match: '(?<!{identCharClass})0[oO][0-7]+'
+    ,
+      name: 'constant.numeric.float.haskell'
+      match: '(?<!{identCharClass})[0-9]+\\.[0-9]+([eE][+-]?[0-9]+)?'
+    ,
+      name: 'constant.numeric.float.haskell'
+      match: '(?<!{identCharClass})[0-9]+[eE][+-]?[0-9]+'
+      # Floats are always decimal
+    ,
+      name: 'constant.numeric.decimal.haskell'
+      match: '(?<!{identCharClass})[0-9]+'
+    ,
+      name: 'keyword.operator.haskell'
+      match: /{operator}/
+    ,
+      include: '#type_ctor'
+    ,
+      match: '{lb}{functionName}{rb}'
+      name: 'identifier.haskell'
       captures:
         0:
           patterns: [
             name: 'support.other.module.haskell'
             match: /^(?:{className}\.)*{className}\.?/
           ]
-    ,
-      include: '#type_ctor'
   ]
   repository:
     block_comment:
@@ -504,7 +519,7 @@ haskellGrammar =
           include: '#comments'
         ,
           name: 'entity.name.function.haskell'
-          match: /\b{functionName}/
+          match: /{lb}{functionName}{rb}/
         ,
           include: '#type_name'
         ,
@@ -528,7 +543,7 @@ haskellGrammar =
       begin: /\{-#/
       end: /#-\}/
       patterns: [
-          match: /\b(LANGUAGE|OPTIONS_GHC|INCLUDE|WARNING|DEPRECATED|INLINE|NOINLINE|ANN|LINE|RULES|SPECIALIZE|UNPACK|SOURCE)(?!')\b/
+          match: /{lb}(LANGUAGE|OPTIONS_GHC|INCLUDE|WARNING|DEPRECATED|INLINE|NOINLINE|ANN|LINE|RULES|SPECIALIZE|UNPACK|SOURCE){rb}/
           name: 'keyword.other.preprocessor.haskell'
       ]
     function_type_declaration:
@@ -567,14 +582,14 @@ haskellGrammar =
       ]
     record_field_declaration:
       name: 'meta.record-field.type-declaration.haskell'
-      begin: /\b{functionTypeDeclaration}/
+      begin: /{lb}{functionTypeDeclaration}/
       end: /(?={functionTypeDeclaration}|})/
       contentName: 'meta.type-signature.haskell'
       beginCaptures:
         1:
           patterns: [
               name: 'entity.other.attribute-name.haskell'
-              match: /\b{functionName}\b/
+              match: /{lb}{functionName}{rb}/
             ,
               include: '#infix_op'
           ]
@@ -609,7 +624,7 @@ haskellGrammar =
           match: /=>|⇒/
         ,
           name: 'support.class.prelude.haskell'
-          match: ///\b
+          match: ///{lb}
             (Int(eger)?
             |Maybe
             |Either
@@ -623,7 +638,7 @@ haskellGrammar =
             |ReadS
             |FilePath
             |IO(Error)?
-            )(?!')\b
+            ){rb}
             ///
         ,
           include: '#generic_type'
@@ -636,23 +651,23 @@ haskellGrammar =
       ]
     type_name:
       name: 'entity.name.type.haskell'
-      match: /\b{className}\b/
+      match: /{lb}{className}{rb}/
     type_ctor:
       name: 'entity.name.tag.haskell'
-      match: /\b{className}\b/
+      match: /{lb}{className}{rb}/
     unit:
       name: 'constant.language.unit.haskell'
       match: /\(\)/
     generic_type:
       name: 'variable.other.generic-type.haskell'
-      match: /\b{functionName}\b/
+      match: /{lb}{functionName}{rb}/
     class_constraint:
       name: 'meta.class-constraint.haskell'
       match: /{classConstraint}/
       captures:
         1: patterns: [
           name: 'entity.other.inherited-class.haskell'
-          match: /\b{className}\b/
+          match: /{lb}{className}{rb}/
         ]
         2: patterns: [
             include: '#type_name'
@@ -669,23 +684,23 @@ haskellGrammar =
       ]
     deriving_keyword:
       name: 'meta.deriving.haskell'
-      match: /\b(deriving)(?!')\b/
+      match: /{lb}(deriving){rb}/
       captures:
         1: name: 'keyword.other.haskell'
     deriving_list:
       name: 'meta.deriving.haskell'
-      begin: /\b(deriving)\s*\(/
+      begin: /{lb}(deriving)\s*\(/
       end: /\)/
       beginCaptures:
         1: name: 'keyword.other.haskell'
       patterns: [
-          match: /\b({className})\b/
+          match: /{lb}({className}){rb}/
           captures:
             1: name: 'entity.other.inherited-class.haskell'
       ]
     deriving_simple:
       name: 'meta.deriving.haskell'
-      match: /\b(deriving)\s*({className})\b/
+      match: /{lb}(deriving)\s*({className}){rb}/
       captures:
         1: name: 'keyword.other.haskell'
         2: name: 'entity.other.inherited-class.haskell'
