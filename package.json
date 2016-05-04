@@ -13,6 +13,6 @@
     "coffee-script": "~1.9.0"
   },
   "scripts": {
-    "postinstall": "node ./node_modules/.bin/coffee src/haskell.coffee"
+    "postinstall": "node ./node_modules/coffee-script/bin/coffee src/haskell.coffee"
   }
 }
