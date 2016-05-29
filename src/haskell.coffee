@@ -808,9 +808,7 @@ literateHaskellGrammar =
       begin: '(?<!\\\\verb)\\|'
       end: /\|/
       name: 'meta.embedded.text.haskell.latex'
-      patterns: [
-          include: 'source.haskell'
-      ]
+      patterns: haskellGrammar.patterns
     ,
       include: 'text.tex.latex'
   ]
@@ -819,5 +817,6 @@ literateHaskellGrammar =
 literateHaskellGrammar.macros.maybeBirdTrack = /^(?:>|<) /
 literateHaskellGrammar.macros.indentBlockEnd =
   /^(?!(?:>|<) \1{indentChar}|(?:>|<) {indentChar}*$)|^(?!(?:>|<) )/
+literateHaskellGrammar.macros.operatorChar = /[\p{S}\p{P}&&[^(),;\[\]`{}_"'\|]]/
 
 makeGrammar literateHaskellGrammar, "grammars/literate haskell.cson"
