@@ -151,10 +151,7 @@ haskellGrammar =
         1: name: 'keyword.other.haskell'
       patterns: [
           name: 'support.class.prelude.haskell'
-          match: ///
-            {lb}
-            (Applicative|Bounded|Enum|Eq|Floating|Foldable|Fractional|Functor|Integral|Monad|Monoid|Num|Ord|Read|Real(Float|Frac)?|Show|Traversable){rb}
-            ///
+          match: "{lb}(#{prelude.classes.join('|')}){rb}"
         ,
           include: '#type_name'
         ,
@@ -590,10 +587,6 @@ haskellGrammar =
           name: 'keyword.other.big-arrow.haskell'
           match: /=>|⇒/
         ,
-        # TODO: Not sure what I could do with these...
-        #   name: 'support.class.inherited-class.prelude.haskell'
-        #   match: "{lb}(#{prelude.classes.join('|')}){rb}"
-        # ,
           name: 'support.class.prelude.haskell'
           match: "{lb}(#{prelude.types.join('|')}){rb}"
         ,
