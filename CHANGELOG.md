@@ -1,3 +1,6 @@
+## 1.7.16
+* Fix #76
+
 ## 1.7.15
 * Another stab at Windows postinstall
 
