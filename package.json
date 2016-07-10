@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "src/main.coffee",
   "engines": {
-    "atom": ">=0.174.0 <2.0.0"
+    "atom": ">=1.8.0 <2.0.0"
   },
   "dependencies": {
     "season": "^2.0.0",
