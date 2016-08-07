@@ -101,7 +101,7 @@ describe 'GADT', ->
               'source.haskell',
               'meta.declaration.type.GADT.haskell',
               'meta.ctor.type-declaration.haskell',
-              'entity.name.type.haskell'
+              'entity.name.tag.haskell'
             ]
           },
           {

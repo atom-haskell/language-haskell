@@ -535,7 +535,7 @@ haskellGrammar =
       beginCaptures:
         2:
           patterns: [
-              name: 'entity.name.type.haskell'
+              name: 'entity.name.tag.haskell'
               match: /{className}/
             ,
               include: '#infix_op'
