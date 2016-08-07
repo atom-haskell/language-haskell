@@ -1247,7 +1247,7 @@
           '2':
             'patterns': [
               {
-                'name': 'entity.name.type.haskell'
+                'name': 'entity.name.tag.haskell'
                 'match': '[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*'
               }
               {
