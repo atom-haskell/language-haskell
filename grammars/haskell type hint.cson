@@ -911,23 +911,19 @@
     'patterns': [
       {
         'name': 'constant.numeric.hexadecimal.haskell'
-        'match': '(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])0[xX][0-9a-fA-F]+'
+        'match': '0[xX][0-9a-fA-F]+'
       }
       {
         'name': 'constant.numeric.octal.haskell'
-        'match': '(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])0[oO][0-7]+'
+        'match': '0[oO][0-7]+'
       }
       {
         'name': 'constant.numeric.float.haskell'
-        'match': '(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])[0-9]+\\.[0-9]+([eE][+-]?[0-9]+)?'
-      }
-      {
-        'name': 'constant.numeric.float.haskell'
-        'match': '(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])[0-9]+[eE][+-]?[0-9]+'
+        'match': '[0-9]+(\\.|[eE][+-]?|\\.[0-9]+[eE][+-]?)[0-9]+'
       }
       {
         'name': 'constant.numeric.decimal.haskell'
-        'match': '(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])[0-9]+'
+        'match': '[0-9]+'
       }
     ]
   'operator':

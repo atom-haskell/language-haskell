@@ -530,20 +530,16 @@ module.exports=
     match: /,/
   lit_num: [
     name: 'constant.numeric.hexadecimal.haskell'
-    match: '(?<!{identCharClass})0[xX][0-9a-fA-F]+'
+    match: '0[xX][0-9a-fA-F]+'
   ,
     name: 'constant.numeric.octal.haskell'
-    match: '(?<!{identCharClass})0[oO][0-7]+'
+    match: '0[oO][0-7]+'
   ,
     name: 'constant.numeric.float.haskell'
-    match: '(?<!{identCharClass})[0-9]+\\.[0-9]+([eE][+-]?[0-9]+)?'
-  ,
-    name: 'constant.numeric.float.haskell'
-    match: '(?<!{identCharClass})[0-9]+[eE][+-]?[0-9]+'
-    # Floats are always decimal
+    match: '[0-9]+(\\.|[eE][+-]?|\\.[0-9]+[eE][+-]?)[0-9]+'
   ,
     name: 'constant.numeric.decimal.haskell'
-    match: '(?<!{identCharClass})[0-9]+'
+    match: '[0-9]+'
   ]
   operator:
     name: 'keyword.operator.haskell'
