@@ -34,4 +34,4 @@ for k, v of exp
   output.push "#{k} = #{JSON.stringify(v)}"
 output.push "module.exports = { #{Object.keys(exp)} }"
 
-fs.writeFileSync 'src/prelude.coffee', output.join('\n'), 'utf8'
+fs.writeFileSync 'src/include/prelude.coffee', output.join('\n'), 'utf8'

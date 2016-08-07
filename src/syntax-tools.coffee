@@ -194,4 +194,24 @@ makeGrammar = (grammar, print = false) ->
   grammar_ = (require 'clone')(grammar)
   (new GrammarCreator grammar_, print).process()
 
-module.exports = makeGrammar
+rxToStr = (rx) ->
+  if typeof rx is 'object'
+    rx.source
+  else
+    rx
+
+list = (item, s, sep) ->
+  "(?<#{item}>(?:#{rxToStr s})(?:\\s*(?:#{rxToStr sep})\\s*\\g<#{item}>)?)"
+
+listMaybe = (item, s, sep) ->
+  #recursive regexp, caution advised
+  "(?<#{item}>(?:#{rxToStr s})(?:\\s*(?:#{rxToStr sep})\\s*\\g<#{item}>)?)?"
+
+concat = (list...) ->
+  r = ''.concat (list.map (i) -> "(?:#{rxToStr i})")...
+  "(?:#{r})"
+
+include = (what) -> require "./include/#{what}"
+
+
+module.exports = { makeGrammar, list, listMaybe, concat, include }
