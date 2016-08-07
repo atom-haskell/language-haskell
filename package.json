@@ -7,7 +7,7 @@
   "engines": {
     "atom": ">=1.8.0 <2.0.0"
   },
-  "dependencies": {
+  "devDependencies": {
     "season": "^2.0.0",
     "coffee-script": "~1.9.0",
     "clone": "^1.0.2"
