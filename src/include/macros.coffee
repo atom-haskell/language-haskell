@@ -35,10 +35,10 @@ module.exports=
   classConstraint: concat /({className})\s+/,
     list('classConstraint', /{className}|{functionName}/, /\s+/)
   functionTypeDeclaration:
-    concat list('functionTypeDeclaration', /{functionName}|{operatorFun}/, /,/),
+    concat list('functionTypeDeclaration', /{functionName}|{operatorFun}/, /\s*,\s*/),
       /\s*(::|∷)/
   ctorTypeDeclaration:
-    concat list('ctorTypeDeclaration', /{className}|{operatorFun}/, /,/),
+    concat list('ctorTypeDeclaration', /{className}|{operatorFun}/, /\s*,\s*/),
       /\s*(::|∷)/
   ctorArgs: ///
     (?!deriving)
@@ -49,7 +49,7 @@ module.exports=
     )
     ///
   ctor: concat /{lb}({className}){rb}/,
-    listMaybe('ctorArgs', /\s+{ctorArgs}/, '')
+    listMaybe('ctorArgs', /{ctorArgs}/, /\s+/)
   typeDeclOne: /(?:(?!{lb}where{rb})(?:{className}|{functionName}))/
   typeDecl: '(?>(?:{typeDeclOne})(?:\\s+{typeDeclOne})*)'
   indentChar: /[ \t]/

@@ -6,7 +6,7 @@ rxToStr = (rx) ->
 
 list = (item, s, sep) ->
   # "(?<#{item}>(?:#{rxToStr s})(?:\\s*(?:#{rxToStr sep})\\s*\\g<#{item}>)?)"
-  "((?:#{rxToStr s})(?:\\s*(?:#{rxToStr sep})\\s*#{rxToStr s})*)"
+  "((?:#{rxToStr s})(?:(?:#{rxToStr sep})#{rxToStr s})*)"
 
 listMaybe = (item, s, sep) ->
   # "(?<#{item}>(?:#{rxToStr s})(?:\\s*(?:#{rxToStr sep})\\s*\\g<#{item}>)?)?"
