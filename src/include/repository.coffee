@@ -1,5 +1,3 @@
-{list, listMaybe, concat} = require './util'
-
 prelude = require './prelude'
 
 pragmas = [
@@ -126,7 +124,7 @@ module.exports=
     ]
   function_type_declaration:
     name: 'meta.function.type-declaration.haskell'
-    begin: concat /{indentBlockStart}/, /{functionTypeDeclaration}/
+    begin: /{indentBlockStart}{functionTypeDeclaration}/
     end: /{indentBlockEnd}/
     contentName: 'meta.type-signature.haskell'
     beginCaptures:
@@ -143,7 +141,7 @@ module.exports=
     ]
   ctor_type_declaration:
     name: 'meta.ctor.type-declaration.haskell'
-    begin: concat /{indentBlockStart}/, /{ctorTypeDeclaration}/
+    begin: /{indentBlockStart}{ctorTypeDeclaration}/
     end: /{indentBlockEnd}/
     contentName: 'meta.type-signature.haskell'
     beginCaptures:
@@ -178,20 +176,10 @@ module.exports=
   type_signature:
     patterns: [
         name: 'meta.class-constraints.haskell'
-        match: concat /\(/,
-          list('classConstraints', /{classConstraint}/, /,/),
-          /\)/, /\s*(=>|⇒)/
+        match: /(.*)(=>|⇒)/
         captures:
           1: patterns: [{include: '#class_constraint'}]
-          #2,3 are from classConstraint
-          4: name: 'keyword.other.big-arrow.haskell'
-      ,
-        name: 'meta.class-constraints.haskell'
-        match: /({classConstraint})\s*(=>|⇒)/
-        captures:
-          1: patterns: [{include: '#class_constraint'}]
-          #2,3 are from classConstraint
-          4: name: 'keyword.other.big-arrow.haskell'
+          2: name: 'keyword.other.big-arrow.haskell'
       ,
         include: '#pragma'
       ,
@@ -357,12 +345,14 @@ module.exports=
       2: name: 'storage.type.data.haskell'
       3:
         name: 'meta.type-signature.haskell'
-        patterns: [include: '#type_signature']
+        patterns: [
+          {include: '#family_and_instance'}
+          {include: '#type_signature'}
+        ]
     patterns: [
         include: '#comments'
       ,
-        match: '{lb}where{rb}'
-        name: 'keyword.other.haskell'
+        include: '#where'
       ,
         include: '#deriving'
       ,
@@ -398,16 +388,17 @@ module.exports=
     ]
   type_alias:
     name: 'meta.declaration.type.type.haskell'
-    begin: /{indentBlockStart}(type(?:\s+(?:family|instance))?)\s+({typeDecl})/
-    end: /{indentBlockEnd}|(?={lb}where{rb})/
+    begin: /{indentBlockStart}(type)/
+    end: /{indentBlockEnd}/
     contentName: 'meta.type-signature.haskell'
     beginCaptures:
       2: name: 'storage.type.data.haskell'
-      3:
-        name: 'meta.type-signature.haskell'
-        patterns: [include: '#type_signature']
     patterns: [
         include: '#comments'
+      ,
+        include: '#family_and_instance'
+      ,
+        include: '#where'
       ,
         match: /=/
         captures:
@@ -521,3 +512,9 @@ module.exports=
     name: 'entity.name.tag.haskell'
     match: /{lb}{className}{rb}/
     captures: 0: patterns: [ include: '#module_name_prefix' ]
+  where:
+    match: '{lb}where{rb}'
+    name: 'keyword.other.haskell'
+  family_and_instance:
+    match: '{lb}(family|instance){rb}'
+    name: 'keyword.other.haskell'

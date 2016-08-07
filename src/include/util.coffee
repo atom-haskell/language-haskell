@@ -4,14 +4,16 @@ rxToStr = (rx) ->
   else
     rx
 
-module.exports =
-  list: (item, s, sep) ->
-    "(?<#{item}>(?:#{rxToStr s})(?:\\s*(?:#{rxToStr sep})\\s*\\g<#{item}>)?)"
+list = (item, s, sep) ->
+  # "(?<#{item}>(?:#{rxToStr s})(?:\\s*(?:#{rxToStr sep})\\s*\\g<#{item}>)?)"
+  "((?:#{rxToStr s})(?:\\s*(?:#{rxToStr sep})\\s*#{rxToStr s})*)"
 
-  listMaybe: (item, s, sep) ->
-    #recursive regexp, caution advised
-    "(?<#{item}>(?:#{rxToStr s})(?:\\s*(?:#{rxToStr sep})\\s*\\g<#{item}>)?)?"
+listMaybe = (item, s, sep) ->
+  # "(?<#{item}>(?:#{rxToStr s})(?:\\s*(?:#{rxToStr sep})\\s*\\g<#{item}>)?)?"
+  "#{list(item, s, sep)}?"
 
-  concat: (list...) ->
-    r = ''.concat (list.map (i) -> "(?:#{rxToStr i})")...
-    "(?:#{r})"
+concat = (list...) ->
+  r = ''.concat (list.map (i) -> "(?:#{rxToStr i})")...
+  "(?:#{r})"
+
+module.exports = {list, listMaybe, concat}
