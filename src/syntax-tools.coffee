@@ -190,7 +190,7 @@ class GrammarCreator
 
     P
 
-makeGrammar = (grammar, print = false) ->
+makeGrammar = (print, grammar) ->
   grammar_ = (require 'clone')(grammar)
   (new GrammarCreator grammar_, print).process()
 

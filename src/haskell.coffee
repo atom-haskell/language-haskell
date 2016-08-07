@@ -1,6 +1,7 @@
-{list, listMaybe, concat, include, makeGrammar} = require './syntax-tools'
+{include, makeGrammar} = require './syntax-tools'
+_ = require 'underscore-plus'
 
-haskellGrammar =
+makeGrammar "grammars/haskell.cson",
   name: 'Haskell'
   fileTypes: [ 'hs' ]
   firstLineMatch: '^\\#\\!.*\\brunhaskell\\b'
@@ -10,42 +11,35 @@ haskellGrammar =
   repository: include 'repository'
   patterns: include 'haskell-patterns'
 
-makeGrammar haskellGrammar, "grammars/haskell.cson"
-
-completionHintGrammar =
+makeGrammar "grammars/haskell autocompletion hint.cson",
   name: 'Haskell Autocompletion Hint'
   fileTypes: []
   scopeName: 'hint.haskell'
 
-  macros: haskellGrammar.macros
+  macros: include 'macros'
   patterns: [
-      include: '#function_type_declaration'
-    ,
-      include: '#ctor_type_declaration'
+      {include: '#function_type_declaration'}
+      {include: '#ctor_type_declaration'}
   ]
-  repository: haskellGrammar.repository
+  repository: include 'repository'
 
-makeGrammar completionHintGrammar, "grammars/haskell autocompletion hint.cson"
-
-typeHintGrammar =
+makeGrammar "grammars/haskell type hint.cson",
   name: 'Haskell Type Hint'
   fileTypes: []
   scopeName: 'hint.type.haskell'
 
-  macros: haskellGrammar.macros
+  macros: include 'macros'
   patterns: [
       include: '#type_signature'
   ]
-  repository: haskellGrammar.repository
+  repository: include 'repository'
 
-makeGrammar typeHintGrammar, "grammars/haskell type hint.cson"
-
-messageHintGrammar =
+makeGrammar "grammars/haskell message hint.cson",
   name: 'Haskell Message Hint'
   fileTypes: []
   scopeName: 'hint.message.haskell'
 
-  macros: haskellGrammar.macros
+  macros: include 'macros'
   patterns: [
       match: /^[^:]*:(.+)$/
       captures:
@@ -66,62 +60,17 @@ messageHintGrammar =
         include: 'source.haskell'
       ]
   ]
-  repository: haskellGrammar.repository
+  repository: include 'repository'
 
-makeGrammar messageHintGrammar, "grammars/haskell message hint.cson"
-
-literateHaskellGrammar =
+makeGrammar "grammars/literate haskell.cson",
   name: 'Literate Haskell'
   fileTypes: [ 'lhs' ]
   scopeName: 'text.tex.latex.haskell'
 
-  macros: haskellGrammar.macros
-  patterns: [
-      begin: /^((\\)begin)({)(code|spec)(})(\s*\n)?/
-      beginCaptures:
-        1:
-          name: 'support.function.be.latex'
-        2:
-          name: 'punctuation.definition.function.latex'
-        3:
-          name: 'punctuation.definition.arguments.begin.latex'
-        5:
-          name: 'punctuation.definition.arguments.end.latex'
-      end: /^((\\)end)({)\4(})/
-      endCaptures:
-        1:
-          name: 'support.function.be.latex'
-        2:
-          name: 'punctuation.definition.function.latex'
-        3:
-          name: 'punctuation.definition.arguments.begin.latex'
-        4:
-          name: 'punctuation.definition.arguments.end.latex'
-      contentName: 'source.haskell.embedded.latex'
-      name: 'meta.embedded.block.haskell.latex'
-      patterns: [
-          include: 'source.haskell'
-      ]
-    ,
-      begin: /^(?=[><] )/
-      end: /^(?![><] )/
-      name: 'meta.embedded.haskell'
-      patterns: haskellGrammar.patterns.concat
-        match: /^> /
-        name: 'punctuation.definition.bird-track.haskell'
-    ,
-      begin: '(?<!\\\\verb)\\|'
-      end: /\|/
-      name: 'meta.embedded.text.haskell.latex'
-      patterns: haskellGrammar.patterns
-    ,
-      include: 'text.tex.latex'
-  ]
-  repository: haskellGrammar.repository
-
-literateHaskellGrammar.macros.maybeBirdTrack = /^(?:>|<) /
-literateHaskellGrammar.macros.indentBlockEnd =
-  /^(?!(?:>|<) \1{indentChar}|(?:>|<) {indentChar}*$)|^(?!(?:>|<) )/
-literateHaskellGrammar.macros.operatorChar = /[\p{S}\p{P}&&[^(),;\[\]`{}_"'\|]]/
-
-makeGrammar literateHaskellGrammar, "grammars/literate haskell.cson"
+  macros: _.extend (require 'clone')(include('macros')),
+    maybeBirdTrack: /^(?:>|<) /
+    indentBlockEnd:
+      /^(?!(?:>|<) \1{indentChar}|(?:>|<) {indentChar}*$)|^(?!(?:>|<) )/
+    operatorChar: /[\p{S}\p{P}&&[^(),;\[\]`{}_"'\|]]/
+  patterns: include 'lhs-patterns'
+  repository: include 'repository'
