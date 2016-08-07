@@ -22,7 +22,6 @@ module.exports =
     { include: '#instance_decl' }
     { include: '#foreign_import' }
     { include: '#regular_import' }
-    { include: '#gadt' }
     { include: '#data_decl' }
     { include: '#type_alias' }
     { include: '#keywords' }
@@ -39,6 +38,6 @@ module.exports =
     { include: '#comma' }
     { include: '#lit_num' }
     { include: '#operator' }
-    { include: '#type_ctor' }
     { include: '#identifier' }
+    { include: '#type_ctor' }
   ]

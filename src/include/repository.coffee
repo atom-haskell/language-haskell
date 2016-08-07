@@ -82,7 +82,7 @@ module.exports=
         {match: '{escapeChar}', name: 'constant.character.escape.haskell'}
         {match: '{octalChar}', name: 'constant.character.escape.octal.haskell'}
         {match: '{hexChar}', name: 'constant.character.escape.hexadecimal.haskell'}
-        {match: 'controlChar', name: 'constant.character.escape.control.haskell'}
+        {match: '{controlChar}', name: 'constant.character.escape.control.haskell'}
       ]
   infix_op:
     name: 'entity.name.function.infix.haskell'
@@ -99,8 +99,7 @@ module.exports=
       ,
         include: '#type_name'
       ,
-        name: 'punctuation.separator.comma.haskell'
-        match: /,/
+        include: '#comma'
       ,
         include: '#infix_op'
       ,
@@ -113,7 +112,10 @@ module.exports=
     ]
   module_name:
     name: 'support.other.module.haskell'
-    match: /(?:{className}\.)*{className}\.?/
+    match: /{lb}{className}{rb}/
+  module_name_prefix:
+    name: 'support.other.module.haskell'
+    match: /{lb}{className}\./
   pragma:
     name: 'meta.preprocessor.haskell'
     begin: /\{-#/
@@ -124,7 +126,7 @@ module.exports=
     ]
   function_type_declaration:
     name: 'meta.function.type-declaration.haskell'
-    begin: concat /{maybeBirdTrack}(\s*)/, /{functionTypeDeclaration}/
+    begin: concat /{indentBlockStart}/, /{functionTypeDeclaration}/
     end: /{indentBlockEnd}/
     contentName: 'meta.type-signature.haskell'
     beginCaptures:
@@ -141,7 +143,7 @@ module.exports=
     ]
   ctor_type_declaration:
     name: 'meta.ctor.type-declaration.haskell'
-    begin: concat /{maybeBirdTrack}(\s*)/, /{ctorTypeDeclaration}/
+    begin: concat /{indentBlockStart}/, /{ctorTypeDeclaration}/
     end: /{indentBlockEnd}/
     contentName: 'meta.type-signature.haskell'
     beginCaptures:
@@ -210,12 +212,6 @@ module.exports=
       ,
         include: '#comments'
     ]
-  type_name:
-    name: 'entity.name.type.haskell'
-    match: /{lb}{className}{rb}/
-  type_ctor:
-    name: 'entity.name.tag.haskell'
-    match: /{lb}{className}{rb}/
   unit:
     name: 'constant.language.unit.haskell'
     match: /\(\)/
@@ -280,17 +276,15 @@ module.exports=
     beginCaptures:
       1: name: 'punctuation.definition.quasiquotes.begin.haskell'
       2: name: 'entity.name.tag.haskell'
-      3: name: 'string.quoted.quasiquotes.haskell'
     endCaptures:
-      1: name: 'string.quoted.quasiquotes.haskell'
       2: name: 'punctuation.definition.quasiquotes.end.haskell'
     contentName: 'string.quoted.quasiquotes.haskell'
   module_decl:
     name: 'meta.declaration.module.haskell'
-    begin: /{lb}(module){rb}/
+    begin: /{indentBlockStart}(module){rb}/
     end: /{lb}(where){rb}/
     beginCaptures:
-      1: name: 'keyword.other.haskell'
+      2: name: 'keyword.other.haskell'
     endCaptures:
       1: name: 'keyword.other.haskell'
     patterns: [
@@ -305,27 +299,22 @@ module.exports=
     ]
   class_decl:
     name: 'meta.declaration.class.haskell'
-    begin: /{lb}(class){rb}/
+    begin: /{indentBlockStart}(class){rb}/
     end: /{lb}(where){rb}|$/
     beginCaptures:
-      1: name: 'storage.type.class.haskell'
+      2: name: 'storage.type.class.haskell'
     endCaptures:
       1: name: 'keyword.other.haskell'
     patterns: [
-        name: 'support.class.prelude.haskell'
-        match: "{lb}(#{prelude.classes.join('|')}){rb}"
-      ,
-        include: '#type_name'
-      ,
-        include: '#generic_type'
+        include: '#type_signature'
     ]
   instance_decl:
     name: 'meta.declaration.instance.haskell'
-    begin: /{lb}(instance){rb}/
+    begin: /{indentBlockStart}(instance){rb}/
     end: /{lb}(where){rb}|$/
     contentName: 'meta.type-signature.haskell'
     beginCaptures:
-      1: name: 'keyword.other.haskell'
+      2: name: 'keyword.other.haskell'
     endCaptures:
       1: name: 'keyword.other.haskell'
     patterns: [
@@ -333,7 +322,7 @@ module.exports=
     ]
   foreign_import:
     name: 'meta.foreign.haskell'
-    begin: /{maybeBirdTrack}(\s*)(foreign)\s+(import|export){rb}/
+    begin: /{indentBlockStart}(foreign)\s+(import|export){rb}/
     end: /{indentBlockEnd}/
     beginCaptures:
       2: name: 'keyword.other.haskell'
@@ -347,10 +336,10 @@ module.exports=
     ]
   regular_import:
     name: 'meta.import.haskell'
-    begin: /{lb}(import){rb}/
-    end: /($|;|(?=--))/
+    begin: /{indentBlockStart}(import){rb}/
+    end: /{indentBlockEnd}/
     beginCaptures:
-      1: name: 'keyword.other.haskell'
+      2: name: 'keyword.other.haskell'
     patterns: [
         include: '#module_name'
       ,
@@ -360,37 +349,9 @@ module.exports=
         captures:
           1: name: 'keyword.other.haskell'
     ]
-  gadt:
-    name: 'meta.declaration.type.GADT.haskell'
-    begin: /{maybeBirdTrack}(\s*)(data|newtype)\s+({typeDecl})(?=\s+where{rb})/
-    end: /{indentBlockEnd}/
-    beginCaptures:
-      2: name: 'storage.type.data.haskell'
-      3:
-        name: 'meta.type-signature.haskell'
-        patterns: [include: '#type_signature']
-    patterns: [
-        include: '#comments'
-      ,
-        include: '#deriving'
-      ,
-        match: /{ctor}/
-        captures:
-          1: patterns: [include: '#type_ctor']
-          2:
-            name: 'meta.type-signature.haskell'
-            patterns: [include: '#type_signature']
-      ,
-        name: 'keyword.other.haskell'
-        match: /{lb}where{rb}/
-      ,
-        include: '#type_name'
-      ,
-        include: '#ctor_type_declaration'
-    ]
   data_decl:
     name: 'meta.declaration.type.data.haskell'
-    begin: /{maybeBirdTrack}(\s*)(data|newtype)\s+({typeDecl})/
+    begin: /{indentBlockStart}(data|newtype)\s+((?:(?!=|where).)*)/
     end: /{indentBlockEnd}/
     beginCaptures:
       2: name: 'storage.type.data.haskell'
@@ -399,6 +360,9 @@ module.exports=
         patterns: [include: '#type_signature']
     patterns: [
         include: '#comments'
+      ,
+        match: '{lb}where{rb}'
+        name: 'keyword.other.haskell'
       ,
         include: '#deriving'
       ,
@@ -425,15 +389,16 @@ module.exports=
         endCaptures:
           0: name: 'keyword.operator.record.end.haskell'
         patterns: [
-            name: 'punctuation.separator.comma.haskell'
-            match: /,/
+            include: '#comma'
           ,
             include: '#record_field_declaration'
         ]
+      ,
+        include: '#ctor_type_declaration' #GADT
     ]
   type_alias:
     name: 'meta.declaration.type.type.haskell'
-    begin: /{maybeBirdTrack}(\s*)(type(?:\s+(?:family|instance))?)\s+({typeDecl})/
+    begin: /{indentBlockStart}(type(?:\s+(?:family|instance))?)\s+({typeDecl})/
     end: /{indentBlockEnd}|(?={lb}where{rb})/
     contentName: 'meta.type-signature.haskell'
     beginCaptures:
@@ -547,9 +512,12 @@ module.exports=
   identifier:
     match: '{lb}{functionName}{rb}'
     name: 'identifier.haskell'
-    captures:
-      0:
-        patterns: [
-          name: 'support.other.module.haskell'
-          match: /^(?:{className}\.)*{className}\.?/
-        ]
+    captures: 0: patterns: [ include: '#module_name_prefix' ]
+  type_name:
+    name: 'entity.name.type.haskell'
+    match: /{lb}{className}{rb}/
+    captures: 0: patterns: [ include: '#module_name_prefix' ]
+  type_ctor:
+    name: 'entity.name.tag.haskell'
+    match: /{lb}{className}{rb}/
+    captures: 0: patterns: [ include: '#module_name_prefix' ]

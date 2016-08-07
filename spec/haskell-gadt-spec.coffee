@@ -33,7 +33,7 @@ describe 'GADT', ->
             value:'data',
             scopes:[
               'source.haskell',
-              'meta.declaration.type.GADT.haskell',
+              'meta.declaration.type.data.haskell',
               'storage.type.data.haskell'
             ]
           },
@@ -41,14 +41,14 @@ describe 'GADT', ->
             value:' ',
             scopes:[
               'source.haskell',
-              'meta.declaration.type.GADT.haskell'
+              'meta.declaration.type.data.haskell'
             ]
           },
           {
             value:'Term',
             scopes:[
               'source.haskell',
-              'meta.declaration.type.GADT.haskell',
+              'meta.declaration.type.data.haskell',
               'meta.type-signature.haskell',
               'entity.name.type.haskell'
             ]
@@ -57,7 +57,7 @@ describe 'GADT', ->
             value:' ',
             scopes:[
               'source.haskell',
-              'meta.declaration.type.GADT.haskell',
+              'meta.declaration.type.data.haskell',
               'meta.type-signature.haskell'
             ]
           },
@@ -65,7 +65,7 @@ describe 'GADT', ->
             value:'a',
             scopes:[
               'source.haskell',
-              'meta.declaration.type.GADT.haskell',
+              'meta.declaration.type.data.haskell',
               'meta.type-signature.haskell',
               'variable.other.generic-type.haskell'
             ]
@@ -73,15 +73,16 @@ describe 'GADT', ->
           {
             value:' ',
             scopes:[
-              'source.haskell',
-              'meta.declaration.type.GADT.haskell'
+              'source.haskell'
+              'meta.declaration.type.data.haskell'
+              'meta.type-signature.haskell'
             ]
           },
           {
             value:'where',
             scopes:[
               'source.haskell',
-              'meta.declaration.type.GADT.haskell',
+              'meta.declaration.type.data.haskell',
               'keyword.other.haskell'
             ]
           }
@@ -91,7 +92,7 @@ describe 'GADT', ->
             value:'  ',
             scopes:[
               'source.haskell',
-              'meta.declaration.type.GADT.haskell',
+              'meta.declaration.type.data.haskell',
               'meta.ctor.type-declaration.haskell'
             ]
           },
@@ -99,7 +100,7 @@ describe 'GADT', ->
             value:'Lit',
             scopes:[
               'source.haskell',
-              'meta.declaration.type.GADT.haskell',
+              'meta.declaration.type.data.haskell',
               'meta.ctor.type-declaration.haskell',
               'entity.name.tag.haskell'
             ]
@@ -108,7 +109,7 @@ describe 'GADT', ->
             value:' ',
             scopes:[
               'source.haskell',
-              'meta.declaration.type.GADT.haskell',
+              'meta.declaration.type.data.haskell',
               'meta.ctor.type-declaration.haskell'
             ]
           },
@@ -116,7 +117,7 @@ describe 'GADT', ->
             value:'::',
             scopes:[
               'source.haskell',
-              'meta.declaration.type.GADT.haskell',
+              'meta.declaration.type.data.haskell',
               'meta.ctor.type-declaration.haskell',
               'keyword.other.double-colon.haskell'
             ]
@@ -125,7 +126,7 @@ describe 'GADT', ->
             value:' ',
             scopes:[
               'source.haskell',
-              'meta.declaration.type.GADT.haskell',
+              'meta.declaration.type.data.haskell',
               'meta.ctor.type-declaration.haskell',
               'meta.type-signature.haskell'
             ]
@@ -134,7 +135,7 @@ describe 'GADT', ->
             value:'Int',
             scopes:[
               'source.haskell',
-              'meta.declaration.type.GADT.haskell',
+              'meta.declaration.type.data.haskell',
               'meta.ctor.type-declaration.haskell',
               'meta.type-signature.haskell',
               'support.class.prelude.haskell'
@@ -144,7 +145,7 @@ describe 'GADT', ->
             value:' ',
             scopes:[
               'source.haskell',
-              'meta.declaration.type.GADT.haskell',
+              'meta.declaration.type.data.haskell',
               'meta.ctor.type-declaration.haskell',
               'meta.type-signature.haskell'
             ]
@@ -153,7 +154,7 @@ describe 'GADT', ->
             value:'->',
             scopes:[
               'source.haskell',
-              'meta.declaration.type.GADT.haskell',
+              'meta.declaration.type.data.haskell',
               'meta.ctor.type-declaration.haskell',
               'meta.type-signature.haskell',
               'keyword.other.arrow.haskell'
@@ -163,7 +164,7 @@ describe 'GADT', ->
             value:' ',
             scopes:[
               'source.haskell',
-              'meta.declaration.type.GADT.haskell',
+              'meta.declaration.type.data.haskell',
               'meta.ctor.type-declaration.haskell',
               'meta.type-signature.haskell'
             ]
@@ -172,7 +173,7 @@ describe 'GADT', ->
             value:'Term',
             scopes:[
               'source.haskell',
-              'meta.declaration.type.GADT.haskell',
+              'meta.declaration.type.data.haskell',
               'meta.ctor.type-declaration.haskell',
               'meta.type-signature.haskell',
               'entity.name.type.haskell'
@@ -182,7 +183,7 @@ describe 'GADT', ->
             value:' ',
             scopes:[
               'source.haskell',
-              'meta.declaration.type.GADT.haskell',
+              'meta.declaration.type.data.haskell',
               'meta.ctor.type-declaration.haskell',
               'meta.type-signature.haskell'
             ]
@@ -191,7 +192,7 @@ describe 'GADT', ->
             value:'Int',
             scopes:[
               'source.haskell',
-              'meta.declaration.type.GADT.haskell',
+              'meta.declaration.type.data.haskell',
               'meta.ctor.type-declaration.haskell',
               'meta.type-signature.haskell',
               'support.class.prelude.haskell'

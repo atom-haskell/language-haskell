@@ -61,8 +61,9 @@ describe 'Record', ->
         {
           "value": " ",
           "scopes": [
-            "source.haskell",
+            "source.haskell"
             "meta.declaration.type.data.haskell"
+            "meta.type-signature.haskell"
           ]
         },
         {

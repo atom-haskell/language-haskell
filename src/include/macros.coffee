@@ -53,6 +53,7 @@ module.exports=
   typeDeclOne: /(?:(?!{lb}where{rb})(?:{className}|{functionName}))/
   typeDecl: '(?>(?:{typeDeclOne})(?:\\s+{typeDeclOne})*)'
   indentChar: /[ \t]/
+  indentBlockStart: '{maybeBirdTrack}({indentChar}*)'
   indentBlockEnd: /^(?!\1{indentChar}|{indentChar}*$)/
   maybeBirdTrack: /^/
   lb: '(?:(?={identStartCharClass})(?<!{identStartCharClass}))'

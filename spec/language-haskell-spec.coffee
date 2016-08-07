@@ -181,7 +181,7 @@ describe "Language-Haskell", ->
         { value : 'data', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell', 'storage.type.data.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell' ] }
         { value : 'Foo', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell', 'meta.type-signature.haskell' ] }
         { value : '=', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell', 'keyword.operator.assignment.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell' ] }
         { value : 'Foo', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell', 'entity.name.tag.haskell' ] }
@@ -202,7 +202,7 @@ describe "Language-Haskell", ->
         { value : 'data', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell', 'storage.type.data.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell' ] }
         { value : 'Foo', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell', 'meta.type-signature.haskell' ] }
         { value : '=', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell', 'keyword.operator.assignment.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell' ] }
         { value : 'Foo', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell', 'entity.name.tag.haskell' ] }
