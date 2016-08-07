@@ -1,4 +1,4 @@
-{list, listMaybe, concat, include, makeGrammar} = require '../syntax-tools'
+{list, listMaybe, concat} = require './util'
 
 prelude = require './prelude'
 
