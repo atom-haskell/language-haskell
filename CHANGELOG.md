@@ -1,3 +1,6 @@
+## 1.8.1
+* Fix multiparam class constraints, forall
+
 ## 1.8.0
 * Better highlighting for type families
 * GADTs unified with `data` definitons
