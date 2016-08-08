@@ -92,8 +92,7 @@ module.exports=
     patterns: [
         include: '#comments'
       ,
-        name: 'entity.name.function.haskell'
-        match: /{lb}{functionName}{rb}/
+        include: '#function_name'
       ,
         include: '#type_name'
       ,
@@ -130,10 +129,8 @@ module.exports=
     beginCaptures:
       2:
         patterns: [
-            name: 'entity.name.function.haskell'
-            match: /{functionName}/
-          ,
-            include: '#infix_op'
+            {include: '#function_name'}
+            {include: '#infix_op'}
         ]
       3: name: 'keyword.other.double-colon.haskell'
     patterns: [
@@ -147,8 +144,7 @@ module.exports=
     beginCaptures:
       2:
         patterns: [
-            name: 'entity.name.tag.haskell'
-            match: /{className}/
+            include: '#type_ctor'
           ,
             include: '#infix_op'
         ]
@@ -222,17 +218,14 @@ module.exports=
     beginCaptures:
       1: name: 'entity.other.inherited-class.haskell'
     patterns: [
-        include: '#type_name'
-      ,
-        include: '#generic_type'
+        {include: '#type_name'}
+        {include: '#generic_type'}
     ]
   deriving:
     patterns: [
-        include: '#deriving_list'
-      ,
-        include: '#deriving_simple'
-      ,
-        include: '#deriving_keyword'
+        {include: '#deriving_list'}
+        {include: '#deriving_simple'}
+        {include: '#deriving_keyword'}
     ]
   deriving_keyword:
     name: 'meta.deriving.haskell'
@@ -280,14 +273,10 @@ module.exports=
     endCaptures:
       1: name: 'keyword.other.haskell'
     patterns: [
-        include: '#comments'
-      ,
-        include: '#module_name'
-      ,
-        include: '#module_exports'
-      ,
-        name: 'invalid'
-        match: /[a-z]+/
+        {include: '#comments'}
+        {include: '#module_name'}
+        {include: '#module_exports'}
+        {include: '#invalid'}
     ]
   class_decl:
     name: 'meta.declaration.class.haskell'
@@ -360,9 +349,7 @@ module.exports=
       ,
         include: '#deriving'
       ,
-        match: /=/
-        captures:
-          0: name: 'keyword.operator.assignment.haskell'
+        include: '#assignment_op'
       ,
         match: /{ctor}/
         captures:
@@ -383,9 +370,8 @@ module.exports=
         endCaptures:
           0: name: 'keyword.operator.record.end.haskell'
         patterns: [
-            include: '#comma'
-          ,
-            include: '#record_field_declaration'
+            {include: '#comma'}
+            {include: '#record_field_declaration'}
         ]
       ,
         include: '#ctor_type_declaration' #GADT
@@ -404,9 +390,7 @@ module.exports=
       ,
         include: '#where'
       ,
-        match: /=/
-        captures:
-          0: name: 'keyword.operator.assignment.haskell'
+        include: '#assignment_op'
       ,
         include: '#type_signature'
     ]
@@ -448,8 +432,7 @@ module.exports=
         endCaptures:
           0: name: 'markup.other.escape.newline.end.haskell'
         patterns: [
-            match: /\S+/
-            name: 'invalid.illegal.character-not-allowed-here.haskell'
+            {include: '#invalid'}
         ]
     ]
   newline_escape:
@@ -532,3 +515,13 @@ module.exports=
   big_arrow:
     name: 'keyword.other.big-arrow.haskell'
     match: /=>|⇒/
+  invalid:
+    match: /\S+/
+    name: 'invalid.illegal.character-not-allowed-here.haskell'
+  function_name:
+    name: 'entity.name.function.haskell'
+    match: /{lb}{functionName}{rb}/
+  assignment_op:
+    match: /=/
+    captures:
+      0: name: 'keyword.operator.assignment.haskell'

@@ -174,8 +174,7 @@
             'include': '#comments'
           }
           {
-            'name': 'entity.name.function.haskell'
-            'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}]))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+            'include': '#function_name'
           }
           {
             'include': '#type_name'
@@ -238,8 +237,7 @@
           '2':
             'patterns': [
               {
-                'name': 'entity.name.function.haskell'
-                'match': '(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*'
+                'include': '#function_name'
               }
               {
                 'include': '#infix_op'
@@ -506,8 +504,7 @@
             'include': '#module_exports'
           }
           {
-            'name': 'invalid.haskell'
-            'match': '[a-z]+'
+            'include': '#invalid'
           }
         ]
       }
@@ -630,10 +627,7 @@
             'include': '#deriving'
           }
           {
-            'match': '='
-            'captures':
-              '0':
-                'name': 'keyword.operator.assignment.haskell'
+            'include': '#assignment_op'
           }
           {
             'match': '(?:(?:(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}]))([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])))(?:((?:(?!deriving)(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:(?!deriving)(?:[\\w()\'→⇒\\[\\],]|->|=>)+\\s*)+))(?:(?:\\s+)(?:(?!deriving)(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:(?!deriving)(?:[\\w()\'→⇒\\[\\],]|->|=>)+\\s*)+)))*)?))'
@@ -704,10 +698,7 @@
             'include': '#where'
           }
           {
-            'match': '='
-            'captures':
-              '0':
-                'name': 'keyword.operator.assignment.haskell'
+            'include': '#assignment_op'
           }
           {
             'include': '#type_signature'
@@ -774,8 +765,7 @@
                 'name': 'markup.other.escape.newline.end.haskell'
             'patterns': [
               {
-                'match': '\\S+'
-                'name': 'invalid.illegal.character-not-allowed-here.haskell'
+                'include': '#invalid'
               }
             ]
           }
@@ -963,5 +953,28 @@
       {
         'name': 'keyword.other.big-arrow.haskell'
         'match': '=>|⇒'
+      }
+    ]
+  'invalid':
+    'patterns': [
+      {
+        'match': '\\S+'
+        'name': 'invalid.illegal.character-not-allowed-here.haskell'
+      }
+    ]
+  'function_name':
+    'patterns': [
+      {
+        'name': 'entity.name.function.haskell'
+        'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}]))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+      }
+    ]
+  'assignment_op':
+    'patterns': [
+      {
+        'match': '='
+        'captures':
+          '0':
+            'name': 'keyword.operator.assignment.haskell'
       }
     ]
