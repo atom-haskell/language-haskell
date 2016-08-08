@@ -195,7 +195,8 @@ module.exports=
         name: 'support.class.prelude.haskell'
         match: "{lb}(#{prelude.types.join('|')}){rb}"
       ,
-        include: '#generic_type'
+        name: 'variable.other.generic-type.haskell'
+        match: /{lb}{functionName}{rb}/
       ,
         include: '#type_name'
     ]
@@ -205,9 +206,6 @@ module.exports=
   empty_list:
     name: 'constant.language.empty-list.haskell'
     match: /\[\]/
-  generic_type:
-    name: 'variable.other.generic-type.haskell'
-    match: /{lb}{functionName}{rb}/
   deriving:
     patterns: [
         {include: '#deriving_list'}
