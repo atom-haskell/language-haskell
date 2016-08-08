@@ -12,7 +12,7 @@ makeGrammar "grammars/haskell.cson",
   patterns: include 'haskell-patterns'
 
 makeGrammar "grammars/haskell autocompletion hint.cson",
-  name: 'Haskell Autocompletion Hint'
+  # name: 'Haskell Autocompletion Hint'
   fileTypes: []
   scopeName: 'hint.haskell'
 
@@ -24,7 +24,7 @@ makeGrammar "grammars/haskell autocompletion hint.cson",
   repository: include 'repository'
 
 makeGrammar "grammars/haskell type hint.cson",
-  name: 'Haskell Type Hint'
+  # name: 'Haskell Type Hint'
   fileTypes: []
   scopeName: 'hint.type.haskell'
 
@@ -35,7 +35,7 @@ makeGrammar "grammars/haskell type hint.cson",
   repository: include 'repository'
 
 makeGrammar "grammars/haskell message hint.cson",
-  name: 'Haskell Message Hint'
+  # name: 'Haskell Message Hint'
   fileTypes: []
   scopeName: 'hint.message.haskell'
 

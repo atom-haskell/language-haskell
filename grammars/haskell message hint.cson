@@ -1,5 +1,4 @@
 'fileTypes': []
-'name': 'Haskell Message Hint'
 'scopeName': 'hint.message.haskell'
 'macros':
   'identStartCharClass': '[\\p{Ll}_\\p{Lu}\\p{Lt}]'
