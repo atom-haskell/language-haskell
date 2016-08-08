@@ -385,15 +385,11 @@ module.exports=
     beginCaptures:
       2: name: 'storage.type.data.haskell'
     patterns: [
-        include: '#comments'
-      ,
-        include: '#family_and_instance'
-      ,
-        include: '#where'
-      ,
-        include: '#assignment_op'
-      ,
-        include: '#type_signature'
+        {include: '#comments'}
+        {include: '#family_and_instance'}
+        {include: '#where'}
+        {include: '#assignment_op'}
+        {include: '#type_signature'}
     ]
   keywords: [
     name: 'keyword.other.haskell'
