@@ -32,13 +32,11 @@ module.exports=
   hexChar: /(?:\\x[0-9A-Fa-f]+)/
   controlChar: /(?:\^[A-Z@\[\]\\\^_])/
   character: '(?:{basicChar}|{escapeChar}|{octalChar}|{hexChar}|{controlChar})'
-  classConstraint: concat /({className})\s+/,
-    list('classConstraint', /{className}|{functionName}/, /\s+/)
   functionTypeDeclaration:
-    concat list('functionTypeDeclaration', /{functionName}|{operatorFun}/, /\s*,\s*/),
+    concat list(/{functionName}|{operatorFun}/, /\s*,\s*/),
       /\s*(::|∷)/
   ctorTypeDeclaration:
-    concat list('ctorTypeDeclaration', /{className}|{operatorFun}/, /\s*,\s*/),
+    concat list(/{className}|{operatorFun}/, /\s*,\s*/),
       /\s*(::|∷)/
   ctorArgs: ///
     (?!deriving)
@@ -49,7 +47,7 @@ module.exports=
     )
     ///
   ctor: concat /{lb}({className}){rb}/,
-    listMaybe('ctorArgs', /{ctorArgs}/, /\s+/)
+    listMaybe(/{ctorArgs}/, /\s+/)
   typeDeclOne: /(?:(?!{lb}where{rb})(?:{className}|{functionName}))/
   typeDecl: '(?>(?:{typeDeclOne})(?:\\s+{typeDeclOne})*)'
   indentChar: /[ \t]/

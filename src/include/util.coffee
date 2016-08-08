@@ -4,13 +4,13 @@ rxToStr = (rx) ->
   else
     rx
 
-list = (item, s, sep) ->
+list = (s, sep) ->
   # "(?<#{item}>(?:#{rxToStr s})(?:\\s*(?:#{rxToStr sep})\\s*\\g<#{item}>)?)"
   "((?:#{rxToStr s})(?:(?:#{rxToStr sep})(?:#{rxToStr s}))*)"
 
-listMaybe = (item, s, sep) ->
+listMaybe = (s, sep) ->
   # "(?<#{item}>(?:#{rxToStr s})(?:\\s*(?:#{rxToStr sep})\\s*\\g<#{item}>)?)?"
-  "#{list(item, s, sep)}?"
+  "#{list(s, sep)}?"
 
 concat = (list...) ->
   r = ''.concat (list.map (i) -> "(?:#{rxToStr i})")...
