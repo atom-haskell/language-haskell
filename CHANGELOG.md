@@ -1,3 +1,7 @@
+## 1.9.3
+* Tweaks and fixes to scoped operators
+* Fix type operators/arrows conflict
+
 ## 1.9.2
 * Type operators, (partial) fix for #71
 
