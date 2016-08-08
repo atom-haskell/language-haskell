@@ -880,7 +880,7 @@
                 'name': 'keyword.operator.record.end.haskell'
             'patterns': [
               {
-                'include': '#comment'
+                'include': '#comments'
               }
               {
                 'include': '#comma'

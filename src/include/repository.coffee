@@ -370,7 +370,7 @@ module.exports=
         endCaptures:
           0: name: 'keyword.operator.record.end.haskell'
         patterns: [
-            {include: '#comment'}
+            {include: '#comments'}
             {include: '#comma'}
             {include: '#record_field_declaration'}
         ]

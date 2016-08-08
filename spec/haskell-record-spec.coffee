@@ -739,3 +739,224 @@ describe 'Record', ->
               }
             ]
           ]
+  it "understands comments in start of records", ->
+    string = """
+      data Car = Car {
+          -- company :: String
+          , model :: String
+        }
+      """
+    lines = grammar.tokenizeLines(string)
+    console.log JSON.stringify(lines, undefined, 2)
+    expect(lines).toEqual [
+        [
+          {
+            "value": "data",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "storage.type.data.haskell"
+            ]
+          },
+          {
+            "value": " ",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell"
+            ]
+          },
+          {
+            "value": "Car",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "meta.type-signature.haskell",
+              "entity.name.type.haskell"
+            ]
+          },
+          {
+            "value": " ",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "meta.type-signature.haskell"
+            ]
+          },
+          {
+            "value": "=",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "keyword.operator.assignment.haskell"
+            ]
+          },
+          {
+            "value": " ",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell"
+            ]
+          },
+          {
+            "value": "Car",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "entity.name.tag.haskell"
+            ]
+          },
+          {
+            "value": " ",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell"
+            ]
+          },
+          {
+            "value": "{",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "meta.declaration.type.data.record.block.haskell",
+              "keyword.operator.record.begin.haskell"
+            ]
+          }
+        ],
+        [
+          {
+            "value": "    ",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "meta.declaration.type.data.record.block.haskell",
+              "punctuation.whitespace.comment.leading.haskell"
+            ]
+          },
+          {
+            "value": "--",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "meta.declaration.type.data.record.block.haskell",
+              "comment.line.double-dash.haskell",
+              "punctuation.definition.comment.haskell"
+            ]
+          },
+          {
+            "value": " company :: String",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "meta.declaration.type.data.record.block.haskell",
+              "comment.line.double-dash.haskell"
+            ]
+          },
+          {
+            "value": "",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "meta.declaration.type.data.record.block.haskell",
+              "comment.line.double-dash.haskell"
+            ]
+          }
+        ],
+        [
+          {
+            "value": "    ",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "meta.declaration.type.data.record.block.haskell"
+            ]
+          },
+          {
+            "value": ",",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "meta.declaration.type.data.record.block.haskell",
+              "punctuation.separator.comma.haskell"
+            ]
+          },
+          {
+            "value": " ",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "meta.declaration.type.data.record.block.haskell"
+            ]
+          },
+          {
+            "value": "model",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "meta.declaration.type.data.record.block.haskell",
+              "meta.record-field.type-declaration.haskell",
+              "entity.other.attribute-name.haskell"
+            ]
+          },
+          {
+            "value": " ",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "meta.declaration.type.data.record.block.haskell",
+              "meta.record-field.type-declaration.haskell"
+            ]
+          },
+          {
+            "value": "::",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "meta.declaration.type.data.record.block.haskell",
+              "meta.record-field.type-declaration.haskell",
+              "keyword.other.double-colon.haskell"
+            ]
+          },
+          {
+            "value": " ",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "meta.declaration.type.data.record.block.haskell",
+              "meta.record-field.type-declaration.haskell",
+              "meta.type-signature.haskell"
+            ]
+          },
+          {
+            "value": "String",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "meta.declaration.type.data.record.block.haskell",
+              "meta.record-field.type-declaration.haskell",
+              "meta.type-signature.haskell",
+              "support.class.prelude.haskell"
+            ]
+          }
+        ],
+        [
+          {
+            "value": "  ",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "meta.declaration.type.data.record.block.haskell",
+              "meta.record-field.type-declaration.haskell",
+              "meta.type-signature.haskell"
+            ]
+          },
+          {
+            "value": "}",
+            "scopes": [
+              "source.haskell",
+              "meta.declaration.type.data.haskell",
+              "meta.declaration.type.data.record.block.haskell",
+              "keyword.operator.record.end.haskell"
+            ]
+          }
+        ]
+      ]
