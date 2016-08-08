@@ -23,7 +23,7 @@ module.exports =
     { include: '#foreign_import' }
     { include: '#regular_import' }
     { include: '#data_decl' }
-    { include: '#type_alias' }
+    { include: '#type_alias' } # TODO: review stopped here
     { include: '#keywords' }
     { include: '#c_preprocessor' }
     { include: '#pragma' }

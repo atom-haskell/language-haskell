@@ -842,7 +842,7 @@
       }
       {
         'name': 'constant.numeric.float.haskell'
-        'match': '[0-9]+(\\.|[eE][+-]?|\\.[0-9]+[eE][+-]?)[0-9]+'
+        'match': '[0-9]+(\\.[0-9]+[eE][+-]?|\\.|[eE][+-]?)[0-9]+'
       }
       {
         'name': 'constant.numeric.decimal.haskell'
