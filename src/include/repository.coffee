@@ -98,14 +98,20 @@ module.exports=
       ,
         include: '#comma'
       ,
-        include: '#infix_op'
-      ,
         name: 'meta.other.constructor-list.haskell'
-        begin: /\(/
+        begin: /{rb}\s*\(/
         end: /\)/
         patterns: [
-          include: '#type_ctor'
+          { include: '#type_ctor' }
+          { include: '#attribute_name' }
+          { include: '#comma' }
+          {
+            match: /\.\./
+            name: 'keyword.operator.wildcard.haskell'
+          }
         ]
+      ,
+        include: '#infix_op'
     ]
   module_name:
     name: 'support.other.module.haskell'
@@ -160,8 +166,7 @@ module.exports=
     beginCaptures:
       1:
         patterns: [
-            name: 'entity.other.attribute-name.haskell'
-            match: /{lb}{functionName}{rb}/
+            include: '#attribute_name'
           ,
             include: '#infix_op'
         ]
@@ -497,3 +502,6 @@ module.exports=
     match: /=/
     captures:
       0: name: 'keyword.operator.assignment.haskell'
+  attribute_name:
+    name: 'entity.other.attribute-name.haskell'
+    match: /{lb}{functionName}{rb}/
