@@ -480,8 +480,7 @@
           '2':
             'patterns': [
               {
-                'name': 'entity.name.tag.haskell'
-                'match': '[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*'
+                'include': '#type_ctor'
               }
               {
                 'include': '#infix_op'
@@ -880,6 +879,9 @@
               '0':
                 'name': 'keyword.operator.record.end.haskell'
             'patterns': [
+              {
+                'include': '#comment'
+              }
               {
                 'include': '#comma'
               }
