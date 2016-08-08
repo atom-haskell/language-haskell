@@ -1,3 +1,6 @@
+## 1.9.2
+* Type operators, (partial) fix for #71
+
 ## 1.9.1
 * Fix data declaration highlighting
 * Add data decl spec
