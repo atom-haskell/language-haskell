@@ -197,10 +197,12 @@ module.exports=
         match: "{lb}(#{prelude.classes.join('|')}){rb}"
       ,
         name: 'keyword.other.arrow.haskell'
-        match: /->|→/
+        match: '(?<!{operatorChar})->|→(?!{operatorChar})'
       ,
         name: 'keyword.other.big-arrow.haskell'
-        match: /=>|⇒/
+        match: '(?<!{operatorChar})=>|⇒(?!{operatorChar})'
+      ,
+        include: '#operator'
       ,
         name: 'support.class.prelude.haskell'
         match: "{lb}(#{prelude.types.join('|')}){rb}"
@@ -462,6 +464,16 @@ module.exports=
       1: name: 'keyword.other.double-colon.haskell'
       2: {name: 'meta.type-signature.haskell', patterns: [include: '#type_signature']}
   ]
+  scoped_type_override:
+    match: '{indentBlockStart}{functionTypeDeclaration}(.*)(?<!{operatorChar})(<-|=)(?!{operatorChar})'
+    captures:
+      2: patterns: [include: '#identifier']
+      3: name: 'keyword.other.double-colon.haskell'
+      4: {name: 'meta.type-signature.haskell', patterns: [include: '#type_signature']}
+      5: patterns: [
+          {include: '#assignment_op'}
+          {include: '#operator'}
+      ]
   prelude:[
     name: 'support.tag.haskell'
     match: "{lb}(#{prelude.constr.join('|')}){rb}"

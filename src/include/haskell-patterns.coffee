@@ -30,6 +30,7 @@ module.exports =
     { include: '#string' }
     { include: '#newline_escape' }
     { include: '#quoted_character' }
+    { include: '#scoped_type_override' }
     { include: '#function_type_declaration' }
     { include: '#scoped_type' }
     { include: '#prelude' }

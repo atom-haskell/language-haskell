@@ -218,7 +218,7 @@ describe "Language-Haskell", ->
   it "properly highlights data declarations", ->
     data = 'data Foo = Foo Bar'
     {tokens} = grammar.tokenizeLine(data)
-    console.log JSON.stringify(tokens, undefined, 2)
+    # console.log JSON.stringify(tokens, undefined, 2)
     expect(tokens).toEqual [
         {
           "value": "data",
@@ -227,7 +227,7 @@ describe "Language-Haskell", ->
             "meta.declaration.type.data.haskell",
             "storage.type.data.haskell"
           ]
-        },
+        }
         {
           "value": " ",
           "scopes": [
@@ -292,3 +292,48 @@ describe "Language-Haskell", ->
           ]
         }
       ]
+  describe "regression test for 71", ->
+    it "<-", ->
+      data = "x :: String <- undefined"
+      {tokens} = grammar.tokenizeLine(data)
+      console.log JSON.stringify(tokens, undefined, 2)
+      expect(tokens).toEqual [
+        { value : 'x', scopes : [ 'source.haskell', 'identifier.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
+        { value : '::', scopes : [ 'source.haskell', 'keyword.other.double-colon.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
+        { value : 'String', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'support.class.prelude.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
+        { value : '<-', scopes : [ 'source.haskell', 'keyword.operator.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
+        { value : 'undefined', scopes : [ 'source.haskell', 'support.function.prelude.haskell' ] }
+        ]
+    it "=", ->
+      data = "x :: String = undefined"
+      {tokens} = grammar.tokenizeLine(data)
+      console.log JSON.stringify(tokens, undefined, 2)
+      expect(tokens).toEqual [
+        { value : 'x', scopes : [ 'source.haskell', 'identifier.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
+        { value : '::', scopes : [ 'source.haskell', 'keyword.other.double-colon.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
+        { value : 'String', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'support.class.prelude.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
+        { value : '=', scopes : [ 'source.haskell', 'keyword.operator.assignment.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell' ] }
+        { value : 'undefined', scopes : [ 'source.haskell', 'support.function.prelude.haskell' ] }
+        ]
+    it "still works for type-op signatures", ->
+      data = "smth :: a <-- b"
+      {tokens} = grammar.tokenizeLine(data)
+      expect(tokens).toEqual [
+        { value : 'smth', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell', 'entity.name.function.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell' ] }
+        { value : '::', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell', 'keyword.other.double-colon.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell', 'meta.type-signature.haskell' ] }
+        { value : 'a', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell', 'meta.type-signature.haskell', 'variable.other.generic-type.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell', 'meta.type-signature.haskell' ] }
+        { value : '<--', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell', 'meta.type-signature.haskell', 'keyword.operator.haskell' ] }
+        { value : ' ', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell', 'meta.type-signature.haskell' ] }
+        { value : 'b', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell', 'meta.type-signature.haskell', 'variable.other.generic-type.haskell' ] }
+        ]

@@ -312,11 +312,14 @@
       }
       {
         'name': 'keyword.other.arrow.haskell'
-        'match': '->|→'
+        'match': '(?<![\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']])->|→(?![\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']])'
       }
       {
         'name': 'keyword.other.big-arrow.haskell'
-        'match': '=>|⇒'
+        'match': '(?<![\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']])=>|⇒(?![\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']])'
+      }
+      {
+        'include': '#operator'
       }
       {
         'name': 'support.class.prelude.haskell'
@@ -786,6 +789,37 @@
             'patterns': [
               {
                 'include': '#type_signature'
+              }
+            ]
+      }
+    ]
+  'scoped_type_override':
+    'patterns': [
+      {
+        'match': '^([ \\t]*)(?:(?:((?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+\\)))(?:(?:\\s*,\\s*)(?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+\\))))*))(?:\\s*(::|∷)))(.*)(?<![\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']])(<-|=)(?![\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']])'
+        'captures':
+          '2':
+            'patterns': [
+              {
+                'include': '#identifier'
+              }
+            ]
+          '3':
+            'name': 'keyword.other.double-colon.haskell'
+          '4':
+            'name': 'meta.type-signature.haskell'
+            'patterns': [
+              {
+                'include': '#type_signature'
+              }
+            ]
+          '5':
+            'patterns': [
+              {
+                'include': '#assignment_op'
+              }
+              {
+                'include': '#operator'
               }
             ]
       }
