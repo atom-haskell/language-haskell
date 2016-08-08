@@ -313,7 +313,7 @@
     'patterns': [
       {
         'name': 'meta.class-constraints.haskell'
-        'match': '(.*)(=>|⇒)'
+        'match': '(?<paren>(?:[^()]|\\(\\g<paren>\\))*)\\s*(=>|⇒)'
         'captures':
           '1':
             'patterns': [
@@ -322,6 +322,12 @@
               }
               {
                 'include': '#forall'
+              }
+              {
+                'include': '#comments'
+              }
+              {
+                'include': '#big_arrow'
               }
             ]
           '2':
@@ -338,8 +344,7 @@
         'match': '->|→'
       }
       {
-        'name': 'keyword.other.big-arrow.haskell'
-        'match': '=>|⇒'
+        'include': '#big_arrow'
       }
       {
         'name': 'support.class.prelude.haskell'
@@ -383,24 +388,19 @@
     'patterns': [
       {
         'name': 'meta.class-constraint.haskell'
-        'match': '(?:(?:([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)\\s+)(?:((?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)(?:(?:\\s+)(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*))*)))'
-        'captures':
+        'begin': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}]))([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'end': '(,|(=>|⇒)|$)'
+        'beginCaptures':
           '1':
-            'patterns': [
-              {
-                'name': 'entity.other.inherited-class.haskell'
-                'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}]))[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
-              }
-            ]
-          '2':
-            'patterns': [
-              {
-                'include': '#type_name'
-              }
-              {
-                'include': '#generic_type'
-              }
-            ]
+            'name': 'entity.other.inherited-class.haskell'
+        'patterns': [
+          {
+            'include': '#type_name'
+          }
+          {
+            'include': '#generic_type'
+          }
+        ]
       }
     ]
   'deriving':
@@ -957,5 +957,12 @@
             'include': '#generic_type'
           }
         ]
+      }
+    ]
+  'big_arrow':
+    'patterns': [
+      {
+        'name': 'keyword.other.big-arrow.haskell'
+        'match': '=>|⇒'
       }
     ]

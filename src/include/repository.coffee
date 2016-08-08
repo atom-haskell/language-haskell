@@ -176,11 +176,13 @@ module.exports=
   type_signature:
     patterns: [
         name: 'meta.class-constraints.haskell'
-        match: /(.*)(=>|⇒)/
+        match: '(?<paren>(?:[^()]|\\(\\g<paren>\\))*)\\s*(=>|⇒)'
         captures:
           1: patterns: [
             {include: '#class_constraint'}
             {include: '#forall'}
+            {include: '#comments'}
+            {include: '#big_arrow'}
           ]
           2: name: 'keyword.other.big-arrow.haskell'
       ,
@@ -191,8 +193,7 @@ module.exports=
         name: 'keyword.other.arrow.haskell'
         match: /->|→/
       ,
-        name: 'keyword.other.big-arrow.haskell'
-        match: /=>|⇒/
+        include: '#big_arrow'
       ,
         name: 'support.class.prelude.haskell'
         match: "{lb}(#{prelude.types.join('|')}){rb}"
@@ -216,17 +217,15 @@ module.exports=
     match: /{lb}{functionName}{rb}/
   class_constraint:
     name: 'meta.class-constraint.haskell'
-    match: /{classConstraint}/
-    captures:
-      1: patterns: [
-        name: 'entity.other.inherited-class.haskell'
-        match: /{lb}{className}{rb}/
-      ]
-      2: patterns: [
-          include: '#type_name'
-        ,
-          include: '#generic_type'
-      ]
+    begin:  /{lb}({className}){rb}/
+    end: /(,|(=>|⇒)|$)/
+    beginCaptures:
+      1: name: 'entity.other.inherited-class.haskell'
+    patterns: [
+        include: '#type_name'
+      ,
+        include: '#generic_type'
+    ]
   deriving:
     patterns: [
         include: '#deriving_list'
@@ -530,3 +529,6 @@ module.exports=
     beginCaptures:
       1: name: 'keyword.other.haskell'
     patterns: [ include: '#generic_type' ]
+  big_arrow:
+    name: 'keyword.other.big-arrow.haskell'
+    match: /=>|⇒/
