@@ -1,7 +1,10 @@
+{grammarExpect, customMatchers} = require './util'
+
 describe "Language-Haskell", ->
   grammar = null
 
   beforeEach ->
+    @addMatchers(customMatchers)
     waitsForPromise ->
       atom.packages.activatePackage("language-haskell")
 
@@ -345,15 +348,22 @@ describe "Language-Haskell", ->
       expect(tokens[4].value).toEqual '***'
       expect(tokens[4].scopes).toContain 'keyword.operator.haskell'
     it "doesn't confuse arrows and type operators", ->
-      {tokens} = grammar.tokenizeLine(":: a --> b")
-      expect(tokens[4].value).toEqual '-->'
-      expect(tokens[4].scopes).toContain 'keyword.operator.haskell'
-      {tokens} = grammar.tokenizeLine(":: a ->- b")
-      expect(tokens[4].value).toEqual '->-'
-      expect(tokens[4].scopes).toContain 'keyword.operator.haskell'
-      {tokens} = grammar.tokenizeLine(":: a =>- b")
-      expect(tokens[4].value).toEqual '=>-'
-      expect(tokens[4].scopes).toContain 'keyword.operator.haskell'
-      {tokens} = grammar.tokenizeLine(":: a ==> b")
-      expect(tokens[4].value).toEqual '==>'
-      expect(tokens[4].scopes).toContain 'keyword.operator.haskell'
+      g = grammarExpect(grammar, ":: a --> b")
+      g.toHaveTokens [['::', ' ', 'a', ' ', '-->', ' ', 'b']]
+      g.toHaveScopes [['source.haskell']]
+      g.tokenToHaveScopes [[[4, ['keyword.operator.haskell', 'meta.type-signature.haskell']]]]
+
+      g = grammarExpect(grammar, ":: a ->- b")
+      g.toHaveTokens [['::', ' ', 'a', ' ', '->-', ' ', 'b']]
+      g.toHaveScopes [['source.haskell']]
+      g.tokenToHaveScopes [[[4, ['keyword.operator.haskell', 'meta.type-signature.haskell']]]]
+
+      g = grammarExpect(grammar, ":: a ==> b")
+      g.toHaveTokens [['::', ' ', 'a', ' ', '==>', ' ', 'b']]
+      g.toHaveScopes [['source.haskell']]
+      g.tokenToHaveScopes [[[4, ['keyword.operator.haskell', 'meta.type-signature.haskell']]]]
+
+      g = grammarExpect(grammar, ":: a =>= b")
+      g.toHaveTokens [['::', ' ', 'a', ' ', '=>=', ' ', 'b']]
+      g.toHaveScopes [['source.haskell']]
+      g.tokenToHaveScopes [[[4, ['keyword.operator.haskell', 'meta.type-signature.haskell']]]]
