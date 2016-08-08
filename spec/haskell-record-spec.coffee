@@ -747,7 +747,7 @@ describe 'Record', ->
         }
       """
     lines = grammar.tokenizeLines(string)
-    console.log JSON.stringify(lines, undefined, 2)
+    # console.log JSON.stringify(lines, undefined, 2)
     expect(lines).toEqual [
         [
           {
