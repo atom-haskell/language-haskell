@@ -1,3 +1,6 @@
+## 1.8.3
+* Hide hint.* grammars from Atom UI
+
 ## 1.8.2
 * Some fixes to class constraints
 
