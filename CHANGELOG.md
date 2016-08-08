@@ -1,3 +1,9 @@
+## 1.9.1
+* Fix data declaration highlighting
+* Add data decl spec
+* Remove debug print
+* Removed obsolete macro,ident arg to util.list func
+
 ## 1.9.0
 * Highlight INCOHERENT/OVERLAP* instance pragmas
 * Properly highlight related imports/exports (e.g. Class(..) or Record(field))
