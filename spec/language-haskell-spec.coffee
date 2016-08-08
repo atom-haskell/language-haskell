@@ -214,3 +214,81 @@ describe "Language-Haskell", ->
         { value : 'Bar', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell', 'meta.declaration.type.data.record.block.haskell', 'meta.record-field.type-declaration.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell' ] }
         { value : '}', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell', 'meta.declaration.type.data.record.block.haskell', 'keyword.operator.record.end.haskell' ] }
       ]
+
+  it "properly highlights data declarations", ->
+    data = 'data Foo = Foo Bar'
+    {tokens} = grammar.tokenizeLine(data)
+    console.log JSON.stringify(tokens, undefined, 2)
+    expect(tokens).toEqual [
+        {
+          "value": "data",
+          "scopes": [
+            "source.haskell",
+            "meta.declaration.type.data.haskell",
+            "storage.type.data.haskell"
+          ]
+        },
+        {
+          "value": " ",
+          "scopes": [
+            "source.haskell",
+            "meta.declaration.type.data.haskell"
+          ]
+        },
+        {
+          "value": "Foo",
+          "scopes": [
+            "source.haskell",
+            "meta.declaration.type.data.haskell",
+            "meta.type-signature.haskell",
+            "entity.name.type.haskell"
+          ]
+        },
+        {
+          "value": " ",
+          "scopes": [
+            "source.haskell",
+            "meta.declaration.type.data.haskell",
+            "meta.type-signature.haskell"
+          ]
+        },
+        {
+          "value": "=",
+          "scopes": [
+            "source.haskell",
+            "meta.declaration.type.data.haskell",
+            "keyword.operator.assignment.haskell"
+          ]
+        },
+        {
+          "value": " ",
+          "scopes": [
+            "source.haskell",
+            "meta.declaration.type.data.haskell"
+          ]
+        },
+        {
+          "value": "Foo",
+          "scopes": [
+            "source.haskell",
+            "meta.declaration.type.data.haskell",
+            "entity.name.tag.haskell"
+          ]
+        },
+        {
+          "value": " ",
+          "scopes": [
+            "source.haskell",
+            "meta.declaration.type.data.haskell"
+          ]
+        },
+        {
+          "value": "Bar",
+          "scopes": [
+            "source.haskell",
+            "meta.declaration.type.data.haskell",
+            "meta.type-signature.haskell"
+            "entity.name.type.haskell"
+          ]
+        }
+      ]
