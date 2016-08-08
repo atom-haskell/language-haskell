@@ -46,8 +46,7 @@ module.exports=
     |(?:(?!deriving)(?:[\w()'→⇒\[\],]|->|=>)+\s*)+ #anything goes!
     )
     ///
-  ctor: concat /{lb}({className}){rb}/,
-    listMaybe(/{ctorArgs}/, /\s+/)
+  ctor: concat /{lb}({className})\s*/, listMaybe(/{ctorArgs}/, /\s+/)
   typeDeclOne: /(?:(?!{lb}where{rb})(?:{className}|{functionName}))/
   typeDecl: '(?>(?:{typeDeclOne})(?:\\s+{typeDeclOne})*)'
   indentChar: /[ \t]/
