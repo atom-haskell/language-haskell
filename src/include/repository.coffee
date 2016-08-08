@@ -16,6 +16,11 @@ pragmas = [
   'SOURCE'
 ]
 
+instance_pragmas = [
+  'INCOHERENT'
+  'OVERLAP(PABLE|PING|S)'
+]
+
 module.exports=
   block_comment:
     patterns: [
@@ -289,7 +294,16 @@ module.exports=
     endCaptures:
       1: name: 'keyword.other.haskell'
     patterns: [
-        include: '#type_signature'
+        {
+          name: 'meta.preprocessor.haskell'
+          begin: /\{-#/
+          end: /#-\}/
+          patterns: [
+              match: "{lb}(#{instance_pragmas.join('|')}){rb}"
+              name: 'keyword.other.preprocessor.haskell'
+          ]
+        }
+        {include: '#type_signature'}
     ]
   foreign_import:
     name: 'meta.foreign.haskell'
