@@ -525,39 +525,32 @@
   'type_signature':
     'patterns': [
       {
-        'name': 'meta.class-constraints.haskell'
-        'match': '(?<paren>(?:[^()]|\\(\\g<paren>\\))*)\\s*(=>|⇒)'
-        'captures':
-          '1':
-            'patterns': [
-              {
-                'include': '#class_constraint'
-              }
-              {
-                'include': '#forall'
-              }
-              {
-                'include': '#comments'
-              }
-              {
-                'include': '#big_arrow'
-              }
-            ]
-          '2':
-            'name': 'keyword.other.big-arrow.haskell'
-      }
-      {
-        'include': '#forall'
-      }
-      {
         'include': '#pragma'
+      }
+      {
+        'include': '#comments'
+      }
+      {
+        'name': 'keyword.other.forall.haskell'
+        'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}]))forall(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+      }
+      {
+        'include': '#unit'
+      }
+      {
+        'include': '#empty_list'
+      }
+      {
+        'name': 'entity.other.inherited-class.haskell'
+        'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}]))(Applicative|Bounded|Enum|Eq|Floating|Foldable|Fractional|Functor|Integral|Monad|Monoid|Num|Ord|Read|Real|RealFloat|RealFrac|Show|Traversable)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
       {
         'name': 'keyword.other.arrow.haskell'
         'match': '->|→'
       }
       {
-        'include': '#big_arrow'
+        'name': 'keyword.other.big-arrow.haskell'
+        'match': '=>|⇒'
       }
       {
         'name': 'support.class.prelude.haskell'
@@ -568,12 +561,6 @@
       }
       {
         'include': '#type_name'
-      }
-      {
-        'include': '#unit'
-      }
-      {
-        'include': '#comments'
       }
     ]
   'unit':
@@ -595,25 +582,6 @@
       {
         'name': 'variable.other.generic-type.haskell'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}]))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
-      }
-    ]
-  'class_constraint':
-    'patterns': [
-      {
-        'name': 'meta.class-constraint.haskell'
-        'begin': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}]))([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
-        'end': '(,|(=>|⇒)|$)'
-        'beginCaptures':
-          '1':
-            'name': 'entity.other.inherited-class.haskell'
-        'patterns': [
-          {
-            'include': '#type_name'
-          }
-          {
-            'include': '#generic_type'
-          }
-        ]
       }
     ]
   'deriving':
@@ -1149,29 +1117,6 @@
       {
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}]))(family|instance)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'name': 'keyword.other.haskell'
-      }
-    ]
-  'forall':
-    'patterns': [
-      {
-        'name': 'meta.type-signature.forall.haskell'
-        'begin': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}]))(forall)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
-        'end': '\\.'
-        'beginCaptures':
-          '1':
-            'name': 'keyword.other.haskell'
-        'patterns': [
-          {
-            'include': '#generic_type'
-          }
-        ]
-      }
-    ]
-  'big_arrow':
-    'patterns': [
-      {
-        'name': 'keyword.other.big-arrow.haskell'
-        'match': '=>|⇒'
       }
     ]
   'invalid':

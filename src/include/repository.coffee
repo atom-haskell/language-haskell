@@ -171,25 +171,26 @@ module.exports=
     ]
   type_signature:
     patterns: [
-        name: 'meta.class-constraints.haskell'
-        match: '(?<paren>(?:[^()]|\\(\\g<paren>\\))*)\\s*(=>|⇒)'
-        captures:
-          1: patterns: [
-            {include: '#class_constraint'}
-            {include: '#forall'}
-            {include: '#comments'}
-            {include: '#big_arrow'}
-          ]
-          2: name: 'keyword.other.big-arrow.haskell'
-      ,
-        include: '#forall'
-      ,
+      #TODO: Type operators, type-level integers etc
         include: '#pragma'
+      ,
+        include: '#comments'
+      ,
+        name: 'keyword.other.forall.haskell'
+        match: '{lb}forall{rb}'
+      ,
+        include: '#unit'
+      ,
+        include: '#empty_list'
+      ,
+        name: 'entity.other.inherited-class.haskell'
+        match: "{lb}(#{prelude.classes.join('|')}){rb}"
       ,
         name: 'keyword.other.arrow.haskell'
         match: /->|→/
       ,
-        include: '#big_arrow'
+        name: 'keyword.other.big-arrow.haskell'
+        match: /=>|⇒/
       ,
         name: 'support.class.prelude.haskell'
         match: "{lb}(#{prelude.types.join('|')}){rb}"
@@ -197,10 +198,6 @@ module.exports=
         include: '#generic_type'
       ,
         include: '#type_name'
-      ,
-        include: '#unit'
-      ,
-        include: '#comments'
     ]
   unit:
     name: 'constant.language.unit.haskell'
@@ -211,16 +208,6 @@ module.exports=
   generic_type:
     name: 'variable.other.generic-type.haskell'
     match: /{lb}{functionName}{rb}/
-  class_constraint:
-    name: 'meta.class-constraint.haskell'
-    begin:  /{lb}({className}){rb}/
-    end: /(,|(=>|⇒)|$)/
-    beginCaptures:
-      1: name: 'entity.other.inherited-class.haskell'
-    patterns: [
-        {include: '#type_name'}
-        {include: '#generic_type'}
-    ]
   deriving:
     patterns: [
         {include: '#deriving_list'}
@@ -502,16 +489,6 @@ module.exports=
   family_and_instance:
     match: '{lb}(family|instance){rb}'
     name: 'keyword.other.haskell'
-  forall:
-    name: 'meta.type-signature.forall.haskell'
-    begin: '{lb}(forall){rb}'
-    end: /\./
-    beginCaptures:
-      1: name: 'keyword.other.haskell'
-    patterns: [ include: '#generic_type' ]
-  big_arrow:
-    name: 'keyword.other.big-arrow.haskell'
-    match: /=>|⇒/
   invalid:
     match: /\S+/
     name: 'invalid.illegal.character-not-allowed-here.haskell'
