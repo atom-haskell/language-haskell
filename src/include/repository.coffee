@@ -178,8 +178,13 @@ module.exports=
         name: 'meta.class-constraints.haskell'
         match: /(.*)(=>|⇒)/
         captures:
-          1: patterns: [{include: '#class_constraint'}]
+          1: patterns: [
+            {include: '#class_constraint'}
+            {include: '#forall'}
+          ]
           2: name: 'keyword.other.big-arrow.haskell'
+      ,
+        include: '#forall'
       ,
         include: '#pragma'
       ,
@@ -518,3 +523,10 @@ module.exports=
   family_and_instance:
     match: '{lb}(family|instance){rb}'
     name: 'keyword.other.haskell'
+  forall:
+    name: 'meta.type-signature.forall.haskell'
+    begin: '{lb}(forall){rb}'
+    end: /\./
+    beginCaptures:
+      1: name: 'keyword.other.haskell'
+    patterns: [ include: '#generic_type' ]
