@@ -197,10 +197,10 @@ module.exports=
         match: "{lb}(#{prelude.classes.join('|')}){rb}"
       ,
         name: 'keyword.other.arrow.haskell'
-        match: '(?<!{operatorChar})->|→(?!{operatorChar})'
+        match: '(?<!{operatorChar})(->|→)(?!{operatorChar})'
       ,
         name: 'keyword.other.big-arrow.haskell'
-        match: '(?<!{operatorChar})=>|⇒(?!{operatorChar})'
+        match: '(?<!{operatorChar})(=>|⇒)(?!{operatorChar})'
       ,
         include: '#operator'
       ,
