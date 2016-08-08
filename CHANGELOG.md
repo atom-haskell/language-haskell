@@ -1,3 +1,6 @@
+## 1.8.2
+* Some fixes to class constraints
+
 ## 1.8.1
 * Fix multiparam class constraints, forall
 
