@@ -337,3 +337,23 @@ describe "Language-Haskell", ->
         { value : ' ', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell', 'meta.type-signature.haskell' ] }
         { value : 'b', scopes : [ 'source.haskell', 'meta.function.type-declaration.haskell', 'meta.type-signature.haskell', 'variable.other.generic-type.haskell' ] }
         ]
+
+  describe "type operators", ->
+    it "parses type operators", ->
+      data = ":: a *** b"
+      {tokens} = grammar.tokenizeLine(data)
+      expect(tokens[4].value).toEqual '***'
+      expect(tokens[4].scopes).toContain 'keyword.operator.haskell'
+    it "doesn't confuse arrows and type operators", ->
+      {tokens} = grammar.tokenizeLine(":: a --> b")
+      expect(tokens[4].value).toEqual '-->'
+      expect(tokens[4].scopes).toContain 'keyword.operator.haskell'
+      {tokens} = grammar.tokenizeLine(":: a ->- b")
+      expect(tokens[4].value).toEqual '->-'
+      expect(tokens[4].scopes).toContain 'keyword.operator.haskell'
+      {tokens} = grammar.tokenizeLine(":: a =>- b")
+      expect(tokens[4].value).toEqual '=>-'
+      expect(tokens[4].scopes).toContain 'keyword.operator.haskell'
+      {tokens} = grammar.tokenizeLine(":: a ==> b")
+      expect(tokens[4].value).toEqual '==>'
+      expect(tokens[4].scopes).toContain 'keyword.operator.haskell'

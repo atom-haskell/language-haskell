@@ -783,7 +783,7 @@
             ]
       }
       {
-        'match': '(::|∷)((?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|\\->|=>|[→⇒()\\[\\]]|\\s)*)'
+        'match': '(::|∷)(.*?)(?:(?<![\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']])(<-|=)(?![\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']])|$)'
         'captures':
           '1':
             'name': 'keyword.other.double-colon.haskell'
@@ -792,6 +792,15 @@
             'patterns': [
               {
                 'include': '#type_signature'
+              }
+            ]
+          '3':
+            'patterns': [
+              {
+                'include': '#assignment_op'
+              }
+              {
+                'include': '#operator'
               }
             ]
       }

@@ -458,11 +458,14 @@ module.exports=
       2: name: 'keyword.other.double-colon.haskell'
       3: {name: 'meta.type-signature.haskell', patterns: [include: '#type_signature']}
   ,
-    # match: '(::|∷)((?:(?:{className}|{functionName}|->|=>|[→⇒()\\[\\]]|\\s)(?!:<-|=))*)'
-    match: '(::|∷)((?:{className}|{functionName}|\\->|=>|[→⇒()\\[\\]]|\\s)*)'
+    match: '(::|∷)(.*?)(?:(?<!{operatorChar})(<-|=)(?!{operatorChar})|$)'
     captures:
       1: name: 'keyword.other.double-colon.haskell'
       2: {name: 'meta.type-signature.haskell', patterns: [include: '#type_signature']}
+      3: patterns: [
+          {include: '#assignment_op'}
+          {include: '#operator'}
+      ]
   ]
   scoped_type_override:
     match: '{indentBlockStart}{functionTypeDeclaration}(.*)(?<!{operatorChar})(<-|=)(?!{operatorChar})'
