@@ -37,11 +37,13 @@ module.exports=
         ]
       ,
         name: 'comment.block.haskell'
-        begin: /\{-(?!#)/
+        begin: /\{-/
         end: /-\}/
         applyEndPatternLast: 1
         beginCaptures:
-          0: name: 'punctuation.definition.comment.haskell'
+          0: name: 'punctuation.definition.comment.block.start.haskell'
+        endCaptures:
+          0: name: 'punctuation.definition.comment.block.end.haskell'
         patterns: [
             include: '#block_comment'
         ]
