@@ -82,21 +82,6 @@ describe "Language-Haskell", ->
           ]
         ]
 
-  it "tokenizes {-  -} comments", ->
-    {tokens} = grammar.tokenizeLine('{--}')
-
-    expect(tokens).toEqual [
-        { value : '{-', scopes : [ 'source.haskell', 'comment.block.haskell', 'punctuation.definition.comment.haskell' ] }
-        { value : '-}', scopes : [ 'source.haskell', 'comment.block.haskell' ] }
-      ]
-
-    {tokens} = grammar.tokenizeLine('{- foo -}')
-    expect(tokens).toEqual  [
-        { value : '{-', scopes : [ 'source.haskell', 'comment.block.haskell', 'punctuation.definition.comment.haskell' ] }
-        { value : ' foo ', scopes : [ 'source.haskell', 'comment.block.haskell' ] }
-        { value : '-}', scopes : [ 'source.haskell', 'comment.block.haskell' ] }
-      ]
-
   describe "ids", ->
     it 'handles type_ids', ->
       typeIds = ['Char', 'Data', 'List', 'Int', 'Integral', 'Float', 'Date']
@@ -314,7 +299,7 @@ describe "Language-Haskell", ->
     it "=", ->
       data = "x :: String = undefined"
       {tokens} = grammar.tokenizeLine(data)
-      console.log JSON.stringify(tokens, undefined, 2)
+      # console.log JSON.stringify(tokens, undefined, 2)
       expect(tokens).toEqual [
         { value : 'x', scopes : [ 'source.haskell', 'identifier.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
@@ -367,3 +352,29 @@ describe "Language-Haskell", ->
       g.toHaveTokens [['::', ' ', 'a', ' ', '=>=', ' ', 'b']]
       g.toHaveScopes [['source.haskell']]
       g.tokenToHaveScopes [[[4, ['keyword.operator.haskell', 'meta.type-signature.haskell']]]]
+
+  describe "comments", ->
+    it "parses block comments", ->
+      g = grammarExpect grammar, "{- this is a block comment -}"
+      g.toHaveTokens [['{-', ' this is a block comment ', '-}']]
+      g.toHaveScopes [['source.haskell', 'comment.block.haskell']]
+      g.tokenToHaveScopes [[[0, ['punctuation.definition.comment.block.start.haskell']],
+                            [2, ['punctuation.definition.comment.block.end.haskell']]]]
+
+    it "parses nested block comments", ->
+      g = grammarExpect grammar, "{- this is a {- nested -} block comment -}"
+      g.toHaveTokens [['{-', ' this is a ', '{-', ' nested ', '-}', ' block comment ', '-}']]
+      g.toHaveScopes [['source.haskell', 'comment.block.haskell']]
+      g.tokenToHaveScopes [[[0, ['punctuation.definition.comment.block.start.haskell']]
+                            [2, ['punctuation.definition.comment.block.start.haskell']]
+                            [4, ['punctuation.definition.comment.block.end.haskell']]
+                            [6, ['punctuation.definition.comment.block.end.haskell']]]]
+
+    it "parses pragmas as comments in block comments", ->
+      g = grammarExpect grammar, '{- this is a {-# nested #-} block comment -}'
+      g.toHaveTokens [['{-', ' this is a ', '{-', '# nested #', '-}', ' block comment ', '-}']]
+      g.toHaveScopes [['source.haskell', 'comment.block.haskell']]
+      g.tokenToHaveScopes [[[0, ['punctuation.definition.comment.block.start.haskell']]
+                            [2, ['punctuation.definition.comment.block.start.haskell']]
+                            [4, ['punctuation.definition.comment.block.end.haskell']]
+                            [6, ['punctuation.definition.comment.block.end.haskell']]]]
