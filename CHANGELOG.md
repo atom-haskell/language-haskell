@@ -1,3 +1,8 @@
+## 1.9.4
+* Fix for #82
+* Tests for #82
+* Custom jasmine matchers
+
 ## 1.9.3
 * Tweaks and fixes to scoped operators
 * Fix type operators/arrows conflict
