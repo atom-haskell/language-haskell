@@ -1,3 +1,7 @@
+## 1.9.5
+* Fix for #84
+* Specs for #84
+
 ## 1.9.4
 * Fix for #82
 * Tests for #82
