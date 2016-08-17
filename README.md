@@ -33,22 +33,98 @@ By default, `increaseIndentPattern` has the following value:
   editor:
     increaseIndentPattern: '(((=|\\bdo|\\bwhere|\\bthen|\\belse|\\bof)\\s*)|(\\bif(?!.*\\bthen\\b.*\\belse\\b.*).*))$'
 ```
+
+# Configuring highlighting
+
+Note, you may need to reopen currently opened files (or restart Atom) for your new stylesheet to be applied.
+
+## Module names
+
+`language-haskell` uses `support.other.module.haskell` scope for module names, both in `import` statements and when using qualified identifiers (like `Prelude.foldl`). Your syntax theme might not support this scope. If you want to highlight module names in this case, you can add the following to your stylesheet (Edit → Stylesheet...):
+
+```less
+atom-text-editor::shadow, ide-haskell-panel {
+  .support.other.module.haskell {
+    color: #C0A077; //or whatever color you like
+  }
+}
+```
+
+## Operators and infix function application
+
+`language-haskell` uses `keyword.operator.haskell` scope for operators and `keyword.operator.infix.haskell` for infix function application, e.g.
+
+```haskell
+negate `map` [1..10]
+```
+
+Not all syntax themes support these scopes (almost none support `keyword.operator.infix` particularly)
+
+If you want to higlight operators and infix function applications you can add the following to your stylesheet (Edit → Stylesheet...):
+
+```less
+atom-text-editor::shadow, ide-haskell-panel {
+    .keyword.operator.haskell {
+      color: #CF8C00; // or whatever color you like
+    }
+    .keyword.operator.infix.haskell {
+      color: #CC77AC; // if you want to highlight infix application differently
+    }
+}
+```
+
+## Special `Prelude` treatment
+
+For historical and other reasons (see #85 for discussion), `Prelude` identifiers (functions, types, etc) are treated slightly differently and, depending on your highlighting theme, can be highlighted differently.
+
+Scopes that are used:
+
+* `support.function.prelude.haskell` for functions and values
+* `support.class.prelude.haskell` for types
+* `entity.other.inherited-class.prelude.haskell` for typeclasses
+* `support.tag.prelude.haskell` for type constructors
+
+If you want `Prelude` identifiers highlighted differently from all the rest, you can define different colors for all or some of those, f.ex. by adding something like this to your stylesheet (Edit → Stylesheet...):
+
+```less
+atom-text-editor::shadow, ide-haskell-panel {
+    .support.function.prelude.haskell {
+      color: #56b6c2; // or whatever color you like
+    }
+    .support.tag.prelude.haskell {
+      color: #e9969d;
+    }
+}
+```
+
+If you don't want `Prelude` identifiers highlighted differently, you can override it by adding something like this to your stylesheet (Edit → Stylesheet...):
+
+```less
+atom-text-editor::shadow, ide-haskell-panel {
+  .prelude.haskell {
+    color: inherit;
+  }
+}
+```
+
+Note, you may need to reopen currently opened files (or restart Atom) for your new stylesheet to be applied.
+
 # License
 
 Copyright © 2015 Atom-Haskell
 
-Contributors:
-* Ian D. Bollinger
-* Jared Roesch
-* Jesse Cooke
-* Matthew Griffith
-* mdgriffith
-* Michael Rawson
+Contributors (by number of commits):
 * Nikolay Yakimov
-* Ranjit Jhala
-* Rob Rix
-* Ross Ogilvie
+* Jared Roesch
+* Matthew Griffith
 * samuela
+* Ross Ogilvie
+* Rob Rix
+* Ranjit Jhala
+* Michael Rawson
+* mdgriffith
+* Jesse Cooke
+* Ian D. Bollinger
 
 See the [LICENSE.md][LICENSE] for details.
 
