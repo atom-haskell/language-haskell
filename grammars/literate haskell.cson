@@ -1147,7 +1147,7 @@
                 'include': '#module_name_prefix'
               }
               {
-                'name': 'support.tag.haskell'
+                'name': 'support.tag.prelude.haskell'
                 'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}]))(EQ|GT|Just|LT|Left|Nothing|Right|True|False)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
               }
             ]

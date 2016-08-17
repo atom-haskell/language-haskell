@@ -494,7 +494,7 @@ module.exports=
     captures: 0: patterns: [
       { include: '#module_name_prefix' }
       {
-        name: 'support.tag.haskell'
+        name: 'support.tag.prelude.haskell'
         match: "{lb}(#{prelude.constr.join('|')}){rb}"
       }
     ]
