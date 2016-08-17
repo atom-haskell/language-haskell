@@ -175,9 +175,6 @@ module.exports=
       ,
         include: '#empty_list'
       ,
-        name: 'entity.other.inherited-class.haskell'
-        match: "{lb}(#{prelude.classes.join('|')}){rb}"
-      ,
         name: 'keyword.other.arrow.haskell'
         match: '(?<!{operatorChar})(->|→)(?!{operatorChar})'
       ,
@@ -185,9 +182,6 @@ module.exports=
         match: '(?<!{operatorChar})(=>|⇒)(?!{operatorChar})'
       ,
         include: '#operator'
-      ,
-        name: 'support.class.prelude.haskell'
-        match: "{lb}(#{prelude.types.join('|')}){rb}"
       ,
         name: 'variable.other.generic-type.haskell'
         match: /{lb}{functionName}{rb}/
@@ -451,13 +445,6 @@ module.exports=
           {include: '#assignment_op'}
           {include: '#operator'}
       ]
-  prelude:[
-    name: 'support.tag.haskell'
-    match: "{lb}(#{prelude.constr.join('|')}){rb}"
-  ,
-    name: 'support.function.prelude.haskell'
-    match: "{lb}(#{prelude.funct.join('|')}){rb}"
-  ]
   comma:
     name: 'punctuation.separator.comma.haskell'
     match: /,/
@@ -480,15 +467,37 @@ module.exports=
   identifier:
     match: '{lb}{functionName}{rb}'
     name: 'identifier.haskell'
-    captures: 0: patterns: [ include: '#module_name_prefix' ]
+    captures: 0: patterns: [
+      { include: '#module_name_prefix' }
+      {
+        name: 'support.function.prelude.haskell'
+        match: "{lb}(#{prelude.funct.join('|')}){rb}"
+      }
+    ]
   type_name:
     name: 'entity.name.type.haskell'
     match: /{lb}{className}{rb}/
-    captures: 0: patterns: [ include: '#module_name_prefix' ]
+    captures: 0: patterns: [
+      { include: '#module_name_prefix' }
+      {
+          name: 'entity.other.inherited-class.prelude.haskell'
+          match: "{lb}(#{prelude.classes.join('|')}){rb}"
+      }
+      {
+          name: 'support.class.prelude.haskell'
+          match: "{lb}(#{prelude.types.join('|')}){rb}"
+      }
+    ]
   type_ctor:
     name: 'entity.name.tag.haskell'
     match: /{lb}{className}{rb}/
-    captures: 0: patterns: [ include: '#module_name_prefix' ]
+    captures: 0: patterns: [
+      { include: '#module_name_prefix' }
+      {
+        name: 'support.tag.haskell'
+        match: "{lb}(#{prelude.constr.join('|')}){rb}"
+      }
+    ]
   where:
     match: '{lb}where{rb}'
     name: 'keyword.other.haskell'

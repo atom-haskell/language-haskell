@@ -33,7 +33,6 @@ module.exports =
     { include: '#scoped_type_override' }
     { include: '#function_type_declaration' }
     { include: '#scoped_type' }
-    { include: '#prelude' }
     { include: '#comments' }
     { include: '#infix_op' }
     { include: '#comma' }

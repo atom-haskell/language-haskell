@@ -115,15 +115,15 @@ describe "Language-Haskell", ->
         { value : '=', scopes : [ 'source.haskell', 'keyword.operator.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '(', scopes : [ 'source.haskell' ] }
-        { value : 'putStrLn', scopes : [ 'source.haskell', 'support.function.prelude.haskell' ] }
+        { value : 'putStrLn', scopes : [ 'source.haskell', 'identifier.haskell', 'support.function.prelude.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '::', scopes : [ 'source.haskell', 'keyword.other.double-colon.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
-        { value : 'String', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'support.class.prelude.haskell' ] }
+        { value : 'String', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell', 'support.class.prelude.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
         { value : '->', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'keyword.other.arrow.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
-        { value : 'IO', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'support.class.prelude.haskell' ] }
+        { value : 'IO', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell', 'support.class.prelude.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
         { value : '()', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'constant.language.unit.haskell' ] }
         { value : ')', scopes : [ 'source.haskell' ] }
@@ -135,7 +135,7 @@ describe "Language-Haskell", ->
         { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '::', scopes : [ 'source.haskell', 'keyword.other.double-colon.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
-        { value : 'String', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'support.class.prelude.haskell' ] }
+        { value : 'String', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell', 'support.class.prelude.haskell' ] }
         { value : ')', scopes : [ 'source.haskell' ] }
       ]
 
@@ -148,7 +148,7 @@ describe "Language-Haskell", ->
         { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '=', scopes : [ 'source.haskell', 'keyword.operator.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
-        { value : 'putStrLn', scopes : [ 'source.haskell', 'support.function.prelude.haskell' ] }
+        { value : 'putStrLn', scopes : [ 'source.haskell', 'identifier.haskell', 'support.function.prelude.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '"', scopes : [ 'source.haskell', 'string.quoted.double.haskell', 'punctuation.definition.string.begin.haskell' ] }
         { value : 'Hello World', scopes : [ 'source.haskell', 'string.quoted.double.haskell' ] }
@@ -156,7 +156,7 @@ describe "Language-Haskell", ->
         { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '::', scopes : [ 'source.haskell', 'keyword.other.double-colon.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
-        { value : 'IO', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'support.class.prelude.haskell' ] }
+        { value : 'IO', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell', 'support.class.prelude.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
         { value : '()', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'constant.language.unit.haskell' ] }
       ]
@@ -290,11 +290,11 @@ describe "Language-Haskell", ->
         { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '::', scopes : [ 'source.haskell', 'keyword.other.double-colon.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
-        { value : 'String', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'support.class.prelude.haskell' ] }
+        { value : 'String', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell', 'support.class.prelude.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
         { value : '<-', scopes : [ 'source.haskell', 'keyword.operator.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
-        { value : 'undefined', scopes : [ 'source.haskell', 'support.function.prelude.haskell' ] }
+        { value : 'undefined', scopes : [ 'source.haskell', 'identifier.haskell', 'support.function.prelude.haskell' ] }
         ]
     it "=", ->
       data = "x :: String = undefined"
@@ -305,11 +305,11 @@ describe "Language-Haskell", ->
         { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '::', scopes : [ 'source.haskell', 'keyword.other.double-colon.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
-        { value : 'String', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'support.class.prelude.haskell' ] }
+        { value : 'String', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell', 'support.class.prelude.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
         { value : '=', scopes : [ 'source.haskell', 'keyword.operator.assignment.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
-        { value : 'undefined', scopes : [ 'source.haskell', 'support.function.prelude.haskell' ] }
+        { value : 'undefined', scopes : [ 'source.haskell', 'identifier.haskell', 'support.function.prelude.haskell' ] }
         ]
     it "still works for type-op signatures", ->
       data = "smth :: a <-- b"
