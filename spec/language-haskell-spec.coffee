@@ -378,3 +378,24 @@ describe "Language-Haskell", ->
                             [2, ['punctuation.definition.comment.block.start.haskell']]
                             [4, ['punctuation.definition.comment.block.end.haskell']]
                             [6, ['punctuation.definition.comment.block.end.haskell']]]]
+  describe "instance", ->
+    it "recognizes instances", ->
+      g = grammarExpect grammar, 'instance Class where'
+      g.toHaveTokens [['instance', ' ', 'Class', ' ', 'where']]
+      g.toHaveScopes [['source.haskell', 'meta.declaration.instance.haskell']]
+      g.tokenToHaveScopes [[[1, ['meta.type-signature.haskell']]
+                            [2, ['meta.type-signature.haskell', 'entity.name.type.haskell']]
+                            [3, ['meta.type-signature.haskell']]
+                            [4, ['keyword.other.haskell']]
+                            ]]
+    it "recognizes instance pragmas", ->
+      for p in [ 'OVERLAPS', 'OVERLAPPING', 'OVERLAPPABLE', 'INCOHERENT' ]
+        g = grammarExpect grammar, "instance {-# #{p} #-} Class where"
+        g.toHaveTokens [['instance', ' ', '{-#', ' ', p, ' ', '#-}', ' ', 'Class', ' ', 'where']]
+        g.toHaveScopes [['source.haskell', 'meta.declaration.instance.haskell']]
+        g.tokenToHaveScopes [[[2, ['meta.preprocessor.haskell']]
+                              [3, ['meta.preprocessor.haskell']]
+                              [4, ['meta.preprocessor.haskell', 'keyword.other.preprocessor.haskell']]
+                              [5, ['meta.preprocessor.haskell']]
+                              [6, ['meta.preprocessor.haskell']]
+                              ]]
