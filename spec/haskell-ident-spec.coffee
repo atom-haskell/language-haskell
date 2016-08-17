@@ -1,7 +1,10 @@
+{grammarExpect, customMatchers} = require './util'
+
 describe "Language-Haskell", ->
   grammar = null
 
   beforeEach ->
+    @addMatchers(customMatchers)
     waitsForPromise ->
       atom.packages.activatePackage("language-haskell")
 
@@ -45,3 +48,15 @@ describe "Language-Haskell", ->
         { value : '123', scopes : [ 'source.haskell', 'constant.numeric.decimal.haskell' ] }
         { value : 'numerident', scopes : [ 'source.haskell', 'identifier.haskell' ] }
       ]
+    it 'doesnt confuse identifiers starting with type (issue 84)', ->
+      g = grammarExpect grammar, 'typeIdentifier'
+      g.toHaveTokens [['typeIdentifier']]
+      g.toHaveScopes [['source.haskell', 'identifier.haskell']]
+    it 'doesnt confuse identifiers starting with data', ->
+      g = grammarExpect grammar, 'dataIdentifier'
+      g.toHaveTokens [['dataIdentifier']]
+      g.toHaveScopes [['source.haskell', 'identifier.haskell']]
+    it 'doesnt confuse identifiers starting with newtype', ->
+      g = grammarExpect grammar, 'newtypeIdentifier'
+      g.toHaveTokens [['newtypeIdentifier']]
+      g.toHaveScopes [['source.haskell', 'identifier.haskell']]
