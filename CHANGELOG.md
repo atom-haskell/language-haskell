@@ -1,3 +1,9 @@
+## 1.9.6
+* Move prelude rules to related scopes
+* Use proper right boundary for type alias
+* Add most (hopefully all) recognized GHC pragmas
+* instance spec
+
 ## 1.9.5
 * Fix for #84
 * Specs for #84
