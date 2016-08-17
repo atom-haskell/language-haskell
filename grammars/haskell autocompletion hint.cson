@@ -648,7 +648,7 @@
     'patterns': [
       {
         'name': 'meta.declaration.type.type.haskell'
-        'begin': '^([ \\t]*)(type)'
+        'begin': '^([ \\t]*)(type)\\s+'
         'end': '^(?!\\1[ \\t]|[ \\t]*$)'
         'contentName': 'meta.type-signature.haskell'
         'beginCaptures':

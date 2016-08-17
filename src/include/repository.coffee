@@ -387,7 +387,7 @@ module.exports=
     ]
   type_alias:
     name: 'meta.declaration.type.type.haskell'
-    begin: /{indentBlockStart}(type)/
+    begin: /{indentBlockStart}(type)\s+/
     end: /{indentBlockEnd}/
     contentName: 'meta.type-signature.haskell'
     beginCaptures:
