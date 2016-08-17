@@ -1,3 +1,7 @@
+## 1.9.7
+* Add prelude scope to support.tag
+* Readme update
+
 ## 1.9.6
 * Move prelude rules to related scopes
 * Use proper right boundary for type alias
