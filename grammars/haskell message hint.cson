@@ -232,7 +232,7 @@
         'end': '#-\\}'
         'patterns': [
           {
-            'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}]))(LANGUAGE|OPTIONS_GHC|INCLUDE|WARNING|DEPRECATED|INLINE|NOINLINE|ANN|LINE|RULES|SPECIALIZE|UNPACK|SOURCE)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+            'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}]))(NOTINLINE CONSTRUCTORLIKE|NOINLINE CONSTRUCTORLIKE|INLINE CONSTRUCTORLIKE|SPECIALISE NOTINLINE|SPECIALIZE NOTINLINE|SPECIALISE NOINLINE|SPECIALIZE NOINLINE|NOTINLINE CONLIKE|SPECIALISE INLINE|SPECIALIZE INLINE|NOINLINE CONLIKE|VECTORISE SCALAR|VECTORIZE SCALAR|OPTIONS_HADDOCK|INLINE CONLIKE|OPTIONS_DERIVE|OPTIONS_CATCH|OPTIONS_NHC98|OPTIONS_HUGS|OVERLAPPABLE|NOVECTORISE|NOVECTORIZE|OPTIONS_GHC|OPTIONS_JHC|OPTIONS_YHC|OVERLAPPING|DEPRECATED|INCOHERENT|INLINEABLE|SPECIALISE|SPECIALIZE|GENERATED|INLINABLE|NOTINLINE|VECTORISE|VECTORIZE|CONTRACT|LANGUAGE|NOINLINE|NOUNPACK|OVERLAPS|INCLUDE|MINIMAL|OPTIONS|WARNING|CFILES|INLINE|SOURCE|UNPACK|CTYPE|RULES|CORE|LINE|ANN|SCC)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
             'name': 'keyword.other.preprocessor.haskell'
           }
         ]
@@ -518,15 +518,7 @@
             'name': 'keyword.other.haskell'
         'patterns': [
           {
-            'name': 'meta.preprocessor.haskell'
-            'begin': '\\{-#'
-            'end': '#-\\}'
-            'patterns': [
-              {
-                'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}]))(INCOHERENT|OVERLAP(PABLE|PING|S))(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
-                'name': 'keyword.other.preprocessor.haskell'
-              }
-            ]
+            'include': '#pragma'
           }
           {
             'include': '#type_signature'

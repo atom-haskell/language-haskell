@@ -1,25 +1,5 @@
 prelude = require './prelude'
-
-pragmas = [
-  'LANGUAGE'
-  'OPTIONS_GHC'
-  'INCLUDE'
-  'WARNING'
-  'DEPRECATED'
-  'INLINE'
-  'NOINLINE'
-  'ANN'
-  'LINE'
-  'RULES'
-  'SPECIALIZE'
-  'UNPACK'
-  'SOURCE'
-]
-
-instance_pragmas = [
-  'INCOHERENT'
-  'OVERLAP(PABLE|PING|S)'
-]
+pragmas = require './pragmas'
 
 module.exports=
   block_comment:
@@ -298,15 +278,7 @@ module.exports=
     endCaptures:
       1: name: 'keyword.other.haskell'
     patterns: [
-        {
-          name: 'meta.preprocessor.haskell'
-          begin: /\{-#/
-          end: /#-\}/
-          patterns: [
-              match: "{lb}(#{instance_pragmas.join('|')}){rb}"
-              name: 'keyword.other.preprocessor.haskell'
-          ]
-        }
+        {include: '#pragma'}
         {include: '#type_signature'}
     ]
   foreign_import:
