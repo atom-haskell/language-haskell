@@ -33,10 +33,10 @@ module.exports =
         match: /^> /
         name: 'punctuation.definition.bird-track.haskell'
     ,
-      begin: '(?<!\\\\verb)\\|'
-      end: /\|/
+      match: '(?<!\\\\verb)\\|((:?[^|]|\\|\\|)+)\\|'
       name: 'meta.embedded.text.haskell.latex'
-      patterns: require './haskell-patterns'
+      captures:
+        1: patterns: [include: 'source.haskell']
     ,
       include: 'text.tex.latex'
   ]

@@ -426,7 +426,7 @@ module.exports=
       2: name: 'keyword.other.double-colon.haskell'
       3: {name: 'meta.type-signature.haskell', patterns: [include: '#type_signature']}
   ,
-    match: '(::|∷)(.*?)(?=(?<!{operatorChar})(<-|=|\\|)(?!{operatorChar})|$)'
+    match: '(::|∷)(.*?)(?=(?<!{operatorChar})(<-|=)(?!{operatorChar})|$)'
     captures:
       1: name: 'keyword.other.double-colon.haskell'
       2: {name: 'meta.type-signature.haskell', patterns: [include: '#type_signature']}
