@@ -1,3 +1,6 @@
+## 1.9.9
+* Now really fix #64
+
 ## 1.9.8
 * Fix #64... again
 
