@@ -22,14 +22,21 @@ module.exports =
       return true
     toHaveTokenScopes: (expected) ->
       for [a, e] in zip(@actual, expected)
-        for [{value, scopes}, earr] in zip(a, e)
-          if typeof(earr) is 'string'
-            earr = [earr]
-          if earr.length?
-            [evalue, escopes] = earr
+        e = [].concat (e.map (val) ->
+          if typeof(val) is 'string'
+            return [[val]]
+          else if val?.length?
+            return [val]
           else
-            evalue = Object.keys(earr)[0]
-            escopes = earr[evalue]
+            for k, v of val
+              [k, v]
+          )...
+        ts = a.map ({value}) -> value
+        es = e.map ([tok, scopes]) -> tok
+        for [ta, te] in zip(ts, es) when ta isnt te
+          @message = -> "Expected '#{ta}' to equal '#{te}' : #{JSON.stringify(ts)} ; #{JSON.stringify(es)}"
+          return false
+        for [{value, scopes}, [evalue, escopes]] in zip(a, e)
           unless value is evalue
             @message = -> "Expected \"#{value}\" to equal \"#{evalue}\""
             return false
