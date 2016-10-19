@@ -288,7 +288,9 @@ module.exports=
         captures:
           0: name: 'keyword.other.haskell'
       ,
-        include: '#haskell_toplevel'
+        include: '#function_type_declaration'
+      ,
+        include: '#haskell_expr'
     ]
   regular_import:
     name: 'meta.import.haskell'
