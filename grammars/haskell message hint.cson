@@ -519,6 +519,26 @@
         ]
       }
     ]
+  'deriving_instance_decl':
+    'patterns': [
+      {
+        'name': 'meta.declaration.instance.deriving.haskell'
+        'begin': '^([ \\t]*)(deriving\\s+instance)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'end': '^(?!\\1[ \\t]|[ \\t]*$)'
+        'contentName': 'meta.type-signature.haskell'
+        'beginCaptures':
+          '2':
+            'name': 'keyword.other.haskell'
+        'patterns': [
+          {
+            'include': '#pragma'
+          }
+          {
+            'include': '#type_signature'
+          }
+        ]
+      }
+    ]
   'foreign_import':
     'patterns': [
       {
@@ -538,7 +558,10 @@
                 'name': 'keyword.other.haskell'
           }
           {
-            'include': '#haskell_toplevel'
+            'include': '#function_type_declaration'
+          }
+          {
+            'include': '#haskell_expr'
           }
         ]
       }
@@ -1048,6 +1071,9 @@
       }
       {
         'include': '#instance_decl'
+      }
+      {
+        'include': '#deriving_instance_decl'
       }
       {
         'include': '#foreign_import'

@@ -276,6 +276,17 @@ module.exports=
         {include: '#pragma'}
         {include: '#type_signature'}
     ]
+  deriving_instance_decl:
+    name: 'meta.declaration.instance.deriving.haskell'
+    begin: /{indentBlockStart}(deriving\s+instance){rb}/
+    end: /{indentBlockEnd}/
+    contentName: 'meta.type-signature.haskell'
+    beginCaptures:
+      2: name: 'keyword.other.haskell'
+    patterns: [
+        {include: '#pragma'}
+        {include: '#type_signature'}
+    ]
   foreign_import:
     name: 'meta.foreign.haskell'
     begin: /{indentBlockStart}(foreign)\s+(import|export){rb}/
@@ -550,6 +561,7 @@ module.exports=
     { include: '#liquidhaskell_annotation' }
     { include: '#class_decl' }
     { include: '#instance_decl' }
+    { include: '#deriving_instance_decl' }
     { include: '#foreign_import' }
     { include: '#regular_import' }
     { include: '#data_decl' }
