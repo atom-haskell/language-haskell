@@ -140,6 +140,21 @@ describe "Language-Haskell", ->
         ]
       ]
 
+    it 'doesnt get confused by quoted ::', ->
+      g = grammarExpect(grammar, '("x :: String -> IO ()" ++ var)')
+      g.toHaveScopes [['source.haskell']]
+      g.toHaveTokenScopes [
+        [ "("
+        , "\""
+        , "x :: String -> IO ()" : ['string.quoted.double.haskell']
+        , "\""
+        , " "
+        , "++" : ['keyword.operator.haskell']
+        , " "
+        , "var" : ['identifier.haskell']
+        , ")"
+        ]
+      ]
 
     it 'parses in-line non-parenthesised declarations', ->
       g = grammarExpect(grammar, 'main = putStrLn "Hello World" :: IO ()')
