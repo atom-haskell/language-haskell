@@ -90,6 +90,14 @@ describe "Language-Haskell", ->
         {tokens} = grammar.tokenizeLine(id)
         expect(tokens[0]).toEqual value: id, scopes: ['source.haskell', 'entity.name.tag.haskell']
 
+  describe "identifiers", ->
+    it 'doesnt highlight partial prelude names', ->
+      g = grammarExpect(grammar, "top'n'tail")
+      g.toHaveScopes [['source.haskell', 'identifier.haskell']]
+      g.toHaveTokenScopes [
+        [ "top'n'tail" : [ 'identifier.haskell' ]]
+      ]
+
   describe ':: declarations', ->
     it 'parses newline declarations', ->
       g = grammarExpect(grammar, 'function :: Type -> OtherType')

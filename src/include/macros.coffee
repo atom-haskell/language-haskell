@@ -2,6 +2,7 @@
 
 module.exports=
   identStartCharClass: /[\p{Ll}_\p{Lu}\p{Lt}]/
+  identContCharClass: /[\p{Ll}_\p{Lu}\p{Lt}']/
   identCharClass: /[\p{Ll}_\p{Lu}\p{Lt}\p{Nd}']/
   functionNameOne: /[\p{Ll}_]{identCharClass}*/
   classNameOne: /[\p{Lu}\p{Lt}]{identCharClass}*/
@@ -54,6 +55,6 @@ module.exports=
   indentBlockStart: '{maybeBirdTrack}({indentChar}*)'
   indentBlockEnd: /^(?!\1{indentChar}|{indentChar}*$)/
   maybeBirdTrack: /^/
-  lb: '(?:(?={identStartCharClass})(?<!{identStartCharClass}))'
+  lb: '(?:(?={identStartCharClass})(?<!{identContCharClass}))'
   rb: '(?:(?<={identCharClass})(?!{identCharClass}))'
   b: '(?:{lb}|{rb})'
