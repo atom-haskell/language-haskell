@@ -1,3 +1,6 @@
+## 1.9.11
+* Fix anchoring for identifiers'with'apostrophes in the middle
+
 ## 1.9.10
 * Support for StandaloneDeriving
 * Clean foreign imp/exp
