@@ -1,3 +1,10 @@
+## 1.9.10
+* Support for StandaloneDeriving
+* Clean foreign imp/exp
+* Add spec for quoted '::'
+* Simplify some specs
+* Fix for scoped_type with :: in string
+
 ## 1.9.9
 * Now really fix #64
 
