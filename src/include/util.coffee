@@ -16,4 +16,10 @@ concat = (list...) ->
   r = ''.concat (list.map (i) -> "(?:#{rxToStr i})")...
   "(?:#{r})"
 
-module.exports = {list, listMaybe, concat}
+balanced = (name, left, right, inner, ignore = '') ->
+  if inner?
+    "(?<#{name}>(?:#{inner}|[^#{left}#{right}#{ignore}]|#{left}\\g<#{name}>#{right})*)"
+  else
+    "(?<#{name}>(?:[^#{left}#{right}#{ignore}]|#{left}\\g<#{name}>#{right})*)"
+
+module.exports = {list, listMaybe, concat, balanced}

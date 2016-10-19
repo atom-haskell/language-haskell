@@ -107,36 +107,37 @@ describe "Language-Haskell", ->
         ]
 
     it 'parses in-line parenthesised declarations', ->
-      data = 'main = (putStrLn :: String -> IO ()) ("Hello World" :: String)'
-      {tokens} = grammar.tokenizeLine(data)
-      expect(tokens).toEqual [
-        { value : 'main', scopes : [ 'source.haskell', 'identifier.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell' ] }
-        { value : '=', scopes : [ 'source.haskell', 'keyword.operator.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell' ] }
-        { value : '(', scopes : [ 'source.haskell' ] }
-        { value : 'putStrLn', scopes : [ 'source.haskell', 'identifier.haskell', 'support.function.prelude.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell' ] }
-        { value : '::', scopes : [ 'source.haskell', 'keyword.other.double-colon.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
-        { value : 'String', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell', 'support.class.prelude.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
-        { value : '->', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'keyword.other.arrow.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
-        { value : 'IO', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell', 'support.class.prelude.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
-        { value : '()', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'constant.language.unit.haskell' ] }
-        { value : ')', scopes : [ 'source.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell' ] }
-        { value : '(', scopes : [ 'source.haskell' ] }
-        { value : '"', scopes : [ 'source.haskell', 'string.quoted.double.haskell', 'punctuation.definition.string.begin.haskell' ] }
-        { value : 'Hello World', scopes : [ 'source.haskell', 'string.quoted.double.haskell' ] }
-        { value : '"', scopes : [ 'source.haskell', 'string.quoted.double.haskell', 'punctuation.definition.string.end.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell' ] }
-        { value : '::', scopes : [ 'source.haskell', 'keyword.other.double-colon.haskell' ] }
-        { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
-        { value : 'String', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell', 'support.class.prelude.haskell' ] }
-        { value : ')', scopes : [ 'source.haskell' ] }
+      g = grammarExpect(grammar, 'main = (putStrLn :: String -> IO ()) ("Hello World" :: String)')
+      g.toHaveScopes [['source.haskell']]
+      g.toHaveTokenScopes [
+        [ "main" : ['identifier.haskell']
+        , " "
+        , "=" : ['keyword.operator.haskell']
+        , " "
+        , "("
+        , "putStrLn" : ['support.function.prelude.haskell' ]
+        , " "
+        , "::" : ['keyword.other.double-colon.haskell']
+        , " "
+        , "String" : ['entity.name.type.haskell', 'support.class.prelude.haskell']
+        , " "
+        , "->" : ['keyword.other.arrow.haskell']
+        , " "
+        , "IO" : ['entity.name.type.haskell', 'support.class.prelude.haskell']
+        , " "
+        , "()" : ['constant.language.unit.haskell' ]
+        , ")"
+        , " "
+        , "("
+        , "\""
+        , "Hello World" : ['string.quoted.double.haskell']
+        , "\""
+        , " "
+        , "::" : ['keyword.other.double-colon.haskell']
+        , " "
+        , "String" : ['entity.name.type.haskell', 'support.class.prelude.haskell']
+        , ")"
+        ]
       ]
 
 

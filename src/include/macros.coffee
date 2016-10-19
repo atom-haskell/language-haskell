@@ -31,13 +31,14 @@ module.exports=
   octalChar: /(?:\\o[0-7]+)/
   hexChar: /(?:\\x[0-9A-Fa-f]+)/
   controlChar: /(?:\^[A-Z@\[\]\\\^_])/
-  character: '(?:{basicChar}|{escapeChar}|{octalChar}|{hexChar}|{controlChar})'
+  character: '(?:{basicChar}|{escapeChar}|{octalChar}|{hexChar}|{controlChar}|{operatorChar})'
   functionTypeDeclaration:
     concat list(/{functionName}|{operatorFun}/, /\s*,\s*/),
-      /\s*(::|∷)/
+      /\s*({doubleColonOperator})/
+  doubleColonOperator: '(?<!{operatorChar})(?:::|∷)(?!{operatorChar})'
   ctorTypeDeclaration:
     concat list(/{className}|{operatorFun}/, /\s*,\s*/),
-      /\s*(::|∷)/
+      /\s*({doubleColonOperator})/
   ctorArgs: ///
     (?!deriving)
     (?:

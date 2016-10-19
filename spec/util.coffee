@@ -20,6 +20,25 @@ module.exports =
           @message = -> "Expected #{JSON.stringify(ts)} to equal #{JSON.stringify(e)}"
           return false
       return true
+    toHaveTokenScopes: (expected) ->
+      for [a, e] in zip(@actual, expected)
+        for [{value, scopes}, earr] in zip(a, e)
+          if typeof(earr) is 'string'
+            earr = [earr]
+          if earr.length?
+            [evalue, escopes] = earr
+          else
+            evalue = Object.keys(earr)[0]
+            escopes = earr[evalue]
+          unless value is evalue
+            @message = -> "Expected \"#{value}\" to equal \"#{evalue}\""
+            return false
+          if escopes?
+            for escope in escopes
+              unless _.contains(scopes, escope)
+                @message = -> "Expected \"#{JSON.stringify(scopes)}\" to contain \"#{escope}\""
+                return false
+      return true
     toHaveScopes: (expected) ->
       zip(@actual, expected).every ([a, e]) ->
         a.every ({scopes}) ->

@@ -1,5 +1,6 @@
 prelude = require './prelude'
 pragmas = require './pragmas'
+{ balanced } = require './util'
 
 module.exports=
   block_comment:
@@ -287,7 +288,7 @@ module.exports=
         captures:
           0: name: 'keyword.other.haskell'
       ,
-        include: '$self'
+        include: '#haskell_toplevel'
     ]
   regular_import:
     name: 'meta.import.haskell'
@@ -420,13 +421,13 @@ module.exports=
         ]
       3: name: 'punctuation.definition.string.end.haskell'
   scoped_type: [
-    match: '\\((?<paren>(?:[^()]|\\(\\g<paren>\\))*)(::|∷)(?<paren2>(?:[^()]|\\(\\g<paren2>\\))*)\\)'
+    match: "\\((#{balanced 'paren', '\\(', '\\)'}{doubleColonOperator}#{balanced 'paren2', '\\(', '\\)'})\\)"
     captures:
-      1: patterns: [include: 'source.haskell']
-      2: name: 'keyword.other.double-colon.haskell'
-      3: {name: 'meta.type-signature.haskell', patterns: [include: '#type_signature']}
+      1: patterns: [
+        include: '#haskell_expr'
+      ]
   ,
-    match: '(::|∷)(.*?)(?=(?<!{operatorChar})(<-|=)(?!{operatorChar})|$)'
+    match: '({doubleColonOperator})(.*?)(?=(?<!{operatorChar})(<-|=)(?!{operatorChar})|$)'
     captures:
       1: name: 'keyword.other.double-colon.haskell'
       2: {name: 'meta.type-signature.haskell', patterns: [include: '#type_signature']}
@@ -513,3 +514,51 @@ module.exports=
   attribute_name:
     name: 'entity.other.attribute-name.haskell'
     match: /{lb}{functionName}{rb}/
+  liquidhaskell_annotation:
+    name: 'block.liquidhaskell'
+    contentName: 'block.liquidhaskell.annotation'
+    begin: '\\{-@(?!#)'
+    end: '@-\\}'
+    patterns: [
+        include: '#haskell_expr'
+    ]
+  shebang:
+    name: 'comment.line.shebang.haskell'
+    match: '^\\#\\!.*\\brunhaskell\\b.*$'
+  haskell_expr: [
+    { include: '#infix_function' }
+    { include: '#unit' }
+    { include: '#empty_list' }
+    { include: '#quasi_quotes' }
+    { include: '#keywords' }
+    { include: '#pragma' }
+    { include: '#string' }
+    { include: '#newline_escape' }
+    { include: '#quoted_character' }
+    { include: '#comments' }
+    { include: '#infix_op' }
+    { include: '#comma' }
+    { include: '#lit_num' }
+    { include: '#scoped_type' }
+    { include: '#operator' }
+    { include: '#identifier' }
+    { include: '#type_ctor' }
+  ]
+  haskell_toplevel: [
+    { include: '#liquidhaskell_annotation' }
+    { include: '#class_decl' }
+    { include: '#instance_decl' }
+    { include: '#foreign_import' }
+    { include: '#regular_import' }
+    { include: '#data_decl' }
+    { include: '#type_alias' } # TODO: review stopped here
+    { include: '#c_preprocessor' }
+    { include: '#scoped_type_override' }
+    { include: '#function_type_declaration' }
+    { include: '#haskell_expr' }
+  ]
+  haskell_source: [
+    { include: '#shebang' }
+    { include: '#module_decl' }
+    { include: '#haskell_toplevel' }
+  ]
