@@ -1,3 +1,6 @@
+## 1.9.12
+* Fix module/class/instance end anchors
+
 ## 1.9.11
 * Fix anchoring for identifiers'with'apostrophes in the middle
 
