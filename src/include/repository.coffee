@@ -241,7 +241,7 @@ module.exports=
   module_decl:
     name: 'meta.declaration.module.haskell'
     begin: /{indentBlockStart}(module){rb}/
-    end: /{lb}(where){rb}/
+    end: /{lb}(where){rb}|{indentBlockEnd}/
     beginCaptures:
       2: name: 'keyword.other.haskell'
     endCaptures:
@@ -255,7 +255,7 @@ module.exports=
   class_decl:
     name: 'meta.declaration.class.haskell'
     begin: /{indentBlockStart}(class){rb}/
-    end: /{lb}(where){rb}|$/
+    end: /{lb}(where){rb}|{indentBlockEnd}/
     beginCaptures:
       2: name: 'storage.type.class.haskell'
     endCaptures:
@@ -266,7 +266,7 @@ module.exports=
   instance_decl:
     name: 'meta.declaration.instance.haskell'
     begin: /{indentBlockStart}(instance){rb}/
-    end: /{lb}(where){rb}|$/
+    end: /{lb}(where){rb}|{indentBlockEnd}/
     contentName: 'meta.type-signature.haskell'
     beginCaptures:
       2: name: 'keyword.other.haskell'
