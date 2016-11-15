@@ -1,6 +1,6 @@
 {grammarExpect, customMatchers} = require './util'
 
-describe "Language-Haskell", ->
+describe "Literate Haskell", ->
   grammar = null
 
   beforeEach ->
@@ -47,7 +47,7 @@ describe "Language-Haskell", ->
                       , '||', ' ', 'False', '|', ' should parse correctly']]
       g.toHaveScopes [['text.tex.latex.haskell']]
       g.tokenToHaveScopes [[[1, ['meta.embedded.text.haskell.latex.haskell']]
-                          , [2, ["storage.type.data.haskell"]]
+                          , [2, ["keyword.other.type.haskell"]]
                           , [3, ["meta.type-signature.haskell"]]
                           , [4, ["entity.name.type.haskell"]]
                           , [6,  ['keyword.operator.assignment.haskell']]

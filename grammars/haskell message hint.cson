@@ -486,7 +486,7 @@
         'end': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(where)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))|^(?!\\1[ \\t]|[ \\t]*$)'
         'beginCaptures':
           '2':
-            'name': 'storage.type.class.haskell'
+            'name': 'keyword.other.class.haskell'
         'endCaptures':
           '1':
             'name': 'keyword.other.haskell'
@@ -600,7 +600,7 @@
         'end': '^(?!\\1[ \\t]|[ \\t]*$)'
         'beginCaptures':
           '2':
-            'name': 'storage.type.data.haskell'
+            'name': 'keyword.other.data.haskell'
           '3':
             'name': 'meta.type-signature.haskell'
             'patterns': [
@@ -684,7 +684,7 @@
         'contentName': 'meta.type-signature.haskell'
         'beginCaptures':
           '2':
-            'name': 'storage.type.data.haskell'
+            'name': 'keyword.other.type.haskell'
         'patterns': [
           {
             'include': '#comments'
@@ -711,7 +711,7 @@
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(deriving|where|data|type|newtype)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
       {
-        'name': 'storage.type.haskell'
+        'name': 'keyword.other.haskell'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(data|type|newtype)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
       {

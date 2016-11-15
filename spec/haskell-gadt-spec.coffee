@@ -34,7 +34,7 @@ describe 'GADT', ->
             scopes:[
               'source.haskell',
               'meta.declaration.type.data.haskell',
-              'storage.type.data.haskell'
+              'keyword.other.data.haskell'
             ]
           },
           {

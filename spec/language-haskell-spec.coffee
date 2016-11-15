@@ -191,7 +191,7 @@ describe "Language-Haskell", ->
       g = grammarExpect(grammar, 'data Foo = Foo {bar :: Bar}')
       g.toHaveScopes [['source.haskell', 'meta.declaration.type.data.haskell']]
       g.toHaveTokenScopes [
-        [ 'data' : [ 'storage.type.data.haskell' ]
+        [ 'data' : [ 'keyword.other.data.haskell' ]
         , ' '
         , 'Foo' : [ 'meta.type-signature.haskell', 'entity.name.type.haskell' ]
         , ' ' : [ 'meta.type-signature.haskell' ]
@@ -213,7 +213,7 @@ describe "Language-Haskell", ->
       data = 'data Foo = Foo{bar :: Bar}'
       {tokens} = grammar.tokenizeLine(data)
       expect(tokens).toEqual [
-        { value : 'data', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell', 'storage.type.data.haskell' ] }
+        { value : 'data', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell', 'keyword.other.data.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell' ] }
         { value : 'Foo', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.declaration.type.data.haskell', 'meta.type-signature.haskell' ] }
@@ -239,7 +239,7 @@ describe "Language-Haskell", ->
           "scopes": [
             "source.haskell",
             "meta.declaration.type.data.haskell",
-            "storage.type.data.haskell"
+            "keyword.other.data.haskell"
           ]
         }
         {
