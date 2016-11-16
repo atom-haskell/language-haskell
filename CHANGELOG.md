@@ -1,3 +1,7 @@
+## 1.10.1
+* Add support for type-level string literals
+* Fix flaky control character pattern
+
 ## 1.10.0
 * Change storage.type scope to keyword.other
 * Fix LICENSE date
