@@ -176,6 +176,8 @@ module.exports=
       ,
         include: '#empty_list'
       ,
+        include: '#string'
+      ,
         name: 'keyword.other.arrow.haskell'
         match: '(?<!{operatorChar})(->|→)(?!{operatorChar})'
       ,

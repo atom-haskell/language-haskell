@@ -60,6 +60,11 @@ describe "Language-Haskell", ->
       g.toHaveTokens [["\"", "^", "\\\\", " ", "\""]]
       g.toHaveScopes [['source.haskell', "string.quoted.double.haskell"]]
       g.tokenToHaveScopes [[ [2, ["constant.character.escape.haskell"]] ]]
+    it "Supports type-level string literals", ->
+      g = grammarExpect grammar, ':: "type-level string"'
+      g.toHaveTokens [["::", " ", "\"", "type-level string", "\""]]
+      g.toHaveScopes [['source.haskell']]
+      g.tokenToHaveScopes [[ [3, ["string.quoted.double.haskell"]] ]]
 
 
   describe "backtick function call", ->

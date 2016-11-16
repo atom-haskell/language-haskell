@@ -312,6 +312,9 @@
         'include': '#empty_list'
       }
       {
+        'include': '#string'
+      }
+      {
         'name': 'keyword.other.arrow.haskell'
         'match': '(?<![\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']])(->|→)(?![\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']])'
       }
