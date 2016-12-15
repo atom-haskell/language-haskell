@@ -80,7 +80,7 @@
         'end': '(?!\\G)'
         'beginCaptures':
           '1':
-            'name': 'punctuation.whitespace.comment.leading.haskell'
+            'name': 'punctuation.whitespace.leading.haskell'
         'patterns': [
           {
             'name': 'comment.line.double-dash.haddock.haskell'
@@ -99,7 +99,7 @@
         'end': '(?!\\G)'
         'beginCaptures':
           '1':
-            'name': 'punctuation.whitespace.comment.leading.haskell'
+            'name': 'punctuation.whitespace.leading.haskell'
         'patterns': [
           {
             'name': 'comment.line.double-dash.haskell'
