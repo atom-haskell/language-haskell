@@ -101,6 +101,24 @@
       where
       \t${0:definitions}
       '''
+  'INLINE':
+    'prefix': 'INL'
+    'body': '{-# INLINE ${1:function} #-}'
+  'NOINLINE':
+    'prefix': 'NOINL'
+    'body': '{-# NOINLINE ${1:function} #-}'
+  'INLINABLE':
+    'prefix': 'INLINABLE'
+    'body': '{-# INLINABLE ${1:function} #-}'
+  'LANGUAGE':
+    'prefix': 'LANG'
+    'body': '{-# LANGUAGE ${1:ext} #-}'
+  'UNPACK':
+    'prefix': 'UNPACK'
+    'body': '{-# UNPACK #-} '
+  'OPTIONS_GHC':
+    'prefix': 'GHC'
+    'body': '{-# OPTIONS_GHC -${1:option} #-}'
   ###### UNICODE ######
   'Proportion':
     'prefix': '::'
@@ -155,3 +173,45 @@
   'deriving …':
     'prefix': 'der'
     'body': 'deriving (${0:Class})'
+'.source.cabal':
+  'executable':
+    'prefix': 'exe'
+    'body': '''
+      executable ${1:exename}
+        hs-source-dirs:      ${2:app}
+        main-is:             ${3:Main.hs}
+        ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N
+        build-depends:       base
+                           , ${4:libname}
+        default-language:    Haskell2010
+       '''
+  'library':
+    'prefix': 'lib'
+    'body': '''
+      library
+        hs-source-dirs:      ${1:src}
+        exposed-modules:     ${2:Lib}
+        other-modules:       ${3:Module}
+        build-depends:       base >= 4 && < 5
+        ghc-options:         -Wall
+        default-language:    Haskell2010
+      '''
+  'repository':
+    'prefix': 'repo'
+    'body': '''
+      source-repository head
+        type:     git
+        location: https://github.com/${1:githubuser}/${2:project}
+      '''
+  'test':
+    'prefix': 'test'
+    'body': '''
+      test-suite ${1:test-name}
+        type:                exitcode-stdio-1.0
+        hs-source-dirs:      ${2:test}
+        main-is:             ${3:Spec.hs}
+        build-depends:       base
+                           , ${4:libname}
+        ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N
+        default-language:    Haskell2010
+      '''
