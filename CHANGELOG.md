@@ -1,3 +1,8 @@
+## 1.10.2
+* Remove scope for comment leading whitespace (#99)
+* Add contributing reference in readme
+* Added CONTRIBUTING
+
 ## 1.10.1
 * Add support for type-level string literals
 * Fix flaky control character pattern
