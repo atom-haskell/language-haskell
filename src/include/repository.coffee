@@ -33,8 +33,6 @@ module.exports=
     patterns: [
         begin: /({maybeBirdTrack}[ \t]+)?(?=--+\s+[|^])/
         end: /(?!\G)/
-        beginCaptures:
-          1: name: 'punctuation.whitespace.comment.leading.haskell'
         patterns: [
             name: 'comment.line.double-dash.haddock.haskell'
             begin: /(--+)\s+([|^])/
@@ -51,8 +49,6 @@ module.exports=
         ###
         begin: /({maybeBirdTrack}[ \t]+)?(?=--+(?!{operatorChar}))/
         end: /(?!\G)/
-        beginCaptures:
-          1: name: 'punctuation.whitespace.comment.leading.haskell'
         patterns: [
             name: 'comment.line.double-dash.haskell'
             begin: /--/

@@ -104,9 +104,6 @@
       {
         'begin': '(^[ \\t]+)?(?=--+\\s+[|^])'
         'end': '(?!\\G)'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.whitespace.comment.leading.haskell'
         'patterns': [
           {
             'name': 'comment.line.double-dash.haddock.haskell'
@@ -123,9 +120,6 @@
       {
         'begin': '(^[ \\t]+)?(?=--+(?![\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]))'
         'end': '(?!\\G)'
-        'beginCaptures':
-          '1':
-            'name': 'punctuation.whitespace.comment.leading.haskell'
         'patterns': [
           {
             'name': 'comment.line.double-dash.haskell'
