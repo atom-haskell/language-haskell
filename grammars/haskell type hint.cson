@@ -156,11 +156,8 @@
             'include': '#comma'
           }
           {
-            'include': '#infix_op'
-          }
-          {
             'name': 'meta.other.constructor-list.haskell'
-            'begin': '(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))\\s*\\('
+            'begin': '\\('
             'end': '\\)'
             'patterns': [
               {
@@ -177,6 +174,9 @@
                 'name': 'keyword.operator.wildcard.haskell'
               }
             ]
+          }
+          {
+            'include': '#infix_op'
           }
         ]
       }
