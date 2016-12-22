@@ -132,7 +132,7 @@
     'patterns': [
       {
         'name': 'entity.name.function.infix.haskell'
-        'match': '(?:\\((?:(?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+)\\))'
+        'match': '\\((?:(?!--+\\))[\\p{S}\\p{P}&&[^(),;\\[\\]`{}_"\']]+)\\)'
       }
     ]
   'module_exports':
