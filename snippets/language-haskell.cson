@@ -1,4 +1,4 @@
-'.source.haskell':
+'.source .haskell':
   'Pragma':
     'prefix': '{-#'
     'body': '{-# $1 #-'
@@ -21,7 +21,7 @@
       '''
   '#!/usr/bin/env…':
     'prefix': '#!'
-    'body': '#!/usr/bin/env ${1:runhaskell}\n'
+    'body': '#!/usr/bin/env ${1:runhaskell}'
   'Lambda Expression':
     'prefix': '\\'
     'body': "\\\\${1:pattern} -> ${0:expression}"
@@ -34,7 +34,7 @@
       module Main where
 
       main :: IO ()
-      main = ${0:putStrLn "Hello World"}\n
+      main = ${0:putStrLn "Hello World"}
       '''
   'Right Arrow':
     'prefix': '>'
@@ -87,7 +87,8 @@
     'prefix': 'let'
     'body': '''
       let
-      \t${1:name} = ${2:expression}\n\tin ${0:expression}
+      \t${1:name} = ${2:expression}
+      \tin ${0:expression}
       '''
   'newtype …':
     'prefix': 'new'
@@ -150,26 +151,22 @@
   'Black star':
     'prefix': '*'
     'body': '★' #0x2605
-'.source.haskell:not(.comment)':
+'.source .haskell:not(.comment)':
   'Guard':
     'prefix': '|'
     'body': '| ${1:predicate} = ${0:definition}'
-'.source.haskell .comment':
+'.source .haskell.comment':
   'Haddock Postfix':
     'prefix': '|'
     'body': '| ${0:documentation}'
   'Haddock Prefix':
     'prefix': '^'
     'body': '^ ${0:documentation}'
-'.source.haskell .constant.language.empty-list':
+'.source .haskell.constant.language.empty-list':
   'List Comprehension':
     'prefix': '['
     'body': '[ ${1:expression} | ${2:${3:name} <- ${4:expression}}$0'
-'.source.haskell .meta.type-signature':
-  'Type Constraint':
-    'prefix': '='
-    'body': '(${1:Class}) => $0'
-'.source.haskell .meta.type':
+'.source .haskell.meta.type':
   'deriving …':
     'prefix': 'der'
     'body': 'deriving (${0:Class})'
