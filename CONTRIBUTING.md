@@ -1,4 +1,4 @@
-# *** DO NOT EDIT GRAMMAR CSON FILES DIRECTLY ***
+# ***DO NOT EDIT GRAMMAR CSON FILES DIRECTLY***
 
 Some grammar files are generated based on common template. In particular,
 
