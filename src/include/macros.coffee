@@ -14,15 +14,13 @@ module.exports=
   permits the definition of new operators which can be nearly any string
   of punctuation characters, such as $%^&*.
   ###
-  operator: /{operatorChar}+/
-  operatorFun: ///
+  operator: ///
     (?:
-      \(
-        (?!--+\)) # An operator cannot be composed entirely of `-` characters
-        {operator}
-      \)
+      (?!--+\)) # An operator cannot be composed entirely of `-` characters
+      {operatorChar}+
     )
     ///
+  operatorFun: /(?:\({operator}\))/
   basicChar: /[\ -\[\]-~]/
   escapeChar: ///
     \\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE
