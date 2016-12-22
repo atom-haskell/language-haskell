@@ -109,6 +109,10 @@ atom-text-editor::shadow, ide-haskell-panel {
 
 Note, you may need to reopen currently opened files (or restart Atom) for your new stylesheet to be applied.
 
+# Contributing
+
+See [CONTRIBUTING.md](https://github.com/atom-haskell/language-haskell/blob/master/README.md)
+
 # License
 
 Copyright © 2015 Atom-Haskell
