@@ -1,3 +1,8 @@
+## 1.10.4
+* Make operatorChar PCRE-compatible
+* Add applyEndPatternLast to module_exports
+* Module spec
+
 ## 1.10.3
 * Use snippets parser in snippets spec
 * Add snippets spec
