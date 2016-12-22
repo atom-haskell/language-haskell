@@ -111,7 +111,7 @@ Note, you may need to reopen currently opened files (or restart Atom) for your n
 
 # Contributing
 
-See [CONTRIBUTING.md](https://github.com/atom-haskell/language-haskell/blob/master/README.md)
+See [CONTRIBUTING.md](https://github.com/atom-haskell/language-haskell/blob/master/COONTRIBUTING.md)
 
 # License
 
