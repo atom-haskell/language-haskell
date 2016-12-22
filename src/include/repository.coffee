@@ -82,6 +82,8 @@ module.exports=
       ,
         include: '#comma'
       ,
+        include: '#infix_op'
+      ,
         name: 'meta.other.constructor-list.haskell'
         begin: /{rb}\s*\(/
         end: /\)/
@@ -94,8 +96,6 @@ module.exports=
             name: 'keyword.operator.wildcard.haskell'
           }
         ]
-      ,
-        include: '#infix_op'
     ]
   module_name:
     name: 'support.other.module.haskell'
