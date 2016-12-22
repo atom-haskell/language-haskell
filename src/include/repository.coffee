@@ -68,7 +68,7 @@ module.exports=
       ]
   infix_op:
     name: 'entity.name.function.infix.haskell'
-    match: /\({operator}\)/
+    match: /{operatorFun}/
   module_exports:
     name: 'meta.declaration.exports.haskell'
     begin: /\(/
