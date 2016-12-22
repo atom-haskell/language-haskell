@@ -10,16 +10,18 @@ describe "Snippets", ->
     atom.keymaps.handleKeyboardEvent(event)
 
   sanitize = (body) ->
-    body =
-      body
-      .replace /\\\\/g, '\\'
+    parser = Snippets.getBodyParser()
+    flatten = (obj) ->
+      if typeof(obj) is "string"
+        return obj
+      else
+        return obj.content.map(flatten).join('')
+    parsed =
+      parser.parse(body)
+      .map(flatten)
+      .join('')
       .replace /\t/g, ' '.repeat(editor.getTabLength())
-    replace = (b) ->
-      b.replace /\$\d|\$\{\d\}|\$\{\d:([^}]*)\}/g, (match, p1) -> p1 or ""
-    ob = body
-    while (nb = replace(ob)) isnt ob
-      ob = nb
-    return ob
+    return parsed
 
   universalTests = ->
     it 'triggers snippets', ->
