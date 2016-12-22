@@ -73,6 +73,7 @@ module.exports=
     name: 'meta.declaration.exports.haskell'
     begin: /\(/
     end: /\)/
+    applyEndPatternLast: 1
     patterns: [
         include: '#comments'
       ,
