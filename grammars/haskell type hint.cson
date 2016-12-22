@@ -157,7 +157,7 @@
           }
           {
             'name': 'meta.other.constructor-list.haskell'
-            'begin': '\\('
+            'begin': '(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))\\s*\\('
             'end': '\\)'
             'patterns': [
               {

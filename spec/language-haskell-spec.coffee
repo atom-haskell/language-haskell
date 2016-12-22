@@ -455,16 +455,24 @@ describe "Language-Haskell", ->
                             [5, ['meta.declaration.exports.haskell', 'entity.name.function.haskell']]
                             [8, ['meta.declaration.exports.haskell', 'entity.name.function.haskell']]
                             ]]
+    it "understands module declarations with operator exports", ->
+      g = grammarExpect grammar, 'module Module ((<|>), export2) where'
+      g.toHaveTokens [['module', ' ', 'Module', ' ', '(', '(<|>)', ',', ' ', 'export2', ')', ' ', 'where']]
+      g.toHaveScopes [['source.haskell', 'meta.declaration.module.haskell']]
+      g.tokenToHaveScopes [[[2, ['support.other.module.haskell']]
+                            [5, ['meta.declaration.exports.haskell', 'entity.name.function.infix.haskell']]
+                            [8, ['meta.declaration.exports.haskell', 'entity.name.function.haskell']]
+                            ]]
     it "understands module declarations with export lists", ->
       g = grammarExpect grammar, 'module Module (export1 (..), export2 (Something)) where'
-      g.toHaveTokens [['module', ' ', 'Module', ' ', '(', 'export1', ' ', '(' , '..', ')',
-                       ',', ' ', 'export2', ' ', '(', 'Something', ')', ')', ' ', 'where']]
+      g.toHaveTokens [['module', ' ', 'Module', ' ', '(', 'export1', ' (' , '..', ')',
+                       ',', ' ', 'export2', ' (', 'Something', ')', ')', ' ', 'where']]
       g.toHaveScopes [['source.haskell', 'meta.declaration.module.haskell']]
       g.tokenToHaveScopes [[[2, ['support.other.module.haskell']]
                             [5, ['meta.declaration.exports.haskell', 'entity.name.function.haskell']]
-                            [8, ['meta.declaration.exports.haskell', 'meta.other.constructor-list.haskell',
+                            [7, ['meta.declaration.exports.haskell', 'meta.other.constructor-list.haskell',
                                  'keyword.operator.wildcard.haskell']]
-                            [12, ['meta.declaration.exports.haskell', 'entity.name.function.haskell']]
-                            [15, ['meta.declaration.exports.haskell', 'meta.other.constructor-list.haskell',
+                            [11, ['meta.declaration.exports.haskell', 'entity.name.function.haskell']]
+                            [13, ['meta.declaration.exports.haskell', 'meta.other.constructor-list.haskell',
                                   'entity.name.tag.haskell']]
                             ]]

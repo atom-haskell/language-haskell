@@ -83,7 +83,7 @@ module.exports=
         include: '#comma'
       ,
         name: 'meta.other.constructor-list.haskell'
-        begin: /\(/
+        begin: /{rb}\s*\(/
         end: /\)/
         patterns: [
           { include: '#type_ctor' }
