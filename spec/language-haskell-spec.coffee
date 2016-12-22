@@ -327,7 +327,6 @@ describe "Language-Haskell", ->
     it "<-", ->
       data = "x :: String <- undefined"
       {tokens} = grammar.tokenizeLine(data)
-      console.log JSON.stringify(tokens, undefined, 2)
       expect(tokens).toEqual [
         { value : 'x', scopes : [ 'source.haskell', 'identifier.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
