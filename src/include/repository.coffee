@@ -476,30 +476,37 @@ module.exports=
   identifier:
     match: '{lb}{functionName}{rb}'
     name: 'identifier.haskell'
-    captures: 0: patterns:
-      [ { include: '#module_name_prefix' } ]
-      .concat prelude.funct.map (f) ->
-        name: "support.function.prelude.#{f.toLowerCase()}.haskell"
-        match: "{lb}(#{f}){rb}"
+    captures: 0: patterns: [
+      { include: '#module_name_prefix' }
+      {
+        name: 'support.function.prelude.haskell'
+        match: "{lb}(#{prelude.funct.join('|')}){rb}"
+      }
+    ]
   type_name:
     name: 'entity.name.type.haskell'
     match: /{lb}{className}{rb}/
-    captures: 0: patterns:
-      [ { include: '#module_name_prefix' } ]
-      .concat prelude.classes.map (f) ->
-        name: "entity.other.inherited-class.prelude.#{f.toLowerCase()}.haskell"
-        match: "{lb}(#{f}){rb}"
-      .concat prelude.types.map (f) ->
-        name: "support.class.prelude.#{f.toLowerCase()}.haskell"
-        match: "{lb}(#{f}){rb}"
+    captures: 0: patterns: [
+      { include: '#module_name_prefix' }
+      {
+          name: 'entity.other.inherited-class.prelude.haskell'
+          match: "{lb}(#{prelude.classes.join('|')}){rb}"
+      }
+      {
+          name: 'support.class.prelude.haskell'
+          match: "{lb}(#{prelude.types.join('|')}){rb}"
+      }
+    ]
   type_ctor:
     name: 'entity.name.tag.haskell'
     match: /{lb}{className}{rb}/
-    captures: 0: patterns:
-      [ { include: '#module_name_prefix' } ]
-      .concat prelude.constr.map (f) ->
-        name: "support.tag.prelude.#{f.toLowerCase()}.haskell"
-        match: "{lb}(#{f}){rb}"
+    captures: 0: patterns: [
+      { include: '#module_name_prefix' }
+      {
+        name: 'support.tag.prelude.haskell'
+        match: "{lb}(#{prelude.constr.join('|')}){rb}"
+      }
+    ]
   where:
     match: '{lb}where{rb}'
     name: 'keyword.other.haskell'
