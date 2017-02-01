@@ -67,9 +67,9 @@ describe "Snippets", ->
     waitsForPromise ->
       atom.packages.activatePackage("snippets")
       .then (snippets) ->
-        Snippets = snippets.mainModule
-      .then ->
+        snippets.activateNow()
         new Promise (resolve) ->
+          Snippets = snippets.mainModule
           Snippets.onDidLoadSnippets -> resolve()
 
   describe 'haskell', ->
