@@ -1,3 +1,6 @@
+## 1.10.5
+* Add cpphs extension to Haskell grammar
+
 ## 1.10.4
 * Make operatorChar PCRE-compatible
 * Add applyEndPatternLast to module_exports
