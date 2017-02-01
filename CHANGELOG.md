@@ -1,3 +1,7 @@
+## 1.10.6
+* Add mdo, rec, proc keywords
+* Add travis tests
+
 ## 1.10.5
 * Add cpphs extension to Haskell grammar
 
