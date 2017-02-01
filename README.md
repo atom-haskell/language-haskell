@@ -43,10 +43,15 @@ Note, you may need to reopen currently opened files (or restart Atom) for your n
 `language-haskell` uses `support.other.module.haskell` scope for module names, both in `import` statements and when using qualified identifiers (like `Prelude.foldl`). Your syntax theme might not support this scope. If you want to highlight module names in this case, you can add the following to your stylesheet (Edit → Stylesheet...):
 
 ```less
+// pre Atom 1.13
 atom-text-editor::shadow, ide-haskell-panel {
   .support.other.module.haskell {
     color: #C0A077; //or whatever color you like
   }
+}
+// post Atom 1.13
+.syntax--support.syntax--other.syntax--module.syntax--haskell {
+  color: #C0A077; //or whatever color you like
 }
 ```
 
@@ -63,6 +68,7 @@ Not all syntax themes support these scopes (almost none support `keyword.operato
 If you want to higlight operators and infix function applications you can add the following to your stylesheet (Edit → Stylesheet...):
 
 ```less
+// pre Atom 1.13
 atom-text-editor::shadow, ide-haskell-panel {
     .keyword.operator.haskell {
       color: #CF8C00; // or whatever color you like
@@ -70,6 +76,13 @@ atom-text-editor::shadow, ide-haskell-panel {
     .keyword.operator.infix.haskell {
       color: #CC77AC; // if you want to highlight infix application differently
     }
+}
+// post Atom 1.13
+.syntax--keyword.syntax--operator.syntax--haskell {
+  color: #CF8C00; // or whatever color you like
+}
+.syntax--keyword.syntax--operator.syntax--infix.syntax--haskell {
+  color: #CC77AC; // if you want to highlight infix application differently
 }
 ```
 
@@ -87,6 +100,7 @@ Scopes that are used:
 If you want `Prelude` identifiers highlighted differently from all the rest, you can define different colors for all or some of those, f.ex. by adding something like this to your stylesheet (Edit → Stylesheet...):
 
 ```less
+// pre Atom 1.13
 atom-text-editor::shadow, ide-haskell-panel {
     .support.function.prelude.haskell {
       color: #56b6c2; // or whatever color you like
@@ -95,19 +109,58 @@ atom-text-editor::shadow, ide-haskell-panel {
       color: #e9969d;
     }
 }
+// post Atom 1.13
+.syntax--support.syntax--function.syntax--prelude.syntax--haskell {
+  color: #56b6c2; // or whatever color you like
+}
+.syntax--support.syntax--tag.syntax--prelude.syntax--haskell {
+  color: #e9969d;
+}
 ```
 
 If you don't want `Prelude` identifiers highlighted differently, you can override it by adding something like this to your stylesheet (Edit → Stylesheet...):
 
 ```less
+// pre Atom 1.13
 atom-text-editor::shadow, ide-haskell-panel {
   .prelude.haskell {
     color: inherit;
   }
 }
+// post Atom 1.13
+.syntax--prelude.syntax--haskell {
+  color: inherit;
+}
 ```
 
 Note, you may need to reopen currently opened files (or restart Atom) for your new stylesheet to be applied.
+
+### Different highlighting for different Prelude identifiers
+
+Since language-haskell v1.12.0 every Prelude identifier has a scope corresponding to its name added, so you can add special highlighting to particular identifiers only.
+
+For example, if you would like to highlight `undefined` and `error` in angry bold red, you can add something like this to your stylesheet:
+
+```less
+// pre Atom 1.13
+atom-text-editor::shadow, ide-haskell-panel {
+  .support.function.prelude.haskell {
+    &.undefined, &.error {
+      color: red;
+      font-weight: bold;
+    }
+  }
+}
+// post Atom 1.13
+.syntax--support.syntax--function.syntax--prelude.syntax--haskell {
+  &.syntax--undefined, &.syntax--error {
+    color: red;
+    font-weight: bold;
+  }
+}
+```
+
+All identifier scopes are case-sensitive, so, if you want to highlight, f.ex. `IO`, you would use `support.class.prelude.IO.haskell` scope.
 
 # Contributing
 
