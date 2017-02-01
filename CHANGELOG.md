@@ -1,3 +1,8 @@
+## 1.12.0
+* Readme update
+* Better handling of prelude identifiers
+* Revert "Add scope tags to Prelude identifiers"
+
 ## 1.11.0
 * Finally fix snippets dependency (hopefully)
 * Install snippets package in travis tests
