@@ -65,11 +65,12 @@ describe "Snippets", ->
     waitsForPromise ->
       atom.packages.activatePackage("language-haskell")
     waitsForPromise ->
-      atom.packages.activatePackage("snippets")
-      .then (snippets) ->
-        snippets.activateNow()
+      snippets = atom.packages.getLoadedPackage('snippets') ? \
+        atom.packages.loadPackage("#{process.env.HOME}/.atom/packages/snippets")
+      snippets.activate()
+      .then ->
+        Snippets = snippets.mainModule
         new Promise (resolve) ->
-          Snippets = snippets.mainModule
           Snippets.onDidLoadSnippets -> resolve()
 
   describe 'haskell', ->
