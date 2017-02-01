@@ -163,7 +163,7 @@ describe 'Record', ->
             "meta.record-field.type-declaration.haskell",
             "meta.type-signature.haskell",
             'entity.name.type.haskell',
-            "support.class.prelude.string.haskell"
+            "support.class.prelude.String.haskell"
           ]
         },
         {
@@ -236,7 +236,7 @@ describe 'Record', ->
             "meta.record-field.type-declaration.haskell",
             "meta.type-signature.haskell",
             'entity.name.type.haskell',
-            "support.class.prelude.string.haskell"
+            "support.class.prelude.String.haskell"
           ]
         },
         {
@@ -309,7 +309,7 @@ describe 'Record', ->
             "meta.record-field.type-declaration.haskell",
             "meta.type-signature.haskell",
             'entity.name.type.haskell',
-            "support.class.prelude.int.haskell"
+            "support.class.prelude.Int.haskell"
           ]
         }
       ],
@@ -520,7 +520,7 @@ describe 'Record', ->
                   "meta.record-field.type-declaration.haskell",
                   "meta.type-signature.haskell",
                   'entity.name.type.haskell',
-                  "support.class.prelude.string.haskell"
+                  "support.class.prelude.String.haskell"
                 ]
               },
               {
@@ -673,7 +673,7 @@ describe 'Record', ->
                   "meta.record-field.type-declaration.haskell",
                   "meta.type-signature.haskell",
                   'entity.name.type.haskell',
-                  "support.class.prelude.int.haskell"
+                  "support.class.prelude.Int.haskell"
                 ]
               },
               {
@@ -938,7 +938,7 @@ describe 'Record', ->
               "meta.record-field.type-declaration.haskell",
               "meta.type-signature.haskell",
               'entity.name.type.haskell',
-              "support.class.prelude.string.haskell"
+              "support.class.prelude.String.haskell"
             ]
           }
         ],

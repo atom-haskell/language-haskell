@@ -140,15 +140,15 @@ describe "Language-Haskell", ->
         , "=" : ['keyword.operator.haskell']
         , " "
         , "("
-        , "putStrLn" : ['support.function.prelude.putstrln.haskell' ]
+        , "putStrLn" : ['support.function.prelude.putStrLn.haskell' ]
         , " "
         , "::" : ['keyword.other.double-colon.haskell']
         , " "
-        , "String" : ['entity.name.type.haskell', 'support.class.prelude.string.haskell']
+        , "String" : ['entity.name.type.haskell', 'support.class.prelude.String.haskell']
         , " "
         , "->" : ['keyword.other.arrow.haskell']
         , " "
-        , "IO" : ['entity.name.type.haskell', 'support.class.prelude.io.haskell']
+        , "IO" : ['entity.name.type.haskell', 'support.class.prelude.IO.haskell']
         , " "
         , "()" : ['constant.language.unit.haskell' ]
         , ")"
@@ -160,7 +160,7 @@ describe "Language-Haskell", ->
         , " "
         , "::" : ['keyword.other.double-colon.haskell']
         , " "
-        , "String" : ['entity.name.type.haskell', 'support.class.prelude.string.haskell']
+        , "String" : ['entity.name.type.haskell', 'support.class.prelude.String.haskell']
         , ")"
         ]
       ]
@@ -189,7 +189,7 @@ describe "Language-Haskell", ->
         , ' '
         , '=' : [ 'keyword.operator.haskell' ]
         , ' '
-        , 'putStrLn' : [ 'identifier.haskell', 'support.function.prelude.putstrln.haskell' ]
+        , 'putStrLn' : [ 'identifier.haskell', 'support.function.prelude.putStrLn.haskell' ]
         , ' '
         , {'"' : [ 'string.quoted.double.haskell', 'punctuation.definition.string.begin.haskell' ]}
         , {'Hello World' : [ 'string.quoted.double.haskell' ]}
@@ -197,7 +197,7 @@ describe "Language-Haskell", ->
         , ' '
         , '::' : [ 'keyword.other.double-colon.haskell' ]
         , ' '
-        , 'IO' : [ 'meta.type-signature.haskell', 'entity.name.type.haskell', 'support.class.prelude.io.haskell' ]
+        , 'IO' : [ 'meta.type-signature.haskell', 'entity.name.type.haskell', 'support.class.prelude.IO.haskell' ]
         , ' '
         , '()' : [ 'meta.type-signature.haskell', 'constant.language.unit.haskell' ]
         ]
@@ -332,7 +332,7 @@ describe "Language-Haskell", ->
         { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '::', scopes : [ 'source.haskell', 'keyword.other.double-colon.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
-        { value : 'String', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell', 'support.class.prelude.string.haskell' ] }
+        { value : 'String', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell', 'support.class.prelude.String.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
         { value : '<-', scopes : [ 'source.haskell', 'keyword.operator.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }
@@ -347,7 +347,7 @@ describe "Language-Haskell", ->
         { value : ' ', scopes : [ 'source.haskell' ] }
         { value : '::', scopes : [ 'source.haskell', 'keyword.other.double-colon.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
-        { value : 'String', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell', 'support.class.prelude.string.haskell' ] }
+        { value : 'String', scopes : [ 'source.haskell', 'meta.type-signature.haskell', 'entity.name.type.haskell', 'support.class.prelude.String.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell', 'meta.type-signature.haskell' ] }
         { value : '=', scopes : [ 'source.haskell', 'keyword.operator.assignment.haskell' ] }
         { value : ' ', scopes : [ 'source.haskell' ] }

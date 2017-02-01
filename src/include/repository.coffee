@@ -479,7 +479,7 @@ module.exports=
     captures: 0: patterns: [
       { include: '#module_name_prefix' }
       {
-        name: 'support.function.prelude.haskell'
+        name: 'support.function.prelude.$1.haskell'
         match: "{lb}(#{prelude.funct.join('|')}){rb}"
       }
     ]
@@ -489,11 +489,11 @@ module.exports=
     captures: 0: patterns: [
       { include: '#module_name_prefix' }
       {
-          name: 'entity.other.inherited-class.prelude.haskell'
+          name: 'entity.other.inherited-class.prelude.$1.haskell'
           match: "{lb}(#{prelude.classes.join('|')}){rb}"
       }
       {
-          name: 'support.class.prelude.haskell'
+          name: 'support.class.prelude.$1.haskell'
           match: "{lb}(#{prelude.types.join('|')}){rb}"
       }
     ]
@@ -503,7 +503,7 @@ module.exports=
     captures: 0: patterns: [
       { include: '#module_name_prefix' }
       {
-        name: 'support.tag.prelude.haskell'
+        name: 'support.tag.prelude.$1.haskell'
         match: "{lb}(#{prelude.constr.join('|')}){rb}"
       }
     ]
