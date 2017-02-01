@@ -3,7 +3,7 @@ _ = require 'underscore-plus'
 
 makeGrammar "grammars/haskell.cson",
   name: 'Haskell'
-  fileTypes: [ 'hs' ]
+  fileTypes: [ 'hs', 'cpphs' ]
   firstLineMatch: '^\\#\\!.*\\brunhaskell\\b'
   scopeName: 'source.haskell'
 
