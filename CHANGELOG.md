@@ -1,3 +1,9 @@
+## 1.11.0
+* Finally fix snippets dependency (hopefully)
+* Install snippets package in travis tests
+* Specs update
+* Add scope tags to Prelude identifiers
+
 ## 1.10.6
 * Add mdo, rec, proc keywords
 * Add travis tests
