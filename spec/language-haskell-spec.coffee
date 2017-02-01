@@ -75,7 +75,7 @@ describe "Language-Haskell", ->
       expect(tokens[2]).toEqual value: '`', scopes: ['source.haskell', 'keyword.operator.function.infix.haskell', 'punctuation.definition.entity.haskell']
 
   describe "keywords", ->
-    controlKeywords = ['case', 'of', 'in', 'where', 'if', 'then', 'else']
+    controlKeywords = ['do', 'if', 'then', 'else', 'case', 'of', 'let', 'in', 'default', 'mdo', 'rec', 'proc']
 
     for scope, keyword of controlKeywords
       it "tokenizes #{keyword} as a keyword", ->

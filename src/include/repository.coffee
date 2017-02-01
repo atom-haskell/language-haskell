@@ -389,7 +389,7 @@ module.exports=
     match: /{lb}infix[lr]?{rb}/
   ,
     name: 'keyword.control.haskell'
-    match: /{lb}(do|if|then|else|case|of|let|in|default){rb}/
+    match: /{lb}(do|if|then|else|case|of|let|in|default|mdo|rec|proc){rb}/
   ]
   c_preprocessor:
     name: 'meta.preprocessor.c'
