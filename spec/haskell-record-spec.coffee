@@ -163,7 +163,7 @@ describe 'Record', ->
             "meta.record-field.type-declaration.haskell",
             "meta.type-signature.haskell",
             'entity.name.type.haskell',
-            "support.class.prelude.haskell"
+            "support.class.prelude.string.haskell"
           ]
         },
         {
@@ -236,7 +236,7 @@ describe 'Record', ->
             "meta.record-field.type-declaration.haskell",
             "meta.type-signature.haskell",
             'entity.name.type.haskell',
-            "support.class.prelude.haskell"
+            "support.class.prelude.string.haskell"
           ]
         },
         {
@@ -309,7 +309,7 @@ describe 'Record', ->
             "meta.record-field.type-declaration.haskell",
             "meta.type-signature.haskell",
             'entity.name.type.haskell',
-            "support.class.prelude.haskell"
+            "support.class.prelude.int.haskell"
           ]
         }
       ],
@@ -520,7 +520,7 @@ describe 'Record', ->
                   "meta.record-field.type-declaration.haskell",
                   "meta.type-signature.haskell",
                   'entity.name.type.haskell',
-                  "support.class.prelude.haskell"
+                  "support.class.prelude.string.haskell"
                 ]
               },
               {
@@ -673,7 +673,7 @@ describe 'Record', ->
                   "meta.record-field.type-declaration.haskell",
                   "meta.type-signature.haskell",
                   'entity.name.type.haskell',
-                  "support.class.prelude.haskell"
+                  "support.class.prelude.int.haskell"
                 ]
               },
               {
@@ -938,7 +938,7 @@ describe 'Record', ->
               "meta.record-field.type-declaration.haskell",
               "meta.type-signature.haskell",
               'entity.name.type.haskell',
-              "support.class.prelude.haskell"
+              "support.class.prelude.string.haskell"
             ]
           }
         ],

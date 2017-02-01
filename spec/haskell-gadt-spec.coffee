@@ -139,7 +139,7 @@ describe 'GADT', ->
               'meta.ctor.type-declaration.haskell',
               'meta.type-signature.haskell',
               'entity.name.type.haskell',
-              'support.class.prelude.haskell'
+              'support.class.prelude.int.haskell'
             ]
           },
           {
@@ -197,7 +197,7 @@ describe 'GADT', ->
               'meta.ctor.type-declaration.haskell',
               'meta.type-signature.haskell',
               'entity.name.type.haskell',
-              'support.class.prelude.haskell'
+              'support.class.prelude.int.haskell'
             ]
           }
         ]]
