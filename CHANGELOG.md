@@ -1,3 +1,6 @@
+## 1.12.1
+* Fix comments in imports (now before ())
+
 ## 1.12.0
 * Readme update
 * Better handling of prelude identifiers
