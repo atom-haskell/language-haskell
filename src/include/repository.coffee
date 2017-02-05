@@ -301,6 +301,8 @@ module.exports=
         include: '#function_type_declaration'
       ,
         include: '#haskell_expr'
+      ,
+        include: '#comments'
     ]
   regular_import:
     name: 'meta.import.haskell'
@@ -316,6 +318,8 @@ module.exports=
         match: /{lb}(qualified|as|hiding){rb}/
         captures:
           1: name: 'keyword.other.haskell'
+      ,
+        include: '#comments'
     ]
   data_decl:
     name: 'meta.declaration.type.data.haskell'

@@ -540,6 +540,9 @@
           {
             'include': '#haskell_expr'
           }
+          {
+            'include': '#comments'
+          }
         ]
       }
     ]
@@ -564,6 +567,9 @@
             'captures':
               '1':
                 'name': 'keyword.other.haskell'
+          }
+          {
+            'include': '#comments'
           }
         ]
       }

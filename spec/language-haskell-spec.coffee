@@ -476,3 +476,13 @@ describe "Language-Haskell", ->
                             [13, ['meta.declaration.exports.haskell', 'meta.other.constructor-list.haskell',
                                   'entity.name.tag.haskell']]
                             ]]
+  describe "regression test for comments after module name in imports", ->
+    it "parses comments after module names", ->
+      g = grammarExpect grammar, 'import Module -- comment'
+      g.toHaveTokens [['import', ' ', 'Module', ' ', '--', ' comment', '']]
+      g.toHaveScopes [['source.haskell', 'meta.import.haskell']]
+      g.tokenToHaveScopes [[[2, ['support.other.module.haskell']]
+                            [4, ['comment.line.double-dash.haskell', 'punctuation.definition.comment.haskell']]
+                            [5, ['comment.line.double-dash.haskell']]
+                            [6, ['comment.line.double-dash.haskell']]
+                            ]]
