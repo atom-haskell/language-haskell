@@ -1,5 +1,7 @@
 # Haskell support in Atom
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/atom-haskell/language-haskell.svg)](https://greenkeeper.io/)
+
 Adds syntax highlighting and snippets to Haskell files in Atom.
 
 Grammars:
