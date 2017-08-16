@@ -1,3 +1,6 @@
+## 1.13.0
+* Added hsig grammar; fixed operatorChar in lhs
+
 ## 1.12.1
 * Fix comments in imports (now before ())
 
