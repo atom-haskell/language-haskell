@@ -1,3 +1,6 @@
+## 1.13.1
+* Added comments to hsig top level
+
 ## 1.13.0
 * Added hsig grammar; fixed operatorChar in lhs
 
