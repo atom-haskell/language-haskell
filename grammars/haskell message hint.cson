@@ -476,6 +476,34 @@
         ]
       }
     ]
+  'hsig_decl':
+    'patterns': [
+      {
+        'name': 'meta.declaration.module.haskell'
+        'begin': '^([ \\t]*)(signature)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'end': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(where)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))|^(?!\\1[ \\t]|[ \\t]*$)'
+        'beginCaptures':
+          '2':
+            'name': 'keyword.other.haskell'
+        'endCaptures':
+          '1':
+            'name': 'keyword.other.haskell'
+        'patterns': [
+          {
+            'include': '#comments'
+          }
+          {
+            'include': '#module_name'
+          }
+          {
+            'include': '#module_exports'
+          }
+          {
+            'include': '#invalid'
+          }
+        ]
+      }
+    ]
   'class_decl':
     'patterns': [
       {
@@ -1066,11 +1094,8 @@
         'include': '#type_ctor'
       }
     ]
-  'haskell_toplevel':
+  'common_toplevel':
     'patterns': [
-      {
-        'include': '#liquidhaskell_annotation'
-      }
       {
         'include': '#class_decl'
       }
@@ -1095,14 +1120,38 @@
       {
         'include': '#c_preprocessor'
       }
+    ]
+  'function_type_declaration_with_scoped_type':
+    'patterns': [
       {
         'include': '#scoped_type_override'
       }
       {
         'include': '#function_type_declaration'
       }
+    ]
+  'haskell_toplevel':
+    'patterns': [
+      {
+        'include': '#liquidhaskell_annotation'
+      }
+      {
+        'include': '#common_toplevel'
+      }
+      {
+        'include': '#function_type_declaration_with_scoped_type'
+      }
       {
         'include': '#haskell_expr'
+      }
+    ]
+  'hsig_toplevel':
+    'patterns': [
+      {
+        'include': '#common_toplevel'
+      }
+      {
+        'include': '#function_type_declaration'
       }
     ]
   'haskell_source':
@@ -1115,5 +1164,14 @@
       }
       {
         'include': '#haskell_toplevel'
+      }
+    ]
+  'hsig_source':
+    'patterns': [
+      {
+        'include': '#hsig_decl'
+      }
+      {
+        'include': '#hsig_toplevel'
       }
     ]

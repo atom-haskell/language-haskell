@@ -11,6 +11,15 @@ makeGrammar "grammars/haskell.cson",
   repository: include 'repository'
   patterns: include 'haskell-patterns'
 
+makeGrammar "grammars/module signature.cson",
+  name: 'Haskell Module Signature'
+  fileTypes: [ 'hsig' ]
+  scopeName: 'source.hsig'
+
+  macros: include('macros')
+  repository: include 'repository'
+  patterns: include 'hsig-patterns'
+
 makeGrammar "grammars/haskell autocompletion hint.cson",
   # name: 'Haskell Autocompletion Hint'
   fileTypes: []
@@ -71,6 +80,6 @@ makeGrammar "grammars/literate haskell.cson",
     maybeBirdTrack: /^(?:>|<) /
     indentBlockEnd:
       /^(?!(?:>|<) \1{indentChar}|(?:>|<) {indentChar}*$)|^(?!(?:>|<) )/
-    operatorChar: /[\p{S}\p{P}&&[^(),;\[\]`{}_"'\|]]/
+    operatorChar: '(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'\\|]))'
   patterns: include 'lhs-patterns'
   repository: include 'repository'

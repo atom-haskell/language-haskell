@@ -1,5 +1,8 @@
-'fileTypes': []
-'scopeName': 'hint.haskell'
+'fileTypes': [
+  'hsig'
+]
+'name': 'Haskell Module Signature'
+'scopeName': 'source.hsig'
 'macros':
   'identStartCharClass': '[\\p{Ll}_\\p{Lu}\\p{Lt}]'
   'identContCharClass': '[\\p{Ll}_\\p{Lu}\\p{Lt}\']'
@@ -31,28 +34,20 @@
   'lb': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))'
   'rb': '(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
   'b': '(?:(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))|(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])))'
-'patterns': [
-  {
-    'include': '#function_type_declaration'
-  }
-  {
-    'include': '#ctor_type_declaration'
-  }
-]
 'repository':
   'block_comment':
     'patterns': [
       {
-        'name': 'comment.block.haddock.haskell'
+        'name': 'comment.block.haddock.haskell.hsig'
         'begin': '\\{-\\s*[|^]'
         'end': '-\\}'
         'applyEndPatternLast': 1
         'beginCaptures':
           '0':
-            'name': 'punctuation.definition.comment.haddock.haskell'
+            'name': 'punctuation.definition.comment.haddock.haskell.hsig'
         'endCaptures':
           '0':
-            'name': 'punctuation.definition.comment.haddock.haskell'
+            'name': 'punctuation.definition.comment.haddock.haskell.hsig'
         'patterns': [
           {
             'include': '#block_comment'
@@ -60,16 +55,16 @@
         ]
       }
       {
-        'name': 'comment.block.haskell'
+        'name': 'comment.block.haskell.hsig'
         'begin': '\\{-'
         'end': '-\\}'
         'applyEndPatternLast': 1
         'beginCaptures':
           '0':
-            'name': 'punctuation.definition.comment.block.start.haskell'
+            'name': 'punctuation.definition.comment.block.start.haskell.hsig'
         'endCaptures':
           '0':
-            'name': 'punctuation.definition.comment.block.end.haskell'
+            'name': 'punctuation.definition.comment.block.end.haskell.hsig'
         'patterns': [
           {
             'include': '#block_comment'
@@ -84,14 +79,14 @@
         'end': '(?!\\G)'
         'patterns': [
           {
-            'name': 'comment.line.double-dash.haddock.haskell'
+            'name': 'comment.line.double-dash.haddock.haskell.hsig'
             'begin': '(--+)\\s+([|^])'
             'end': '\\n'
             'beginCaptures':
               '1':
-                'name': 'punctuation.definition.comment.haskell'
+                'name': 'punctuation.definition.comment.haskell.hsig'
               '2':
-                'name': 'punctuation.definition.comment.haddock.haskell'
+                'name': 'punctuation.definition.comment.haddock.haskell.hsig'
           }
         ]
       }
@@ -100,12 +95,12 @@
         'end': '(?!\\G)'
         'patterns': [
           {
-            'name': 'comment.line.double-dash.haskell'
+            'name': 'comment.line.double-dash.haskell.hsig'
             'begin': '--'
             'end': '\\n'
             'beginCaptures':
               '0':
-                'name': 'punctuation.definition.comment.haskell'
+                'name': 'punctuation.definition.comment.haskell.hsig'
           }
         ]
       }
@@ -117,32 +112,32 @@
     'patterns': [
       {
         'match': '\\\\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\\\\\"\'\\&])'
-        'name': 'constant.character.escape.haskell'
+        'name': 'constant.character.escape.haskell.hsig'
       }
       {
         'match': '(?:\\\\o[0-7]+)'
-        'name': 'constant.character.escape.octal.haskell'
+        'name': 'constant.character.escape.octal.haskell.hsig'
       }
       {
         'match': '(?:\\\\x[0-9A-Fa-f]+)'
-        'name': 'constant.character.escape.hexadecimal.haskell'
+        'name': 'constant.character.escape.hexadecimal.haskell.hsig'
       }
       {
         'match': '(?:\\\\\\^[A-Z@\\[\\]\\\\^_])'
-        'name': 'constant.character.escape.control.haskell'
+        'name': 'constant.character.escape.control.haskell.hsig'
       }
     ]
   'infix_op':
     'patterns': [
       {
-        'name': 'entity.name.function.infix.haskell'
+        'name': 'entity.name.function.infix.haskell.hsig'
         'match': '(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\))'
       }
     ]
   'module_exports':
     'patterns': [
       {
-        'name': 'meta.declaration.exports.haskell'
+        'name': 'meta.declaration.exports.haskell.hsig'
         'begin': '\\('
         'end': '\\)'
         'applyEndPatternLast': 1
@@ -160,7 +155,7 @@
             'include': '#comma'
           }
           {
-            'name': 'meta.other.constructor-list.haskell'
+            'name': 'meta.other.constructor-list.haskell.hsig'
             'begin': '(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))\\s*\\('
             'end': '\\)'
             'patterns': [
@@ -175,7 +170,7 @@
               }
               {
                 'match': '\\.\\.'
-                'name': 'keyword.operator.wildcard.haskell'
+                'name': 'keyword.operator.wildcard.haskell.hsig'
               }
             ]
           }
@@ -188,27 +183,27 @@
   'module_name':
     'patterns': [
       {
-        'name': 'support.other.module.haskell'
+        'name': 'support.other.module.haskell.hsig'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
     ]
   'module_name_prefix':
     'patterns': [
       {
-        'name': 'support.other.module.haskell'
+        'name': 'support.other.module.haskell.hsig'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.'
       }
     ]
   'pragma':
     'patterns': [
       {
-        'name': 'meta.preprocessor.haskell'
+        'name': 'meta.preprocessor.haskell.hsig'
         'begin': '\\{-#'
         'end': '#-\\}'
         'patterns': [
           {
             'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(NOTINLINE CONSTRUCTORLIKE|NOINLINE CONSTRUCTORLIKE|INLINE CONSTRUCTORLIKE|SPECIALISE NOTINLINE|SPECIALIZE NOTINLINE|SPECIALISE NOINLINE|SPECIALIZE NOINLINE|NOTINLINE CONLIKE|SPECIALISE INLINE|SPECIALIZE INLINE|NOINLINE CONLIKE|VECTORISE SCALAR|VECTORIZE SCALAR|OPTIONS_HADDOCK|INLINE CONLIKE|OPTIONS_DERIVE|OPTIONS_CATCH|OPTIONS_NHC98|OPTIONS_HUGS|OVERLAPPABLE|NOVECTORISE|NOVECTORIZE|OPTIONS_GHC|OPTIONS_JHC|OPTIONS_YHC|OVERLAPPING|DEPRECATED|INCOHERENT|INLINEABLE|SPECIALISE|SPECIALIZE|GENERATED|INLINABLE|NOTINLINE|VECTORISE|VECTORIZE|CONTRACT|LANGUAGE|NOINLINE|NOUNPACK|OVERLAPS|INCLUDE|MINIMAL|OPTIONS|WARNING|CFILES|INLINE|SOURCE|UNPACK|CTYPE|RULES|CORE|LINE|ANN|SCC)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
-            'name': 'keyword.other.preprocessor.haskell'
+            'name': 'keyword.other.preprocessor.haskell.hsig'
           }
         ]
       }
@@ -216,10 +211,10 @@
   'function_type_declaration':
     'patterns': [
       {
-        'name': 'meta.function.type-declaration.haskell'
+        'name': 'meta.function.type-declaration.haskell.hsig'
         'begin': '^([ \\t]*)(?:(?:((?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\)))(?:(?:\\s*,\\s*)(?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\))))*))(?:\\s*((?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:::|∷)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))))'
         'end': '^(?!\\1[ \\t]|[ \\t]*$)'
-        'contentName': 'meta.type-signature.haskell'
+        'contentName': 'meta.type-signature.haskell.hsig'
         'beginCaptures':
           '2':
             'patterns': [
@@ -231,7 +226,7 @@
               }
             ]
           '3':
-            'name': 'keyword.other.double-colon.haskell'
+            'name': 'keyword.other.double-colon.haskell.hsig'
         'patterns': [
           {
             'include': '#type_signature'
@@ -242,10 +237,10 @@
   'ctor_type_declaration':
     'patterns': [
       {
-        'name': 'meta.ctor.type-declaration.haskell'
+        'name': 'meta.ctor.type-declaration.haskell.hsig'
         'begin': '^([ \\t]*)(?:(?:((?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\)))(?:(?:\\s*,\\s*)(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\))))*))(?:\\s*((?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:::|∷)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))))'
         'end': '^(?!\\1[ \\t]|[ \\t]*$)'
-        'contentName': 'meta.type-signature.haskell'
+        'contentName': 'meta.type-signature.haskell.hsig'
         'beginCaptures':
           '2':
             'patterns': [
@@ -257,7 +252,7 @@
               }
             ]
           '3':
-            'name': 'keyword.other.double-colon.haskell'
+            'name': 'keyword.other.double-colon.haskell.hsig'
         'patterns': [
           {
             'include': '#type_signature'
@@ -268,10 +263,10 @@
   'record_field_declaration':
     'patterns': [
       {
-        'name': 'meta.record-field.type-declaration.haskell'
+        'name': 'meta.record-field.type-declaration.haskell.hsig'
         'begin': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(?:(?:((?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\)))(?:(?:\\s*,\\s*)(?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\))))*))(?:\\s*((?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:::|∷)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))))'
         'end': '(?=(?:(?:((?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\)))(?:(?:\\s*,\\s*)(?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\))))*))(?:\\s*((?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:::|∷)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))))|})'
-        'contentName': 'meta.type-signature.haskell'
+        'contentName': 'meta.type-signature.haskell.hsig'
         'beginCaptures':
           '1':
             'patterns': [
@@ -283,7 +278,7 @@
               }
             ]
           '2':
-            'name': 'keyword.other.double-colon.haskell'
+            'name': 'keyword.other.double-colon.haskell.hsig'
         'patterns': [
           {
             'include': '#type_signature'
@@ -300,7 +295,7 @@
         'include': '#comments'
       }
       {
-        'name': 'keyword.other.forall.haskell'
+        'name': 'keyword.other.forall.haskell.hsig'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))forall(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
       {
@@ -313,18 +308,18 @@
         'include': '#string'
       }
       {
-        'name': 'keyword.other.arrow.haskell'
+        'name': 'keyword.other.arrow.haskell.hsig'
         'match': '(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(->|→)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))'
       }
       {
-        'name': 'keyword.other.big-arrow.haskell'
+        'name': 'keyword.other.big-arrow.haskell.hsig'
         'match': '(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(=>|⇒)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))'
       }
       {
         'include': '#operator'
       }
       {
-        'name': 'variable.other.generic-type.haskell'
+        'name': 'variable.other.generic-type.haskell.hsig'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
       {
@@ -334,14 +329,14 @@
   'unit':
     'patterns': [
       {
-        'name': 'constant.language.unit.haskell'
+        'name': 'constant.language.unit.haskell.hsig'
         'match': '\\(\\)'
       }
     ]
   'empty_list':
     'patterns': [
       {
-        'name': 'constant.language.empty-list.haskell'
+        'name': 'constant.language.empty-list.haskell.hsig'
         'match': '\\[\\]'
       }
     ]
@@ -360,28 +355,28 @@
   'deriving_keyword':
     'patterns': [
       {
-        'name': 'meta.deriving.haskell'
+        'name': 'meta.deriving.haskell.hsig'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(deriving)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'captures':
           '1':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.haskell.hsig'
       }
     ]
   'deriving_list':
     'patterns': [
       {
-        'name': 'meta.deriving.haskell'
+        'name': 'meta.deriving.haskell.hsig'
         'begin': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(deriving)\\s*\\('
         'end': '\\)'
         'beginCaptures':
           '1':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.haskell.hsig'
         'patterns': [
           {
             'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
             'captures':
               '1':
-                'name': 'entity.other.inherited-class.haskell'
+                'name': 'entity.other.inherited-class.haskell.hsig'
           }
         ]
       }
@@ -389,25 +384,25 @@
   'deriving_simple':
     'patterns': [
       {
-        'name': 'meta.deriving.haskell'
+        'name': 'meta.deriving.haskell.hsig'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(deriving)\\s*([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'captures':
           '1':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.haskell.hsig'
           '2':
-            'name': 'entity.other.inherited-class.haskell'
+            'name': 'entity.other.inherited-class.haskell.hsig'
       }
     ]
   'infix_function':
     'patterns': [
       {
-        'name': 'keyword.operator.function.infix.haskell'
+        'name': 'keyword.operator.function.infix.haskell.hsig'
         'match': '(`)(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(`)'
         'captures':
           '1':
-            'name': 'punctuation.definition.entity.haskell'
+            'name': 'punctuation.definition.entity.haskell.hsig'
           '2':
-            'name': 'punctuation.definition.entity.haskell'
+            'name': 'punctuation.definition.entity.haskell.hsig'
       }
     ]
   'quasi_quotes':
@@ -417,27 +412,27 @@
         'end': '(\\|)(\\])'
         'beginCaptures':
           '1':
-            'name': 'punctuation.definition.quasiquotes.begin.haskell'
+            'name': 'punctuation.definition.quasiquotes.begin.haskell.hsig'
           '2':
-            'name': 'entity.name.tag.haskell'
+            'name': 'entity.name.tag.haskell.hsig'
         'endCaptures':
           '2':
-            'name': 'punctuation.definition.quasiquotes.end.haskell'
-        'contentName': 'string.quoted.quasiquotes.haskell'
+            'name': 'punctuation.definition.quasiquotes.end.haskell.hsig'
+        'contentName': 'string.quoted.quasiquotes.haskell.hsig'
       }
     ]
   'module_decl':
     'patterns': [
       {
-        'name': 'meta.declaration.module.haskell'
+        'name': 'meta.declaration.module.haskell.hsig'
         'begin': '^([ \\t]*)(module)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(where)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))|^(?!\\1[ \\t]|[ \\t]*$)'
         'beginCaptures':
           '2':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.haskell.hsig'
         'endCaptures':
           '1':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.haskell.hsig'
         'patterns': [
           {
             'include': '#comments'
@@ -457,15 +452,15 @@
   'hsig_decl':
     'patterns': [
       {
-        'name': 'meta.declaration.module.haskell'
+        'name': 'meta.declaration.module.haskell.hsig'
         'begin': '^([ \\t]*)(signature)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(where)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))|^(?!\\1[ \\t]|[ \\t]*$)'
         'beginCaptures':
           '2':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.haskell.hsig'
         'endCaptures':
           '1':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.haskell.hsig'
         'patterns': [
           {
             'include': '#comments'
@@ -485,15 +480,15 @@
   'class_decl':
     'patterns': [
       {
-        'name': 'meta.declaration.class.haskell'
+        'name': 'meta.declaration.class.haskell.hsig'
         'begin': '^([ \\t]*)(class)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(where)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))|^(?!\\1[ \\t]|[ \\t]*$)'
         'beginCaptures':
           '2':
-            'name': 'keyword.other.class.haskell'
+            'name': 'keyword.other.class.haskell.hsig'
         'endCaptures':
           '1':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.haskell.hsig'
         'patterns': [
           {
             'include': '#type_signature'
@@ -504,16 +499,16 @@
   'instance_decl':
     'patterns': [
       {
-        'name': 'meta.declaration.instance.haskell'
+        'name': 'meta.declaration.instance.haskell.hsig'
         'begin': '^([ \\t]*)(instance)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(where)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))|^(?!\\1[ \\t]|[ \\t]*$)'
-        'contentName': 'meta.type-signature.haskell'
+        'contentName': 'meta.type-signature.haskell.hsig'
         'beginCaptures':
           '2':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.haskell.hsig'
         'endCaptures':
           '1':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.haskell.hsig'
         'patterns': [
           {
             'include': '#pragma'
@@ -527,13 +522,13 @@
   'deriving_instance_decl':
     'patterns': [
       {
-        'name': 'meta.declaration.instance.deriving.haskell'
+        'name': 'meta.declaration.instance.deriving.haskell.hsig'
         'begin': '^([ \\t]*)(deriving\\s+instance)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '^(?!\\1[ \\t]|[ \\t]*$)'
-        'contentName': 'meta.type-signature.haskell'
+        'contentName': 'meta.type-signature.haskell.hsig'
         'beginCaptures':
           '2':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.haskell.hsig'
         'patterns': [
           {
             'include': '#pragma'
@@ -547,20 +542,20 @@
   'foreign_import':
     'patterns': [
       {
-        'name': 'meta.foreign.haskell'
+        'name': 'meta.foreign.haskell.hsig'
         'begin': '^([ \\t]*)(foreign)\\s+(import|export)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '^(?!\\1[ \\t]|[ \\t]*$)'
         'beginCaptures':
           '2':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.haskell.hsig'
           '3':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.haskell.hsig'
         'patterns': [
           {
             'match': '(?:un)?safe'
             'captures':
               '0':
-                'name': 'keyword.other.haskell'
+                'name': 'keyword.other.haskell.hsig'
           }
           {
             'include': '#function_type_declaration'
@@ -577,12 +572,12 @@
   'regular_import':
     'patterns': [
       {
-        'name': 'meta.import.haskell'
+        'name': 'meta.import.haskell.hsig'
         'begin': '^([ \\t]*)(import)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '^(?!\\1[ \\t]|[ \\t]*$)'
         'beginCaptures':
           '2':
-            'name': 'keyword.other.haskell'
+            'name': 'keyword.other.haskell.hsig'
         'patterns': [
           {
             'include': '#module_name'
@@ -594,7 +589,7 @@
             'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(qualified|as|hiding)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
             'captures':
               '1':
-                'name': 'keyword.other.haskell'
+                'name': 'keyword.other.haskell.hsig'
           }
           {
             'include': '#comments'
@@ -605,14 +600,14 @@
   'data_decl':
     'patterns': [
       {
-        'name': 'meta.declaration.type.data.haskell'
+        'name': 'meta.declaration.type.data.haskell.hsig'
         'begin': '^([ \\t]*)(data|newtype)\\s+((?:(?!=|where).)*)'
         'end': '^(?!\\1[ \\t]|[ \\t]*$)'
         'beginCaptures':
           '2':
-            'name': 'keyword.other.data.haskell'
+            'name': 'keyword.other.data.haskell.hsig'
           '3':
-            'name': 'meta.type-signature.haskell'
+            'name': 'meta.type-signature.haskell.hsig'
             'patterns': [
               {
                 'include': '#family_and_instance'
@@ -644,7 +639,7 @@
                   }
                 ]
               '2':
-                'name': 'meta.type-signature.haskell'
+                'name': 'meta.type-signature.haskell.hsig'
                 'patterns': [
                   {
                     'include': '#type_signature'
@@ -655,18 +650,18 @@
             'match': '\\|'
             'captures':
               '0':
-                'name': 'punctuation.separator.pipe.haskell'
+                'name': 'punctuation.separator.pipe.haskell.hsig'
           }
           {
-            'name': 'meta.declaration.type.data.record.block.haskell'
+            'name': 'meta.declaration.type.data.record.block.haskell.hsig'
             'begin': '\\{'
             'beginCaptures':
               '0':
-                'name': 'keyword.operator.record.begin.haskell'
+                'name': 'keyword.operator.record.begin.haskell.hsig'
             'end': '\\}'
             'endCaptures':
               '0':
-                'name': 'keyword.operator.record.end.haskell'
+                'name': 'keyword.operator.record.end.haskell.hsig'
             'patterns': [
               {
                 'include': '#comments'
@@ -688,13 +683,13 @@
   'type_alias':
     'patterns': [
       {
-        'name': 'meta.declaration.type.type.haskell'
+        'name': 'meta.declaration.type.type.haskell.hsig'
         'begin': '^([ \\t]*)(type)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '^(?!\\1[ \\t]|[ \\t]*$)'
-        'contentName': 'meta.type-signature.haskell'
+        'contentName': 'meta.type-signature.haskell.hsig'
         'beginCaptures':
           '2':
-            'name': 'keyword.other.type.haskell'
+            'name': 'keyword.other.type.haskell.hsig'
         'patterns': [
           {
             'include': '#comments'
@@ -717,26 +712,26 @@
   'keywords':
     'patterns': [
       {
-        'name': 'keyword.other.haskell'
+        'name': 'keyword.other.haskell.hsig'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(deriving|where|data|type|newtype)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
       {
-        'name': 'keyword.other.haskell'
+        'name': 'keyword.other.haskell.hsig'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(data|type|newtype)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
       {
-        'name': 'keyword.operator.haskell'
+        'name': 'keyword.operator.haskell.hsig'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))infix[lr]?(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
       {
-        'name': 'keyword.control.haskell'
+        'name': 'keyword.control.haskell.hsig'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(do|if|then|else|case|of|let|in|default|mdo|rec|proc)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
     ]
   'c_preprocessor':
     'patterns': [
       {
-        'name': 'meta.preprocessor.c.haskell'
+        'name': 'meta.preprocessor.c.hsig'
         'begin': '^(?=#)'
         'end': '(?<!\\\\)(?=\\n)'
         'patterns': [
@@ -749,15 +744,15 @@
   'string':
     'patterns': [
       {
-        'name': 'string.quoted.double.haskell'
+        'name': 'string.quoted.double.haskell.hsig'
         'begin': '"'
         'end': '"'
         'beginCaptures':
           '0':
-            'name': 'punctuation.definition.string.begin.haskell'
+            'name': 'punctuation.definition.string.begin.haskell.hsig'
         'endCaptures':
           '0':
-            'name': 'punctuation.definition.string.end.haskell'
+            'name': 'punctuation.definition.string.end.haskell.hsig'
         'patterns': [
           {
             'include': '#characters'
@@ -767,10 +762,10 @@
             'end': '\\\\'
             'beginCaptures':
               '0':
-                'name': 'markup.other.escape.newline.begin.haskell'
+                'name': 'markup.other.escape.newline.begin.haskell.hsig'
             'endCaptures':
               '0':
-                'name': 'markup.other.escape.newline.end.haskell'
+                'name': 'markup.other.escape.newline.end.haskell.hsig'
             'patterns': [
               {
                 'include': '#invalid'
@@ -783,18 +778,18 @@
   'newline_escape':
     'patterns': [
       {
-        'name': 'markup.other.escape.newline.haskell'
+        'name': 'markup.other.escape.newline.haskell.hsig'
         'match': '\\\\$'
       }
     ]
   'quoted_character':
     'patterns': [
       {
-        'name': 'string.quoted.single.haskell'
+        'name': 'string.quoted.single.haskell.hsig'
         'match': '(\')((?:[\\ -\\[\\]-~]|\\\\(?:NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\\\\\"\'\\&])|(?:\\\\o[0-7]+)|(?:\\\\x[0-9A-Fa-f]+)|(?:\\\\\\^[A-Z@\\[\\]\\\\^_])|(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))(\')'
         'captures':
           '1':
-            'name': 'punctuation.definition.string.begin.haskell'
+            'name': 'punctuation.definition.string.begin.haskell.hsig'
           '2':
             'patterns': [
               {
@@ -802,7 +797,7 @@
               }
             ]
           '3':
-            'name': 'punctuation.definition.string.end.haskell'
+            'name': 'punctuation.definition.string.end.haskell.hsig'
       }
     ]
   'scoped_type':
@@ -821,9 +816,9 @@
         'match': '((?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:::|∷)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))(.*?)(?=(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(<-|=)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))|$)'
         'captures':
           '1':
-            'name': 'keyword.other.double-colon.haskell'
+            'name': 'keyword.other.double-colon.haskell.hsig'
           '2':
-            'name': 'meta.type-signature.haskell'
+            'name': 'meta.type-signature.haskell.hsig'
             'patterns': [
               {
                 'include': '#type_signature'
@@ -843,9 +838,9 @@
               }
             ]
           '3':
-            'name': 'keyword.other.double-colon.haskell'
+            'name': 'keyword.other.double-colon.haskell.hsig'
           '4':
-            'name': 'meta.type-signature.haskell'
+            'name': 'meta.type-signature.haskell.hsig'
             'patterns': [
               {
                 'include': '#type_signature'
@@ -865,33 +860,33 @@
   'comma':
     'patterns': [
       {
-        'name': 'punctuation.separator.comma.haskell'
+        'name': 'punctuation.separator.comma.haskell.hsig'
         'match': ','
       }
     ]
   'lit_num':
     'patterns': [
       {
-        'name': 'constant.numeric.hexadecimal.haskell'
+        'name': 'constant.numeric.hexadecimal.haskell.hsig'
         'match': '0[xX][0-9a-fA-F]+'
       }
       {
-        'name': 'constant.numeric.octal.haskell'
+        'name': 'constant.numeric.octal.haskell.hsig'
         'match': '0[oO][0-7]+'
       }
       {
-        'name': 'constant.numeric.float.haskell'
+        'name': 'constant.numeric.float.haskell.hsig'
         'match': '[0-9]+(\\.[0-9]+[eE][+-]?|\\.|[eE][+-]?)[0-9]+'
       }
       {
-        'name': 'constant.numeric.decimal.haskell'
+        'name': 'constant.numeric.decimal.haskell.hsig'
         'match': '[0-9]+'
       }
     ]
   'operator':
     'patterns': [
       {
-        'name': 'keyword.operator.haskell'
+        'name': 'keyword.operator.haskell.hsig'
         'match': '(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+'
       }
     ]
@@ -899,7 +894,7 @@
     'patterns': [
       {
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
-        'name': 'identifier.haskell'
+        'name': 'identifier.haskell.hsig'
         'captures':
           '0':
             'patterns': [
@@ -907,7 +902,7 @@
                 'include': '#module_name_prefix'
               }
               {
-                'name': 'support.function.prelude.$1.haskell'
+                'name': 'support.function.prelude.$1.haskell.hsig'
                 'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(abs|acos|acosh|all|and|any|appendFile|asTypeOf|asin|asinh|atan|atan2|atanh|break|ceiling|compare|concat|concatMap|const|cos|cosh|curry|cycle|decodeFloat|div|divMod|drop|dropWhile|either|elem|encodeFloat|enumFrom|enumFromThen|enumFromThenTo|enumFromTo|error|even|exp|exponent|fail|filter|flip|floatDigits|floatRadix|floatRange|floor|fmap|foldMap|foldl|foldl1|foldr|foldr1|fromEnum|fromInteger|fromIntegral|fromRational|fst|gcd|getChar|getContents|getLine|head|id|init|interact|ioError|isDenormalized|isIEEE|isInfinite|isNaN|isNegativeZero|iterate|last|lcm|length|lex|lines|log|logBase|lookup|map|mapM|mapM_|mappend|max|maxBound|maximum|maybe|mconcat|mempty|min|minBound|minimum|mod|negate|not|notElem|null|odd|or|otherwise|pi|pred|print|product|properFraction|pure|putChar|putStr|putStrLn|quot|quotRem|read|readFile|readIO|readList|readLn|readParen|reads|readsPrec|realToFrac|recip|rem|repeat|replicate|return|reverse|round|scaleFloat|scanl|scanl1|scanr|scanr1|seq|sequence|sequenceA|sequence_|show|showChar|showList|showParen|showString|shows|showsPrec|significand|signum|sin|sinh|snd|span|splitAt|sqrt|subtract|succ|sum|tail|take|takeWhile|tan|tanh|toEnum|toInteger|toRational|traverse|truncate|uncurry|undefined|unlines|until|unwords|unzip|unzip3|userError|words|writeFile|zip|zip3|zipWith|zipWith3)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
               }
             ]
@@ -916,7 +911,7 @@
   'type_name':
     'patterns': [
       {
-        'name': 'entity.name.type.haskell'
+        'name': 'entity.name.type.haskell.hsig'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'captures':
           '0':
@@ -925,11 +920,11 @@
                 'include': '#module_name_prefix'
               }
               {
-                'name': 'entity.other.inherited-class.prelude.$1.haskell'
+                'name': 'entity.other.inherited-class.prelude.$1.haskell.hsig'
                 'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(Applicative|Bounded|Enum|Eq|Floating|Foldable|Fractional|Functor|Integral|Monad|Monoid|Num|Ord|Read|Real|RealFloat|RealFrac|Show|Traversable)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
               }
               {
-                'name': 'support.class.prelude.$1.haskell'
+                'name': 'support.class.prelude.$1.haskell.hsig'
                 'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(Either|FilePath|IO|IOError|Integer|Maybe|Ordering|Rational|ReadS|ShowS|String|Bool|Char|Double|Float|Int|Word)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
               }
             ]
@@ -938,7 +933,7 @@
   'type_ctor':
     'patterns': [
       {
-        'name': 'entity.name.tag.haskell'
+        'name': 'entity.name.tag.haskell.hsig'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'captures':
           '0':
@@ -947,7 +942,7 @@
                 'include': '#module_name_prefix'
               }
               {
-                'name': 'support.tag.prelude.$1.haskell'
+                'name': 'support.tag.prelude.$1.haskell.hsig'
                 'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(EQ|GT|Just|LT|Left|Nothing|Right|True|False)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
               }
             ]
@@ -957,27 +952,27 @@
     'patterns': [
       {
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))where(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
-        'name': 'keyword.other.haskell'
+        'name': 'keyword.other.haskell.hsig'
       }
     ]
   'family_and_instance':
     'patterns': [
       {
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(family|instance)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
-        'name': 'keyword.other.haskell'
+        'name': 'keyword.other.haskell.hsig'
       }
     ]
   'invalid':
     'patterns': [
       {
         'match': '\\S+'
-        'name': 'invalid.illegal.character-not-allowed-here.haskell'
+        'name': 'invalid.illegal.character-not-allowed-here.haskell.hsig'
       }
     ]
   'function_name':
     'patterns': [
       {
-        'name': 'entity.name.function.haskell'
+        'name': 'entity.name.function.haskell.hsig'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
     ]
@@ -987,21 +982,21 @@
         'match': '='
         'captures':
           '0':
-            'name': 'keyword.operator.assignment.haskell'
+            'name': 'keyword.operator.assignment.haskell.hsig'
       }
     ]
   'attribute_name':
     'patterns': [
       {
-        'name': 'entity.other.attribute-name.haskell'
+        'name': 'entity.other.attribute-name.haskell.hsig'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
     ]
   'liquidhaskell_annotation':
     'patterns': [
       {
-        'name': 'block.liquidhaskell.haskell'
-        'contentName': 'block.liquidhaskell.annotation.haskell'
+        'name': 'block.liquidhaskell.hsig'
+        'contentName': 'block.liquidhaskell.annotation.hsig'
         'begin': '\\{-@(?!#)'
         'end': '@-\\}'
         'patterns': [
@@ -1014,7 +1009,7 @@
   'shebang':
     'patterns': [
       {
-        'name': 'comment.line.shebang.haskell'
+        'name': 'comment.line.shebang.haskell.hsig'
         'match': '^\\#\\!.*\\brunhaskell\\b.*$'
       }
     ]
@@ -1153,3 +1148,8 @@
         'include': '#hsig_toplevel'
       }
     ]
+'patterns': [
+  {
+    'include': '#hsig_source'
+  }
+]

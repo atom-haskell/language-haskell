@@ -251,6 +251,20 @@ module.exports=
         {include: '#module_exports'}
         {include: '#invalid'}
     ]
+  hsig_decl:
+    name: 'meta.declaration.module.haskell'
+    begin: /{indentBlockStart}(signature){rb}/
+    end: /{lb}(where){rb}|{indentBlockEnd}/
+    beginCaptures:
+      2: name: 'keyword.other.haskell'
+    endCaptures:
+      1: name: 'keyword.other.haskell'
+    patterns: [
+        {include: '#comments'}
+        {include: '#module_name'}
+        {include: '#module_exports'}
+        {include: '#invalid'}
+    ]
   class_decl:
     name: 'meta.declaration.class.haskell'
     begin: /{indentBlockStart}(class){rb}/
@@ -560,22 +574,36 @@ module.exports=
     { include: '#identifier' }
     { include: '#type_ctor' }
   ]
-  haskell_toplevel: [
-    { include: '#liquidhaskell_annotation' }
+  common_toplevel: [
     { include: '#class_decl' }
     { include: '#instance_decl' }
     { include: '#deriving_instance_decl' }
     { include: '#foreign_import' }
     { include: '#regular_import' }
     { include: '#data_decl' }
-    { include: '#type_alias' } # TODO: review stopped here
+    { include: '#type_alias' }
     { include: '#c_preprocessor' }
+  ]
+  function_type_declaration_with_scoped_type: [
     { include: '#scoped_type_override' }
     { include: '#function_type_declaration' }
+  ]
+  haskell_toplevel: [
+    { include: '#liquidhaskell_annotation' }
+    { include: '#common_toplevel' }
+    { include: '#function_type_declaration_with_scoped_type' }
     { include: '#haskell_expr' }
+  ]
+  hsig_toplevel: [
+    { include: '#common_toplevel' }
+    { include: '#function_type_declaration' }
   ]
   haskell_source: [
     { include: '#shebang' }
     { include: '#module_decl' }
     { include: '#haskell_toplevel' }
+  ]
+  hsig_source: [
+    { include: '#hsig_decl' }
+    { include: '#hsig_toplevel' }
   ]
