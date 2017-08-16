@@ -1126,6 +1126,9 @@
       {
         'include': '#function_type_declaration'
       }
+      {
+        'include': '#comments'
+      }
     ]
   'haskell_source':
     'patterns': [

@@ -597,6 +597,7 @@ module.exports=
   hsig_toplevel: [
     { include: '#common_toplevel' }
     { include: '#function_type_declaration' }
+    { include: '#comments' }
   ]
   haskell_source: [
     { include: '#shebang' }
