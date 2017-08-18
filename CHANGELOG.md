@@ -1,3 +1,7 @@
+## 1.13.2
+* Add "lazy" function signatures to hsig (works if :: is on next line)
+* Update CI script
+
 ## 1.13.1
 * Added comments to hsig top level
 
