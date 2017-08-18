@@ -33,9 +33,9 @@ module.exports=
   hexChar: /(?:\\x[0-9A-Fa-f]+)/
   controlChar: /(?:\\\^[A-Z@\[\]\\^_])/
   character: '(?:{basicChar}|{escapeChar}|{octalChar}|{hexChar}|{controlChar}|{operatorChar})'
+  functionList: list(/{functionName}|{operatorFun}/, /\s*,\s*/)
   functionTypeDeclaration:
-    concat list(/{functionName}|{operatorFun}/, /\s*,\s*/),
-      /\s*({doubleColonOperator})/
+    concat /{functionList}\s*({doubleColonOperator})/
   doubleColonOperator: '(?<!{operatorChar})(?:::|∷)(?!{operatorChar})'
   ctorTypeDeclaration:
     concat list(/{className}|{operatorFun}/, /\s*,\s*/),

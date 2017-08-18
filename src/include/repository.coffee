@@ -127,6 +127,24 @@ module.exports=
     patterns: [
         include: '#type_signature'
     ]
+  lazy_function_type_signature:
+    name: 'meta.function.type-declaration.haskell'
+    begin: /{indentBlockStart}({functionList})\s*$/
+    end: /{indentBlockEnd}/
+    contentName: 'meta.type-signature.haskell'
+    beginCaptures:
+      2:
+        patterns: [
+            {include: '#function_name'}
+            {include: '#infix_op'}
+        ]
+    patterns: [
+        {include: '#double_colon_operator'}
+        {include: '#type_signature'}
+    ]
+  double_colon_operator:
+    name: 'keyword.other.double-colon.haskell'
+    match: '{doubleColonOperator}'
   ctor_type_declaration:
     name: 'meta.ctor.type-declaration.haskell'
     begin: /{indentBlockStart}{ctorTypeDeclaration}/
@@ -597,6 +615,7 @@ module.exports=
   hsig_toplevel: [
     { include: '#common_toplevel' }
     { include: '#function_type_declaration' }
+    { include: '#lazy_function_type_signature' }
     { include: '#comments' }
   ]
   haskell_source: [
