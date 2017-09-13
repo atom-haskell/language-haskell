@@ -1,3 +1,7 @@
+## 1.14.0
+* Basic support for liquid types
+* Rework LiquidHaskell (avoid scope leaks)
+
 ## 1.13.3
 * Fix mixed-case pragmas (#109)
 
