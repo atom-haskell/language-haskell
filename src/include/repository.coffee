@@ -109,7 +109,7 @@ module.exports=
     begin: /\{-#/
     end: /#-\}/
     patterns: [
-        match: "{lb}(#{pragmas.join('|')}){rb}"
+        match: "{lb}((?i:#{pragmas.join('|')})){rb}"
         name: 'keyword.other.preprocessor.haskell'
     ]
   function_type_declaration:
