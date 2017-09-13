@@ -93,4 +93,26 @@ makeGrammar "grammars/liquid haskell.cson",
     maybeBirdTrack: '(?:\\G|^)'
     indentBlockEnd: /(?:^(?!\1{indentChar}|{indentChar}*$)|(?=@-}))/
   patterns: include 'liquid-patterns'
-  repository: include 'repository'
+  repository: _.extend (require 'clone')(include 'repository'),
+    type_signature_hs: (include 'repository').type_signature
+    type_signature:
+      patterns: [
+        { include: '#liquid_id' }
+        { include: '#liquid_type' }
+        { include: '#type_signature_hs' }
+      ]
+    liquid_id:
+      match: /{functionName}\s*:/
+      captures:
+        0: patterns: [ include: '#identifier' ]
+    liquid_type:
+      begin: /\{/
+      end: /\}/
+      name: 'liquid.type.haskell'
+      patterns: [
+        {
+          match: /\G(.*?)\|/
+          captures: 1: patterns: [include: '#type_signature']
+        }
+        { include: '#haskell_expr' }
+      ]

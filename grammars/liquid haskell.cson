@@ -341,41 +341,13 @@
   'type_signature':
     'patterns': [
       {
-        'include': '#pragma'
+        'include': '#liquid_id'
       }
       {
-        'include': '#comments'
+        'include': '#liquid_type'
       }
       {
-        'name': 'keyword.other.forall.haskell'
-        'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))forall(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
-      }
-      {
-        'include': '#unit'
-      }
-      {
-        'include': '#empty_list'
-      }
-      {
-        'include': '#string'
-      }
-      {
-        'name': 'keyword.other.arrow.haskell'
-        'match': '(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(->|→)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))'
-      }
-      {
-        'name': 'keyword.other.big-arrow.haskell'
-        'match': '(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(=>|⇒)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))'
-      }
-      {
-        'include': '#operator'
-      }
-      {
-        'name': 'variable.other.generic-type.haskell'
-        'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
-      }
-      {
-        'include': '#type_name'
+        'include': '#type_signature_hs'
       }
     ]
   'unit':
@@ -1204,5 +1176,81 @@
       }
       {
         'include': '#hsig_toplevel'
+      }
+    ]
+  'type_signature_hs':
+    'patterns': [
+      {
+        'include': '#pragma'
+      }
+      {
+        'include': '#comments'
+      }
+      {
+        'name': 'keyword.other.forall.haskell'
+        'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))forall(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+      }
+      {
+        'include': '#unit'
+      }
+      {
+        'include': '#empty_list'
+      }
+      {
+        'include': '#string'
+      }
+      {
+        'name': 'keyword.other.arrow.haskell'
+        'match': '(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(->|→)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))'
+      }
+      {
+        'name': 'keyword.other.big-arrow.haskell'
+        'match': '(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(=>|⇒)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))'
+      }
+      {
+        'include': '#operator'
+      }
+      {
+        'name': 'variable.other.generic-type.haskell'
+        'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+      }
+      {
+        'include': '#type_name'
+      }
+    ]
+  'liquid_id':
+    'patterns': [
+      {
+        'match': '(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*\\s*:'
+        'captures':
+          '0':
+            'patterns': [
+              {
+                'include': '#identifier'
+              }
+            ]
+      }
+    ]
+  'liquid_type':
+    'patterns': [
+      {
+        'begin': '\\{'
+        'end': '\\}'
+        'name': 'liquid.type.haskell'
+        'patterns': [
+          {
+            'match': '\\G(.*?)\\|'
+            'captures':
+              '1':
+                'patterns': [
+                  {
+                    'include': '#type_signature'
+                  }
+                ]
+          }
+          {
+            'include': '#haskell_expr'
+          }
+        ]
       }
     ]
