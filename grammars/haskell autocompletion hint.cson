@@ -1041,7 +1041,7 @@
         'end': '@-\\}'
         'patterns': [
           {
-            'include': '#haskell_expr'
+            'include': '#haskell_toplevel'
           }
         ]
       }
