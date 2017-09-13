@@ -1,3 +1,6 @@
+## 1.14.1
+* Rudimentary support for LH annotation keywords
+
 ## 1.14.0
 * Basic support for liquid types
 * Rework LiquidHaskell (avoid scope leaks)
