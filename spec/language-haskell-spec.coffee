@@ -420,6 +420,28 @@ describe "Language-Haskell", ->
                             [2, ['punctuation.definition.comment.block.start.haskell']]
                             [4, ['punctuation.definition.comment.block.end.haskell']]
                             [6, ['punctuation.definition.comment.block.end.haskell']]]]
+
+  describe "pragmas", ->
+    it "parses pragmas", ->
+      g = grammarExpect grammar, '{-# LANGUAGE OverloadedStrings #-}'
+      g.toHaveTokens [['{-#', ' ', 'LANGUAGE', ' OverloadedStrings ', '#-}']]
+      g.toHaveScopes [['source.haskell', 'meta.preprocessor.haskell']]
+      g.tokenToHaveScopes [[[2, ['keyword.other.preprocessor.haskell']]]]
+
+  describe "pragmas", ->
+    it "parses lowercase pragmas", ->
+      g = grammarExpect grammar, '{-# language OverloadedStrings #-}'
+      g.toHaveTokens [['{-#', ' ', 'language', ' OverloadedStrings ', '#-}']]
+      g.toHaveScopes [['source.haskell', 'meta.preprocessor.haskell']]
+      g.tokenToHaveScopes [[[2, ['keyword.other.preprocessor.haskell']]]]
+
+  describe "pragmas", ->
+    it "parses mixed case pragmas", ->
+      g = grammarExpect grammar, '{-# lanGuaGE OverloadedStrings #-}'
+      g.toHaveTokens [['{-#', ' ', 'lanGuaGE', ' OverloadedStrings ', '#-}']]
+      g.toHaveScopes [['source.haskell', 'meta.preprocessor.haskell']]
+      g.tokenToHaveScopes [[[2, ['keyword.other.preprocessor.haskell']]]]
+
   describe "instance", ->
     it "recognizes instances", ->
       g = grammarExpect grammar, 'instance Class where'
@@ -432,6 +454,18 @@ describe "Language-Haskell", ->
                             ]]
     it "recognizes instance pragmas", ->
       for p in [ 'OVERLAPS', 'OVERLAPPING', 'OVERLAPPABLE', 'INCOHERENT' ]
+        g = grammarExpect grammar, "instance {-# #{p} #-} Class where"
+        g.toHaveTokens [['instance', ' ', '{-#', ' ', p, ' ', '#-}', ' ', 'Class', ' ', 'where']]
+        g.toHaveScopes [['source.haskell', 'meta.declaration.instance.haskell']]
+        g.tokenToHaveScopes [[[2, ['meta.preprocessor.haskell']]
+                              [3, ['meta.preprocessor.haskell']]
+                              [4, ['meta.preprocessor.haskell', 'keyword.other.preprocessor.haskell']]
+                              [5, ['meta.preprocessor.haskell']]
+                              [6, ['meta.preprocessor.haskell']]
+                              ]]
+
+    it "recognizes lowercase instance pragmas", ->
+      for p in [ 'overlaps', 'overlapping', 'overlappable', 'incoherent' ]
         g = grammarExpect grammar, "instance {-# #{p} #-} Class where"
         g.toHaveTokens [['instance', ' ', '{-#', ' ', p, ' ', '#-}', ' ', 'Class', ' ', 'where']]
         g.toHaveScopes [['source.haskell', 'meta.declaration.instance.haskell']]
