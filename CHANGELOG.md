@@ -1,3 +1,6 @@
+## 1.13.3
+* Fix mixed-case pragmas (#109)
+
 ## 1.13.2
 * Add "lazy" function signatures to hsig (works if :: is on next line)
 * Update CI script
