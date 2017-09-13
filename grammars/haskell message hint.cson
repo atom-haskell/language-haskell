@@ -1063,7 +1063,7 @@
         'end': '@-\\}'
         'patterns': [
           {
-            'include': '#haskell_expr'
+            'include': 'annotation.liquidhaskell.haskell'
           }
         ]
       }

@@ -568,7 +568,7 @@ module.exports=
     begin: '\\{-@(?!#)'
     end: '@-\\}'
     patterns: [
-        include: '#haskell_expr'
+      { include: 'annotation.liquidhaskell.haskell' }
     ]
   shebang:
     name: 'comment.line.shebang.haskell'

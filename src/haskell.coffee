@@ -83,3 +83,14 @@ makeGrammar "grammars/literate haskell.cson",
     operatorChar: '(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'\\|]))'
   patterns: include 'lhs-patterns'
   repository: include 'repository'
+
+makeGrammar "grammars/liquid haskell.cson",
+  # name: 'Liquid Haskell'
+  fileTypes: []
+  scopeName: 'annotation.liquidhaskell.haskell'
+
+  macros: _.extend (require 'clone')(include('macros')),
+    maybeBirdTrack: '(?:\\G|^)'
+    indentBlockEnd: /(?:^(?!\1{indentChar}|{indentChar}*$)|(?=@-}))/
+  patterns: include 'liquid-patterns'
+  repository: include 'repository'
