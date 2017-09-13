@@ -26,9 +26,9 @@
   'typeDeclOne': '(?:(?!(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))where(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*))'
   'typeDecl': '(?>(?:(?:(?!(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))where(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)))(?:\\s+(?:(?!(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))where(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)))*)'
   'indentChar': '[ \\t]'
-  'indentBlockStart': '(?:\\G|^)([ \\t]*)'
+  'indentBlockStart': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)'
   'indentBlockEnd': '(?:^(?!\\1[ \\t]|[ \\t]*$)|(?=@-}))'
-  'maybeBirdTrack': '(?:\\G|^)'
+  'maybeBirdTrack': '(?:\\G(?:\\s*\\w+\\s)?|^)'
   'lb': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))'
   'rb': '(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
   'b': '(?:(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))|(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])))'
@@ -93,7 +93,7 @@
   'comments':
     'patterns': [
       {
-        'begin': '((?:\\G|^)[ \\t]+)?(?=--+\\s+[|^])'
+        'begin': '((?:\\G(?:\\s*\\w+\\s)?|^)[ \\t]+)?(?=--+\\s+[|^])'
         'end': '(?!\\G)'
         'patterns': [
           {
@@ -109,7 +109,7 @@
         ]
       }
       {
-        'begin': '((?:\\G|^)[ \\t]+)?(?=--+(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))'
+        'begin': '((?:\\G(?:\\s*\\w+\\s)?|^)[ \\t]+)?(?=--+(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))'
         'end': '(?!\\G)'
         'patterns': [
           {
@@ -230,7 +230,7 @@
     'patterns': [
       {
         'name': 'meta.function.type-declaration.haskell'
-        'begin': '(?:\\G|^)([ \\t]*)(?:(?:((?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\)))(?:(?:\\s*,\\s*)(?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\))))*)\\s*((?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:::|∷)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))))'
+        'begin': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)(?:(?:((?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\)))(?:(?:\\s*,\\s*)(?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\))))*)\\s*((?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:::|∷)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))))'
         'end': '(?:^(?!\\1[ \\t]|[ \\t]*$)|(?=@-}))'
         'contentName': 'meta.type-signature.haskell'
         'beginCaptures':
@@ -256,7 +256,7 @@
     'patterns': [
       {
         'name': 'meta.function.type-declaration.haskell'
-        'begin': '(?:\\G|^)([ \\t]*)(((?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\)))(?:(?:\\s*,\\s*)(?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\))))*))\\s*$'
+        'begin': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)(((?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\)))(?:(?:\\s*,\\s*)(?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\))))*))\\s*$'
         'end': '(?:^(?!\\1[ \\t]|[ \\t]*$)|(?=@-}))'
         'contentName': 'meta.type-signature.haskell'
         'beginCaptures':
@@ -290,7 +290,7 @@
     'patterns': [
       {
         'name': 'meta.ctor.type-declaration.haskell'
-        'begin': '(?:\\G|^)([ \\t]*)(?:(?:((?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\)))(?:(?:\\s*,\\s*)(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\))))*))(?:\\s*((?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:::|∷)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))))'
+        'begin': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)(?:(?:((?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\)))(?:(?:\\s*,\\s*)(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\))))*))(?:\\s*((?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:::|∷)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))))'
         'end': '(?:^(?!\\1[ \\t]|[ \\t]*$)|(?=@-}))'
         'contentName': 'meta.type-signature.haskell'
         'beginCaptures':
@@ -449,7 +449,7 @@
     'patterns': [
       {
         'name': 'meta.declaration.module.haskell'
-        'begin': '(?:\\G|^)([ \\t]*)(module)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'begin': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)(module)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(where)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))|(?:^(?!\\1[ \\t]|[ \\t]*$)|(?=@-}))'
         'beginCaptures':
           '2':
@@ -477,7 +477,7 @@
     'patterns': [
       {
         'name': 'meta.declaration.module.haskell'
-        'begin': '(?:\\G|^)([ \\t]*)(signature)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'begin': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)(signature)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(where)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))|(?:^(?!\\1[ \\t]|[ \\t]*$)|(?=@-}))'
         'beginCaptures':
           '2':
@@ -505,7 +505,7 @@
     'patterns': [
       {
         'name': 'meta.declaration.class.haskell'
-        'begin': '(?:\\G|^)([ \\t]*)(class)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'begin': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)(class)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(where)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))|(?:^(?!\\1[ \\t]|[ \\t]*$)|(?=@-}))'
         'beginCaptures':
           '2':
@@ -524,7 +524,7 @@
     'patterns': [
       {
         'name': 'meta.declaration.instance.haskell'
-        'begin': '(?:\\G|^)([ \\t]*)(instance)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'begin': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)(instance)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(where)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))|(?:^(?!\\1[ \\t]|[ \\t]*$)|(?=@-}))'
         'contentName': 'meta.type-signature.haskell'
         'beginCaptures':
@@ -547,7 +547,7 @@
     'patterns': [
       {
         'name': 'meta.declaration.instance.deriving.haskell'
-        'begin': '(?:\\G|^)([ \\t]*)(deriving\\s+instance)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'begin': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)(deriving\\s+instance)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '(?:^(?!\\1[ \\t]|[ \\t]*$)|(?=@-}))'
         'contentName': 'meta.type-signature.haskell'
         'beginCaptures':
@@ -567,7 +567,7 @@
     'patterns': [
       {
         'name': 'meta.foreign.haskell'
-        'begin': '(?:\\G|^)([ \\t]*)(foreign)\\s+(import|export)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'begin': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)(foreign)\\s+(import|export)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '(?:^(?!\\1[ \\t]|[ \\t]*$)|(?=@-}))'
         'beginCaptures':
           '2':
@@ -597,7 +597,7 @@
     'patterns': [
       {
         'name': 'meta.import.haskell'
-        'begin': '(?:\\G|^)([ \\t]*)(import)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'begin': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)(import)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '(?:^(?!\\1[ \\t]|[ \\t]*$)|(?=@-}))'
         'beginCaptures':
           '2':
@@ -625,7 +625,7 @@
     'patterns': [
       {
         'name': 'meta.declaration.type.data.haskell'
-        'begin': '(?:\\G|^)([ \\t]*)(data|newtype)\\s+((?:(?!=|where).)*)'
+        'begin': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)(data|newtype)\\s+((?:(?!=|where).)*)'
         'end': '(?:^(?!\\1[ \\t]|[ \\t]*$)|(?=@-}))'
         'beginCaptures':
           '2':
@@ -708,7 +708,7 @@
     'patterns': [
       {
         'name': 'meta.declaration.type.type.haskell'
-        'begin': '(?:\\G|^)([ \\t]*)(type)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'begin': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)(type)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '(?:^(?!\\1[ \\t]|[ \\t]*$)|(?=@-}))'
         'contentName': 'meta.type-signature.haskell'
         'beginCaptures':
@@ -756,7 +756,7 @@
     'patterns': [
       {
         'name': 'meta.preprocessor.c.haskell'
-        'begin': '(?:\\G|^)(?=#)'
+        'begin': '(?:\\G(?:\\s*\\w+\\s)?|^)(?=#)'
         'end': '(?<!\\\\)(?=\\n)'
         'patterns': [
           {
@@ -853,7 +853,7 @@
   'scoped_type_override':
     'patterns': [
       {
-        'match': '(?:\\G|^)([ \\t]*)(?:(?:((?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\)))(?:(?:\\s*,\\s*)(?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\))))*)\\s*((?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:::|∷)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))))(.*)(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(<-|=)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))'
+        'match': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)(?:(?:((?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\)))(?:(?:\\s*,\\s*)(?:(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*|(?:\\((?!--+\\))(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+\\))))*)\\s*((?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:::|∷)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))))(.*)(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(<-|=)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))'
         'captures':
           '2':
             'patterns': [

@@ -90,7 +90,7 @@ makeGrammar "grammars/liquid haskell.cson",
   scopeName: 'annotation.liquidhaskell.haskell'
 
   macros: _.extend (require 'clone')(include('macros')),
-    maybeBirdTrack: '(?:\\G|^)'
+    maybeBirdTrack: '(?:\\G(?:\\s*\\w+\\s)?|^)'
     indentBlockEnd: /(?:^(?!\1{indentChar}|{indentChar}*$)|(?=@-}))/
   patterns: include 'liquid-patterns'
   repository: _.extend (require 'clone')(include 'repository'),
