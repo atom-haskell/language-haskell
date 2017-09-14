@@ -2,6 +2,9 @@ CSON = require 'season'
 
 defs = CSON.readFileSync("#{__dirname}/../snippets/language-haskell.cson")
 
+open = (what) ->
+  atom.workspace.open("#{__dirname}/fixture/#{what}")
+
 describe "Snippets", ->
   [editorElement, editor, Snippets] = []
 
@@ -76,7 +79,7 @@ describe "Snippets", ->
   describe 'haskell', ->
     beforeEach ->
       waitsForPromise ->
-        atom.workspace.open('sample.hs')
+        open('sample.hs')
       runs ->
         editor = atom.workspace.getActiveTextEditor()
         editorElement = atom.views.getView(editor)
@@ -84,7 +87,7 @@ describe "Snippets", ->
   describe 'c2hs', ->
     beforeEach ->
       waitsForPromise ->
-        atom.workspace.open('sample.chs')
+        open('sample.chs')
       runs ->
         editor = atom.workspace.getActiveTextEditor()
         editorElement = atom.views.getView(editor)
@@ -92,7 +95,7 @@ describe "Snippets", ->
   describe 'hsc2hs', ->
     beforeEach ->
       waitsForPromise ->
-        atom.workspace.open('sample.hsc')
+        open('sample.hsc')
       runs ->
         editor = atom.workspace.getActiveTextEditor()
         editorElement = atom.views.getView(editor)
@@ -101,7 +104,7 @@ describe "Snippets", ->
   describe 'cabal', ->
     beforeEach ->
       waitsForPromise ->
-        atom.workspace.open('sample.cabal')
+        open('sample.cabal')
       runs ->
         editor = atom.workspace.getActiveTextEditor()
         editorElement = atom.views.getView(editor)
