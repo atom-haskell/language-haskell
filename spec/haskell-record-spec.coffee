@@ -555,17 +555,6 @@ describe 'Record', ->
                   "meta.type-signature.haskell",
                   "comment.line.double-dash.haskell"
                 ]
-              },
-              {
-                "value": "",
-                "scopes": [
-                  "source.haskell",
-                  "meta.declaration.type.data.haskell",
-                  "meta.declaration.type.data.record.block.haskell",
-                  "meta.record-field.type-declaration.haskell",
-                  "meta.type-signature.haskell",
-                  "comment.line.double-dash.haskell"
-                ]
               }
             ],
             [
@@ -593,17 +582,6 @@ describe 'Record', ->
               },
               {
                 "value": " model :: String, -- commented field",
-                "scopes": [
-                  "source.haskell",
-                  "meta.declaration.type.data.haskell",
-                  "meta.declaration.type.data.record.block.haskell",
-                  "meta.record-field.type-declaration.haskell",
-                  "meta.type-signature.haskell",
-                  "comment.line.double-dash.haskell"
-                ]
-              },
-              {
-                "value": "",
                 "scopes": [
                   "source.haskell",
                   "meta.declaration.type.data.haskell",
@@ -700,17 +678,6 @@ describe 'Record', ->
               },
               {
                 "value": " another comment",
-                "scopes": [
-                  "source.haskell",
-                  "meta.declaration.type.data.haskell",
-                  "meta.declaration.type.data.record.block.haskell",
-                  "meta.record-field.type-declaration.haskell",
-                  "meta.type-signature.haskell",
-                  "comment.line.double-dash.haskell"
-                ]
-              },
-              {
-                "value": "",
                 "scopes": [
                   "source.haskell",
                   "meta.declaration.type.data.haskell",
@@ -847,15 +814,6 @@ describe 'Record', ->
           },
           {
             "value": " company :: String",
-            "scopes": [
-              "source.haskell",
-              "meta.declaration.type.data.haskell",
-              "meta.declaration.type.data.record.block.haskell",
-              "comment.line.double-dash.haskell"
-            ]
-          },
-          {
-            "value": "",
             "scopes": [
               "source.haskell",
               "meta.declaration.type.data.haskell",

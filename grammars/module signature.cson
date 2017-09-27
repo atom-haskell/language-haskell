@@ -82,7 +82,7 @@
           {
             'name': 'comment.line.double-dash.haddock.haskell.hsig'
             'begin': '(--+)\\s+([|^])'
-            'end': '\\n'
+            'end': '$'
             'beginCaptures':
               '1':
                 'name': 'punctuation.definition.comment.haskell.hsig'
@@ -98,7 +98,7 @@
           {
             'name': 'comment.line.double-dash.haskell.hsig'
             'begin': '--'
-            'end': '\\n'
+            'end': '$'
             'beginCaptures':
               '0':
                 'name': 'punctuation.definition.comment.haskell.hsig'
@@ -768,7 +768,7 @@
       {
         'name': 'meta.preprocessor.c.hsig'
         'begin': '^(?=#)'
-        'end': '(?<!\\\\)(?=\\n)'
+        'end': '(?<!\\\\)(?=$)'
         'patterns': [
           {
             'include': 'source.c'
