@@ -99,7 +99,7 @@
           {
             'name': 'comment.line.double-dash.haddock.haskell'
             'begin': '(--+)\\s+([|^])'
-            'end': '\\n'
+            'end': '$'
             'beginCaptures':
               '1':
                 'name': 'punctuation.definition.comment.haskell'
@@ -115,7 +115,7 @@
           {
             'name': 'comment.line.double-dash.haskell'
             'begin': '--'
-            'end': '\\n'
+            'end': '$'
             'beginCaptures':
               '0':
                 'name': 'punctuation.definition.comment.haskell'
@@ -757,7 +757,7 @@
       {
         'name': 'meta.preprocessor.c.haskell'
         'begin': '(?:\\G(?:\\s*\\w+\\s)?|^)(?=#)'
-        'end': '(?<!\\\\)(?=\\n)'
+        'end': '(?<!\\\\)(?=$)'
         'patterns': [
           {
             'include': 'source.c'

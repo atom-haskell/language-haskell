@@ -1,6 +1,6 @@
 module.exports =
   [
-      begin: /^((\\)begin)({)(code|spec)(})(\s*\n)?/
+      begin: /^((\\)begin)({)(code|spec)(})(\s*$)?/
       beginCaptures:
         1:
           name: 'support.function.be.latex'
