@@ -1,3 +1,6 @@
+## 1.14.2
+* Do not attempt to match newline characters -- Atom 1.22+ compatibility (@Wliu)
+
 ## 1.14.1
 * Rudimentary support for LH annotation keywords
 
