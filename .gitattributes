@@ -1,7 +1,7 @@
 grammars/haskell.cson linguist-generated
-grammars/module signature.cson linguist-generated
-grammars/haskell autocompletion hint.cson linguist-generated
-grammars/haskell type hint.cson linguist-generated
-grammars/haskell message hint.cson linguist-generated
-grammars/literate haskell.cson linguist-generated
-grammars/liquid haskell.cson linguist-generated
+grammars/module[[:space:]]signature.cson linguist-generated
+grammars/haskell[[:space:]]autocompletion hint.cson linguist-generated
+grammars/haskell[[:space:]]type[[:space:]]hint.cson linguist-generated
+grammars/haskell[[:space:]]message[[:space:]]hint.cson linguist-generated
+grammars/literate[[:space:]]haskell.cson linguist-generated
+grammars/liquid[[:space:]]haskell.cson linguist-generated
