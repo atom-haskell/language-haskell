@@ -175,6 +175,7 @@ Contributors (by number of commits):
 * Jared Roesch
 * Matthew Griffith
 * samuela
+* Wliu
 * Ross Ogilvie
 * Rob Rix
 * Ranjit Jhala
