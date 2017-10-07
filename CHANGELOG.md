@@ -1,3 +1,7 @@
+## 1.14.3
+* Fix qualified quasiqotes (#111)
+* Updated contributors list
+
 ## 1.14.2
 * Do not attempt to match newline characters -- Atom 1.22+ compatibility (@Wliu)
 
