@@ -247,11 +247,13 @@ module.exports=
       1: name: 'punctuation.definition.entity.haskell'
       2: name: 'punctuation.definition.entity.haskell'
   quasi_quotes:
-    begin: /(\[)({functionNameOne})(\|)/
+    begin: /(\[)({functionName})(\|)/
     end: /(\|)(\])/
     beginCaptures:
       1: name: 'punctuation.definition.quasiquotes.begin.haskell'
-      2: name: 'entity.name.tag.haskell'
+      2:
+        name: 'entity.name.tag.haskell'
+        patterns: { include: '#module_name_prefix' }
     endCaptures:
       2: name: 'punctuation.definition.quasiquotes.end.haskell'
     contentName: 'string.quoted.quasiquotes.haskell'

@@ -519,3 +519,27 @@ describe "Language-Haskell", ->
                             [4, ['comment.line.double-dash.haskell', 'punctuation.definition.comment.haskell']]
                             [5, ['comment.line.double-dash.haskell']]
                             ]]
+
+  describe "quasiqotes", ->
+    it "parses unqualified quasiquotes", ->
+      g = grammarExpect grammar, '[q| do maybe String|]'
+      g.toHaveTokens [['[', 'q', '|', ' do maybe String', '|', ']']]
+      g.toHaveScopes [['source.haskell']]
+      g.tokenToHaveScopes [[
+          [0, ['punctuation.definition.quasiquotes.begin.haskell']]
+          [1, ['entity.name.tag.haskell']]
+          [3, ['string.quoted.quasiquotes.haskell']]
+          [5, ['punctuation.definition.quasiquotes.end.haskell']]
+          ]]
+
+    fit "parses qualified quasiquotes", ->
+      g = grammarExpect grammar, '[Some.Module.Name.q| do maybe String|]'
+      g.toHaveTokens [['[', 'Some.Module.Name.', 'q', '|', ' do maybe String', '|', ']']]
+      g.toHaveScopes [['source.haskell']]
+      g.tokenToHaveScopes [[
+          [0, ['punctuation.definition.quasiquotes.begin.haskell']]
+          [1, ['entity.name.tag.haskell', 'support.other.module.haskell']]
+          [2, ['entity.name.tag.haskell']]
+          [4, ['string.quoted.quasiquotes.haskell']]
+          [6, ['punctuation.definition.quasiquotes.end.haskell']]
+          ]]
