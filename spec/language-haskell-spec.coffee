@@ -532,7 +532,7 @@ describe "Language-Haskell", ->
           [5, ['punctuation.definition.quasiquotes.end.haskell']]
           ]]
 
-    fit "parses qualified quasiquotes", ->
+    it "parses qualified quasiquotes", ->
       g = grammarExpect grammar, '[Some.Module.Name.q| do maybe String|]'
       g.toHaveTokens [['[', 'Some.Module.Name.', 'q', '|', ' do maybe String', '|', ']']]
       g.toHaveScopes [['source.haskell']]
