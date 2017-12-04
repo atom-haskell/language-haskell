@@ -1,4 +1,4 @@
-# Haskell support in Atom
+# Haskell support in Atom ![](https://david-dm.org/atom-haskell/language-haskell.svg)
 
 Adds syntax highlighting and snippets to Haskell files in Atom.
 
