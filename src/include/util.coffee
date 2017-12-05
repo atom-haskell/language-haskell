@@ -22,4 +22,7 @@ balanced = (name, left, right, inner, ignore = '') ->
   else
     "(?<#{name}>(?:[^#{left}#{right}#{ignore}]|#{left}\\g<#{name}>#{right})*)"
 
-module.exports = {list, listMaybe, concat, balanced}
+floatPattern = (digit, exp) ->
+  "#{digit}*(?:\\.#{digit}+#{exp}[+-]?|\\.|#{exp}[+-]?)#{digit}+"
+
+module.exports = {list, listMaybe, concat, balanced, floatPattern}

@@ -1,6 +1,6 @@
 prelude = require './prelude'
 pragmas = require './pragmas'
-{ balanced } = require './util'
+{ balanced, floatPattern } = require './util'
 
 module.exports=
   block_comment:
@@ -497,22 +497,22 @@ module.exports=
     match: /,/
   lit_num: [
     name: 'constant.numeric.hexfloat.haskell'
-    match: '0[xX]_*[0-9a-fA-F](_*[0-9a-fA-F])*((\\.[0-9a-fA-F](_*[0-9a-fA-F])*(_*[pP][+-]?[0-9](_*[0-9])*)*)|(_*[pP][+-]?[0-9](_*[0-9])*))'
+    match: "0[xX]#{floatPattern('[0-9a-fA-F_]','[pP]')}"
   ,
     name: 'constant.numeric.hexadecimal.haskell'
-    match: '0[xX]_*[0-9a-fA-F](_*[0-9a-fA-F])*'
+    match: '0[xX][_0-9a-fA-F]+'
   ,
     name: 'constant.numeric.octal.haskell'
-    match: '0[oO]_*[0-7](_*[0-7])*'
+    match: '0[oO][_0-7]+'
   ,
     name: 'constant.numeric.binary.haskell'
-    match: '0[bB]_*[01](_*[01])*'
+    match: '0[bB][_01]+'
   ,
     name: 'constant.numeric.float.haskell'
-    match: '[0-9](_*[0-9])*(\\.[0-9](_*[0-9])*_*[eE][+-]?|\\.|_*[eE][+-]?)[0-9](_*[0-9])*'
+    match: "[0-9]#{floatPattern('[0-9_]', '[eE]')}"
   ,
     name: 'constant.numeric.decimal.haskell'
-    match: '[0-9](_*[0-9])*'
+    match: '[0-9][_0-9]*'
   ]
   operator:
     name: 'keyword.operator.haskell'
