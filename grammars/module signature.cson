@@ -908,7 +908,7 @@
     'patterns': [
       {
         'name': 'constant.numeric.hexfloat.haskell.hsig'
-        'match': '0[xX][0-9a-fA-F_]*(?:\\.[0-9a-fA-F_]+[pP][+-]?|\\.|[pP][+-]?)[0-9a-fA-F_]+'
+        'match': '0[xX][0-9a-fA-F_]*(?:(?:\\.[0-9a-fA-F_]+)?[pP][+-]?[0-9_]+|\\.[0-9a-fA-F_]+)'
       }
       {
         'name': 'constant.numeric.hexadecimal.haskell.hsig'
@@ -924,7 +924,7 @@
       }
       {
         'name': 'constant.numeric.float.haskell.hsig'
-        'match': '[0-9][0-9_]*(?:\\.[0-9_]+[eE][+-]?|\\.|[eE][+-]?)[0-9_]+'
+        'match': '[0-9][0-9_]*(?:(?:\\.[0-9_]+)?[eE][+-]?[0-9_]+|\\.[0-9_]+)'
       }
       {
         'name': 'constant.numeric.decimal.haskell.hsig'
