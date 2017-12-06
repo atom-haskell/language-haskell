@@ -1,3 +1,7 @@
+## 1.15.0
+* Tests for number literals
+* Patch numeric underscores (#112) (Takenobu Tani)
+
 ## 1.14.3
 * Fix qualified quasiqotes (#111)
 * Updated contributors list
