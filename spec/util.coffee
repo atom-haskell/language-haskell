@@ -50,11 +50,23 @@ module.exports =
       zip(@actual, expected).every ([a, e]) ->
         a.every ({scopes}) ->
           e.every (s) -> _.contains(scopes, s)
+    notToHaveScopes: (expected) ->
+      not zip(@actual, expected).every ([a, e]) ->
+        a.every ({scopes}) ->
+          e.every (s) -> _.contains(scopes, s)
     tokenToHaveScopes: (expected) ->
       for [a, e] in zip(@actual, expected)
         for [i, s] in e
           for sc in s
             unless _.contains(a[i].scopes, sc)
               @message = -> "Expected #{JSON.stringify(a[i])} to have scope #{sc} from #{JSON.stringify(s)}"
+              return false
+      return true
+    tokenNotToHaveScopes: (expected) ->
+      for [a, e] in zip(@actual, expected)
+        for [i, s] in e
+          for sc in s
+            if _.contains(a[i].scopes, sc)
+              @message = -> "Expected #{JSON.stringify(a[i])} not to have scope #{sc} from #{JSON.stringify(s)}"
               return false
       return true
