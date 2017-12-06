@@ -23,7 +23,7 @@ balanced = (name, left, right, inner, ignore = '') ->
     "(?<#{name}>(?:[^#{left}#{right}#{ignore}]|#{left}\\g<#{name}>#{right})*)"
 
 floatPattern = (digit, exp) ->
-  "#{digit}*(?:(?:\\.#{digit}+)?#{exp}[+-]?[0-9_]+|\\.#{digit}+)"
-
+  exponent = "#{exp}[+-]?[0-9_]+"
+  "#{digit}*(?:\\.#{digit}+(?:#{exponent})?|#{exponent})"
 
 module.exports = {list, listMaybe, concat, balanced, floatPattern}
