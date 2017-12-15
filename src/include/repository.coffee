@@ -514,9 +514,23 @@ module.exports=
   operator:
     name: 'keyword.operator.haskell'
     match: /{operator}/
+    captures:
+      0: patterns: [
+        {
+          name: 'support.operator.prelude.haskell'
+          match: "^(#{prelude.operators.map((x) -> x.replace(/./g, (y) -> '\\'+y)).join('|')})$"
+        }
+      ]
   infix_op:
     name: 'entity.name.function.operator.haskell'
     match: /{operatorFun}/
+    captures:
+      0: patterns: [
+        {
+          name: 'support.operator.prelude.haskell'
+          match: "^\\((#{prelude.operators.map((x) -> x.replace(/./g, (y) -> '\\'+y)).join('|')})\\)$"
+        }
+      ]
   identifier:
     match: '{lb}{functionName}{rb}'
     name: 'identifier.haskell'
