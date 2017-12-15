@@ -66,9 +66,6 @@ module.exports=
         {match: '{hexChar}', name: 'constant.character.escape.hexadecimal.haskell'}
         {match: '{controlChar}', name: 'constant.character.escape.control.haskell'}
       ]
-  infix_op:
-    name: 'entity.name.function.infix.haskell'
-    match: /{operatorFun}/
   module_exports:
     name: 'meta.declaration.exports.haskell'
     begin: /\(/
@@ -517,6 +514,9 @@ module.exports=
   operator:
     name: 'keyword.operator.haskell'
     match: /{operator}/
+  infix_op:
+    name: 'entity.name.function.operator.haskell'
+    match: /{operatorFun}/
   identifier:
     match: '{lb}{functionName}{rb}'
     name: 'identifier.haskell'
