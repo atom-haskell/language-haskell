@@ -40,6 +40,7 @@ Contributors (by number of commits):
 * mdgriffith
 * Jesse Cooke
 * Ian D. Bollinger
+
 <!-- END CONTRIBUTORS LIST -->
 
 See the [LICENSE.md][LICENSE] for details.
