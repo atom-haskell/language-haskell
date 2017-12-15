@@ -1,3 +1,6 @@
+## 1.16.1
+* Remove usage information; link to doc site instead
+
 ## 1.16.0
 * Parse qualified prefix for operators
 * Mark prelude operators with `support.operator.prelude.haskell`
