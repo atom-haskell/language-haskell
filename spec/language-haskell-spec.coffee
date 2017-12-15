@@ -82,23 +82,6 @@ describe "Language-Haskell", ->
         {tokens} = grammar.tokenizeLine(keyword)
         expect(tokens[0]).toEqual value: keyword, scopes: ['source.haskell', 'keyword.control.haskell']
 
-  describe "operators", ->
-    it "tokenizes the / arithmetic operator when separated by newlines", ->
-      lines = grammar.tokenizeLines """
-        1
-        / 2
-      """
-      expect(lines).toEqual  [
-          [
-            { value : '1', scopes : [ 'source.haskell', 'constant.numeric.decimal.haskell' ] }
-          ],
-          [
-            { value : '/', scopes : [ 'source.haskell', 'keyword.operator.haskell' ] }
-            { value : ' ', scopes : [ 'source.haskell' ] }
-            { value : '2', scopes : [ 'source.haskell', 'constant.numeric.decimal.haskell' ] }
-          ]
-        ]
-
   describe "ids", ->
     it 'handles type_ids', ->
       typeIds = ['Char', 'Data', 'List', 'Int', 'Integral', 'Float', 'Date']
@@ -494,7 +477,7 @@ describe "Language-Haskell", ->
       g.toHaveTokens [['module', ' ', 'Module', ' ', '(', '(<|>)', ',', ' ', 'export2', ')', ' ', 'where']]
       g.toHaveScopes [['source.haskell', 'meta.declaration.module.haskell']]
       g.tokenToHaveScopes [[[2, ['support.other.module.haskell']]
-                            [5, ['meta.declaration.exports.haskell', 'entity.name.function.infix.haskell']]
+                            [5, ['meta.declaration.exports.haskell', 'entity.name.function.operator.haskell']]
                             [8, ['meta.declaration.exports.haskell', 'entity.name.function.haskell']]
                             ]]
     it "understands module declarations with export lists", ->
