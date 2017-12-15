@@ -1,3 +1,10 @@
+## 1.16.0
+* Parse qualified prefix for operators
+* Mark prelude operators with `support.operator.prelude.haskell`
+* **POSSIBLE COMPATIBILITY ISSUE** Rename prefix operator application to better describe it.\
+  `entity.name.function.infix.haskell` scope renamed to `entity.name.function.operator.haskell`
+* Prelude updated; added operators
+
 ## 1.15.0
 * Tests for number literals
 * Patch numeric underscores (#112) (Takenobu Tani)
