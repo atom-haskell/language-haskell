@@ -1,3 +1,6 @@
+## 1.16.2
+* Fix README formatting error
+
 ## 1.16.1
 * Remove usage information; link to doc site instead
 
