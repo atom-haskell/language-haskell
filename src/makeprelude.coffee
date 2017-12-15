@@ -30,9 +30,9 @@ exp.types.push (run (line) ->
   line.match(/^[A-Z]/) and not line.match(/::/) and not line.match(/True|False/))...
 exp.constr.push 'True', 'False'
 
-output = []
+output = [ '# coffeelint: disable' ]
 for k, v of exp
   output.push "#{k} = #{JSON.stringify(v)}"
 output.push "module.exports = { #{Object.keys(exp)} }"
 
-fs.writeFileSync 'src/include/prelude.coffee', output.join('\n'), 'utf8'
+fs.writeFileSync 'src/include/prelude.coffee', output.join('\n')+'\n', 'utf8'
