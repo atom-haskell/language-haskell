@@ -497,7 +497,7 @@ module.exports=
     match: /,/
   lit_num: [
     name: 'constant.numeric.hexfloat.haskell'
-    match: "0[xX]#{floatPattern('[0-9a-fA-F_]','[pP]')}"
+    match: "0[xX]#{floatPattern('[0-9a-fA-F_]', '[pP]')}"
   ,
     name: 'constant.numeric.hexadecimal.haskell'
     match: '0[xX][_0-9a-fA-F]+'
