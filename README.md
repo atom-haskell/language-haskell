@@ -171,11 +171,14 @@ See [CONTRIBUTING.md](https://github.com/atom-haskell/language-haskell/blob/mast
 Copyright © 2015 Atom-Haskell
 
 Contributors (by number of commits):
+
+<!-- BEGIN CONTRIBUTORS LIST -->
 * Nikolay Yakimov
 * Jared Roesch
 * Matthew Griffith
 * samuela
 * Wliu
+* Takenobu Tani
 * Ross Ogilvie
 * Rob Rix
 * Ranjit Jhala
@@ -183,6 +186,7 @@ Contributors (by number of commits):
 * mdgriffith
 * Jesse Cooke
 * Ian D. Bollinger
+<!-- END CONTRIBUTORS LIST -->
 
 See the [LICENSE.md][LICENSE] for details.
 
