@@ -3,7 +3,7 @@
 CP = require 'child_process'
 fs = require 'fs'
 
-genp = CP.execSync("ghc-mod browse -dp Prelude", encoding: 'utf8').split(/\r?\n|\r/).slice(0, -1)
+genp = CP.execSync("ghc-mod browse -dpo Prelude", encoding: 'utf8').split(/\r?\n|\r/).slice(0, -1)
 
 arr = (input) ->
   lines =
@@ -24,6 +24,7 @@ exp.classes = run /class/
 exp.funct = run /^[a-z]/
 exp.constr = run /^[A-Z].*from:/
 exp.types = run /data|type/
+exp.operators = run(/^\(/).map((x) -> x.slice(1, -1))
 
 exp.types.push (run (line) ->
   line.match(/^[A-Z]/) and not line.match(/::/) and not line.match(/True|False/))...
