@@ -14,7 +14,7 @@ module.exports=
   permits the definition of new operators which can be nearly any string
   of punctuation characters, such as $%^&*.
   ###
-  operator: /{operatorChar}+/
+  operator: /(?:{lb}{className}\.)?{operatorChar}+/
   operatorFun: ///
     (?:
       \(

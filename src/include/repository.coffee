@@ -516,6 +516,7 @@ module.exports=
     match: /{operator}/
     captures:
       0: patterns: [
+        { include: '#module_name_prefix' }
         {
           name: 'support.operator.prelude.haskell'
           match: "^(#{prelude.operators.map((x) -> x.replace(/./g, (y) -> '\\'+y)).join('|')})$"
@@ -526,6 +527,7 @@ module.exports=
     match: /{operatorFun}/
     captures:
       0: patterns: [
+        { include: '#module_name_prefix' }
         {
           name: 'support.operator.prelude.haskell'
           match: "^\\((#{prelude.operators.map((x) -> x.replace(/./g, (y) -> '\\'+y)).join('|')})\\)$"
