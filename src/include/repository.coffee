@@ -124,6 +124,16 @@ module.exports=
     patterns: [
         include: '#type_signature'
     ]
+  multiline_type_declaration:
+    name: 'meta.multiline.type-declaration.haskell'
+    begin: /{indentBlockStart}({doubleColonOperator})/
+    end: '{indentBlockCont}|(?=(?<!{operatorChar})(<-|=)(?!{operatorChar}))'
+    contentName: 'meta.type-signature.haskell'
+    beginCaptures:
+      2: name: 'keyword.other.double-colon.haskell'
+    patterns: [
+      {include: '#type_signature'}
+    ]
   lazy_function_type_signature:
     name: 'meta.function.type-declaration.haskell'
     begin: /{indentBlockStart}({functionList})\s*$/
@@ -629,6 +639,7 @@ module.exports=
   function_type_declaration_with_scoped_type: [
     { include: '#scoped_type_override' }
     { include: '#function_type_declaration' }
+    { include: '#multiline_type_declaration' }
   ]
   haskell_toplevel: [
     { include: '#liquidhaskell_annotation' }

@@ -80,6 +80,8 @@ makeGrammar "grammars/literate haskell.cson",
     maybeBirdTrack: /^(?:>|<) /
     indentBlockEnd:
       /^(?!(?:>|<) \1{indentChar}|(?:>|<) {indentChar}*$)|^(?!(?:>|<) )/
+    indentBlockCont:
+      /^(?!(?:>|<) \1|(?:>|<) {indentChar}*$)|^(?!(?:>|<) )/
     operatorChar: '(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'\\|]))'
   patterns: include 'lhs-patterns'
   repository: include 'repository'
@@ -92,6 +94,7 @@ makeGrammar "grammars/liquid haskell.cson",
   macros: _.extend (require 'clone')(include('macros')),
     maybeBirdTrack: '(?:\\G(?:\\s*\\w+\\s)?|^)'
     indentBlockEnd: /(?:^(?!\1{indentChar}|{indentChar}*$)|(?=@-}))/
+    indentBlockCont: /(?:^(?!\1|{indentChar}*$)|(?=@-}))/
   patterns: include 'liquid-patterns'
   repository: _.extend (require 'clone')(include 'repository'),
     type_signature_hs: (include 'repository').type_signature

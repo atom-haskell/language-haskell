@@ -54,6 +54,7 @@ module.exports=
   indentChar: /[ \t]/
   indentBlockStart: '{maybeBirdTrack}({indentChar}*)'
   indentBlockEnd: /^(?!\1{indentChar}|{indentChar}*$)/
+  indentBlockCont: /^(?!\1|{indentChar}*$)/
   maybeBirdTrack: /^/
   lb: '(?:(?={identStartCharClass})(?<!{identContCharClass}))'
   rb: '(?:(?<={identCharClass})(?!{identCharClass}))'

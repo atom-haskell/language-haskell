@@ -28,6 +28,7 @@
   'indentChar': '[ \\t]'
   'indentBlockStart': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)'
   'indentBlockEnd': '(?:^(?!\\1[ \\t]|[ \\t]*$)|(?=@-}))'
+  'indentBlockCont': '(?:^(?!\\1|[ \\t]*$)|(?=@-}))'
   'maybeBirdTrack': '(?:\\G(?:\\s*\\w+\\s)?|^)'
   'lb': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))'
   'rb': '(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
@@ -237,6 +238,23 @@
               }
             ]
           '3':
+            'name': 'keyword.other.double-colon.haskell'
+        'patterns': [
+          {
+            'include': '#type_signature'
+          }
+        ]
+      }
+    ]
+  'multiline_type_declaration':
+    'patterns': [
+      {
+        'name': 'meta.multiline.type-declaration.haskell'
+        'begin': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)((?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:::|∷)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))'
+        'end': '(?:^(?!\\1|[ \\t]*$)|(?=@-}))|(?=(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(<-|=)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))'
+        'contentName': 'meta.type-signature.haskell'
+        'beginCaptures':
+          '2':
             'name': 'keyword.other.double-colon.haskell'
         'patterns': [
           {
@@ -1160,6 +1178,9 @@
       }
       {
         'include': '#function_type_declaration'
+      }
+      {
+        'include': '#multiline_type_declaration'
       }
     ]
   'haskell_toplevel':
