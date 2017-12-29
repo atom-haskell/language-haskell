@@ -1,3 +1,11 @@
+## 1.17.0
+* Support standalone multiline type signatures
+    ```haskell
+    someFunction
+      :: Type
+      -> OtherType
+    ```
+
 ## 1.16.2
 * Fix README formatting error
 
