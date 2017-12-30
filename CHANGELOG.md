@@ -1,3 +1,20 @@
+## 1.17.2
+* Handle promoted types
+
+    ```haskell
+    type family TF a where
+      TF 'Nothing = 0
+      TF ('Just a) = 1
+    ```
+* Added keyword name to scope name
+
+    example (for `if` and `deriving` keywords):
+
+    - `keyword.control.haskell` → `keyword.control.if.haskell`
+    - `keyword.other.haskell` → `keyword.other.deriving.haskell`
+* Removed redundant keyword-related rules
+* More specs, better specs
+
 ## 1.17.1
 * Terminate function signatures on (<-|=)
 * Add some general tests
