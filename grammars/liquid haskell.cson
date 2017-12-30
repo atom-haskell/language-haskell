@@ -52,6 +52,12 @@
   {
     'include': '#lazy_function_type_signature'
   }
+  {
+    'include': '#haskell_expr'
+  }
+  {
+    'include': '#comments'
+  }
 ]
 'repository':
   'block_comment':

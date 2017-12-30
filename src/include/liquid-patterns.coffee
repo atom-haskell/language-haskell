@@ -5,4 +5,6 @@ module.exports = [
   { include: '#type_alias' }
   { include: '#function_type_declaration' }
   { include: '#lazy_function_type_signature' }
+  { include: '#haskell_expr' }
+  { include: '#comments' }
 ]
