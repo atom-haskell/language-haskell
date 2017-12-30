@@ -1,6 +1,6 @@
 prelude = require './prelude'
 pragmas = require './pragmas'
-{ balanced, floatPattern } = require './util'
+{ balanced, floatPattern, controlKeywords, otherKeywords } = require './util'
 
 module.exports=
   block_comment:
@@ -424,17 +424,14 @@ module.exports=
         {include: '#type_signature'}
     ]
   keywords: [
-    name: 'keyword.other.haskell'
-    match: /{lb}(deriving|where|data|type|newtype){rb}/
+    name: 'keyword.other.$1.haskell'
+    match: "{lb}(#{otherKeywords.join('|')}){rb}"
   ,
-    name: 'keyword.other.haskell'
-    match: /{lb}(data|type|newtype){rb}/
+    name: 'keyword.operator.$1.haskell'
+    match: /{lb}(infix[lr]?){rb}/
   ,
-    name: 'keyword.operator.haskell'
-    match: /{lb}infix[lr]?{rb}/
-  ,
-    name: 'keyword.control.haskell'
-    match: /{lb}(do|if|then|else|case|of|let|in|default|mdo|rec|proc){rb}/
+    name: 'keyword.control.$1.haskell'
+    match: "{lb}(#{controlKeywords.join('|')}){rb}"
   ]
   c_preprocessor:
     name: 'meta.preprocessor.c'

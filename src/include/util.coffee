@@ -26,4 +26,12 @@ floatPattern = (digit, exp) ->
   exponent = "#{exp}[+-]?[0-9_]+"
   "#{digit}*(?:\\.#{digit}+(?:#{exponent})?|#{exponent})"
 
-module.exports = {list, listMaybe, concat, balanced, floatPattern}
+controlKeywords = [
+  'do', 'if', 'then', 'else', 'case', 'of', 'let', 'in', 'default', 'mdo', 'rec', 'proc'
+]
+
+otherKeywords = [
+  'deriving', 'where', 'data', 'type', 'newtype'
+]
+
+module.exports = {list, listMaybe, concat, balanced, floatPattern, controlKeywords, otherKeywords}
