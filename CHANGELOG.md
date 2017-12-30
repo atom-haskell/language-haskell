@@ -1,3 +1,9 @@
+## 1.17.1
+* Terminate function signatures on (<-|=)
+* Add some general tests
+* Add expressions and comments to liquidhaskell
+* Add fixture-based test
+
 ## 1.17.0
 * Support standalone multiline type signatures
     ```haskell
