@@ -11,5 +11,10 @@ describe 'Fixture-based grammar tests', ->
     desc name, -> grammarTest("#{__dirname}#{sep}fixture#{sep}#{file}")
   ftest = (name, file) -> test(name, file, fdescribe)
 
-  test 'Liquid Haskell', 'general.hs'
+  test 'Haskell', 'general.hs'
   test 'Liquid Haskell', 'liquidhaskell.hs'
+  test 'Record syntax', 'record.hs'
+  test 'Identifiers', 'identifiers.hs'
+  test 'GADTs', 'gadt.hs'
+  test 'Multiline signatures', 'multilineSignatures.hs'
+  test 'Signatures', 'signatures.hs'
