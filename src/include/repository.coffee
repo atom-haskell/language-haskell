@@ -112,7 +112,7 @@ module.exports=
   function_type_declaration:
     name: 'meta.function.type-declaration.haskell'
     begin: /{indentBlockStart}{functionTypeDeclaration}/
-    end: /{indentBlockEnd}/
+    end: '{indentBlockEnd}|(?=(?<!{operatorChar})(<-|=)(?!{operatorChar}))'
     contentName: 'meta.type-signature.haskell'
     beginCaptures:
       2:
