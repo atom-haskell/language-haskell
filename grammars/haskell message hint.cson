@@ -31,6 +31,7 @@
   'indentBlockCont': '^(?!\\1|[ \\t]*$)'
   'maybeBirdTrack': '^'
   'lb': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))'
+  'lbrel': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}\'])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))'
   'rb': '(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
   'b': '(?:(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))|(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])))'
 'patterns': [
@@ -372,7 +373,29 @@
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))forall(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
       {
+        'match': '\'(\\(\\))'
+        'name': 'constant.language.unit.promoted.haskell'
+        'captures':
+          '1':
+            'patterns': [
+              {
+                'include': '#unit'
+              }
+            ]
+      }
+      {
         'include': '#unit'
+      }
+      {
+        'match': '\'(\\[\\])'
+        'name': 'constant.language.empty-list.promoted.haskell'
+        'captures':
+          '1':
+            'patterns': [
+              {
+                'include': '#empty_list'
+              }
+            ]
       }
       {
         'include': '#empty_list'
@@ -389,6 +412,17 @@
         'match': '(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(=>|⇒)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))'
       }
       {
+        'match': '\'((?:(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+)'
+        'name': 'keyword.operator.promoted.haskell'
+        'captures':
+          '1':
+            'patterns': [
+              {
+                'include': '#operator'
+              }
+            ]
+      }
+      {
         'include': '#operator'
       }
       {
@@ -396,7 +430,21 @@
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
       {
+        'name': 'entity.name.type.promoted.haskell'
+        'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}\'])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))\'([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'captures':
+          '1':
+            'patterns': [
+              {
+                'include': '#type_name'
+              }
+            ]
+      }
+      {
         'include': '#type_name'
+      }
+      {
+        'include': '#lit_num'
       }
     ]
   'unit':

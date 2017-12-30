@@ -49,6 +49,8 @@ type family Reverse' lst lst' where
  -- ^^^^^^^^ entity.name.type
  -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.declaration.type.type meta.type-signature
     Reverse' (l ': ls) lst = Reverse' ls (l ': lst)
+--                                          ^^ keyword.operator.promoted
+--              ^^ keyword.operator.promoted
  --                                            ^^^ variable.other.generic-type
  --                                   ^^ variable.other.generic-type
  --                          ^^^^^^^^ entity.name.type
@@ -81,3 +83,21 @@ type family Zip2 (l1 :: [*]) (l2 :: [*]) :: [*] where
  --      ^^ meta.declaration.type.type meta.type-signature variable.other.generic-type
  -- ^^^^ meta.declaration.type.type meta.type-signature entity.name.type
  -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.declaration.type.type meta.type-signature
+
+type family PromConstr a where
+  PromConstr ('Just a) = 1
+  --          ^^^^^ entity.name.type.promoted
+  --           ^^^^ support.class.prelude.Just
+  --                     ^ constant.numeric.decimal
+  PromConstr 'Nothing = 2
+  --                    ^ constant.numeric.decimal
+  --          ^^^^^^^ entity.name.type support.class.prelude.Nothing
+  --         ^^^^^^^^ entity.name.type.promoted
+
+type family PromConstr2 a where
+  PromConstr2 '() = 2
+
+type family PromConstr3 a where
+  PromConstr3 '[] = 2
+  --           ^^ constant.language.empty-list
+  --          ^^^ constant.language.empty-list.promoted
