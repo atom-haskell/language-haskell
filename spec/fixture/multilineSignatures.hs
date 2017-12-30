@@ -21,9 +21,9 @@ someFunc''
 
 someFunc'
     :: String
---     ^ meta.multiline.type-declaration meta.type-signature entity.name.type support.class.prelude.String
+--     ^^^^^^ meta.multiline.type-declaration meta.type-signature entity.name.type support.class.prelude.String
  -> String
---  ^ entity.name.tag
+--  ^^^^^^ entity.name.tag
 
 someFunc = undefined
 someFunc' = undefined
@@ -32,32 +32,32 @@ someFunc'' = undefined
 f x = do
   stuff :: String <- x
 --                   ^ identifier
---         ^ meta.type-signature entity.name.type support.class.prelude.String
+--         ^^^^^^ entity.name.type support.class.prelude.String
+--        ^^^^^^^^ meta.type-signature
   return ()
 
 g x = do
   stuff
     :: String
-       -- <- meta.multiline.type-declaration meta.type-signature entity.name.type support.class.prelude.String
+    -- ^^^^^^ meta.multiline.type-declaration meta.type-signature entity.name.type support.class.prelude.String
     -> String <- x
+    -- ^^^^^^ meta.multiline.type-declaration meta.type-signature entity.name.type support.class.prelude.String
 --               ^ identifier
---     ^ meta.multiline.type-declaration meta.type-signature entity.name.type support.class.prelude.String
   return ()
   -- <- identifier support.function.prelude.return
 
 h x = do
   stuff
     :: String
-       -- <- meta.multiline.type-declaration meta.type-signature entity.name.type support.class.prelude.String
+    -- ^^^^^^ meta.multiline.type-declaration meta.type-signature entity.name.type support.class.prelude.String
     ->> String
-    -- <- meta.multiline.type-declaration meta.type-signature keyword.operator
-        -- <- meta.multiline.type-declaration meta.type-signature entity.name.type support.class.prelude.String
+    --  ^^^^^^ meta.multiline.type-declaration meta.type-signature entity.name.type support.class.prelude.String
     -- <- meta.multiline.type-declaration meta.type-signature keyword.operator
     --> IO String <- x
---  ^ meta.multiline.type-declaration meta.type-signature keyword.operator
+--         ^^^^^^ meta.multiline.type-declaration meta.type-signature entity.name.type support.class.prelude.String
+--      ^^ meta.multiline.type-declaration meta.type-signature entity.name.type support.class.prelude.IO
+--  ^^^ meta.multiline.type-declaration meta.type-signature keyword.operator
 --                   ^ identifier
---         ^ meta.multiline.type-declaration meta.type-signature entity.name.type support.class.prelude.String
---      ^ meta.multiline.type-declaration meta.type-signature entity.name.type support.class.prelude.IO
   return ()
 data (->>) a b = DArr a b
 data (-->) a b = DDArr a b
