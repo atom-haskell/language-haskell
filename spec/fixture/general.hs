@@ -16,10 +16,18 @@ module Test (
     str1, str2,
 --        ^^^^ meta.declaration.module meta.declaration.exports entity.name.function
 --  ^^^^ meta.declaration.module meta.declaration.exports entity.name.function
-    DataType(..)
---           ^^ meta.declaration.module meta.declaration.exports meta.other.constructor-list keyword.operator.wildcard
---          ^^^^ meta.declaration.module meta.declaration.exports meta.other.constructor-list
+    DataType(
 --  ^^^^^^^^ meta.declaration.module meta.declaration.exports entity.name.type
+#ifdef EXPORT_CTOR
+-- <- meta.preprocessor.c
+      TypeCtor
+--    ^^^^^^^^ meta.declaration.module meta.declaration.exports meta.other.constructor-list entity.name.tag
+#else
+      ..
+--    ^^ meta.declaration.module meta.declaration.exports meta.other.constructor-list keyword.operator.wildcard
+#endif
+-- <- meta.preprocessor.c
+    )
 #endif
 -- <- meta.preprocessor.c
 ) where
@@ -27,6 +35,10 @@ module Test (
 import GHC.Types
 
 data DataType = TypeCtor Int
+--                       ^^^ meta.declaration.type.data meta.type-signature entity.name.type support.class.prelude.Int
+--              ^^^^^^^^ meta.declaration.type.data entity.name.tag
+--   ^^^^^^^^ meta.declaration.type.data meta.type-signature entity.name.type
+-- <- meta.declaration.type.data keyword.other.data
 
 ---------------------------------- Strings -------------------------------------
 
