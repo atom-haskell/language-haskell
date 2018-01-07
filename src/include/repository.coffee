@@ -74,6 +74,18 @@ module.exports=
     patterns: [
         include: '#comments'
       ,
+        include: '#c_preprocessor'
+      ,
+        begin: /{lb}(module){rb}/
+        end: /{lb}({className}){rb}/
+        beginCaptures:
+          1: name: 'keyword.other.haskell'
+        endCaptures:
+          1: name: 'support.other.module.haskell'
+        patterns: [
+            {include: '#invalid'}
+        ]
+      ,
         include: '#function_name'
       ,
         include: '#type_name'
@@ -464,7 +476,10 @@ module.exports=
     begin: /{maybeBirdTrack}(?=#)/
     end: '(?<!\\\\)(?=$)'
     patterns: [
-      include: 'source.c'
+      {
+        match: '^#\\S+'
+        name: 'keyword.control.c'
+      }
     ]
   string:
     name: 'string.quoted.double.haskell'

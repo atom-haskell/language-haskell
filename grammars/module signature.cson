@@ -142,6 +142,24 @@
             'include': '#comments'
           }
           {
+            'include': '#c_preprocessor'
+          }
+          {
+            'begin': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(module)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+            'end': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+            'beginCaptures':
+              '1':
+                'name': 'keyword.other.haskell.hsig'
+            'endCaptures':
+              '1':
+                'name': 'support.other.module.haskell.hsig'
+            'patterns': [
+              {
+                'include': '#invalid'
+              }
+            ]
+          }
+          {
             'include': '#function_name'
           }
           {
@@ -831,7 +849,8 @@
         'end': '(?<!\\\\)(?=$)'
         'patterns': [
           {
-            'include': 'source.c'
+            'match': '^#\\S+'
+            'name': 'keyword.control.c.hsig'
           }
         ]
       }

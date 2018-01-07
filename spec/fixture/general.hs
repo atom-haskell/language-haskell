@@ -1,10 +1,32 @@
 -- SYNTAX TEST "source.haskell"
 
-{-# LANGUAGE DataKinds, KindSignatures #-}
+{-# LANGUAGE DataKinds, KindSignatures, CPP #-}
 
-module Test where
+module Test (
+    main,
+--  ^^^^ meta.declaration.module meta.declaration.exports entity.name.function
+#ifdef TEST
+--     ^^^^ meta.preprocessor.c
+-- <- meta.preprocessor.c
+    module Test
+--         ^^^^ meta.declaration.module meta.declaration.exports support.other.module
+--  ^^^^^^ meta.declaration.module meta.declaration.exports keyword.other
+#else
+-- <- meta.preprocessor.c
+    str1, str2,
+--        ^^^^ meta.declaration.module meta.declaration.exports entity.name.function
+--  ^^^^ meta.declaration.module meta.declaration.exports entity.name.function
+    DataType(..)
+--           ^^ meta.declaration.module meta.declaration.exports meta.other.constructor-list keyword.operator.wildcard
+--          ^^^^ meta.declaration.module meta.declaration.exports meta.other.constructor-list
+--  ^^^^^^^^ meta.declaration.module meta.declaration.exports entity.name.type
+#endif
+-- <- meta.preprocessor.c
+) where
 
 import GHC.Types
+
+data DataType = TypeCtor Int
 
 ---------------------------------- Strings -------------------------------------
 
