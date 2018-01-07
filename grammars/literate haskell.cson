@@ -233,6 +233,12 @@
             'end': '\\)'
             'patterns': [
               {
+                'include': '#comments'
+              }
+              {
+                'include': '#c_preprocessor'
+              }
+              {
                 'include': '#type_ctor'
               }
               {

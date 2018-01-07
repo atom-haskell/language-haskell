@@ -96,6 +96,8 @@ module.exports=
         begin: /{rb}\s*\(/
         end: /\)/
         patterns: [
+          { include: '#comments' }
+          { include: '#c_preprocessor' }
           { include: '#type_ctor' }
           { include: '#attribute_name' }
           { include: '#comma' }
