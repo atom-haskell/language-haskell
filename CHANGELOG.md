@@ -1,3 +1,8 @@
+## 1.17.3
+* Better module exports highlighting at the cost of C
+
+    Basically, highlight CPP inside module export definitions. That comes with a caveat of not using embedded C grammar for CPP anymore. See 78810e0 for a more detailed explanation
+
 ## 1.17.2
 * Handle promoted types
 
