@@ -1,4 +1,4 @@
-# Haskell support in Atom
+# Haskell support in Atom [![](https://travis-ci.org/atom-haskell/language-haskell.svg?branch=master)](https://travis-ci.org/atom-haskell/language-haskell)
 
 Adds syntax highlighting and snippets to Haskell files in Atom.
 
