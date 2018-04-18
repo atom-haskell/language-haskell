@@ -541,7 +541,7 @@
         'endCaptures':
           '2':
             'name': 'punctuation.definition.quasiquotes.end.haskell.hsig'
-        'contentName': 'string.quoted.quasiquotes.haskell.hsig'
+        'contentName': 'quoted.quasiquotes.haskell.hsig'
       }
     ]
   'module_decl':

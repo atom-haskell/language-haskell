@@ -303,7 +303,7 @@ module.exports=
         patterns: { include: '#module_name_prefix' }
     endCaptures:
       2: name: 'punctuation.definition.quasiquotes.end.haskell'
-    contentName: 'string.quoted.quasiquotes.haskell'
+    contentName: 'quoted.quasiquotes.haskell'
   module_decl:
     name: 'meta.declaration.module.haskell'
     begin: /{indentBlockStart}(module){rb}/

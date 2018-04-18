@@ -27,19 +27,19 @@ Copyright © 2015 Atom-Haskell
 Contributors (by number of commits):
 
 <!-- BEGIN CONTRIBUTORS LIST -->
-* Nikolay Yakimov
-* Jared Roesch
-* Matthew Griffith
-* samuela
-* Wliu
-* Takenobu Tani
-* Ross Ogilvie
-* Rob Rix
-* Ranjit Jhala
-* Michael Rawson
-* mdgriffith
-* Jesse Cooke
-* Ian D. Bollinger
+-   Nikolay Yakimov
+-   Jared Roesch
+-   Matthew Griffith
+-   samuela
+-   Wliu
+-   Takenobu Tani
+-   Ross Ogilvie
+-   Rob Rix
+-   Ranjit Jhala
+-   Michael Rawson
+-   mdgriffith
+-   Jesse Cooke
+-   Ian D. Bollinger
 
 <!-- END CONTRIBUTORS LIST -->
 
