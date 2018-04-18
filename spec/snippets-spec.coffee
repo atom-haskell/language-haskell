@@ -8,9 +8,8 @@ open = (what) ->
 describe "Snippets", ->
   [editorElement, editor, Snippets] = []
 
-  simulateTabKeyEvent = ({shift} = {}) ->
-    event = atom.keymaps.constructor.buildKeydownEvent('tab', {shift, target: editorElement})
-    atom.keymaps.handleKeyboardEvent(event)
+  expandSnippet = (editor) ->
+    atom.commands.dispatch(atom.views.getView(editor), 'snippets:expand')
 
   sanitize = (body) ->
     parser = Snippets.getBodyParser()
@@ -31,21 +30,21 @@ describe "Snippets", ->
       expect((for name, {prefix, body} of defs['.source .haskell']
         editor.setText("")
         editor.insertText(prefix)
-        simulateTabKeyEvent()
+        expandSnippet(editor)
         expect(editor.getText().trim()).toBe sanitize(body).trim()
       ).length).toBeGreaterThan 0
     it 'triggers non-comment snippets', ->
       expect((for name, {prefix, body} of defs['.source .haskell:not(.comment)']
         editor.setText("")
         editor.insertText(prefix)
-        simulateTabKeyEvent()
+        expandSnippet(editor)
         expect(editor.getText().trim()).toBe sanitize(body).trim()
       ).length).toBeGreaterThan 0
     it 'triggers comment snippets', ->
       expect((for name, {prefix, body} of defs['.source .haskell.comment']
         editor.setText("")
         editor.insertText("-- #{prefix}")
-        simulateTabKeyEvent()
+        expandSnippet(editor)
         expect(editor.getText().trim()).toBe "-- #{sanitize(body).trim()}"
       ).length).toBeGreaterThan 0
     it 'triggers empty-list snippets', ->
@@ -53,14 +52,14 @@ describe "Snippets", ->
         editor.setText("")
         editor.insertText("#{prefix}]")
         editor.getLastCursor().moveLeft()
-        simulateTabKeyEvent()
+        expandSnippet(editor)
         expect(editor.getText().trim()).toBe "#{sanitize(body).trim()}]"
       ).length).toBeGreaterThan 0
     it 'triggers type snippets', ->
       expect((for name, {prefix, body} of defs['.source .haskell.meta.type']
         editor.setText("")
         editor.insertText("data Data = Constr #{prefix}")
-        simulateTabKeyEvent()
+        expandSnippet(editor)
         expect(editor.getText().trim()).toBe "data Data = Constr #{sanitize(body).trim()}"
       ).length).toBeGreaterThan 0
 
@@ -112,6 +111,6 @@ describe "Snippets", ->
       expect((for name, {prefix, body} of defs['.source.cabal']
         editor.setText("")
         editor.insertText(prefix)
-        simulateTabKeyEvent()
+        expandSnippet(editor)
         expect(editor.getText().trim()).toBe sanitize(body).trim()
       ).length).toBeGreaterThan 0
