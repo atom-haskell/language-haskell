@@ -524,13 +524,17 @@ module.exports=
         include: '#haskell_expr'
       ]
   ,
-    match: '({doubleColonOperator})(.*?)(?=(?<!{operatorChar})(<-|=)(?!{operatorChar})|$)'
+    match: '({doubleColonOperator})'+
+        '(.*?)'+
+        '(?=({-|(?<!{operatorChar})(--|<-|=))(?!{operatorChar})|$)'
     captures:
       1: name: 'keyword.other.double-colon.haskell'
       2: {name: 'meta.type-signature.haskell', patterns: [include: '#type_signature']}
   ]
   scoped_type_override:
-    match: '{indentBlockStart}{functionTypeDeclaration}(.*)(?<!{operatorChar})(<-|=)(?!{operatorChar})'
+    match: '{indentBlockStart}{functionTypeDeclaration}'+
+        '((?:(?!(?:(?<!{operatorChar})--|{-)).)*)'+
+        '(?<!{operatorChar})(<-|=)(?!{operatorChar})'
     captures:
       2: patterns: [include: '#identifier']
       3: name: 'keyword.other.double-colon.haskell'

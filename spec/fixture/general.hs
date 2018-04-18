@@ -76,3 +76,21 @@ data Foo = Foo Int
 main :: IO ()
 main = undefined
 -- >> =source.haskell
+
+func2 :: IO () {- comment = also comment -}
+--             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block
+func2 :: IO () !{- comment = also comment -}
+--              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block
+func :: IO () -- comment = also comment
+--            ^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.double-dash
+func :: IO () !-- comment = also comment
+--             ^^^^^^^^^^^^^^^^^^^^^^^^^ !comment.line.double-dash
+let x :: Int -- comment <- an int
+--           ^^^^^^^^^^^^^^^^^^^^ comment.line.double-dash
+let x :: Int {- comment <- an int -}
+--           ^^^^^^^^^^^^^^^^^^^^^^^ comment.block
+let x :: Int !-- comment <- an int
+--            ^^^^^^^^^^^^^^^^^^^^ !comment.line.double-dash
+let x :: Int !{- comment <- an int -}
+--            ^^^^^^^^^^^^^^^^^^^^^^^ comment.block
+-- >> =source.haskell
