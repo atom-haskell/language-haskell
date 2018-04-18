@@ -1,3 +1,8 @@
+## 1.17.4
+
+-   Update\/fix specs
+-   Remove string scope from quasiquotes (URI injection breaks highlighting)
+
 ## 1.17.3
 * Better module exports highlighting at the cost of C
 
