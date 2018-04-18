@@ -633,6 +633,9 @@ module.exports=
   function_name:
     name: 'entity.name.function.haskell'
     match: /{lb}{functionName}{rb}/
+    captures: 0: patterns: [
+      { include: '#module_name_prefix' }
+    ]
   assignment_op:
     match: /=/
     captures:

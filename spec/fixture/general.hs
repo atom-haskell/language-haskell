@@ -13,8 +13,9 @@ module Test (
 --  ^^^^^^ meta.declaration.module meta.declaration.exports keyword.other
 #else
 -- <- meta.preprocessor.c
-    str1, str2,
---        ^^^^ meta.declaration.module meta.declaration.exports entity.name.function
+    str1, Test.str2,
+--             ^^^^ meta.declaration.module meta.declaration.exports entity.name.function
+--        ^^^^^ support.other.module
 --  ^^^^ meta.declaration.module meta.declaration.exports entity.name.function
     DataType(
 --  ^^^^^^^^ meta.declaration.module meta.declaration.exports entity.name.type
@@ -27,7 +28,10 @@ module Test (
 --    ^^ meta.declaration.module meta.declaration.exports meta.other.constructor-list keyword.operator.wildcard
 #endif
 -- <- meta.preprocessor.c
-    )
+    ),
+    Test.DataType
+--  ^^^^^^^^^^^^^ entity.name.type
+--  ^^^^^ support.other.module
 #endif
 -- <- meta.preprocessor.c
 ) where
