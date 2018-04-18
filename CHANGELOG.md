@@ -1,3 +1,7 @@
+## 1.17.5
+
+-   Fix comments containing <- and = after function signatures
+
 ## 1.17.4
 
 -   Update\/fix specs
