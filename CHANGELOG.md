@@ -1,3 +1,7 @@
+## 1.17.6
+
+-   Add module name highlighting to functions
+
 ## 1.17.5
 
 -   Fix comments containing <- and = after function signatures
