@@ -1,3 +1,8 @@
+## 1.17.7
+
+-   Rework scoped types
+-   Fix data declarations comments
+
 ## 1.17.6
 
 -   Add module name highlighting to functions
