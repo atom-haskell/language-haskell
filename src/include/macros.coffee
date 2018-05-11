@@ -1,4 +1,4 @@
-{list, listMaybe, concat} = require './util'
+{list, listMaybe, concat, guarded, balanced} = require './util'
 
 module.exports=
   identStartCharClass: /[\p{Ll}_\p{Lu}\p{Lt}]/
@@ -36,7 +36,7 @@ module.exports=
   functionList: list(/{functionName}|{operatorFun}/, /\s*,\s*/)
   functionTypeDeclaration:
     concat /{functionList}\s*({doubleColonOperator})/
-  doubleColonOperator: '(?<!{operatorChar})(?:::|∷)(?!{operatorChar})'
+  doubleColonOperator:  guarded '::|∷'
   ctorTypeDeclaration:
     concat list(/{className}|{operatorFun}/, /\s*,\s*/),
       /\s*({doubleColonOperator})/
@@ -60,3 +60,4 @@ module.exports=
   lbrel: '(?:(?={identContCharClass})(?<!{identContCharClass}))'
   rb: '(?:(?<={identCharClass})(?!{identCharClass}))'
   b: '(?:{lb}|{rb})'
+  data_def: "((?:(?!#{guarded '=|--+'}|{lb}where{rb}|{-).|{-.*?-})*)"

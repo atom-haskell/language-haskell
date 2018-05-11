@@ -79,7 +79,28 @@ data Foo = Foo Int
 
 main :: IO ()
 main = undefined
--- >> =source.haskell
+
+-- no unnecessary termination in data declarations
+data Something ~= Something
+--                ^^^^^^^^^ meta.declaration.type.data meta.type-signature entity.name.type
+data Something ~--= Something
+--                  ^^^^^^^^^ meta.declaration.type.data meta.type-signature entity.name.type
+-- proper termination in data declarations
+data Something --- Something = Something
+--             ^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.double-dash
+data Something = Something
+--             ^  keyword.operator.assignment
+--               ^^^^^^^^^ entity.name.tag
+--   ^^^^^^^^^ entity.name.type
+data Something -- = Something
+--             ^^^^^^^^^^^^^^ comment.line.double-dash
+--   ^^^^^^^^^ entity.name.type
+data Something a {- =b -} aa = Other
+--               ^^^^^^^^ comment.block
+--                       ^^ meta.type-signature
+--   ^^^^^^^^^ meta.type-signature entity.name.type
+data Something {- = Something -} = Other
+--             ^^^^^^^^^^^^^^^^^ comment.block
 
 func2 :: IO () {- comment = also comment -}
 --             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block

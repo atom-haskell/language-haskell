@@ -404,7 +404,7 @@ module.exports=
     ]
   data_decl:
     name: 'meta.declaration.type.data.haskell'
-    begin: /{indentBlockStart}(data|newtype)\s+((?:(?!=|where).)*)/
+    begin: /{indentBlockStart}(data|newtype)\s+{data_def}/
     end: /{indentBlockEnd}/
     beginCaptures:
       2: name: 'keyword.other.data.haskell'

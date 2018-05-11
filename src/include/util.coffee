@@ -16,15 +16,15 @@ concat = (list...) ->
   r = ''.concat (list.map (i) -> "(?:#{rxToStr i})")...
   "(?:#{r})"
 
-balanced = (name, left, right, inner, ignore = '') ->
-  if inner?
-    "(?<#{name}>(?:#{inner}|[^#{left}#{right}#{ignore}]|#{left}\\g<#{name}>#{right})*)"
-  else
-    "(?<#{name}>(?:[^#{left}#{right}#{ignore}]|#{left}\\g<#{name}>#{right})*)"
+balanced = (name, left, right) ->
+  "(?<#{name}>(?:(?!#{left}|#{right}).|#{left}\\g<#{name}>#{right})*)"
 
 floatPattern = (digit, exp) ->
   exponent = "#{exp}[+-]?[0-9_]+"
   "#{digit}*(?:\\.#{digit}+(?:#{exponent})?|#{exponent})"
+
+guarded = (pattern) ->
+  "(?:(?<!{operatorChar})(?:#{pattern})(?!{operatorChar}))"
 
 controlKeywords = [
   'do', 'if', 'then', 'else', 'case', 'of', 'let', 'in', 'default', 'mdo', 'rec', 'proc'
@@ -34,4 +34,4 @@ otherKeywords = [
   'deriving', 'where', 'data', 'type', 'newtype'
 ]
 
-module.exports = {list, listMaybe, concat, balanced, floatPattern, controlKeywords, otherKeywords}
+module.exports = {list, listMaybe, concat, balanced, guarded, floatPattern, controlKeywords, otherKeywords}
