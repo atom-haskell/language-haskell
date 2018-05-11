@@ -61,3 +61,4 @@ module.exports=
   rb: '(?:(?<={identCharClass})(?!{identCharClass}))'
   b: '(?:{lb}|{rb})'
   data_def: "((?:(?!#{guarded '=|--+'}|{lb}where{rb}|{-).|{-.*?-})*)"
+  scoped_assignment: guarded '<-|='

@@ -60,6 +60,14 @@ regressionTest71 = do
 --        ^^^^^^ meta.type-signature entity.name.type support.class.prelude.String
 --     ^^ keyword.other.double-colon
 --  ^^ identifier
+    xx :: {- comment -} String <- undefined
+--                             ^^ keyword.operator
+--        ^^^^^^^^^^^^^ meta.type-signature comment.block
+--  ^^ identifier
+    xx :: {- comment String <- undefined
+--        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block
+--  ^^ meta.function.type-declaration entity.name.function
+    -}
     return ()
   where
     -- it stops parsing on =
