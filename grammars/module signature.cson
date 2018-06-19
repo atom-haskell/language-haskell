@@ -194,6 +194,9 @@
                 'match': '\\.\\.'
                 'name': 'keyword.operator.wildcard.haskell.hsig'
               }
+              {
+                'include': '#infix_op'
+              }
             ]
           }
           {

@@ -105,6 +105,7 @@ module.exports=
             match: /\.\./
             name: 'keyword.operator.wildcard.haskell'
           }
+          {include: '#infix_op'}
         ]
       ,
         include: '#infix_op'
