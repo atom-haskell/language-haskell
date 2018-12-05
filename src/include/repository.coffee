@@ -266,17 +266,24 @@ module.exports=
         {include: '#deriving_simple'}
         {include: '#deriving_keyword'}
     ]
-  deriving_keyword:
-    name: 'meta.deriving.haskell'
-    match: /{lb}(deriving){rb}/
+  deriving_strategies:
+    name: 'meta.deriving.strategy.haskell'
+    match: '{lb}(stock|newtype|anyclass){rb}'
     captures:
       1: name: 'keyword.other.haskell'
+  deriving_keyword:
+    name: 'meta.deriving.haskell'
+    match: /{lb}{deriving}{rb}/
+    captures:
+      1: name: 'keyword.other.haskell'
+      2: patterns: [{include: '#deriving_strategies'}]
   deriving_list:
     name: 'meta.deriving.haskell'
-    begin: /{lb}(deriving)\s*\(/
+    begin: /{lb}{deriving}\s*\(/
     end: /\)/
     beginCaptures:
       1: name: 'keyword.other.haskell'
+      2: patterns: [{include: '#deriving_strategies'}]
     patterns: [
         match: /{lb}({className}){rb}/
         captures:
@@ -284,10 +291,37 @@ module.exports=
     ]
   deriving_simple:
     name: 'meta.deriving.haskell'
-    match: /{lb}(deriving)\s*({className}){rb}/
+    match: /{lb}{deriving}\s*({className}){rb}/
     captures:
       1: name: 'keyword.other.haskell'
-      2: name: 'entity.other.inherited-class.haskell'
+      2: patterns: [{include: '#deriving_strategies'}]
+      3: name: 'entity.other.inherited-class.haskell'
+  via:
+    patterns: [
+        {include: '#via_list'}
+        {include: '#via_simple'}
+        {include: '#via_keyword'}
+    ]
+  via_keyword:
+    name: 'meta.via.haskell'
+    match: /{lb}(via){rb}/
+    captures:
+      1: name: 'keyword.other.haskell'
+  via_simple:
+    name: 'meta.via.haskell'
+    match: /{lb}(via)\s*({className}){rb}/
+    captures:
+      1: name: 'keyword.other.haskell'
+      2: patterns: [include: "#type_signature"]
+  via_list:
+    name: 'meta.via.haskell'
+    begin: /{lb}(via)\s*\(/
+    end: /\)/
+    beginCaptures:
+      1: name: 'keyword.other.haskell'
+    patterns: [
+        {include: "#type_signature"}
+    ]
   infix_function:
     name: 'keyword.operator.function.infix.haskell'
     match: /(`){functionName}(`)/
@@ -359,14 +393,17 @@ module.exports=
     ]
   deriving_instance_decl:
     name: 'meta.declaration.instance.deriving.haskell'
-    begin: /{indentBlockStart}(deriving\s+instance){rb}/
+    begin: /{indentBlockStart}{deriving}\s+(instance){rb}/
     end: /{indentBlockEnd}/
     contentName: 'meta.type-signature.haskell'
     beginCaptures:
       2: name: 'keyword.other.haskell'
+      3: patterns: [{include: '#deriving_strategies'}]
+      4: name: 'keyword.other.haskell'
     patterns: [
         {include: '#pragma'}
         {include: '#type_signature'}
+        {include: '#deriving_via'}
     ]
   foreign_import:
     name: 'meta.foreign.haskell'
@@ -416,25 +453,25 @@ module.exports=
           {include: '#type_signature'}
         ]
     patterns: [
-        include: '#comments'
-      ,
-        include: '#where'
-      ,
-        include: '#deriving'
-      ,
-        include: '#assignment_op'
-      ,
+      {include: '#comments'}
+      {include: '#where'}
+      {include: '#deriving'}
+      {include: '#via'}
+      {include: '#assignment_op'}
+      {
         match: /{ctor}/
         captures:
           1: patterns: [include: '#type_ctor']
           2:
             name: 'meta.type-signature.haskell'
             patterns: [include: '#type_signature']
-      ,
+      }
+      {
         match: /\|/
         captures:
           0: name: 'punctuation.separator.pipe.haskell'
-      ,
+      }
+      {
         name: 'meta.declaration.type.data.record.block.haskell'
         begin: /\{/
         beginCaptures:
@@ -447,8 +484,8 @@ module.exports=
             {include: '#comma'}
             {include: '#record_field_declaration'}
         ]
-      ,
-        include: '#ctor_type_declaration' #GADT
+      }
+      {include: '#ctor_type_declaration'} #GADT
     ]
   type_alias:
     name: 'meta.declaration.type.type.haskell'

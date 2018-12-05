@@ -19,3 +19,4 @@ describe 'Fixture-based grammar tests', ->
   test 'Multiline signatures', 'multilineSignatures.hs'
   test 'Signatures', 'signatures.hs'
   test 'Type families', 'typeFamilies.hs'
+  test 'Deriving strategy', 'deriveStrategy.hs'

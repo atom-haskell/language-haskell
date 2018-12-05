@@ -36,6 +36,7 @@
   'b': '(?:(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))|(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])))'
   'data_def': '((?:(?!(?:(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:=|--+)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))|(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))where(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))|{-).|{-.*?-})*)'
   'scoped_assignment': '(?:(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:<-|=)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))'
+  'deriving': '(?:(deriving)(?:\\s+([\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*))?)'
 'patterns': [
   {
     'include': '#class_decl'
@@ -423,25 +424,47 @@
         'include': '#deriving_keyword'
       }
     ]
+  'deriving_strategies':
+    'patterns': [
+      {
+        'name': 'meta.deriving.strategy.haskell'
+        'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(stock|newtype|anyclass)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'captures':
+          '1':
+            'name': 'keyword.other.haskell'
+      }
+    ]
   'deriving_keyword':
     'patterns': [
       {
         'name': 'meta.deriving.haskell'
-        'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(deriving)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(?:(deriving)(?:\\s+([\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*))?)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'captures':
           '1':
             'name': 'keyword.other.haskell'
+          '2':
+            'patterns': [
+              {
+                'include': '#deriving_strategies'
+              }
+            ]
       }
     ]
   'deriving_list':
     'patterns': [
       {
         'name': 'meta.deriving.haskell'
-        'begin': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(deriving)\\s*\\('
+        'begin': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(?:(deriving)(?:\\s+([\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*))?)\\s*\\('
         'end': '\\)'
         'beginCaptures':
           '1':
             'name': 'keyword.other.haskell'
+          '2':
+            'patterns': [
+              {
+                'include': '#deriving_strategies'
+              }
+            ]
         'patterns': [
           {
             'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
@@ -456,12 +479,72 @@
     'patterns': [
       {
         'name': 'meta.deriving.haskell'
-        'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(deriving)\\s*([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(?:(deriving)(?:\\s+([\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*))?)\\s*([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'captures':
           '1':
             'name': 'keyword.other.haskell'
           '2':
+            'patterns': [
+              {
+                'include': '#deriving_strategies'
+              }
+            ]
+          '3':
             'name': 'entity.other.inherited-class.haskell'
+      }
+    ]
+  'via':
+    'patterns': [
+      {
+        'include': '#via_list'
+      }
+      {
+        'include': '#via_simple'
+      }
+      {
+        'include': '#via_keyword'
+      }
+    ]
+  'via_keyword':
+    'patterns': [
+      {
+        'name': 'meta.via.haskell'
+        'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(via)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'captures':
+          '1':
+            'name': 'keyword.other.haskell'
+      }
+    ]
+  'via_simple':
+    'patterns': [
+      {
+        'name': 'meta.via.haskell'
+        'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(via)\\s*([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'captures':
+          '1':
+            'name': 'keyword.other.haskell'
+          '2':
+            'patterns': [
+              {
+                'include': '#type_signature'
+              }
+            ]
+      }
+    ]
+  'via_list':
+    'patterns': [
+      {
+        'name': 'meta.via.haskell'
+        'begin': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(via)\\s*\\('
+        'end': '\\)'
+        'beginCaptures':
+          '1':
+            'name': 'keyword.other.haskell'
+        'patterns': [
+          {
+            'include': '#type_signature'
+          }
+        ]
       }
     ]
   'infix_function':
@@ -599,11 +682,19 @@
     'patterns': [
       {
         'name': 'meta.declaration.instance.deriving.haskell'
-        'begin': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)(deriving\\s+instance)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'begin': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)(?:(deriving)(?:\\s+([\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*))?)\\s+(instance)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '(?:^(?!\\1[ \\t]|[ \\t]*$)|(?=@-}))'
         'contentName': 'meta.type-signature.haskell'
         'beginCaptures':
           '2':
+            'name': 'keyword.other.haskell'
+          '3':
+            'patterns': [
+              {
+                'include': '#deriving_strategies'
+              }
+            ]
+          '4':
             'name': 'keyword.other.haskell'
         'patterns': [
           {
@@ -611,6 +702,9 @@
           }
           {
             'include': '#type_signature'
+          }
+          {
+            'include': '#deriving_via'
           }
         ]
       }
@@ -701,6 +795,9 @@
           }
           {
             'include': '#deriving'
+          }
+          {
+            'include': '#via'
           }
           {
             'include': '#assignment_op'
