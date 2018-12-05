@@ -1,3 +1,7 @@
+## 1.18.0
+
+-   Initial support for deriving strategies
+
 ## 1.17.8
 
 -   Fix infix type constructor exports
