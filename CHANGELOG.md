@@ -1,3 +1,7 @@
+## 1.18.1
+
+-   Fix standalone deriving via
+
 ## 1.18.0
 
 -   Initial support for deriving strategies
