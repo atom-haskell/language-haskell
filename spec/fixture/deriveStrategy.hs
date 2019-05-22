@@ -64,3 +64,7 @@ newtype New = New Int deriving Generic via (Hex Int)
 --                                          ^^^ entity.name.type
 --                                              ^^^ entity.name.type
 --                                     ^^^^^^^^^^^^^ meta.declaration.type.data meta.via
+deriving via Lift (ReaderT r) m instance (MonadExit m) => (MonadExit (ReaderT r m))
+--                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.declaration.instance.deriving meta.type-signature
+--           ^^^^^^^^^^^^^^^^^^ meta.declaration.instance.deriving meta.type-signature
+--       ^^^                    ^^^^^^^^ meta.declaration.instance.deriving keyword.other

@@ -761,7 +761,7 @@
     'patterns': [
       {
         'name': 'meta.declaration.instance.deriving.haskell'
-        'begin': '^([ \\t]*)(?:(deriving)(?:\\s+([\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*))?)\\s+(instance)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'begin': '^([ \\t]*)(?:(?:(deriving)(?:\\s+([\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*))?)\\s+|(deriving)\\s+(via)\\s+(.*)\\s+)?(instance)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'end': '^(?!\\1[ \\t]|[ \\t]*$)'
         'contentName': 'meta.type-signature.haskell'
         'beginCaptures':
@@ -775,15 +775,23 @@
             ]
           '4':
             'name': 'keyword.other.haskell'
+          '5':
+            'name': 'keyword.other.haskell'
+          '6':
+            'name': 'meta.type-signature.haskell'
+            'patterns': [
+              {
+                'include': '#type_signature'
+              }
+            ]
+          '7':
+            'name': 'keyword.other.haskell'
         'patterns': [
           {
             'include': '#pragma'
           }
           {
             'include': '#type_signature'
-          }
-          {
-            'include': '#deriving_via'
           }
         ]
       }

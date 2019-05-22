@@ -393,17 +393,22 @@ module.exports=
     ]
   deriving_instance_decl:
     name: 'meta.declaration.instance.deriving.haskell'
-    begin: /{indentBlockStart}{deriving}\s+(instance){rb}/
+    begin: /{indentBlockStart}(?:{deriving}\s+|(deriving)\s+(via)\s+(.*)\s+)?(instance){rb}/
     end: /{indentBlockEnd}/
     contentName: 'meta.type-signature.haskell'
     beginCaptures:
-      2: name: 'keyword.other.haskell'
-      3: patterns: [{include: '#deriving_strategies'}]
-      4: name: 'keyword.other.haskell'
+      2: name: 'keyword.other.haskell' # deriving
+      3: patterns: [{include: '#deriving_strategies'}] # stragegy
+      4: name: 'keyword.other.haskell' # deriving
+      5: name: 'keyword.other.haskell' # via
+      6: { # sig
+        name: 'meta.type-signature.haskell'
+        patterns: [{include: '#type_signature'}]
+      }
+      7: name: 'keyword.other.haskell' #instance
     patterns: [
         {include: '#pragma'}
         {include: '#type_signature'}
-        {include: '#deriving_via'}
     ]
   foreign_import:
     name: 'meta.foreign.haskell'
