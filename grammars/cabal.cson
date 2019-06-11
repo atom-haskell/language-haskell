@@ -39,7 +39,7 @@
       }
 
       {
-          'match': '(benchmark|executable|flag|source-repository|test-suite)\\s+(\\S+)'
+          'match': '(benchmark|common|executable|flag|source-repository|test-suite)\\s+(\\S+)'
           'captures':
             '1':
                 'name':'entity.name.function'
