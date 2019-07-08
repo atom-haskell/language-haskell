@@ -1,3 +1,7 @@
+## 1.18.2
+
+-   cabal.cson: support common stanza (#122) (Domen Kožar)
+
 ## 1.18.1
 
 -   Fix standalone deriving via

@@ -40,6 +40,7 @@ Contributors (by number of commits):
 -   mdgriffith
 -   Jesse Cooke
 -   Ian D. Bollinger
+-   Domen Kožar
 
 <!-- END CONTRIBUTORS LIST -->
 
