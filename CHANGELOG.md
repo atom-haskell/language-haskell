@@ -1,3 +1,7 @@
+## 1.19.0
+
+-   Rework data declarations to support multiline constructor definitions
+
 ## 1.18.2
 
 -   cabal.cson: support common stanza (#122) (Domen Kožar)
