@@ -464,12 +464,14 @@ module.exports=
       {include: '#via'}
       {include: '#assignment_op'}
       {
-        match: /{ctor}/
-        captures:
+        begin: '{lb}({className})\\s*'
+        end: /^(?!{maybeBirdTrack}{indentChar}|{indentChar}*$)|(?=\{|\}|\||{lb}deriving{rb})/
+        contentName: 'meta.type-signature'
+        beginCaptures:
           1: patterns: [include: '#type_ctor']
-          2:
-            name: 'meta.type-signature.haskell'
-            patterns: [include: '#type_signature']
+        patterns: [
+          {include: '#type_signature'}
+        ]
       }
       {
         match: /\|/

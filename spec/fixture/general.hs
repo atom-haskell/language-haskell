@@ -118,4 +118,14 @@ let x :: Int !-- comment <- an int
 --            ^^^^^^^^^^^^^^^^^^^^ !comment.line.double-dash
 let x :: Int !{- comment <- an int -}
 --            ^^^^^^^^^^^^^^^^^^^^^^^ comment.block
+
+data PhExpr id
+     = PhVar id
+     | OpApp (LPhExpr id)
+             (LPhExpr id)
+             (LPhExpr id)
+     | NegApp (LPhExpr id)
+
+-- end
+
 -- >> =source.haskell
