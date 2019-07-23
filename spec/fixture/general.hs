@@ -119,12 +119,17 @@ let x :: Int !-- comment <- an int
 let x :: Int !{- comment <- an int -}
 --            ^^^^^^^^^^^^^^^^^^^^^^^ comment.block
 
+-- multi-line type constructor definitions 
 data PhExpr id
      = PhVar id
      | OpApp (LPhExpr id)
+ --           ^^^^^^^ meta.declaration.type.data meta.type-signature entity.name.type
              (LPhExpr id)
+ --           ^^^^^^^ meta.declaration.type.data meta.type-signature entity.name.type
              (LPhExpr id)
+ --           ^^^^^^^ meta.declaration.type.data meta.type-signature entity.name.type
      | NegApp (LPhExpr id)
+ --            ^^^^^^^ meta.declaration.type.data meta.type-signature entity.name.type
 
 -- end
 
