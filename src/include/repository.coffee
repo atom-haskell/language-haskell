@@ -227,11 +227,9 @@ module.exports=
       ,
         include: '#string'
       ,
-        name: 'keyword.other.arrow.haskell'
-        match: guarded '->|→'
+        include: '#arrow'
       ,
-        name: 'keyword.other.big-arrow.haskell'
-        match: guarded '=>|⇒'
+        include: '#big_arrow'
       ,
         match: "'({operator})"
         name: 'keyword.operator.promoted.haskell'
@@ -241,8 +239,7 @@ module.exports=
       ,
         include: '#operator'
       ,
-        name: 'variable.other.generic-type.haskell'
-        match: /{lb}{functionName}{rb}/
+        include: '#type_variable'
       ,
         name: 'entity.name.type.promoted.haskell'
         match: /{lbrel}'({className}){rb}/
@@ -254,6 +251,15 @@ module.exports=
       ,
         include: '#lit_num'
     ]
+  arrow:
+    name: 'keyword.other.arrow.haskell'
+    match: '{arrow}'
+  big_arrow:
+    name: 'keyword.other.big-arrow.haskell'
+    match: '{big_arrow}'
+  type_variable:
+    name: 'variable.other.generic-type.haskell'
+    match: /{lb}{functionName}{rb}/
   unit:
     name: 'constant.language.unit.haskell'
     match: /\(\)/
@@ -463,16 +469,8 @@ module.exports=
       {include: '#deriving'}
       {include: '#via'}
       {include: '#assignment_op'}
-      {
-        begin: '{lb}({className})\\s*'
-        end: /^(?!{maybeBirdTrack}{indentChar}|{indentChar}*$)|(?=\{|\}|\||{lb}deriving{rb})/
-        contentName: 'meta.type-signature'
-        beginCaptures:
-          1: patterns: [include: '#type_ctor']
-        patterns: [
-          {include: '#type_signature'}
-        ]
-      }
+      {include: '#type_ctor_forall'}
+      {include: '#type_ctor_alt'}
       {
         match: /\|/
         captures:
@@ -493,6 +491,41 @@ module.exports=
         ]
       }
       {include: '#ctor_type_declaration'} #GADT
+    ]
+  type_ctor_forall:
+    begin: '{lb}forall{rb}'
+    end: '{type_ctor_alt_delim}'
+    contentName: 'meta.type-signature'
+    beginCaptures:
+      0: patterns: [include: '#type_signature']
+    patterns: [
+      {include: '#comments'}
+      {
+        match: '\\G.*?{big_arrow}'
+        captures: 0: patterns: [include: '#type_signature']
+      }
+      {
+        match: '\\G.*?\\.'
+        captures: 0: patterns: [include: '#type_signature']
+      }
+      { include: '#big_arrow' }
+      { include: '#type_variable' }
+      {
+        begin: '\\('
+        end: '\\)'
+        patterns: [include: '#type_signature']
+      }
+      {include: '#type_ctor_alt'}
+    ]
+  type_ctor_alt:
+    begin: '{lb}({className})\\s*'
+    end: '{type_ctor_alt_delim}'
+    contentName: 'meta.type-signature'
+    beginCaptures:
+      1: patterns: [include: '#type_ctor']
+    patterns: [
+      {include: '#comments'}
+      {include: '#type_signature'}
     ]
   type_alias:
     name: 'meta.declaration.type.type.haskell'

@@ -44,6 +44,42 @@ data DataType = TypeCtor Int
 --   ^^^^^^^^ meta.declaration.type.data meta.type-signature entity.name.type
 -- <- meta.declaration.type.data keyword.other.data
 
+data Obj = forall a. (Show a) => Obj a
+--                               ^^^ entity.name.tag
+--                            ^^ keyword.other.big-arrow
+--                    ^^^^ entity.other.inherited-class.prelude.Show
+--         ^^^^^^ keyword.other.forall
+
+data Obj = forall a. Show a => Obj a
+--                             ^^^ entity.name.tag
+--                          ^^ keyword.other.big-arrow
+--                   ^^^^ entity.other.inherited-class.prelude.Show
+--         ^^^^^^ keyword.other.forall
+
+data Obj = forall a
+ --        ^^^^^^ keyword.other.forall
+            . (Show a) => Obj a
+--             ^^^^ entity.other.inherited-class.prelude.Show
+--                        ^^^ entity.name.tag
+--                     ^^ keyword.other.big-arrow
+
+data Obj = forall a. (Show a)
+ --        ^^^^^^ keyword.other.forall
+ --                   ^^^^ entity.other.inherited-class.prelude.Show
+         => Obj a
+--              ^ variable.other.generic-type
+--          ^^^ entity.name.tag
+--       ^^ keyword.other.big-arrow
+
+data Obj = forall a. Obj a
+--                   ^^^ entity.name.tag
+--         ^^^^^^ keyword.other.forall
+
+data Obj = forall a
+ --        ^^^^^^ keyword.other.forall
+         . Obj a
+--         ^^^ entity.name.tag
+
 ---------------------------------- Strings -------------------------------------
 
 str1, str2 :: String
@@ -119,7 +155,7 @@ let x :: Int !-- comment <- an int
 let x :: Int !{- comment <- an int -}
 --            ^^^^^^^^^^^^^^^^^^^^^^^ comment.block
 
--- multi-line type constructor definitions 
+-- multi-line type constructor definitions
 data PhExpr id
      = PhVar id
      | OpApp (LPhExpr id)

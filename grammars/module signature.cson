@@ -40,6 +40,9 @@
   'data_def': '((?:(?!(?:(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:=|--+)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))|(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))where(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))|{-).|{-.*?-})*)'
   'scoped_assignment': '(?:(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:<-|=)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))'
   'deriving': '(?:(deriving)(?:\\s+([\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*))?)'
+  'arrow': '(?:(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:->|→)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))'
+  'big_arrow': '(?:(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:=>|⇒)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))'
+  'type_ctor_alt_delim': '^(?!^[ \\t]|[ \\t]*$)|(?=\\{|\\}|\\||(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))deriving(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])))'
 'repository':
   'block_comment':
     'patterns': [
@@ -407,12 +410,10 @@
         'include': '#string'
       }
       {
-        'name': 'keyword.other.arrow.haskell.hsig'
-        'match': '(?:(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:->|→)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))'
+        'include': '#arrow'
       }
       {
-        'name': 'keyword.other.big-arrow.haskell.hsig'
-        'match': '(?:(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:=>|⇒)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))'
+        'include': '#big_arrow'
       }
       {
         'match': '\'((?:(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+)'
@@ -429,8 +430,7 @@
         'include': '#operator'
       }
       {
-        'name': 'variable.other.generic-type.haskell.hsig'
-        'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'include': '#type_variable'
       }
       {
         'name': 'entity.name.type.promoted.haskell.hsig'
@@ -448,6 +448,27 @@
       }
       {
         'include': '#lit_num'
+      }
+    ]
+  'arrow':
+    'patterns': [
+      {
+        'name': 'keyword.other.arrow.haskell.hsig'
+        'match': '(?:(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:->|→)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))'
+      }
+    ]
+  'big_arrow':
+    'patterns': [
+      {
+        'name': 'keyword.other.big-arrow.haskell.hsig'
+        'match': '(?:(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:=>|⇒)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))'
+      }
+    ]
+  'type_variable':
+    'patterns': [
+      {
+        'name': 'variable.other.generic-type.haskell.hsig'
+        'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
     ]
   'unit':
@@ -863,21 +884,10 @@
             'include': '#assignment_op'
           }
           {
-            'begin': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)\\s*'
-            'end': '^(?!^[ \\t]|[ \\t]*$)|(?=\\{|\\}|\\||(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))deriving(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])))'
-            'contentName': 'meta.type-signature.hsig'
-            'beginCaptures':
-              '1':
-                'patterns': [
-                  {
-                    'include': '#type_ctor'
-                  }
-                ]
-            'patterns': [
-              {
-                'include': '#type_signature'
-              }
-            ]
+            'include': '#type_ctor_forall'
+          }
+          {
+            'include': '#type_ctor_alt'
           }
           {
             'match': '\\|'
@@ -909,6 +919,87 @@
           }
           {
             'include': '#ctor_type_declaration'
+          }
+        ]
+      }
+    ]
+  'type_ctor_forall':
+    'patterns': [
+      {
+        'begin': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))forall(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
+        'end': '^(?!^[ \\t]|[ \\t]*$)|(?=\\{|\\}|\\||(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))deriving(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])))'
+        'contentName': 'meta.type-signature.hsig'
+        'beginCaptures':
+          '0':
+            'patterns': [
+              {
+                'include': '#type_signature'
+              }
+            ]
+        'patterns': [
+          {
+            'include': '#comments'
+          }
+          {
+            'match': '\\G.*?(?:(?<!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\'])))(?:=>|⇒)(?!(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))))'
+            'captures':
+              '0':
+                'patterns': [
+                  {
+                    'include': '#type_signature'
+                  }
+                ]
+          }
+          {
+            'match': '\\G.*?\\.'
+            'captures':
+              '0':
+                'patterns': [
+                  {
+                    'include': '#type_signature'
+                  }
+                ]
+          }
+          {
+            'include': '#big_arrow'
+          }
+          {
+            'include': '#type_variable'
+          }
+          {
+            'begin': '\\('
+            'end': '\\)'
+            'patterns': [
+              {
+                'include': '#type_signature'
+              }
+            ]
+          }
+          {
+            'include': '#type_ctor_alt'
+          }
+        ]
+      }
+    ]
+  'type_ctor_alt':
+    'patterns': [
+      {
+        'begin': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)\\s*'
+        'end': '^(?!^[ \\t]|[ \\t]*$)|(?=\\{|\\}|\\||(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))deriving(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])))'
+        'contentName': 'meta.type-signature.hsig'
+        'beginCaptures':
+          '1':
+            'patterns': [
+              {
+                'include': '#type_ctor'
+              }
+            ]
+        'patterns': [
+          {
+            'include': '#comments'
+          }
+          {
+            'include': '#type_signature'
           }
         ]
       }

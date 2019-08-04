@@ -63,3 +63,6 @@ module.exports=
   data_def: "((?:(?!#{guarded '=|--+'}|{lb}where{rb}|{-).|{-.*?-})*)"
   scoped_assignment: guarded '<-|='
   deriving: '(?:(deriving)(?:\\s+({functionNameOne}))?)'
+  arrow: guarded '->|→'
+  big_arrow: guarded '=>|⇒'
+  type_ctor_alt_delim: /^(?!{maybeBirdTrack}{indentChar}|{indentChar}*$)|(?=\{|\}|\||{lb}deriving{rb})/
