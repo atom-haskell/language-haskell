@@ -1,3 +1,8 @@
+## 1.19.1
+
+-   Fix existential quantification in data declarations
+-   Add test for multiline type ctor defns
+
 ## 1.19.0
 
 -   Rework data declarations to support multiline constructor definitions
