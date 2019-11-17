@@ -67,8 +67,7 @@ describe "Snippets", ->
     waitsForPromise ->
       atom.packages.activatePackage("language-haskell")
     waitsForPromise ->
-      snippets = atom.packages.getLoadedPackage('snippets') ? \
-        atom.packages.loadPackage("#{process.env.HOME}/.atom/packages/snippets")
+      snippets = atom.packages.loadPackage('snippets')
       snippets.activate()
       .then ->
         Snippets = snippets.mainModule
