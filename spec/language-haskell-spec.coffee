@@ -309,16 +309,16 @@ describe "Language-Haskell", ->
       ]
     it "understands module declarations with export lists", ->
       g = grammarExpect grammar, 'module Module (export1 (..), export2 (Something)) where'
-      g.toHaveTokens [['module', ' ', 'Module', ' ', '(', 'export1', ' (' , '..', ')',
-                       ',', ' ', 'export2', ' (', 'Something', ')', ')', ' ', 'where']]
+      g.toHaveTokens [['module', ' ', 'Module', ' ', '(', 'export1', ' ', '(' , '..', ')',
+                       ',', ' ', 'export2', ' ', '(', 'Something', ')', ')', ' ', 'where']]
       g.toHaveScopes [['source.haskell', 'meta.declaration.module.haskell']]
       g.tokenToHaveScopes [
         2: ['support.other.module.haskell']
         5: ['meta.declaration.exports.haskell', 'entity.name.function.haskell']
-        7: ['meta.declaration.exports.haskell', 'meta.other.constructor-list.haskell',
+        8: ['meta.declaration.exports.haskell', 'meta.other.constructor-list.haskell',
              'keyword.operator.wildcard.haskell']
-        11: ['meta.declaration.exports.haskell', 'entity.name.function.haskell']
-        13: ['meta.declaration.exports.haskell', 'meta.other.constructor-list.haskell',
+        12: ['meta.declaration.exports.haskell', 'entity.name.function.haskell']
+        15: ['meta.declaration.exports.haskell', 'meta.other.constructor-list.haskell',
               'entity.name.tag.haskell']
       ]
   describe "regression test for comments after module name in imports", ->
