@@ -18,7 +18,7 @@ module.exports=
   operatorFun: ///
     (?:
       \(
-        (?!--+\)) # An operator cannot be composed entirely of `-` characters
+        (?!--+\)|\.\.\)) # An operator cannot be composed entirely of `-` characters, or ..
         {operator}
       \)
     )
