@@ -92,8 +92,10 @@ module.exports=
       ,
         include: '#comma'
       ,
+        include: '#infix_op'
+      ,
         name: 'meta.other.constructor-list.haskell'
-        begin: /{rb}\s*\(/
+        begin: /\(/
         end: /\)/
         patterns: [
           { include: '#comments' }
@@ -107,8 +109,6 @@ module.exports=
           }
           {include: '#infix_op'}
         ]
-      ,
-        include: '#infix_op'
     ]
   module_name:
     name: 'support.other.module.haskell'
