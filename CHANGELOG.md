@@ -1,3 +1,7 @@
+## 1.19.3
+
+-   Fix breakage reported in #126; improve via syntax a little
+
 ## 1.19.2
 
 -   Fix #125
