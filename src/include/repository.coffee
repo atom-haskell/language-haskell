@@ -305,6 +305,8 @@ module.exports=
   via:
     patterns: [
         {include: '#via_list'}
+        {include: '#via_list_newline'}
+        {include: '#via_ident'}
         {include: '#via_simple'}
         {include: '#via_keyword'}
     ]
@@ -325,6 +327,24 @@ module.exports=
     end: /\)/
     beginCaptures:
       1: name: 'keyword.other.haskell'
+    patterns: [
+        {include: "#type_signature"}
+    ]
+  via_list_newline:
+    name: 'meta.via.haskell'
+    begin: /{lb}(via)\s*/
+    end: /$/
+    beginCaptures:
+      1: name: 'keyword.other.haskell'
+    patterns: [
+        {include: "#type_signature"}
+    ]
+  via_ident:
+    name: 'meta.via.haskell'
+    begin: /{indentBlockStart}(via)\s*/
+    end: /{indentBlockEnd}/
+    beginCaptures:
+      2: name: 'keyword.other.haskell'
     patterns: [
         {include: "#type_signature"}
     ]
@@ -465,6 +485,7 @@ module.exports=
         ]
     patterns: [
       {include: '#comments'}
+      {include: '#string'}
       {include: '#where'}
       {include: '#deriving'}
       {include: '#via'}

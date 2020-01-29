@@ -523,6 +523,12 @@
         'include': '#via_list'
       }
       {
+        'include': '#via_list_newline'
+      }
+      {
+        'include': '#via_ident'
+      }
+      {
         'include': '#via_simple'
       }
       {
@@ -563,6 +569,38 @@
         'end': '\\)'
         'beginCaptures':
           '1':
+            'name': 'keyword.other.haskell'
+        'patterns': [
+          {
+            'include': '#type_signature'
+          }
+        ]
+      }
+    ]
+  'via_list_newline':
+    'patterns': [
+      {
+        'name': 'meta.via.haskell'
+        'begin': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))(via)\\s*'
+        'end': '$'
+        'beginCaptures':
+          '1':
+            'name': 'keyword.other.haskell'
+        'patterns': [
+          {
+            'include': '#type_signature'
+          }
+        ]
+      }
+    ]
+  'via_ident':
+    'patterns': [
+      {
+        'name': 'meta.via.haskell'
+        'begin': '(?:\\G(?:\\s*\\w+\\s)?|^)([ \\t]*)(via)\\s*'
+        'end': '(?:^(?!\\1[ \\t]|[ \\t]*$)|(?=@-}))'
+        'beginCaptures':
+          '2':
             'name': 'keyword.other.haskell'
         'patterns': [
           {
@@ -821,6 +859,9 @@
         'patterns': [
           {
             'include': '#comments'
+          }
+          {
+            'include': '#string'
           }
           {
             'include': '#where'

@@ -68,3 +68,12 @@ deriving via Lift (ReaderT r) m instance (MonadExit m) => (MonadExit (ReaderT r 
 --                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.declaration.instance.deriving meta.type-signature
 --           ^^^^^^^^^^^^^^^^^^ meta.declaration.instance.deriving meta.type-signature
 --       ^^^                    ^^^^^^^^ meta.declaration.instance.deriving keyword.other
+
+data Foo = Bar deriving Class via (Baz Quux FooBar)
+--                                 ^^^ ^^^^ ^^^^^^ meta.declaration.type.data meta.via entity.name.type
+data Foo = Bar deriving Class via Baz Quux FooBar
+--                                ^^^ ^^^^ ^^^^^^ meta.declaration.type.data meta.via entity.name.type
+data Foo = Bar deriving Class
+  via Baz
+    Quux FooBar
+--  ^^^^ ^^^^^^ meta.declaration.type.data meta.via entity.name.type
