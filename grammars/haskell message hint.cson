@@ -602,7 +602,7 @@
         'include': '#via_list_newline'
       }
       {
-        'include': '#via_ident'
+        'include': '#via_indent'
       }
       {
         'include': '#via_simple'
@@ -669,12 +669,12 @@
         ]
       }
     ]
-  'via_ident':
+  'via_indent':
     'patterns': [
       {
         'name': 'meta.via.haskell'
         'begin': '^([ \\t]*)(via)\\s*'
-        'end': '^(?!\\1[ \\t]|[ \\t]*$)'
+        'end': '^(?!\\1|[ \\t]*$)'
         'beginCaptures':
           '2':
             'name': 'keyword.other.haskell'

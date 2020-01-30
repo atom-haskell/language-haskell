@@ -77,3 +77,7 @@ data Foo = Bar deriving Class
   via Baz
     Quux FooBar
 --  ^^^^ ^^^^^^ meta.declaration.type.data meta.via entity.name.type
+data Foo = Bar deriving Class
+    via Baz
+    Quux FooBar
+--  ^^^^ ^^^^^^ meta.declaration.type.data meta.via entity.name.type

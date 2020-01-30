@@ -306,7 +306,7 @@ module.exports=
     patterns: [
         {include: '#via_list'}
         {include: '#via_list_newline'}
-        {include: '#via_ident'}
+        {include: '#via_indent'}
         {include: '#via_simple'}
         {include: '#via_keyword'}
     ]
@@ -339,10 +339,10 @@ module.exports=
     patterns: [
         {include: "#type_signature"}
     ]
-  via_ident:
+  via_indent:
     name: 'meta.via.haskell'
     begin: /{indentBlockStart}(via)\s*/
-    end: /{indentBlockEnd}/
+    end: /{indentBlockCont}/
     beginCaptures:
       2: name: 'keyword.other.haskell'
     patterns: [
