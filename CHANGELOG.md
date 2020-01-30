@@ -1,3 +1,7 @@
+## 1.19.4
+
+-   Improve highlighting multiline via statements
+
 ## 1.19.3
 
 -   Fix breakage reported in #126; improve via syntax a little
