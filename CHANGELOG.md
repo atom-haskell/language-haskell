@@ -1,3 +1,9 @@
+## 1.20.0
+
+-   Mark quasiquotes with the function-based class
+
+    Please see [#88](https://github.com/atom-haskell/language-haskell/issues/88) for context.
+
 ## 1.19.4
 
 -   Improve highlighting multiline via statements
