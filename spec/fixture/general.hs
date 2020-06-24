@@ -169,4 +169,7 @@ data PhExpr id
 
 -- end
 
+x = [something|some text here|]
+--             ^^^^^^^^^^^^^^ quoted.quasiquotes.qq-something
+
 -- >> =source.haskell

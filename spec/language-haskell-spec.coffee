@@ -340,7 +340,7 @@ describe "Language-Haskell", ->
       g.tokenToHaveScopes [
         0: ['punctuation.definition.quasiquotes.begin.haskell']
         1: ['entity.name.tag.haskell']
-        3: ['quoted.quasiquotes.haskell']
+        3: ['quoted.quasiquotes.qq-q.haskell']
         5: ['punctuation.definition.quasiquotes.end.haskell']
       ]
 
@@ -352,6 +352,6 @@ describe "Language-Haskell", ->
         0: ['punctuation.definition.quasiquotes.begin.haskell']
         1: ['entity.name.tag.haskell', 'support.other.module.haskell']
         2: ['entity.name.tag.haskell']
-        4: ['quoted.quasiquotes.haskell']
+        4: ['quoted.quasiquotes.qq-q.haskell']
         6: ['punctuation.definition.quasiquotes.end.haskell']
       ]

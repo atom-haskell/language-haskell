@@ -624,7 +624,7 @@
   'quasi_quotes':
     'patterns': [
       {
-        'begin': '(\\[)((?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?[\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)(\\|)'
+        'begin': '(\\[)((?:[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?([\\p{Ll}_][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*))(\\|)'
         'end': '(\\|)(\\])'
         'beginCaptures':
           '1':
@@ -639,7 +639,7 @@
         'endCaptures':
           '2':
             'name': 'punctuation.definition.quasiquotes.end.haskell'
-        'contentName': 'quoted.quasiquotes.haskell'
+        'contentName': 'quoted.quasiquotes.qq-$3.haskell'
       }
     ]
   'module_decl':

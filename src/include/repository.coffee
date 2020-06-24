@@ -355,7 +355,7 @@ module.exports=
       1: name: 'punctuation.definition.entity.haskell'
       2: name: 'punctuation.definition.entity.haskell'
   quasi_quotes:
-    begin: /(\[)({functionName})(\|)/
+    begin: /(\[)((?:{className}\.)?({functionNameOne}))(\|)/
     end: /(\|)(\])/
     beginCaptures:
       1: name: 'punctuation.definition.quasiquotes.begin.haskell'
@@ -364,7 +364,7 @@ module.exports=
         patterns: { include: '#module_name_prefix' }
     endCaptures:
       2: name: 'punctuation.definition.quasiquotes.end.haskell'
-    contentName: 'quoted.quasiquotes.haskell'
+    contentName: 'quoted.quasiquotes.qq-$3.haskell'
   module_decl:
     name: 'meta.declaration.module.haskell'
     begin: /{indentBlockStart}(module){rb}/
