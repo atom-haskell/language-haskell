@@ -1,5 +1,6 @@
 'fileTypes': [
   'hs'
+  'hs-boot'
   'cpphs'
 ]
 'firstLineMatch': '^\\#\\!.*\\brunhaskell\\b'
