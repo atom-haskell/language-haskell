@@ -1,6 +1,8 @@
 'scopeName': 'source.cabal'
 'fileTypes': [
   'cabal'
+  'cabal.project'
+  'cabal.project.local'
 ]
 'name': 'Cabal'
 'patterns': [
