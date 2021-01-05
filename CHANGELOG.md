@@ -1,3 +1,8 @@
+## 1.21.0
+
+-   Disable snippet spec
+-   Detect .hs-boot and cabal.project\/cabal.project.local file types (Alexis King)
+
 ## 1.20.0
 
 -   Mark quasiquotes with the function-based class
