@@ -5,7 +5,7 @@ defs = CSON.readFileSync("#{__dirname}/../snippets/language-haskell.cson")
 open = (what) ->
   atom.workspace.open("#{__dirname}/fixture/#{what}")
 
-describe "Snippets", ->
+xdescribe "Snippets", ->
   [editorElement, editor, Snippets] = []
 
   expandSnippet = (editor) ->

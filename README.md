@@ -41,6 +41,7 @@ Contributors (by number of commits):
 -   Jesse Cooke
 -   Ian D. Bollinger
 -   Domen Kožar
+-   Alexis King
 
 <!-- END CONTRIBUTORS LIST -->
 
