@@ -20,3 +20,4 @@ describe 'Fixture-based grammar tests', ->
   test 'Signatures', 'signatures.hs'
   test 'Type families', 'typeFamilies.hs'
   test 'Deriving strategy', 'deriveStrategy.hs'
+  test 'Char Kind', 'charKind.hs'
