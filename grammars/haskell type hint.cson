@@ -446,6 +446,9 @@
             ]
       }
       {
+        'include': '#quoted_character'
+      }
+      {
         'include': '#type_name'
       }
       {

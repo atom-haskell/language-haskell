@@ -247,6 +247,8 @@ module.exports=
           include: '#type_name'
         ]
       ,
+        include: '#quoted_character'
+      ,
         include: '#type_name'
       ,
         include: '#lit_num'
