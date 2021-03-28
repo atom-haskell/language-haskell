@@ -1,3 +1,8 @@
+## 1.22.0
+
+-   Add Char kind support
+-   Add Char kind test
+
 ## 1.21.0
 
 -   Disable snippet spec
