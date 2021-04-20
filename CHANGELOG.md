@@ -1,3 +1,9 @@
+## 1.22.1
+
+-   Override questionable type kewyord highlighting
+
+    Atom 1.56 changed default highlighting rules, mostly borrowing from C, many which don't make much sense in Haskell. Instead of changing scopes (which would be a breaking change), I've added some overrides to restore the previous behaviour for Haskell specifically. Will be extending that as needed, feel free to open issues if something highlights weird.
+
 ## 1.22.0
 
 -   Add Char kind support
