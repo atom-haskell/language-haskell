@@ -1,3 +1,8 @@
+## 1.23.0
+
+-   Tweak promoted type highlighting; fix char\/promoted conflict
+-   Visible type applications
+
 ## 1.22.1
 
 -   Override questionable type kewyord highlighting
