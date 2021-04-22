@@ -751,6 +751,16 @@ module.exports=
     patterns: [
       { include: 'annotation.liquidhaskell.haskell' }
     ]
+  type_application:
+    name: 'other.type-application.haskell'
+    match: "(<?\\s+)(@)(\\'?\\(#{balanced 'paren', '\\(', '\\)'}\\)|\\'?\\[#{balanced 'brack', '\\[', '\\]'}\\]|\"#{balanced 'quot', '"', '"'}\"|'{character}'|\\S+)"
+    captures:
+      2: patterns: [
+        include: '#operator'
+      ]
+      3: patterns: [
+        include: '#type_signature'
+      ]
   shebang:
     name: 'comment.line.shebang.haskell'
     match: '^\\#\\!.*\\brunhaskell\\b.*$'
@@ -769,6 +779,7 @@ module.exports=
     { include: '#comma' }
     { include: '#lit_num' }
     { include: '#scoped_type' }
+    { include: '#type_application' }
     { include: '#operator' }
     { include: '#identifier' }
     { include: '#type_ctor' }
