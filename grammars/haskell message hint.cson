@@ -406,8 +406,11 @@
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))forall(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
       }
       {
+        'include': '#quoted_character'
+      }
+      {
         'match': '\'(\\(\\))'
-        'name': 'constant.language.unit.promoted.haskell'
+        'name': 'other.promoted.haskell'
         'captures':
           '1':
             'patterns': [
@@ -421,7 +424,7 @@
       }
       {
         'match': '\'(\\[\\])'
-        'name': 'constant.language.empty-list.promoted.haskell'
+        'name': 'other.promoted.haskell'
         'captures':
           '1':
             'patterns': [
@@ -444,7 +447,7 @@
       }
       {
         'match': '\'((?:(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*\\.)?(?:[\\p{S}\\p{P}](?<![(),;\\[\\]`{}_"\']))+)'
-        'name': 'keyword.operator.promoted.haskell'
+        'name': 'other.promoted.haskell'
         'captures':
           '1':
             'patterns': [
@@ -460,7 +463,7 @@
         'include': '#type_variable'
       }
       {
-        'name': 'entity.name.type.promoted.haskell'
+        'name': 'other.promoted.haskell'
         'match': '(?:(?=[\\p{Ll}_\\p{Lu}\\p{Lt}\'])(?<![\\p{Ll}_\\p{Lu}\\p{Lt}\']))\'([\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']*)*)(?:(?<=[\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\'])(?![\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}\']))'
         'captures':
           '1':
@@ -469,9 +472,6 @@
                 'include': '#type_name'
               }
             ]
-      }
-      {
-        'include': '#quoted_character'
       }
       {
         'include': '#type_name'

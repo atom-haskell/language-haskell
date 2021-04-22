@@ -209,8 +209,10 @@ module.exports=
         name: 'keyword.other.forall.haskell'
         match: '{lb}forall{rb}'
       ,
+        include: '#quoted_character'
+      ,
         match: /'(\(\))/
-        name: 'constant.language.unit.promoted.haskell'
+        name: 'other.promoted.haskell'
         captures: 1: patterns: [
           {include: '#unit'}
         ]
@@ -218,7 +220,7 @@ module.exports=
         include: '#unit'
       ,
         match: /'(\[\])/
-        name: 'constant.language.empty-list.promoted.haskell'
+        name: 'other.promoted.haskell'
         captures: 1: patterns: [
           {include: '#empty_list'}
         ]
@@ -232,7 +234,7 @@ module.exports=
         include: '#big_arrow'
       ,
         match: "'({operator})"
-        name: 'keyword.operator.promoted.haskell'
+        name: 'other.promoted.haskell'
         captures: 1: patterns: [
           {include: '#operator'}
         ]
@@ -241,13 +243,11 @@ module.exports=
       ,
         include: '#type_variable'
       ,
-        name: 'entity.name.type.promoted.haskell'
+        name: 'other.promoted.haskell'
         match: /{lbrel}'({className}){rb}/
         captures: 1: patterns: [
           include: '#type_name'
         ]
-      ,
-        include: '#quoted_character'
       ,
         include: '#type_name'
       ,
