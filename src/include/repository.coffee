@@ -709,10 +709,10 @@ module.exports=
     ]
   pattern_name:
     name: 'meta.declaration.export.qualified.pattern.haskell'
-    match: /{lb}(pattern)\s+({className}){rb}/
+    match: /{lb}(pattern)\s+({className}{rb}|{operatorFun})/
     captures:
       1: patterns: [ '#keywords' ]
-      2: patterns: [ '#type_ctor' ]
+      2: patterns: [ '#type_ctor', '#infix_op' ]
   type_exportImport:
     name: 'meta.declaration.export.qualified.type.haskell'
     match: /{lb}(type)\s+({className}{rb}|{operatorFun})/
