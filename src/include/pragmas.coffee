@@ -4,6 +4,7 @@ _ = require 'underscore-plus'
 pragmas = [
   # Line pragma
   'LINE'
+  'COLUMN'
   # Header pragmas
   'OPTIONS'
   'OPTIONS_GHC'
@@ -43,6 +44,7 @@ pragmas = [
   'OVERLAPPING'
   'INCOHERENT'
   'CTYPE'
+  'COMPLETE'
   # Two word pragmas
   'INLINE CONLIKE'
   'NOTINLINE CONLIKE'

@@ -31,7 +31,7 @@ controlKeywords = [
 ]
 
 otherKeywords = [
-  'deriving', 'where', 'data', 'type', 'newtype'
+  'deriving', 'where', 'data', 'type', 'newtype', 'pattern'
 ]
 
 module.exports = {list, listMaybe, concat, balanced, guarded, floatPattern, controlKeywords, otherKeywords}
