@@ -95,9 +95,9 @@ module.exports=
       ,
         include: '#type_exportImport'
       ,
-        include: '#type_name'
-      ,
         include: '#function_name'
+      ,
+        include: '#type_name'
       ,
         include: '#comma'
       ,

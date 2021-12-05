@@ -233,19 +233,19 @@ describe "Language-Haskell", ->
       g = grammarExpect grammar, '{-# LANGUAGE OverloadedStrings #-}'
       g.toHaveTokens [['{-#', ' ', 'LANGUAGE', ' OverloadedStrings ', '#-}']]
       g.toHaveScopes [['source.haskell', 'meta.preprocessor.haskell']]
-      g.tokenToHaveScopes [2: ['keyword.other.preprocessor.haskell']]
+      g.tokenToHaveScopes [2: ['keyword.other.preprocessor.LANGUAGE.haskell']]
 
     it "parses lowercase pragmas", ->
       g = grammarExpect grammar, '{-# language OverloadedStrings #-}'
       g.toHaveTokens [['{-#', ' ', 'language', ' OverloadedStrings ', '#-}']]
       g.toHaveScopes [['source.haskell', 'meta.preprocessor.haskell']]
-      g.tokenToHaveScopes [2: ['keyword.other.preprocessor.haskell']]
+      g.tokenToHaveScopes [2: ['keyword.other.preprocessor.language.haskell']]
 
     it "parses mixed case pragmas", ->
       g = grammarExpect grammar, '{-# lanGuaGE OverloadedStrings #-}'
       g.toHaveTokens [['{-#', ' ', 'lanGuaGE', ' OverloadedStrings ', '#-}']]
       g.toHaveScopes [['source.haskell', 'meta.preprocessor.haskell']]
-      g.tokenToHaveScopes [2: ['keyword.other.preprocessor.haskell']]
+      g.tokenToHaveScopes [2: ['keyword.other.preprocessor.lanGuaGE.haskell']]
 
   describe "instance", ->
     it "recognizes instances", ->
@@ -266,7 +266,7 @@ describe "Language-Haskell", ->
         g.tokenToHaveScopes [
           2: ['meta.preprocessor.haskell']
           3: ['meta.preprocessor.haskell']
-          4: ['meta.preprocessor.haskell', 'keyword.other.preprocessor.haskell']
+          4: ['meta.preprocessor.haskell', "keyword.other.preprocessor.#{p}.haskell"]
           5: ['meta.preprocessor.haskell']
           6: ['meta.preprocessor.haskell']
         ]
@@ -279,7 +279,7 @@ describe "Language-Haskell", ->
         g.tokenToHaveScopes [
           2: ['meta.preprocessor.haskell']
           3: ['meta.preprocessor.haskell']
-          4: ['meta.preprocessor.haskell', 'keyword.other.preprocessor.haskell']
+          4: ['meta.preprocessor.haskell', "keyword.other.preprocessor.#{p}.haskell"]
           5: ['meta.preprocessor.haskell']
           6: ['meta.preprocessor.haskell']
         ]
