@@ -34,12 +34,17 @@ module.exports=
         begin: /({maybeBirdTrack}[ \t]+)?(?=--+\s+[|^])/
         end: /(?!\G)/
         patterns: [
-            name: 'comment.line.double-dash.haddock.haskell'
-            begin: /(--+)\s+([|^])/
-            end: /$/
+            begin: /(--+)\s+([|^])(.*)/
+            end: /^(?!--+)/
             beginCaptures:
               1: name: 'punctuation.definition.comment.haskell'
               2: name: 'punctuation.definition.comment.haddock.haskell'
+              3: name: 'comment.line.double-dash.haddock.haskell'
+            patterns:
+              match: /^(--+)(.*)/
+              captures:
+                1: name: 'punctuation.definition.comment.haskell'
+                2: name: 'comment.line.double-dash.haddock.haskell'
         ]
       ,
         ###
@@ -51,7 +56,7 @@ module.exports=
         end: /(?!\G)/
         patterns: [
             name: 'comment.line.double-dash.haskell'
-            begin: /--/
+            begin: /--+/
             end: /$/
             beginCaptures:
               0: name: 'punctuation.definition.comment.haskell'
@@ -86,9 +91,13 @@ module.exports=
             {include: '#invalid'}
         ]
       ,
-        include: '#function_name'
+        include: '#pattern_name'
+      ,
+        include: '#type_exportImport'
       ,
         include: '#type_name'
+      ,
+        include: '#function_name'
       ,
         include: '#comma'
       ,
@@ -122,7 +131,7 @@ module.exports=
     end: /#-\}/
     patterns: [
         match: "{lb}((?i:#{pragmas.join('|')})){rb}"
-        name: 'keyword.other.preprocessor.haskell'
+        name: 'keyword.other.preprocessor.$1.haskell'
     ]
   function_type_declaration:
     name: 'meta.function.type-declaration.haskell'
@@ -376,6 +385,7 @@ module.exports=
     endCaptures:
       1: name: 'keyword.other.haskell'
     patterns: [
+        {include: '#pragma'}
         {include: '#comments'}
         {include: '#module_name'}
         {include: '#module_exports'}
@@ -697,6 +707,18 @@ module.exports=
         match: "{lb}(#{prelude.funct.join('|')}){rb}"
       }
     ]
+  pattern_name:
+    name: 'meta.declaration.export.qualified.pattern.haskell'
+    match: /{lb}(pattern)\s+({className}){rb}/
+    captures:
+      1: patterns: [ '#keywords' ]
+      2: patterns: [ '#type_ctor' ]
+  type_exportImport:
+    name: 'meta.declaration.export.qualified.type.haskell'
+    match: /{lb}(type)\s+({className}{rb}|{operatorFun})/
+    captures:
+      1: patterns: [ '#keywords' ]
+      2: patterns: [ '#type_name', '#operator' ]
   type_name:
     name: 'entity.name.type.haskell'
     match: /{lb}{className}{rb}/
