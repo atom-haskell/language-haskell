@@ -1,3 +1,11 @@
+## 1.24.0
+
+- Recognize `COLUMN` and `COMPLETE` pragmas
+- Recognize `DEPRECATED` pragmas module declarations
+- Recognize `pattern` keyword
+- Recognize explicit namespacing in module exports/imports
+- Include pragma name into its scope name, e.g. `keyword.other.preprocessor.OVERLAPPING.haskell`
+
 ## 1.23.0
 
 -   Tweak promoted type highlighting; fix char\/promoted conflict
